@@ -1,7 +1,7 @@
 # attest
 Contract management tool
 
-Development instructions:
+Development instructions (pre-requisites are installation of node and npm):
 
 ```git clone https://github.com/grabbeh/attest```
 
