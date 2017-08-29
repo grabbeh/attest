@@ -1,0 +1,27 @@
+{
+  "name": "attest",
+  "version": "0.0.1",
+  "description": "Contract management",
+  "main": "index.js",
+  "dependencies": {
+    "next": "^3.0.6",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/grabbeh/attest.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/grabbeh/attest/issues"
+  },
+  "homepage": "https://github.com/grabbeh/attest#readme"
+}
