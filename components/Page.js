@@ -1,4 +1,4 @@
-import React from 'react'
+import react from 'preact-compat'
 import Meta from './Meta'
 
 export default ({ children }) => (

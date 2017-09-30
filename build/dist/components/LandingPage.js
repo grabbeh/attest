@@ -8,6 +8,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _preactCompat = require('preact-compat');
+
+var _preactCompat2 = _interopRequireDefault(_preactCompat);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _jsxFileName = 'C:\\Users\\mbg\\Documents\\attest\\components\\LandingPage.js';

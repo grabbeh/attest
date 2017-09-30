@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import React from 'react'
+import react from 'preact-compat'
 
 export default () => (
   <div>

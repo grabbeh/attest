@@ -28,6 +28,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _preactCompat = require('preact-compat');
+
+var _preactCompat2 = _interopRequireDefault(_preactCompat);
+
 var _Page = require('../components/Page');
 
 var _Page2 = _interopRequireDefault(_Page);
@@ -41,8 +45,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var _jsxFileName = 'C:\\Users\\mbg\\Documents\\attest\\pages\\index.js?entry';
 
 
-var _class = function (_Component) {
-  (0, _inherits3.default)(_class, _Component);
+var _class = function (_react$Component) {
+  (0, _inherits3.default)(_class, _react$Component);
 
   function _class() {
     (0, _classCallCheck3.default)(this, _class);
@@ -68,6 +72,6 @@ var _class = function (_Component) {
   }]);
 
   return _class;
-}(_react.Component);
+}(_preactCompat2.default.Component);
 
 exports.default = _class;

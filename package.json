@@ -4,15 +4,26 @@
   "description": "Contract management",
   "main": "index.js",
   "dependencies": {
+    "express": "^4.15.4",
+    "module-alias": "^2.0.1",
     "next": "^3.0.6",
+    "preact": "^8.2.5",
+    "preact-compat": "^3.17.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "standard": "^10.0.3"
+  },
+  "standard": {
+    "globals": [
+      "React"
+    ]
+  },
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start"
+    "start": "NODE_ENV=production node index.js"
   },
   "repository": {
     "type": "git",

@@ -1,4 +1,4 @@
-import React from 'react'
+import react from 'preact-compat'
 
 export default () => (
   <div>

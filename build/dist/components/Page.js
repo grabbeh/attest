@@ -8,6 +8,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _preactCompat = require('preact-compat');
+
+var _preactCompat2 = _interopRequireDefault(_preactCompat);
+
 var _Meta = require('./Meta');
 
 var _Meta2 = _interopRequireDefault(_Meta);
