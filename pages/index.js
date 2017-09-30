@@ -1,4 +1,4 @@
-import react from 'preact-compat'
+import react from 'react'
 import Page from '../components/Page'
 import LandingPage from '../components/LandingPage'
 

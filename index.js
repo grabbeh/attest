@@ -3,9 +3,6 @@ const next = require('next')
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handle = app.getRequestHandler()
-const moduleAlias = require('module-alias')
-moduleAlias.addAlias('react', 'preact-compat')
-moduleAlias.addAlias('react-dom', 'preact-compat')
 
 app.prepare().then(() => {
   const server = express()
