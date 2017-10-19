@@ -1,4 +1,7 @@
 import react from 'react'
+import Line from './Line'
+import Break from './Break'
+import Box from './Box'
 
 export default () => (
   <div>
@@ -18,59 +21,57 @@ export default () => (
         <div className='b mb2 dark-gray'>ACME INC</div>
         <div className='w-70-ns w-100 fl pr2-ns pr0'>
           <div className='bg-light-yellow w-100 pa2'>
-            <div className='bb mt1 dark-gray' />
-            <div className='bb dark-gray mt1' />
-            <div className='bb mt1 dark-gray w1' />
+            <Line />
+            <Line />
+            <Line />
             <div className='mt1 fl bg-navy h1 w2' />
             <div className='mt1 fl ml2 h1 w2 bg-red pl2' />
             <div className='cf' />
           </div>
           <div className='mt2 bg-light-yellow w-100 pa2'>
-            <div className='bb mt1 dark-gray' />
-            <div className='bb dark-gray mt1' />
-            <div className='bb mt1 dark-gray' />
+            <Line />
+            <Line />
+            <Line />
             <div className='mt1 fl bg-black h1 w2' />
             <div className='cf' />
           </div>
           <div className='mt2 bg-light-red w-100 pa2'>
-            <div className='bb mt1 dark-gray' />
-            <div className='bb dark-gray mt1' />
-            <div className='bb mt1 dark-gray w4' />
+            <Line />
+            <Line />
+            <Line />
             <div className='mt1 fl bg-navy h1 w2' />
             <div className='mt1 fl ml2 h1 w2 bg-purple pl2' />
             <div className='cf' />
           </div>
           <div className='mt2 bg-green w-100 pa2'>
-            <div className='bb mt1 dark-gray' />
-            <div className='bb mt1 dark-gray' />
-            <div className='bb mt1 dark-gray w3' />
+            <Line />
+            <Line />
+            <Line />
             <div className='mt1 fl bg-navy h1 w2' />
-            <div className='mt1 fl ml2 h1 w2 bg-blue pl2' />
+            <Box />
             <div className='mt1 fl ml2 h1 w2 bg-gray pl2' />
             <div className='cf' />
           </div>
         </div>
         <div className='fl bg-light-gray w-30-ns w-100 mt0-ns mt2 pt1 pa2'>
-          <div className='bb mt1 dark-gray' />
-          <div className='bb mt1 dark-gray' />
-          <div className='bb mt1 dark-gray' />
-
-          <div className='bb mt1 dark-gray' />
-          <div className='bb mt1 dark-gray' />
-          <div className='bb mt1 dark-gray' />
-          <div className='h1 mt1 dark-gray' />
-          <div className='bb mt1 dark-gray' />
-          <div className='bb mt1 dark-gray' />
-          <div className='bb mt1 dark-gray' />
-          <div className='bb mt1 dark-gray' />
-
-          <div className='bb mt1 dark-gray' />
-          <div className='bb mt1 dark-gray' />
-          <div className='bb mt1 dark-gray' />
-          <div className='h1 mb2 mt1 dark-gray' />
-          <div className='bb mt1 dark-gray' />
-          <div className='bb mt1 dark-gray' />
-          <div className='bb mt1 dark-gray' />
+          <Line />
+          <Line />
+          <Line />
+          <Line />
+          <Line />
+          <Line />
+          <Break />
+          <Line />
+          <Line />
+          <Line />
+          <Line />
+          <Line />
+          <Line />
+          <Line />
+          <Break />
+          <Line />
+          <Line />
+          <Line />
 
           <div className='mt3 pa2 bg-dark-blue'>
 
@@ -108,7 +109,7 @@ export default () => (
       <div className='white tc f4'>
         "Probably not the future of contract management"
       </div>
-      <div className='white mt2 fr'>- namesless VC</div>
+      <div className='white mt2 fr'>- nameless VC</div>
       <div className='cf' />
     </div>
   </div>
