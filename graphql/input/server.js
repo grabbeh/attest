@@ -5,13 +5,11 @@ import schema from './schema'
 
 const GRAPHQL_PORT = 8000
 
-const graphQLServer = express()
+const server = express()
 
-graphQLServer.use('/graphql', bodyParser.json(), graphqlExpress({ schema }))
-graphQLServer.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }))
+server.use('/graphql', bodyParser.json(), graphqlExpress({ schema }))
+server.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }))
 
-graphQLServer.listen(GRAPHQL_PORT, () =>
-  console.log(
-    `GraphiQL is now running on http://localhost:${GRAPHQL_PORT}/graphiql`
-  )
+server.listen(GRAPHQL_PORT, () =>
+  console.log(`GraphiQL is now running on http://localhost:${GRAPHQL_PORT}/graphiql`)
 )
