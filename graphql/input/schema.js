@@ -5,18 +5,33 @@ const typeDefs = `
 type Query {
   contracts: [Contract]
 }
+scalar Date
+type MyType {
+   created: Date
+}
 
 type Contract {
-  name: String
-  id: Int
-  subject: String
+  id: ID!
+  internalParties: [String]
+  externalParties: [String]
+  executionDate: Date
+  effectiveDate: Date
+  expiryDate: Date
+  rollingTerm: Boolean
+  tags: [String]
+  businessUnit: String
+  status: String
+  createdAt: Date
+  lastUpdated: Date
+  status: String
+  client: Boolean
+  supplier: Boolean
 }
 
 schema {
   query: Query
  }
 `
-
 const schema = makeExecutableSchema({ typeDefs, resolvers })
 
 export default schema

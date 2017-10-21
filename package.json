@@ -6,16 +6,24 @@
   "dependencies": {
     "apollo-server-express": "^1.1.7",
     "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
     "body-parser": "^1.18.2",
+    "chance": "^1.0.11",
     "connect": "^3.6.5",
+    "cors": "^2.8.4",
     "express": "^4.15.4",
     "graphql": "^0.11.7",
+    "moment": "^2.19.1",
+    "mongoose": "^4.12.3",
     "next": "^3.0.6",
     "react": "^15.6.2",
+    "react-apollo": "^1.4.16",
     "react-dom": "^15.6.1",
     "tachyons-components": "^1.0.0-1"
   },
   "devDependencies": {
+    "babel-preset-stage-0": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
     "standard": "^10.0.3"
   },
   "standard": {
@@ -27,13 +35,20 @@
     "dev": "next",
     "build": "next build",
     "start": "NODE_ENV=production forever start index.js",
-    "graph": "babel ./graphql/input --out-dir ./graphql/compiled"
+    "watch-graph": "babel ./graphql/input --watch --out-dir ./graphql/compiled",
+    "watch-data": "babel ./data/input --watch --out-dir ./data/compiled"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/grabbeh/attest.git"
   },
   "babel": {
+    "presets": [
+      "next/babel",
+      "stage-0",
+      "es2015",
+      "stage-2"
+    ],
     "plugins": [
       [
         "transform-es2015-modules-commonjs",

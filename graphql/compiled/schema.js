@@ -12,22 +12,7 @@ var _resolvers2 = _interopRequireDefault(_resolvers);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const typeDefs = `
-type Query {
-  contracts: [Contract]
-}
-
-type Contract {
-  name: String
-  id: Int
-  subject: String
-}
-
-schema {
-  query: Query
- }
-`;
-
-const schema = (0, _graphqlTools.makeExecutableSchema)({ typeDefs, resolvers: _resolvers2.default });
+var typeDefs = '\ntype Query {\n  contracts: [Contract]\n}\nscalar Date\ntype MyType {\n   created: Date\n}\n\ntype Contract {\n  id: ID!\n  internalParties: [String]\n  externalParties: [String]\n  executionDate: Date\n  effectiveDate: Date\n  expiryDate: Date\n  rollingTerm: Boolean\n  tags: [String]\n  businessUnit: String\n  status: String\n  createdAt: Date\n  lastUpdated: Date\n  status: String\n  client: Boolean\n  supplier: Boolean\n}\n\nschema {\n  query: Query\n }\n';
+var schema = (0, _graphqlTools.makeExecutableSchema)({ typeDefs: typeDefs, resolvers: _resolvers2.default });
 
 exports.default = schema;
