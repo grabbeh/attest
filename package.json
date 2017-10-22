@@ -39,7 +39,7 @@
     "start-graph": "NODE_ENV=production forever start ./graphql/compiled/server.js",
     "watch-graph": "babel ./graphql/input --watch --out-dir ./graphql/compiled",
     "watch-data": "babel ./data/input --watch --out-dir ./data/compiled",
-    "compilte-graph": "babel ./graphql/input --out-dir ./graphql/compiled"
+    "compile-graph": "babel ./graphql/input --out-dir ./graphql/compiled"
   },
   "repository": {
     "type": "git",
