@@ -14,37 +14,37 @@ var _moment2 = _interopRequireDefault(_moment);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const chance = new _chance2.default();
+var chance = new _chance2.default();
 
-const internal = ['ACME Inc', 'ACME DYNAMITE Inc', 'ACME LUBRICANT Inc', 'ACME DRILLING Inc'];
+var internal = ['ACME Inc', 'ACME DYNAMITE Inc', 'ACME LUBRICANT Inc', 'ACME DRILLING Inc'];
 
-const external = ['Oracle, Inc', 'Google, Inc', 'Apple, Inc', 'Facebook, Inc', 'Amazon Inc', 'JP Morgan'];
+var external = ['Oracle, Inc', 'Google, Inc', 'Apple, Inc', 'Facebook, Inc', 'Amazon Inc', 'JP Morgan'];
 
-const businessUnits = ['Sales', 'IT', 'Disaster recovery', 'Incident management', 'Facilities', 'Legal', 'Finance', 'Customer services', 'Marketing', 'Software development'];
+var businessUnits = ['Sales', 'IT', 'Disaster recovery', 'Incident management', 'Facilities', 'Legal', 'Finance', 'Customer services', 'Marketing', 'Software development'];
 
-const statuses = ['Instructed', 'Executed', 'Drafted'];
+var statuses = ['Instructed', 'Executed', 'Drafted'];
 
-const randomTags = ['High priority', 'renewal', 'Critical', 'Strategic'];
+var randomTags = ['High priority', 'renewal', 'Critical', 'Strategic'];
 
-const random = arr => {
+var random = function random(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
 };
 
-const number = arr => {
+var number = function number(arr) {
   return Math.floor(Math.random() * arr.length);
 };
 
-const metaDataGenerator = () => {
-  const date = new Date();
-  const client = chance.bool();
-  const supplier = !client;
-  const internalParties = random(internal);
-  const externalParties = random(external);
-  const status = random(statuses);
-  const id = chance.guid();
-  const tags = randomTags.slice(number(randomTags), number(randomTags));
-  const unit = random(businessUnits);
-  let effectiveDate = chance.date({
+var metaDataGenerator = function metaDataGenerator() {
+  var date = new Date();
+  var client = chance.bool();
+  var supplier = !client;
+  var internalParties = random(internal);
+  var externalParties = random(external);
+  var status = random(statuses);
+  var id = chance.guid();
+  var tags = randomTags.slice(number(randomTags), number(randomTags));
+  var businessUnit = random(businessUnits);
+  var effectiveDate = chance.date({
     year: chance.year({ min: 1990, max: date.getFullYear() }),
     string: true,
     american: false
@@ -52,37 +52,36 @@ const metaDataGenerator = () => {
 
   effectiveDate = new Date((0, _moment2.default)(effectiveDate, 'DD-MM-YYYY')).toISOString();
 
-  const executionDate = effectiveDate;
+  var executionDate = effectiveDate;
 
-  let expiryDate = chance.date({
+  var expiryDate = chance.date({
     year: chance.year({ min: date.getFullYear(), max: 2025 }),
     string: true,
     american: false
   });
 
   expiryDate = new Date((0, _moment2.default)(expiryDate, 'DD-MM-YYYY')).toISOString();
+  var rollingTerm = chance.bool();
 
-  const rollingTerm = chance.bool();
-
-  const metaData = {
-    internalParties,
-    externalParties,
-    id,
-    effectiveDate,
-    executionDate,
-    expiryDate,
-    rollingTerm,
-    client,
-    supplier,
-    unit,
-    tags,
-    status
+  var metaData = {
+    internalParties: internalParties,
+    externalParties: externalParties,
+    id: id,
+    effectiveDate: effectiveDate,
+    executionDate: executionDate,
+    expiryDate: expiryDate,
+    rollingTerm: rollingTerm,
+    client: client,
+    supplier: supplier,
+    businessUnit: businessUnit,
+    tags: tags,
+    status: status
   };
   return metaData;
 };
 
-const contractsGenerator = num => {
-  const contractsData = [];
+var contractsGenerator = function contractsGenerator(num) {
+  var contractsData = [];
   if (num) {
     while (num > 0) {
       contractsData.push(metaDataGenerator());

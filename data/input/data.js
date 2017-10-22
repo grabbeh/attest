@@ -52,7 +52,7 @@ const metaDataGenerator = () => {
   const status = random(statuses)
   const id = chance.guid()
   const tags = randomTags.slice(number(randomTags), number(randomTags))
-  const unit = random(businessUnits)
+  const businessUnit = random(businessUnits)
   let effectiveDate = chance.date({
     year: chance.year({ min: 1990, max: date.getFullYear() }),
     string: true,
@@ -70,7 +70,6 @@ const metaDataGenerator = () => {
   })
 
   expiryDate = new Date(moment(expiryDate, 'DD-MM-YYYY')).toISOString()
-
   const rollingTerm = chance.bool()
 
   const metaData = {
@@ -83,7 +82,7 @@ const metaDataGenerator = () => {
     rollingTerm,
     client,
     supplier,
-    unit,
+    businessUnit,
     tags,
     status
   }

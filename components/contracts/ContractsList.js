@@ -1,19 +1,16 @@
 import { gql, graphql } from 'react-apollo'
+import Contract from './Contract'
 
 function ContractsList ({ data: { contracts } }) {
   if (contracts && contracts.length) {
     return (
       <section>
-        <ul>
+        <ul className='list'>
           {contracts.map((contract, index) => (
-            <li key={contract.id}>
-              <div>
-                {contract.internalParties.map(i => <div> {i}</div>)}
-              </div>
-            </li>
+            <li><Contract {...contract} /></li>
           ))}
         </ul>
-        <style jsx>{`
+        <style jsx>{`   
          
         `}</style>
       </section>
@@ -31,6 +28,7 @@ const contracts = gql`
       effectiveDate
       status
       tags
+      businessUnit
     }
   }
 `

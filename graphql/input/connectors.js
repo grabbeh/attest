@@ -1,6 +1,7 @@
 import mongoose from 'mongoose'
+
+import generator from '../../data/compiled/data'
 const db = require('../../config/db.js')
-// import generator from '../../data/compiled/data'
 mongoose.connect(db)
 
 const ContractSchema = mongoose.Schema({
@@ -22,16 +23,18 @@ const ContractSchema = mongoose.Schema({
 const Contract = mongoose.model('contracts', ContractSchema)
 
 export { Contract }
-/*
-const contracts = generator(10)
 
-contracts.forEach(c => {
-  new Contract(c).save((err, save) => {
-    if (err) console.log(err)
-    console.log('Saved')
+// delete existing contracts
+
+Contract.find().exec((err, contracts) => {
+  contracts.forEach(c => {
+    c.remove()
   })
 })
 
-Contract.find().exec((err, contracts) => {
-  console.log(contracts.length)
-}) */
+const contracts = generator(50)
+console.log(contracts[0])
+
+contracts.forEach(c => {
+  new Contract(c).save()
+})
