@@ -9,12 +9,21 @@ export default ({
 }) => (
   <ContractHolder status={status}>
     <div>
-      {internalParties.map(party => <div className='b'>{party}</div>)}
+      {externalParties.map(party => <div className=' pb1 b bb'>{party}</div>)}
     </div>
-    <div>{externalParties.map(party => <div>{party}</div>)}</div>
-    <div>{tags.map(tag => <div>{tag}</div>)}</div>
-    <div>{status}</div>
+    <div>{internalParties.map(party => <div>{party}</div>)}</div>
+    <div>
+      <ul className='list ma0 pa0'>
+        {tags.map(tag => (
+          <li className='bg-navy white fl pa1 mr1 mv1'>{tag}</li>
+        ))}
+      </ul>
+
+    </div>
+    <div className='cf' />
+
     <div>{businessUnit}</div>
+    <div>{status}</div>
 
   </ContractHolder>
 )

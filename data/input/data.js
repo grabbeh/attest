@@ -33,7 +33,7 @@ const businessUnits = [
 
 const statuses = ['Instructed', 'Executed', 'Drafted']
 
-const randomTags = ['High priority', 'renewal', 'Critical', 'Strategic']
+const randomTags = ['High priority', 'Renewal', 'Critical', 'Strategic']
 
 const random = arr => {
   return arr[Math.floor(Math.random() * arr.length)]
