@@ -18,6 +18,7 @@
     "react": "^15.6.2",
     "react-apollo": "^1.4.16",
     "react-dom": "^15.6.1",
+    "react-moment": "^0.6.5",
     "tachyons-components": "^1.0.0-1"
   },
   "devDependencies": {

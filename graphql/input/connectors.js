@@ -33,8 +33,9 @@ Contract.find().exec((err, contracts) => {
 })
 
 const contracts = generator(50)
-console.log(contracts[0])
 
 contracts.forEach(c => {
-  new Contract(c).save()
+  new Contract(c).save((err, res) => {
+    if (err) console.log(err)
+  })
 })

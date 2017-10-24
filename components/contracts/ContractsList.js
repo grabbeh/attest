@@ -4,8 +4,8 @@ import Contract from './Contract'
 function ContractsList ({ data: { contracts } }) {
   if (contracts && contracts.length) {
     return (
-      <section>
-        <ul className='list'>
+      <section className='mh2 mt2 mb3'>
+        <ul className='list pa0 ma0'>
           {contracts.map((contract, index) => (
             <li><Contract {...contract} /></li>
           ))}

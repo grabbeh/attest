@@ -1,29 +1,59 @@
 import ContractHolder from './ContractHolder'
+import Moment from 'react-moment'
+import React from 'react'
 
-export default ({
-  internalParties,
-  externalParties,
-  tags,
-  status,
-  businessUnit
-}) => (
-  <ContractHolder status={status}>
-    <div>
-      {externalParties.map(party => <div className=' pb1 b bb'>{party}</div>)}
-    </div>
-    <div>{internalParties.map(party => <div>{party}</div>)}</div>
-    <div>
-      <ul className='list ma0 pa0'>
-        {tags.map(tag => (
-          <li className='bg-navy white fl pa1 mr1 mv1'>{tag}</li>
-        ))}
-      </ul>
+class Contract extends React.Component {
+  constructor (props) {
+    super(props)
+    console.log(props)
+  }
 
-    </div>
-    <div className='cf' />
+  render () {
+    const {
+      internalParties,
+      externalParties,
+      tags,
+      status,
+      businessUnit,
+      effectiveDate
+    } = this.props
 
-    <div>{businessUnit}</div>
-    <div>{status}</div>
+    let date = null
+    if (effectiveDate) {
+      date = <Moment format='DD-MM-YYYY'>{effectiveDate}</Moment>
+    }
+    return (
+      <ContractHolder status={status}>
+        <div>
+          {externalParties.map(party => (
+            <div className='pb1 b bb'>{party}</div>
+          ))}
+        </div>
+        <div className='mt1'>
+          {internalParties.map(party => <div>{party}</div>)}
+        </div>
+        <div>
+          <ul className='list ma0 pa0'>
+            {tags.map(tag => (
+              <li className='bg-navy white fl pa1 mr1 mv1'>{tag}</li>
+            ))}
+          </ul>
 
-  </ContractHolder>
-)
+        </div>
+        <div className='cf' />
+
+        <div>{businessUnit}</div>
+        <div className='mt1'>{status}</div>
+        <div>{date}</div>
+        <div className='mt1'>
+          <div><i className=' fr mt1 fa fa-pencil' /></div>
+          <div><i className='mr2 fr mt1 fa fa-user' /></div>
+          <div><i className='mr2 fr mt1 fa fa-eye' /></div>
+          <div><i className='mr2 fr mt1 fa fa-plus-square' /></div>
+        </div>
+      </ContractHolder>
+    )
+  }
+}
+
+export default Contract

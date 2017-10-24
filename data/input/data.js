@@ -31,7 +31,7 @@ const businessUnits = [
   'Software development'
 ]
 
-const statuses = ['Instructed', 'Executed', 'Drafted']
+const statuses = ['Instructed', 'Executed', 'Approved', 'Drafted']
 
 const randomTags = ['High priority', 'Renewal', 'Critical', 'Strategic']
 
@@ -61,7 +61,7 @@ const metaDataGenerator = () => {
 
   effectiveDate = new Date(moment(effectiveDate, 'DD-MM-YYYY')).toISOString()
 
-  const executionDate = effectiveDate
+  let executionDate = effectiveDate
 
   let expiryDate = chance.date({
     year: chance.year({ min: date.getFullYear(), max: 2025 }),
@@ -70,7 +70,18 @@ const metaDataGenerator = () => {
   })
 
   expiryDate = new Date(moment(expiryDate, 'DD-MM-YYYY')).toISOString()
+  let createdAt = Date.now().toISOString()
   const rollingTerm = chance.bool()
+
+  if (status !== 'Executed') {
+    effectiveDate = null
+  }
+  if (status !== 'Executed') {
+    expiryDate = null
+  }
+  if (status !== 'Executed') {
+    executionDate = null
+  }
 
   const metaData = {
     internalParties,
@@ -80,6 +91,7 @@ const metaDataGenerator = () => {
     executionDate,
     expiryDate,
     rollingTerm,
+    createdAt,
     client,
     supplier,
     businessUnit,

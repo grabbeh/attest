@@ -11,7 +11,8 @@ export default ({ children, status }) => (
       'fl',
       status === 'Executed' && 'bg-green',
       status === 'Instructed' && 'bg-light-red',
-      status === 'Drafted' && 'bg-light-yellow'
+      status === 'Drafted' && 'bg-light-yellow',
+      status === 'Approved' && 'bg-light-green'
     )}
   >
     {children}

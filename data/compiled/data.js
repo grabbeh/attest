@@ -22,9 +22,9 @@ var external = ['Oracle, Inc', 'Google, Inc', 'Apple, Inc', 'Facebook, Inc', 'Am
 
 var businessUnits = ['Sales', 'IT', 'Disaster recovery', 'Incident management', 'Facilities', 'Legal', 'Finance', 'Customer services', 'Marketing', 'Software development'];
 
-var statuses = ['Instructed', 'Executed', 'Drafted'];
+var statuses = ['Instructed', 'Executed', 'Approved', 'Drafted'];
 
-var randomTags = ['High priority', 'renewal', 'Critical', 'Strategic'];
+var randomTags = ['High priority', 'Renewal', 'Critical', 'Strategic'];
 
 var random = function random(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
@@ -61,7 +61,18 @@ var metaDataGenerator = function metaDataGenerator() {
   });
 
   expiryDate = new Date((0, _moment2.default)(expiryDate, 'DD-MM-YYYY')).toISOString();
+  var createdAt = Date.now().toISOString();
   var rollingTerm = chance.bool();
+
+  if (status !== 'Executed') {
+    effectiveDate = null;
+  }
+  if (status !== 'Executed') {
+    expiryDate = null;
+  }
+  if (status !== 'Executed') {
+    executionDate = null;
+  }
 
   var metaData = {
     internalParties: internalParties,
@@ -71,6 +82,7 @@ var metaDataGenerator = function metaDataGenerator() {
     executionDate: executionDate,
     expiryDate: expiryDate,
     rollingTerm: rollingTerm,
+    createdAt: createdAt,
     client: client,
     supplier: supplier,
     businessUnit: businessUnit,
