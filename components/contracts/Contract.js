@@ -5,7 +5,6 @@ import React from 'react'
 class Contract extends React.Component {
   constructor (props) {
     super(props)
-    console.log(props)
   }
 
   render () {
