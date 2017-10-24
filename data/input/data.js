@@ -31,6 +31,14 @@ const businessUnits = [
   'Software development'
 ]
 
+const lawyers = [
+  'Atticus Finch',
+  'Horace Rumpole,
+  'Ally McBeal',
+  'Elle Woods',
+  'Sam Seaborn'
+  ]
+
 const statuses = ['Instructed', 'Executed', 'Approved', 'Drafted']
 
 const randomTags = ['High priority', 'Renewal', 'Critical', 'Strategic']
@@ -53,6 +61,7 @@ const metaDataGenerator = () => {
   const id = chance.guid()
   const tags = randomTags.slice(number(randomTags), number(randomTags))
   const businessUnit = random(businessUnits)
+  const assignedTo = random(lawyers)
   let effectiveDate = chance.date({
     year: chance.year({ min: 1990, max: date.getFullYear() }),
     string: true,
@@ -96,7 +105,8 @@ const metaDataGenerator = () => {
     supplier,
     businessUnit,
     tags,
-    status
+    status,
+    assignedTo
   }
   return metaData
 }
