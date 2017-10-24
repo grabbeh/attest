@@ -26,6 +26,7 @@ type Contract {
   status: String
   client: Boolean
   supplier: Boolean
+  assignedTo: String
 }
 
 schema {
