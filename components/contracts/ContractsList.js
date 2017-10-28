@@ -29,7 +29,6 @@ const contracts = gql`
       status
       tags
       businessUnit
-      assignedTo
     }
   }
 `
