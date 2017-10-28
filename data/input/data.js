@@ -70,7 +70,7 @@ const metaDataGenerator = () => {
   })
 
   expiryDate = new Date(moment(expiryDate, 'DD-MM-YYYY')).toISOString()
-  let createdAt = Date.now().toISOString()
+  // let createdAt = Date.now().toISOString()
   const rollingTerm = chance.bool()
 
   if (status !== 'Executed') {
@@ -91,7 +91,7 @@ const metaDataGenerator = () => {
     executionDate,
     expiryDate,
     rollingTerm,
-    createdAt,
+
     client,
     supplier,
     businessUnit,

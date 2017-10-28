@@ -3,11 +3,6 @@ import Moment from 'react-moment'
 import React from 'react'
 
 class Contract extends React.Component {
-  constructor (props) {
-    super(props)
-    console.log(props)
-  }
-
   render () {
     const {
       internalParties,

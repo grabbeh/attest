@@ -1,23 +1,6 @@
 import { gql, graphql } from 'react-apollo'
-import Contract from './Contract'
-
-function ContractsList ({ data: { contracts } }) {
-  if (contracts && contracts.length) {
-    return (
-      <section className='mh2 mt2 mb3'>
-        <ul className='list pa0 ma0'>
-          {contracts.map((contract, index) => (
-            <li><Contract {...contract} /></li>
-          ))}
-        </ul>
-        <style jsx>{`   
-         
-        `}</style>
-      </section>
-    )
-  }
-  return <div>Loading</div>
-}
+import ContractSubList from './ContractSubList'
+import _ from 'underscore'
 
 const contracts = gql`
   query {
@@ -34,7 +17,7 @@ const contracts = gql`
 `
 
 // The `graphql` wrapper executes a GraphQL query and makes the results
-// available on the `data` prop of the wrapped component (PostList)
+// available on the `data` prop of the wrapped component (ContractsList)
 export default graphql(contracts, {
   options: {
     variables: {}
@@ -42,4 +25,4 @@ export default graphql(contracts, {
   props: ({ data }) => ({
     data
   })
-})(ContractsList)
+})(ContractSubList)
