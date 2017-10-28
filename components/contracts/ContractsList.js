@@ -15,9 +15,6 @@ const contracts = gql`
     }
   }
 `
-
-// The `graphql` wrapper executes a GraphQL query and makes the results
-// available on the `data` prop of the wrapped component (ContractsList)
 export default graphql(contracts, {
   options: {
     variables: {}
