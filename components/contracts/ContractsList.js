@@ -1,6 +1,5 @@
 import { gql, graphql } from 'react-apollo'
 import ContractSubList from './ContractSubList'
-import _ from 'underscore'
 
 const contracts = gql`
   query {
@@ -12,6 +11,10 @@ const contracts = gql`
       status
       tags
       businessUnit
+      assignedTo{
+        firstName
+        lastName
+      }
     }
   }
 `

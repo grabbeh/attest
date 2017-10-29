@@ -26,7 +26,14 @@ type Contract {
   status: String
   client: Boolean
   supplier: Boolean
-  assignedTo: String
+  assignedTo: Lawyer
+  createdAt: Date
+}
+
+type Lawyer {
+  id: ID!
+  firstName: String
+  lastName: String
 }
 
 schema {

@@ -19,6 +19,7 @@
     "react-apollo": "^1.4.16",
     "react-dom": "^15.6.1",
     "react-moment": "^0.6.5",
+    "react-motion": "^0.5.2",
     "tachyons-components": "^1.0.0-1",
     "underscore": "^1.8.3"
   },
@@ -41,6 +42,7 @@
     "start-graph": "NODE_ENV=production forever start ./graphql/compiled/server.js",
     "watch-graph": "babel ./graphql/input --watch --out-dir ./graphql/compiled",
     "watch-data": "babel ./data/input --watch --out-dir ./data/compiled",
+    "watch-all": "npm run dev && npm run watch-graph",
     "compile-graph": "babel ./graphql/input --out-dir ./graphql/compiled"
   },
   "repository": {

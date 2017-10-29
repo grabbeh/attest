@@ -22,6 +22,8 @@ var external = ['Oracle, Inc', 'Google, Inc', 'Apple, Inc', 'Facebook, Inc', 'Am
 
 var businessUnits = ['Sales', 'IT', 'Disaster recovery', 'Incident management', 'Facilities', 'Legal', 'Finance', 'Customer services', 'Marketing', 'Software development'];
 
+var lawyers = [{ firstName: 'Atticus', lastName: 'Finch', id: 1 }, { firstName: 'Horace', lastName: 'Rumpole', id: 2 }, { firstName: 'Ally', lastName: 'McBeal', id: 3 }, { firstName: 'Elle', lastName: 'Woods', id: 4 }, { firstName: 'Sam', lastName: 'Seaborn', id: 5 }, 'Atticus Finch', 'Horace Rumpole', 'Ally McBeal', 'Elle Woods', 'Sam Seaborn'];
+
 var statuses = ['Instructed', 'Executed', 'Approved', 'Drafted'];
 
 var randomTags = ['High priority', 'Renewal', 'Critical', 'Strategic'];

@@ -4,13 +4,10 @@ import cn from 'classnames'
 export default ({ children, status }) => (
   <div
     className={cn(
-      'h5',
-      'w5-ns',
-      'mr3',
-      'pa2',
-      'w-100',
+      'h2',
+      'w5',
       'mb3',
-      'fl',
+      'pa1',
       status === 'Executed' && 'bg-green',
       status === 'Instructed' && 'bg-light-red',
       status === 'Drafted' && 'bg-light-yellow',

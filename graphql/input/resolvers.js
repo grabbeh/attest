@@ -1,4 +1,4 @@
-import { Contract } from './connectors'
+import { Contract, Lawyer } from './connectors'
 import { GraphQLScalarType } from 'graphql'
 import { Kind } from 'graphql/language'
 
@@ -22,6 +22,11 @@ const resolvers = {
   Query: {
     contracts (root, args) {
       return Contract.find()
+    }
+  },
+  Contract: {
+    assignedTo (contract) {
+      return Lawyer.findOne({ id: contract.assignedTo })
     }
   }
 }

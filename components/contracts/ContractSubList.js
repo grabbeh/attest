@@ -8,9 +8,12 @@ const items = ['Instructed', 'Drafted', 'Approved', 'Executed']
 class ContractSubList extends react.Component {
   constructor (props) {
     super(props)
+    let { contracts } = this.props.data
     this.state = {
-      originalContracts: [],
-      filteredContracts: []
+      originalContracts: contracts,
+      filteredContracts: _.flatten(
+        _.values(_.pick(_.groupBy(contracts, 'status'), items))
+      )
     }
     this.createCheckbox = this.createCheckbox.bind(this)
     this.toggleCheckbox = this.toggleCheckbox.bind(this)
@@ -48,25 +51,21 @@ class ContractSubList extends react.Component {
 
   componentWillMount () {
     this.selectedCheckboxes = new Set(items)
-    let copy = this.props.data.contracts
-    this.setState({ originalContracts: copy })
-
-    let filtered = _.flatten(_.values(_.pick(_.groupBy(copy, 'status'), items)))
-    this.setState({ filteredContracts: filtered })
   }
 
   render () {
     let checkboxes = this.createCheckboxes()
+    let { filteredContracts } = this.state
     return (
       <div>
-        <div>
-          <ul className='list'>{checkboxes}</ul>
+        <div className='mt1'>
+          <ul className='ma0 pa0 list'>{checkboxes}</ul>
         </div>
         <div className='cf' />
-        <section className='mh2 mt2 mb3'>
+        <section className='mh2 mt2 mb4'>
           <ul className='list pa0 ma0'>
-            {this.state.filteredContracts.map((contract, index) => (
-              <li><Contract {...contract} /></li>
+            {filteredContracts.map((contract, index) => (
+              <li key={contract.id}><Contract {...contract} /></li>
             ))}
           </ul>
         </section>

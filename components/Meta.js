@@ -17,7 +17,7 @@ export default () => (
       />
 
       <link
-        href='https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css'
+        href='https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'
         rel='stylesheet'
       />
 

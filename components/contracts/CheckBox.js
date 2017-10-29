@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import cn from 'classnames'
 
 class Checkbox extends Component {
   constructor (props) {
@@ -24,15 +25,25 @@ class Checkbox extends Component {
     const { isChecked } = this.state
 
     return (
-      <li className='pa2 fl'>
+      <li key={label} className='pa2 fl'>
         <label>
           <input
+            className='dn'
             type='checkbox'
             value={label}
             checked={isChecked}
             onChange={this.toggleCheckboxChange}
           />
-          {label}
+          <div
+            className={cn(
+              'pointer',
+              'fr',
+              'pa1',
+              isChecked && 'bg-lightest-blue'
+            )}
+          >
+            {label}
+          </div>
         </label>
       </li>
     )

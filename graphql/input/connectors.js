@@ -17,12 +17,21 @@ const ContractSchema = mongoose.Schema({
   createdAt: Date,
   lastUpdated: Date,
   client: Boolean,
-  supplier: Boolean
+  supplier: Boolean,
+  assignedTo: Number
 })
 
-const Contract = mongoose.model('contracts', ContractSchema)
+const Contract = mongoose.model('contract', ContractSchema)
 
-export { Contract }
+const LawyerSchema = mongoose.Schema({
+  firstName: String,
+  lastName: String,
+  id: Number
+})
+
+const Lawyer = mongoose.model('lawyer', LawyerSchema)
+
+export { Contract, Lawyer }
 
 // delete existing contracts
 
@@ -36,6 +45,26 @@ const contracts = generator(50)
 
 contracts.forEach(c => {
   new Contract(c).save((err, res) => {
+    if (err) console.log(err)
+  })
+})
+
+const lawyers = [
+  { firstName: 'Atticus', lastName: 'Finch', id: 1 },
+  { firstName: 'Horace', lastName: 'Rumpole', id: 2 },
+  { firstName: 'Ally', lastName: 'McBeal', id: 3 },
+  { firstName: 'Elle', lastName: 'Woods', id: 4 },
+  { firstName: 'Sam', lastName: 'Seaborn', id: 5 }
+]
+
+Lawyer.find().exec((err, lawyers) => {
+  lawyers.forEach(l => {
+    l.remove()
+  })
+})
+
+lawyers.forEach(l => {
+  new Lawyer(l).save((err, res) => {
     if (err) console.log(err)
   })
 })
