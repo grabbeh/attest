@@ -7,14 +7,17 @@ mongoose.connect(db)
 const ContractSchema = mongoose.Schema({
   internalParties: Array,
   externalParties: Array,
-  executionDate: Date,
-  effectiveDate: Date,
   expiryDate: Date,
   rollingTerm: Boolean,
   tags: Array,
   businessUnit: String,
-  status: String,
-  createdAt: Date,
+  currentStatus: String,
+  statuses: [
+    {
+      status: String,
+      date: Date
+    }
+  ],
   lastUpdated: Date,
   client: Boolean,
   supplier: Boolean,
@@ -41,7 +44,7 @@ Contract.find().exec((err, contracts) => {
   })
 })
 
-const contracts = generator(50)
+const contracts = generator(10)
 
 contracts.forEach(c => {
   new Contract(c).save((err, res) => {

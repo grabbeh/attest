@@ -6,6 +6,7 @@ export default ({ children, status }) => (
     className={cn(
       'h5',
       'w5-ns',
+      'f5',
       'mr3',
       'pa2',
       'w-100',

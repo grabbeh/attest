@@ -31,7 +31,7 @@ const businessUnits = [
   'Software development'
 ]
 
-const statuses = ['Instructed', 'Executed', 'Approved', 'Drafted']
+const baseStatuses = ['Instructed', 'Approved', 'Drafted', 'Executed']
 
 const randomTags = ['High priority', 'Renewal', 'Critical', 'Strategic']
 
@@ -49,57 +49,40 @@ const metaDataGenerator = () => {
   const supplier = !client
   const internalParties = random(internal)
   const externalParties = random(external)
-  const status = random(statuses)
+  const currentStatus = random(baseStatuses)
   const id = chance.guid()
   const tags = randomTags.slice(number(randomTags), number(randomTags))
   const businessUnit = random(businessUnits)
   const assignedTo = random([1, 2, 3, 4, 5])
-  let effectiveDate = chance.date({
+
+  let createdAt = chance.date({
     year: chance.year({ min: 1990, max: date.getFullYear() }),
     string: true,
     american: false
   })
-  const createdAt = new Date(moment()).toISOString()
-
-  effectiveDate = new Date(moment(effectiveDate, 'DD-MM-YYYY')).toISOString()
-
-  let executionDate = effectiveDate
-
   let expiryDate = chance.date({
     year: chance.year({ min: date.getFullYear(), max: 2025 }),
     string: true,
     american: false
   })
-
   expiryDate = new Date(moment(expiryDate, 'DD-MM-YYYY')).toISOString()
-  // let createdAt = Date.now().toISOString()
   const rollingTerm = chance.bool()
 
-  if (status !== 'Executed') {
-    effectiveDate = null
-  }
-  if (status !== 'Executed') {
-    expiryDate = null
-  }
-  if (status !== 'Executed') {
-    executionDate = null
-  }
+  const statuses = statusGenerator(createdAt, currentStatus)
 
   const metaData = {
     internalParties,
     externalParties,
     id,
-    effectiveDate,
-    executionDate,
     expiryDate,
     rollingTerm,
     client,
     supplier,
     businessUnit,
     tags,
-    status,
-    assignedTo,
-    createdAt
+    currentStatus,
+    statuses,
+    assignedTo
   }
   return metaData
 }
@@ -115,6 +98,28 @@ const contractsGenerator = num => {
     contractsData.push(metaDataGenerator())
   }
   return contractsData
+}
+
+const statusGenerator = (createdDate, currentStatus) => {
+  let position = baseStatuses.indexOf(currentStatus)
+  // console.log(position)
+  // Don't include initial status because that will always be present and we need to allocate base date
+  let priorExceptInstructed = baseStatuses.slice(1, position + 1)
+
+  let firstStatus = {
+    status: 'Instructed',
+    date: new Date(moment(createdDate, 'DD-MM-YYYY')).toISOString()
+  }
+  let subsequentStatuses = priorExceptInstructed.map((p, i) => {
+    return {
+      status: p,
+      date: new Date(
+        moment(createdDate, 'DD-MM-YYYY').add(i, 'M')
+      ).toISOString()
+    }
+  })
+  let full = [firstStatus, ...subsequentStatuses]
+  return full
 }
 
 export default contractsGenerator

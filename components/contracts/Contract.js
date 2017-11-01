@@ -1,6 +1,7 @@
 import ContractHolder from './ContractHolder'
 import Moment from 'react-moment'
 import React from 'react'
+import _ from 'underscore'
 
 class Contract extends React.Component {
   render () {
@@ -8,14 +9,15 @@ class Contract extends React.Component {
       internalParties,
       externalParties,
       tags,
-      status,
+      currentStatus,
       businessUnit,
-      effectiveDate,
-      assignedTo
+      assignedTo,
+      statuses
     } = this.props
 
     let date = null
-    if (effectiveDate) {
+    if (_.last(statuses).status === 'Executed') {
+      let effectiveDate = _.last(statuses).date
       date = (
         <div>
           <i className='mr2 mt1 fa fa-check-square-o' />
@@ -38,7 +40,7 @@ class Contract extends React.Component {
       )
     }
     return (
-      <ContractHolder status={status}>
+      <ContractHolder status={currentStatus}>
         <div>
           {externalParties.map(party => (
             <div key={party} className='pb1 b bb'>{party}</div>
@@ -61,18 +63,20 @@ class Contract extends React.Component {
             {assignedTo.firstName + ' ' + assignedTo.lastName}
           </span>
         </div>
-        <div className='mt1 '>{status}</div>
+        <div className='mt1 b '>{currentStatus}</div>
         <div className='bb pb1'> {date}</div>
         <div>
           {tagDiv}
         </div>
         <div className='cf' />
+
         <ul className='list fr pa0 ma0'>
           <li className='fr mt1'><i className='fa fa-pencil' /></li>
           <li className='fr mr2 mt1'><i className='fa fa-trash-o' /></li>
           <li className='fr mr2 mt1'><i className='fa fa-eye' /></li>
           <li className='fr mr2 mt1'><i className='fa fa-plus-square' /></li>
         </ul>
+
         <div className='cf' />
 
       </ContractHolder>

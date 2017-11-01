@@ -20,14 +20,18 @@ type Contract {
   rollingTerm: Boolean
   tags: [String]
   businessUnit: String
-  status: String
   createdAt: Date
   lastUpdated: Date
-  status: String
+  currentStatus: String
+  statuses: [Status]
   client: Boolean
   supplier: Boolean
   assignedTo: Lawyer
-  createdAt: Date
+}
+
+type Status {
+  status: String
+  date: Date
 }
 
 type Lawyer {

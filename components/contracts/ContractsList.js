@@ -7,11 +7,15 @@ const contracts = gql`
       id
       internalParties
       externalParties
-      effectiveDate
-      status
+      currentStatus
+      statuses {
+        status
+        date
+      }
       tags
       businessUnit
-      assignedTo{
+      currentStatus
+      assignedTo {
         firstName
         lastName
       }
