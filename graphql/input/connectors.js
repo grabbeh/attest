@@ -1,8 +1,15 @@
 import mongoose from 'mongoose'
-
 import generator from '../../data/compiled/data'
+mongoose.Promise = require('bluebird')
+
 const db = require('../../config/db.js')
 mongoose.connect(db)
+
+const lawyers = [
+  { firstName: 'Atticus', lastName: 'Finch', id: 1 },
+  { firstName: 'Ally', lastName: 'McBeal', id: 2 },
+  { firstName: 'Horace', lastName: 'Rumpole', id: 3 }
+]
 
 const ContractSchema = mongoose.Schema({
   internalParties: Array,
@@ -37,29 +44,7 @@ const Lawyer = mongoose.model('lawyer', LawyerSchema)
 export { Contract, Lawyer }
 
 // delete existing contracts
-
-Contract.find().exec((err, contracts) => {
-  contracts.forEach(c => {
-    c.remove()
-  })
-})
-
-const contracts = generator(10)
-
-contracts.forEach(c => {
-  new Contract(c).save((err, res) => {
-    if (err) console.log(err)
-  })
-})
-
-const lawyers = [
-  { firstName: 'Atticus', lastName: 'Finch', id: 1 },
-  { firstName: 'Horace', lastName: 'Rumpole', id: 2 },
-  { firstName: 'Ally', lastName: 'McBeal', id: 3 },
-  { firstName: 'Elle', lastName: 'Woods', id: 4 },
-  { firstName: 'Sam', lastName: 'Seaborn', id: 5 }
-]
-
+/*
 Lawyer.find().exec((err, lawyers) => {
   lawyers.forEach(l => {
     l.remove()
@@ -71,3 +56,18 @@ lawyers.forEach(l => {
     if (err) console.log(err)
   })
 })
+
+Contract.find().exec((err, contracts) => {
+  contracts.forEach(c => {
+    c.remove()
+  })
+})
+
+const contracts = generator(50)
+
+contracts.forEach(c => {
+  new Contract(c).save((err, res) => {
+    if (err) console.log(err)
+  })
+})
+*/

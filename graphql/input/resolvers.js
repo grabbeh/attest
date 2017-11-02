@@ -26,7 +26,12 @@ const resolvers = {
   },
   Contract: {
     assignedTo (contract) {
-      return Lawyer.findOne({ id: contract.assignedTo })
+      return Lawyer.findOne({ id: contract.assignedTo }).then(res => {
+        console.log(contract.assignedTo)
+        console.log('Lawyer')
+        console.log(res)
+        return res
+      })
     }
   }
 }

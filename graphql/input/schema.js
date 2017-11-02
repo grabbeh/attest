@@ -35,7 +35,7 @@ type Status {
 }
 
 type Lawyer {
-  id: ID!
+  id: Int
   firstName: String
   lastName: String
 }

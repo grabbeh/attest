@@ -89,8 +89,8 @@ class ContractSubList extends react.Component {
     let checkboxes = this.createCheckboxes()
     let { filteredContracts } = this.state
     return (
-      <div>
-        <div className='mt1'>
+      <div className='pa2'>
+        <div className='fl mt1'>
           <ul className='ma0 pa0 list'>{checkboxes}</ul>
         </div>
         <div className='cf' />
@@ -100,7 +100,7 @@ class ContractSubList extends react.Component {
           </button>
         </div>
         <div className='cf' />
-        <section className='mh2 mt2 mb4'>
+        <section className='mt2 mb4'>
           <ul className='list pa0 ma0'>
             {filteredContracts.map((contract, index) => (
               <li key={contract.id}><Contract {...contract} /></li>

@@ -32,7 +32,6 @@ const businessUnits = [
 ]
 
 const baseStatuses = ['Instructed', 'Approved', 'Drafted', 'Executed']
-
 const randomTags = ['High priority', 'Renewal', 'Critical', 'Strategic']
 
 const random = arr => {
@@ -53,7 +52,7 @@ const metaDataGenerator = () => {
   const id = chance.guid()
   const tags = randomTags.slice(number(randomTags), number(randomTags))
   const businessUnit = random(businessUnits)
-  const assignedTo = random([1, 2, 3, 4, 5])
+  const assignedTo = random([1, 2, 3])
 
   let createdAt = chance.date({
     year: chance.year({ min: 1990, max: date.getFullYear() }),
