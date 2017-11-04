@@ -5,18 +5,16 @@ class Checkbox extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      isChecked: true
+      isChecked: props.checked
     }
     this.toggleCheckboxChange = this.toggleCheckboxChange.bind(this)
   }
 
   toggleCheckboxChange () {
     const { handleCheckboxChange, label } = this.props
-
     this.setState(({ isChecked }) => ({
       isChecked: !isChecked
     }))
-
     handleCheckboxChange(label)
   }
 
