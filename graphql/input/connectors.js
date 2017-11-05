@@ -57,7 +57,7 @@ lawyers.forEach(l => {
     if (err) console.log(err)
   })
 }) */
-
+/*
 Contract.find().exec((err, contracts) => {
   if (err) console.log(err)
   console.log(contracts.length)
@@ -69,4 +69,4 @@ contracts.forEach(c => {
   new Contract(c).save((err, res) => {
     if (err) console.log(err)
   })
-})
+}) */
