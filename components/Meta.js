@@ -10,6 +10,7 @@ export default () => (
       <meta name='viewport' content='width=device-width' />
       <title>Attest - open source contract management</title>
       <link rel='stylesheet' href='/static/tachyons.css' />
+      <link rel='stylesheet' href='/static/datepicker.css' />
       <link
         href='https://fonts.googleapis.com/css?family=Montserrat:400,700'
         rel='stylesheet'
@@ -34,6 +35,10 @@ export default () => (
 
       .bg--dark-blue {
         background-color: #132238
+      }
+
+      input, textarea {
+        font-family: Montserrat, sans-serif;
       }
 
       .fc-blue {

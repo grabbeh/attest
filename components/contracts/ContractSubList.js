@@ -3,14 +3,11 @@ import Contract from './Contract'
 import Checkbox from './CheckBox'
 import _ from 'underscore'
 import Moment from 'moment'
+import HideToggle from './Hide'
 import { extendMoment } from 'moment-range'
+import DatePicker from 'react-datepicker'
 
 const moment = extendMoment(Moment)
-
-const invalidDate = moment('fsdfsdf')
-if (invalidDate.isValid) {
-  console.log('Date is valid')
-}
 
 class ContractSubList extends react.Component {
   constructor (props) {
@@ -29,8 +26,8 @@ class ContractSubList extends react.Component {
       initialValues: {
         statuses: statuses,
         dateRange: {
-          start: '',
-          finish: ''
+          startDate: null,
+          endDate: null
         },
         tags: tags,
         businessUnits: businessUnits
@@ -38,8 +35,8 @@ class ContractSubList extends react.Component {
       filters: {
         statuses: statuses,
         dateRange: {
-          start: '',
-          finish: ''
+          startDate: null,
+          endDate: null
         },
         tags: [],
         businessUnits: businessUnits
@@ -56,8 +53,41 @@ class ContractSubList extends react.Component {
     this.createCheckboxes = this.createCheckboxes.bind(this)
     this.updateFilterState = this.updateFilterState.bind(this)
     this.filterContracts = this.filterContracts.bind(this)
-    this.handleDateChange = this.handleDateChange.bind(this)
     this.updateSet = this.updateSet.bind(this)
+    this.handleChangeEnd = this.handleChangeEnd.bind(this)
+    this.handleChangeStart = this.handleChangeStart.bind(this)
+    this.resetDates = this.resetDates.bind(this)
+  }
+
+  handleChangeStart (date) {
+    let dateRange = {}
+    dateRange.startDate = date
+    this.updateFilterState('dateRange', dateRange)
+  }
+
+  handleChangeEnd (date) {
+    let dateRange = {}
+    dateRange.endDate = date
+    dateRange.startDate = this.state.filters.dateRange.startDate
+    this.updateFilterState('dateRange', dateRange)
+    if (dateRange.endDate.isBefore(dateRange.startDate)) {
+      let { error } = this.state
+      error.finishBeforeStart = true
+      this.setState({ error: error })
+    } else {
+      let { error } = this.state
+      error.finishBeforeStart = false
+      this.setState({ error: error })
+      this.filterContracts(this.state.filters)
+    }
+  }
+
+  resetDates () {
+    let dateRange = {}
+    dateRange.endDate = null
+    dateRange.startDate = null
+    this.updateFilterState('dateRange', dateRange)
+    this.filterContracts(this.state.filters)
   }
 
   updateFilterState (filterName, content) {
@@ -73,35 +103,6 @@ class ContractSubList extends react.Component {
       set.add(label)
     }
     return [...set]
-  }
-
-  handleDateChange (e) {
-    let { name, value } = e.target
-    let dateRange = {}
-    if (name === 'start') {
-      dateRange.start = value
-      dateRange.finish = this.state.filters.dateRange.finish
-    }
-    if (name === 'finish') {
-      dateRange.finish = value
-      dateRange.start = this.state.filters.dateRange.start
-    }
-    if (
-      moment(dateRange.finish, 'DD/MM/YYYY').isBefore(
-        dateRange.start,
-        'DD/MM/YYYY'
-      )
-    ) {
-      let { error } = this.state
-      error.finishBeforeStart = true
-      this.setState({ error: error })
-    } else {
-      let { error } = this.state
-      error.finishBeforeStart = false
-      this.setState({ error: error })
-    }
-    this.updateFilterState('dateRange', dateRange)
-    this.filterContracts(this.state.filters)
   }
 
   filterContracts (filters) {
@@ -129,13 +130,13 @@ class ContractSubList extends react.Component {
     // date filter
 
     if (
-      moment(dateRange.start, 'DD/MM/YYYY').isValid() &&
-      moment(dateRange.finish, 'DD/MM/YYYY').isValid()
+      dateRange.startDate &&
+      dateRange.startDate.isValid() &&
+      dateRange.endDate &&
+      dateRange.endDate.isValid()
     ) {
-      let { start, finish } = dateRange
-      start = moment(start, 'DD/MM/YYYY')
-      finish = moment(finish, 'DD/MM/YYYY')
-      const range = moment.range(start, finish)
+      let { startDate, endDate } = dateRange
+      const range = moment.range(startDate, endDate)
       copy = _.filter(copy, s => {
         let latestDate = moment(_.last(s.statuses).date)
         return range.contains(latestDate)
@@ -189,54 +190,93 @@ class ContractSubList extends react.Component {
   render () {
     let { filteredContracts } = this.state
     let { statuses, tags, businessUnits } = this.state.initialValues
-    let s = this.createCheckboxes(statuses, true)
-    let t = this.createCheckboxes(tags, false)
-    let b = this.createCheckboxes(businessUnits, true)
 
     return (
-      <div className='pa2'>
-        <div className='fl mt1'>
-          <ul className='ma0 pa0 list'>{s}</ul>
+      <div className='pa3'>
+        <div className='outline pa3'>
+          <div className='b'>Filters</div>
+          <HideToggle title='Statuses'>
+            <div className='mt2'>
+              <ul className='ma0 pa0 list'>
+                {this.createCheckboxes(statuses, true)}
+              </ul>
+            </div>
+          </HideToggle>
+          <div className='cf' />
+          <HideToggle title='Tags'>
+            <div className='mt2'>
+              <ul className='ma0 pa0 list'>
+                {this.createCheckboxes(tags, false)}
+              </ul>
+            </div>
+          </HideToggle>
+
+          <div className='cf' />
+          <HideToggle title='Business Units'>
+            <div className='mt2'>
+              <ul className='ma0 pa0 list'>
+                {this.createCheckboxes(businessUnits, true)}
+              </ul>
+            </div>
+          </HideToggle>
+          <div className='cf' />
+          <HideToggle title='Dates'>
+            <div className='fl mt2'>
+              <div className='fl mr2'>
+                <DatePicker
+                  className=' w4 tc pointer'
+                  selected={this.state.filters.dateRange.startDate}
+                  selectsStart
+                  startDate={this.state.filters.dateRange.startDate}
+                  endDate={this.state.filters.dateRange.endDate}
+                  onChange={this.handleChangeStart}
+                  placeholderText='Start date'
+                  showMonthDropdown
+                  dateFormat='DD/MM/YYYY'
+                />
+              </div>
+
+              <div className='fl mr2'>
+                <DatePicker
+                  className=' w4 tc pointer'
+                  selected={this.state.filters.dateRange.endDate}
+                  selectsEnd
+                  startDate={this.state.filters.dateRange.startDate}
+                  endDate={this.state.filters.dateRange.endDate}
+                  onChange={this.handleChangeEnd}
+                  placeholderText='End date'
+                  showMonthDropdown
+                  dateFormat='DD/MM/YYYY'
+                />
+              </div>
+
+              <div onClick={this.resetDates} className='fl'>
+                <i className='pointer fa fa-window-close-o fa-lg gray' />
+              </div>
+
+            </div>
+          </HideToggle>
+          <div className='cf' />
+          <div>
+            {this.state.error.finishBeforeStart &&
+              <div>End date is before the start date</div>}
+          </div>
         </div>
-        <div className='cf' />
-        <div className='fl mt1'>
-          <ul className='ma0 pa0 list'>{t}</ul>
-        </div>
-        <div className='cf' />
-        <div className='fl mt1'>
-          <ul className='ma0 pa0 list'>{b}</ul>
-        </div>
-        <div className='cf' />
-        <div>
-          <form>
-            <input
-              value={this.state.filters.dateRange.start}
-              name='start'
-              placeholder='DD/MM/YYYY'
-              onChange={this.handleDateChange}
-              type='text'
-            />
-            <input
-              value={this.state.filters.dateRange.finish}
-              name='finish'
-              placeholder='DD/MM/YYYY'
-              onChange={this.handleDateChange}
-              type='text'
-            />
-          </form>
-        </div>
-        <div>
-          {this.state.error.finishBeforeStart &&
-            <div>End date is before the start date</div>}
-        </div>
-        <div className='cf' />
-        <section className='mt2 mb4'>
-          <ul className='list pa0 ma0'>
-            {filteredContracts.map((contract, index) => (
-              <li key={contract.id}><Contract {...contract} /></li>
-            ))}
-          </ul>
-        </section>
+
+        {filteredContracts.length > 0
+          ? <div>
+            <div className='cf' />
+            <section className='mt3 mb4'>
+              <ul className='list pa0 ma0 flex flex-wrap'>
+                {filteredContracts.map((contract, index) => (
+                  <li key={contract.id}>
+                    <Contract {...contract} />
+                  </li>
+                  ))}
+              </ul>
+            </section>
+          </div>
+          : <div className='mt2'>No matching contracts</div>}
       </div>
     )
   }

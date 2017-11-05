@@ -3,7 +3,7 @@ import generator from '../../data/compiled/data'
 mongoose.Promise = require('bluebird')
 
 const db = require('../../config/db.js')
-mongoose.connect(db)
+mongoose.connect(db, { useMongoClient: true })
 
 const lawyers = [
   { firstName: 'Atticus', lastName: 'Finch', id: 1 },
@@ -55,19 +55,18 @@ lawyers.forEach(l => {
   new Lawyer(l).save((err, res) => {
     if (err) console.log(err)
   })
-})
-
+}) */
+/*
 Contract.find().exec((err, contracts) => {
   contracts.forEach(c => {
     c.remove()
   })
-})
+}) */
 
-const contracts = generator(50)
+const contracts = generator(30)
 
 contracts.forEach(c => {
   new Contract(c).save((err, res) => {
     if (err) console.log(err)
   })
 })
-*/
