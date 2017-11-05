@@ -56,17 +56,17 @@ lawyers.forEach(l => {
   new Lawyer(l).save((err, res) => {
     if (err) console.log(err)
   })
-}) */
-/*
+})
+
 Contract.find().exec((err, contracts) => {
   if (err) console.log(err)
   console.log(contracts.length)
-})
+}) */
 
-const contracts = generator(30)
+const contracts = generator(100)
 
 contracts.forEach(c => {
   new Contract(c).save((err, res) => {
     if (err) console.log(err)
   })
-}) */
+})

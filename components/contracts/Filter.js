@@ -22,11 +22,11 @@ class ContractSubList extends react.Component {
 
     return (
       <div className='flex'>
-        <div className='bg-light-yellow w-33-ns w-100 mr3-ns mr0 br3 pa3'>
+        <div className='outline w-33-ns w-100 mr3-ns mr0 br3 pa3'>
           <div className='b'>Filters</div>
           <HideToggle title='Statuses'>
 
-            <ul className='mt2 ma0 pa0 list flex flex-wrap'>
+            <ul className='mt2 ma0 pa0 list '>
               {createCheckboxes(statuses, true)}
             </ul>
 
