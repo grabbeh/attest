@@ -7,7 +7,9 @@ export default ({ filteredContracts }) => (
         <div className='cf' />
         <section className='mt3 mb4'>
           <ul className='flex flex-wrap list pa0 ma0'>
-            {filteredContracts.map(contract => <Contract {...contract} />)}
+            {filteredContracts.map(contract => (
+              <Contract key={contract.id} {...contract} />
+              ))}
           </ul>
         </section>
       </div>

@@ -5,7 +5,6 @@ import _ from 'underscore'
 
 class Contract extends React.Component {
   render () {
-    console.log(this.props.contract)
     const {
       internalParties,
       externalParties,
@@ -13,8 +12,7 @@ class Contract extends React.Component {
       currentStatus,
       businessUnit,
       assignedTo,
-      statuses,
-      id
+      statuses
     } = this.props
 
     let date = null
@@ -45,7 +43,7 @@ class Contract extends React.Component {
       )
     }
     return (
-      <ContractHolder status={currentStatus} id={id}>
+      <ContractHolder status={currentStatus}>
         <div>
           {externalParties.map(party => (
             <div key={party} className='pb1 b bb b--dark-gray'>{party}</div>
@@ -74,14 +72,12 @@ class Contract extends React.Component {
           {tagDiv}
         </div>
         <div className='cf' />
-
         <ul className='fr list pa0 ma0 mt2'>
           <li className='fl mr2'><i className='fa fa-pencil' /></li>
           <li className='fl mr2 '><i className='fa fa-trash-o' /></li>
           <li className='fl mr2'><i className='fa fa-eye' /></li>
           <li className='fl'><i className='fa fa-plus-square' /></li>
         </ul>
-
         <div className='cf' />
 
       </ContractHolder>

@@ -3,7 +3,8 @@ import generator from '../../data/compiled/data'
 mongoose.Promise = require('bluebird')
 
 const db = require('../../config/db.js')
-mongoose.connect(db, { useMongoClient: true })
+// mongoose.connect(db, { useMongoClient: true })
+mongoose.connect(db)
 
 const lawyers = [
   { firstName: 'Atticus', lastName: 'Finch', id: 1 },
