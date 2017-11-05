@@ -5,6 +5,7 @@ import _ from 'underscore'
 
 class Contract extends React.Component {
   render () {
+    console.log(this.props.contract)
     const {
       internalParties,
       externalParties,
@@ -12,7 +13,8 @@ class Contract extends React.Component {
       currentStatus,
       businessUnit,
       assignedTo,
-      statuses
+      statuses,
+      id
     } = this.props
 
     let date = null
@@ -31,7 +33,10 @@ class Contract extends React.Component {
         <div className='fl mt1 '>
           <ul className='list ma0 pa0'>
             {tags.map(tag => (
-              <li key={tag} className='bg-navy white fl pv1 ph2 mr1 mv1'>
+              <li
+                key={tag}
+                className='br2 bg-dark-blue white fl pv1 ph2 mr1 mv1'
+              >
                 {tag}
               </li>
             ))}
@@ -40,10 +45,10 @@ class Contract extends React.Component {
       )
     }
     return (
-      <ContractHolder status={currentStatus}>
+      <ContractHolder status={currentStatus} id={id}>
         <div>
           {externalParties.map(party => (
-            <div key={party} className='pb1 b bb'>{party}</div>
+            <div key={party} className='pb1 b bb b--dark-gray'>{party}</div>
           ))}
         </div>
         <div className='mt1'>
@@ -64,17 +69,17 @@ class Contract extends React.Component {
           </span>
         </div>
         <div className='mt1 b '>{currentStatus}</div>
-        <div className='bb pb1'> {date}</div>
+        <div className='bb b--dark-gray pb1'> {date}</div>
         <div>
           {tagDiv}
         </div>
         <div className='cf' />
 
-        <ul className='list fr pa0 ma0'>
-          <li className='fr mt1'><i className='fa fa-pencil' /></li>
-          <li className='fr mr2 mt1'><i className='fa fa-trash-o' /></li>
-          <li className='fr mr2 mt1'><i className='fa fa-eye' /></li>
-          <li className='fr mr2 mt1'><i className='fa fa-plus-square' /></li>
+        <ul className='fr list pa0 ma0 mt2'>
+          <li className='fl mr2'><i className='fa fa-pencil' /></li>
+          <li className='fl mr2 '><i className='fa fa-trash-o' /></li>
+          <li className='fl mr2'><i className='fa fa-eye' /></li>
+          <li className='fl'><i className='fa fa-plus-square' /></li>
         </ul>
 
         <div className='cf' />

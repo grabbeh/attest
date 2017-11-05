@@ -101,7 +101,6 @@ const contractsGenerator = num => {
 
 const statusGenerator = (createdDate, currentStatus) => {
   let position = baseStatuses.indexOf(currentStatus)
-  // console.log(position)
   // Don't include initial status because that will always be present and we need to allocate base date
   let priorExceptInstructed = baseStatuses.slice(1, position + 1)
 

@@ -56,12 +56,11 @@ lawyers.forEach(l => {
     if (err) console.log(err)
   })
 }) */
-/*
+
 Contract.find().exec((err, contracts) => {
-  contracts.forEach(c => {
-    c.remove()
-  })
-}) */
+  if (err) console.log(err)
+  console.log(contracts.length)
+})
 
 const contracts = generator(30)
 

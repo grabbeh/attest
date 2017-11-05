@@ -1,32 +1,16 @@
-import { gql, graphql } from 'react-apollo'
-import ContractSubList from './ContractSubList'
+import Contract from './Contract'
 
-const contracts = gql`
-  query {
-    contracts {
-      id
-      internalParties
-      externalParties
-      currentStatus
-      statuses {
-        status
-        date
-      }
-      tags
-      businessUnit
-      currentStatus
-      assignedTo {
-        firstName
-        lastName
-      }
-    }
-  }
-`
-export default graphql(contracts, {
-  options: {
-    variables: {}
-  },
-  props: ({ data }) => ({
-    data
-  })
-})(ContractSubList)
+export default ({ filteredContracts }) => (
+  <div>
+    {filteredContracts.length > 0
+      ? <div>
+        <div className='cf' />
+        <section className='mt3 mb4'>
+          <ul className='flex flex-wrap list pa0 ma0'>
+            {filteredContracts.map(contract => <Contract {...contract} />)}
+          </ul>
+        </section>
+      </div>
+      : <div className='mt2'>No matching contracts</div>}
+  </div>
+)

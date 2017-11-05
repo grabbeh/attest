@@ -1,21 +1,22 @@
 import react from 'react'
-import Contract from './Contract'
 import Checkbox from './CheckBox'
+import ContractsList from './ContractsList'
 import _ from 'underscore'
 import Moment from 'moment'
-import HideToggle from './Hide'
+
 import { extendMoment } from 'moment-range'
-import DatePicker from 'react-datepicker'
+import Filter from './Filter'
 
 const moment = extendMoment(Moment)
 
-class ContractSubList extends react.Component {
+class ContractsHolder extends react.Component {
   constructor (props) {
     super(props)
     let { contracts } = this.props.data
-    let statuses = _.uniq(
+    /* let statuses = _.uniq(
       _.flatten(_.pluck(contracts, 'currentStatus'))
-    ).reverse()
+    ).reverse() */
+    let statuses = ['Instructed', 'Drafted', 'Approved', 'Executed']
     let tags = _.uniq(_.flatten(_.pluck(contracts, 'tags')))
     let businessUnits = _.uniq(_.flatten(_.pluck(contracts, 'businessUnit')))
     this.state = {
@@ -127,8 +128,7 @@ class ContractSubList extends react.Component {
       _.values(_.pick(_.groupBy(copy, 'businessUnit'), businessUnits))
     )
 
-    // date filter
-
+    // date filters
     if (
       dateRange.startDate &&
       dateRange.startDate.isValid() &&
@@ -188,98 +188,23 @@ class ContractSubList extends react.Component {
   }
 
   render () {
-    let { filteredContracts } = this.state
-    let { statuses, tags, businessUnits } = this.state.initialValues
-
+    let { filteredContracts, initialValues, filters } = this.state
     return (
       <div className='pa3'>
-        <div className='outline pa3'>
-          <div className='b'>Filters</div>
-          <HideToggle title='Statuses'>
-            <div className='mt2'>
-              <ul className='ma0 pa0 list'>
-                {this.createCheckboxes(statuses, true)}
-              </ul>
-            </div>
-          </HideToggle>
-          <div className='cf' />
-          <HideToggle title='Tags'>
-            <div className='mt2'>
-              <ul className='ma0 pa0 list'>
-                {this.createCheckboxes(tags, false)}
-              </ul>
-            </div>
-          </HideToggle>
-
-          <div className='cf' />
-          <HideToggle title='Business Units'>
-            <div className='mt2'>
-              <ul className='ma0 pa0 list'>
-                {this.createCheckboxes(businessUnits, true)}
-              </ul>
-            </div>
-          </HideToggle>
-          <div className='cf' />
-          <HideToggle title='Dates'>
-            <div className='fl mt2'>
-              <div className='fl mr2'>
-                <DatePicker
-                  className=' w4 tc pointer'
-                  selected={this.state.filters.dateRange.startDate}
-                  selectsStart
-                  startDate={this.state.filters.dateRange.startDate}
-                  endDate={this.state.filters.dateRange.endDate}
-                  onChange={this.handleChangeStart}
-                  placeholderText='Start date'
-                  showMonthDropdown
-                  dateFormat='DD/MM/YYYY'
-                />
-              </div>
-
-              <div className='fl mr2'>
-                <DatePicker
-                  className=' w4 tc pointer'
-                  selected={this.state.filters.dateRange.endDate}
-                  selectsEnd
-                  startDate={this.state.filters.dateRange.startDate}
-                  endDate={this.state.filters.dateRange.endDate}
-                  onChange={this.handleChangeEnd}
-                  placeholderText='End date'
-                  showMonthDropdown
-                  dateFormat='DD/MM/YYYY'
-                />
-              </div>
-
-              <div onClick={this.resetDates} className='fl'>
-                <i className='pointer fa fa-window-close-o fa-lg gray' />
-              </div>
-
-            </div>
-          </HideToggle>
-          <div className='cf' />
-          <div>
-            {this.state.error.finishBeforeStart &&
-              <div>End date is before the start date</div>}
-          </div>
-        </div>
-
-        {filteredContracts.length > 0
-          ? <div>
-            <div className='cf' />
-            <section className='mt3 mb4'>
-              <ul className='list pa0 ma0 flex flex-wrap'>
-                {filteredContracts.map((contract, index) => (
-                  <li key={contract.id}>
-                    <Contract {...contract} />
-                  </li>
-                  ))}
-              </ul>
-            </section>
-          </div>
-          : <div className='mt2'>No matching contracts</div>}
+        <Filter
+          initialValues={initialValues}
+          createCheckboxes={this.createCheckboxes}
+          startDate={filters.dateRange.startDate}
+          endDate={filters.dateRange.endDate}
+          handleChangeStart={this.handleChangeStart}
+          handleChangeEnd={this.handleChangeEnd}
+          resetDates={this.resetDates}
+          error={this.state.error}
+        />
+        <ContractsList filteredContracts={filteredContracts} />
       </div>
     )
   }
 }
 
-export default ContractSubList
+export default ContractsHolder
