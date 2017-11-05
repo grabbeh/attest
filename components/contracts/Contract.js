@@ -28,12 +28,12 @@ class Contract extends React.Component {
     let tagDiv = null
     if (tags) {
       tagDiv = (
-        <div className='fl mt1 '>
+        <div className='fl mt1'>
           <ul className='list ma0 pa0'>
             {tags.map(tag => (
               <li
                 key={tag}
-                className='br2 bg-dark-blue white fl pv1 ph2 mr1 mv1'
+                className='shadow-4 br2 bg-dark-blue white fl pv1 ph2 mr1 mv1'
               >
                 {tag}
               </li>

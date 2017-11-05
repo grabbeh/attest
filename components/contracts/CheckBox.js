@@ -38,6 +38,7 @@ class Checkbox extends Component {
               'fr',
               'pa1',
               'br2',
+              'shadow-4',
               isChecked && 'bg-dark-blue',
               isChecked && 'white'
             )}

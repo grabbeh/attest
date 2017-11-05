@@ -25,25 +25,20 @@ class ContractSubList extends react.Component {
         <div className='outline w-33-ns w-100 mr3-ns mr0 br3 pa3'>
           <div className='b'>Filters</div>
           <HideToggle title='Statuses'>
-
-            <ul className='mt2 ma0 pa0 list '>
+            <ul className='mt2 pb2 ma0 bb pa0 list flex flex-wrap  '>
               {createCheckboxes(statuses, true)}
             </ul>
-
           </HideToggle>
-
           <HideToggle title='Tags'>
-            <ul className='mt2 ma0 pa0 list flex flex-wrap'>
+            <ul className='mt2 pb2 ma0 bb pa0 list flex flex-wrap'>
               {createCheckboxes(tags, false)}
             </ul>
           </HideToggle>
-
           <HideToggle title='Business Units'>
-            <ul className='mt2 ma0 pa0 list flex flex-wrap'>
+            <ul className='mt2 ma0 pb2 bb pa0 list flex flex-wrap'>
               {createCheckboxes(businessUnits, true)}
             </ul>
           </HideToggle>
-
           <HideToggle title='Dates'>
             <div className='fl mt2'>
               <div className='fl mr2'>
@@ -76,13 +71,13 @@ class ContractSubList extends react.Component {
                 />
               </div>
 
-              <div onClick={resetDates} className='fl'>
-                <i className='pointer fa fa-window-close-o fa-lg gray' />
+              <div onClick={resetDates} className='fl f7 outline pa1 pointer'>
+                Clear
               </div>
 
             </div>
           </HideToggle>
-          <div className='cf' />
+
           <div>
             {error.finishBeforeStart &&
               <div className='pt2'>End date is before the start date</div>}

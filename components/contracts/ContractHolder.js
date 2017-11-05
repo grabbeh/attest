@@ -12,6 +12,7 @@ export default ({ children, status }) => (
       'w-100',
       'mr3-ns',
       'mr0',
+      'shadow-4',
       status === 'Executed' && 'bg-green',
       status === 'Instructed' && 'bg-light-red',
       status === 'Drafted' && 'bg-light-yellow',
