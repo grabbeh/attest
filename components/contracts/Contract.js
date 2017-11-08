@@ -34,7 +34,7 @@ class Contract extends React.Component {
             {tags.map(tag => (
               <li
                 key={tag}
-                className='shadow-4 b f6 bg-purple white fl pv1 ph2 mr1 mv1'
+                className='shadow-4 b f6 bg-blue white fl pv1 ph2 mr1 mv1'
               >
                 {tag}
               </li>
