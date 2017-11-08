@@ -5,7 +5,6 @@ export default ({ children, status }) => (
   <li
     className={cn(
       'f5',
-      'br2',
       'pa2',
       'mb3',
       'w-20-ns',
@@ -13,10 +12,7 @@ export default ({ children, status }) => (
       'mr3-ns',
       'mr0',
       'shadow-4',
-      status === 'Executed' && 'bg-green',
-      status === 'Instructed' && 'bg-light-red',
-      status === 'Drafted' && 'bg-light-yellow',
-      status === 'Approved' && 'bg-light-green'
+      'bg-white'
     )}
   >
     {children}

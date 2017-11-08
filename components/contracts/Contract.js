@@ -2,6 +2,7 @@ import ContractHolder from './ContractHolder'
 import Moment from 'react-moment'
 import React from 'react'
 import _ from 'underscore'
+import cn from 'classnames'
 
 class Contract extends React.Component {
   render () {
@@ -28,12 +29,12 @@ class Contract extends React.Component {
     let tagDiv = null
     if (tags) {
       tagDiv = (
-        <div className='fl mt1'>
+        <div className='fl mt1 '>
           <ul className='list ma0 pa0'>
             {tags.map(tag => (
               <li
                 key={tag}
-                className='shadow-4 br2 bg-dark-blue white fl pv1 ph2 mr1 mv1'
+                className='shadow-4 b f6 bg-purple white fl pv1 ph2 mr1 mv1'
               >
                 {tag}
               </li>
@@ -66,8 +67,27 @@ class Contract extends React.Component {
             {assignedTo.firstName + ' ' + assignedTo.lastName}
           </span>
         </div>
-        <div className='mt1 b '>{currentStatus}</div>
-        <div className='bb b--dark-gray pb1'> {date}</div>
+        <div
+          className={cn(
+            'mt1',
+            'b',
+            currentStatus === 'Executed' && 'bb',
+            currentStatus === 'Instructed' && 'bb',
+            currentStatus === 'Drafted' && 'bb',
+            currentStatus === 'Approved' && 'bb',
+            currentStatus === 'Executed' && 'b--green',
+            currentStatus === 'Instructed' && 'b--light-red',
+            currentStatus === 'Drafted' && 'b--light-yellow',
+            currentStatus === 'Approved' && 'b--light-green',
+            currentStatus === 'Executed' && 'bw2',
+            currentStatus === 'Instructed' && 'bw2',
+            currentStatus === 'Drafted' && 'bw2',
+            currentStatus === 'Approved' && 'bw2'
+          )}
+        >
+          {currentStatus}
+        </div>
+        <div className='pb1'> {date}</div>
         <div>
           {tagDiv}
         </div>

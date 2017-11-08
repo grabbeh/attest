@@ -22,7 +22,7 @@ class ContractSubList extends react.Component {
 
     return (
       <div className='flex'>
-        <div className='outline w-33-ns w-100 mr3-ns mr0 br3 pa3'>
+        <div className='bg-white  w-50-ns w-100 mr3-ns mr0 shadow-4 pa3'>
           <div className='b'>Filters</div>
           <HideToggle title='Statuses'>
             <ul className='mt2 pb2 ma0 bb pa0 list flex flex-wrap  '>
@@ -71,10 +71,10 @@ class ContractSubList extends react.Component {
                 />
               </div>
 
-              <div onClick={resetDates} className='fl f7 outline pa1 pointer'>
-                Clear
-              </div>
-
+            </div>
+            <div className='cf' />
+            <div onClick={resetDates} className='pt1  f7 pa1 pointer'>
+              Clear
             </div>
           </HideToggle>
 

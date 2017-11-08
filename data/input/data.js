@@ -50,7 +50,7 @@ const metaDataGenerator = () => {
   const externalParties = random(external)
   const currentStatus = random(baseStatuses)
   const id = chance.guid()
-  const tags = randomTags.slice(number(randomTags), number(randomTags))
+  const tags = randomTags.slice(number(randomTags), number(randomTags) + 1)
   const businessUnit = random(businessUnits)
   const assignedTo = random([1, 2, 3])
 
