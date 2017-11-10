@@ -29,7 +29,7 @@ class Contract extends React.Component {
     let tagDiv = null
     if (tags) {
       tagDiv = (
-        <div className='fl mt1 '>
+        <div className='fl'>
           <ul className='list ma0 pa0'>
             {tags.map(tag => (
               <li
@@ -47,7 +47,7 @@ class Contract extends React.Component {
       <ContractHolder status={currentStatus}>
         <div>
           {externalParties.map(party => (
-            <div key={party} className='pb1 b bb b--dark-gray'>{party}</div>
+            <div key={party} className='pb1 b bb bw3 b--mid-gray'>{party}</div>
           ))}
         </div>
         <div className='mt1'>
@@ -71,6 +71,7 @@ class Contract extends React.Component {
           className={cn(
             'mt1',
             'b',
+            'pb1',
             currentStatus === 'Executed' && 'bb',
             currentStatus === 'Instructed' && 'bb',
             currentStatus === 'Drafted' && 'bb',
@@ -79,10 +80,10 @@ class Contract extends React.Component {
             currentStatus === 'Instructed' && 'b--light-red',
             currentStatus === 'Drafted' && 'b--light-yellow',
             currentStatus === 'Approved' && 'b--light-green',
-            currentStatus === 'Executed' && 'bw2',
-            currentStatus === 'Instructed' && 'bw2',
-            currentStatus === 'Drafted' && 'bw2',
-            currentStatus === 'Approved' && 'bw2'
+            currentStatus === 'Executed' && 'bw3',
+            currentStatus === 'Instructed' && 'bw3',
+            currentStatus === 'Drafted' && 'bw3',
+            currentStatus === 'Approved' && 'bw3'
           )}
         >
           {currentStatus}

@@ -29,12 +29,24 @@ export default () => (
         font-family: Montserrat, sans-serif;
       }
 
+      .bg-darkest-gray {
+        background-color: #383636;
+      }
+
+      .bg--dark-gray {
+        background-color: #2a2727;
+      }
+
       .bg--blue {
         background-color: #005baa;
       }
 
       .bg--dark-blue {
         background-color: #132238
+      }
+
+      .light-gray {
+        color: #a7a3a3;
       }
 
       input, textarea {

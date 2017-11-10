@@ -22,20 +22,20 @@ class ContractSubList extends react.Component {
 
     return (
       <div className='flex'>
-        <div className='bg-white  w-50-ns w-100 mr3-ns mr0 shadow-4 pa3'>
+        <div className='bg-dark-gray light-gray w-50-ns w-100 mr3-ns mr0 shadow-4 pa3'>
           <div className='b'>Filters</div>
           <HideToggle title='Statuses'>
-            <ul className='mt2 pb2 ma0 bb pa0 list flex flex-wrap  '>
+            <ul className='mt2 pb2 ma0 bb b--mid-gray pa0 list flex flex-wrap  '>
               {createCheckboxes(statuses, true)}
             </ul>
           </HideToggle>
           <HideToggle title='Tags'>
-            <ul className='mt2 pb2 ma0 bb pa0 list flex flex-wrap'>
+            <ul className='mt2 pb2 ma0 bb b--mid-gray pa0 list flex flex-wrap'>
               {createCheckboxes(tags, false)}
             </ul>
           </HideToggle>
           <HideToggle title='Business Units'>
-            <ul className='mt2 ma0 pb2 bb pa0 list flex flex-wrap'>
+            <ul className='mt2 ma0 pb2 bb b--mid-gray pa0 list flex flex-wrap'>
               {createCheckboxes(businessUnits, true)}
             </ul>
           </HideToggle>
@@ -80,7 +80,9 @@ class ContractSubList extends react.Component {
 
           <div>
             {error.finishBeforeStart &&
-              <div className='pt2'>End date is before the start date</div>}
+              <div className='pt2 pa2 bg-light-red black b mt2'>
+                End date is before the start date
+              </div>}
           </div>
         </div>
       </div>

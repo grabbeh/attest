@@ -190,7 +190,7 @@ class ContractsHolder extends react.Component {
   render () {
     let { filteredContracts, initialValues, filters } = this.state
     return (
-      <div className='bg-light-blue pa3'>
+      <div className='bg--dark-gray pa3'>
         <Filter
           initialValues={initialValues}
           createCheckboxes={this.createCheckboxes}

@@ -12,7 +12,8 @@ export default ({ children, status }) => (
       'mr3-ns',
       'mr0',
       'shadow-4',
-      'bg-white'
+      'bg-dark-gray',
+      'light-gray'
     )}
   >
     {children}
