@@ -27,12 +27,7 @@ server.use('/graphql', function (req, res, next) {
     'Access-Control-Allow-Headers',
     'Content-Type, Authorization, Content-Length, X-Requested-With'
   )
-  if (req.method === 'OPTIONS') {
-    // console.log('Method = OPTIONS')
-    res.sendStatus(200)
-  } else {
-    next()
-  }
+  next()
 })
 
 server.use(
