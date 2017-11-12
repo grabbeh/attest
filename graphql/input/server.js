@@ -17,7 +17,7 @@ const corsOptions = {
 
 const server = express()
 server.options('*', cors())
-server.use(cors(corsOptions))
+
 server.use('/graphql', bodyParser.json(), graphqlExpress({ schema: schema }))
 server.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }))
 
