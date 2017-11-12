@@ -6,7 +6,11 @@ import cors from 'cors'
 
 const GRAPHQL_PORT = 8000
 
-const whitelist = ['http://localhost:3000', 'http://tryattest.com']
+const whitelist = [
+  'http://localhost:3000',
+  'http://tryattest.com:3000',
+  'http://207.154.247.21:3000/graphql'
+]
 const corsOptions = {
   origin (origin, callback) {
     const originIsWhitelisted = whitelist.indexOf(origin) !== -1
