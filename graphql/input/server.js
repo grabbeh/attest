@@ -6,7 +6,7 @@ import cors from 'cors'
 
 const GRAPHQL_PORT = 8000
 
-const whitelist = ['http://localhost:3000']
+const whitelist = ['http://localhost:3000', 'http://tryattest.com']
 const corsOptions = {
   origin (origin, callback) {
     const originIsWhitelisted = whitelist.indexOf(origin) !== -1
@@ -17,7 +17,7 @@ const corsOptions = {
 
 const server = express()
 server.options('*', cors())
-
+server.use(cors(corsOptions))
 server.use('/graphql', bodyParser.json(), graphqlExpress({ schema: schema }))
 server.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }))
 
