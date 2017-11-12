@@ -42,9 +42,4 @@ server.use(
   graphqlExpress({ schema: schema, context: {} })
 )
 server.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }))
-
-server.listen(GRAPHQL_PORT, () =>
-  console.log(
-    `GraphiQL is now running on http://localhost:${GRAPHQL_PORT}/graphiql`
-  )
-)
+server.listen(GRAPHQL_PORT)
