@@ -6,7 +6,10 @@ import ContractsQuery from './ContractsQuery'
 
 function DeleteButton ({ deleteContract, id }) {
   return (
-    <button onClick={() => deleteContract(id)}>
+    <button
+      className='f6 link dim mb2 dib light-gray bg-dark-gray'
+      onClick={() => deleteContract(id)}
+    >
       <i className='pointer fa fa-trash-o' />
     </button>
   )

@@ -45,6 +45,8 @@ export default () => (
         background-color: #132238
       }
 
+      input, button, submit { border:none; } 
+
       .light-gray {
         color: #a7a3a3;
       }
