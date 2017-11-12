@@ -29,7 +29,7 @@ server.use('/graphql', function (req, res, next) {
     'Content-Type, Authorization, Content-Length, X-Requested-With'
   )
   if (req.method === 'OPTIONS') {
-    console.log('Method = OPTIONS')
+    // console.log('Method = OPTIONS')
     res.sendStatus(200)
   } else {
     next()
