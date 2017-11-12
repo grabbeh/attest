@@ -17,9 +17,14 @@ const corsOptions = {
 
 const server = express()
 
-server.use(cors(corsOptions))
+// server.use(cors(corsOptions))
+server.use('*', cors(corsOptions))
 
-server.use('/graphql', bodyParser.json(), graphqlExpress({ schema: schema }))
+server.use(
+  '/graphql',
+  bodyParser.json(),
+  graphqlExpress({ schema: schema, context: {} })
+)
 server.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }))
 
 server.listen(GRAPHQL_PORT, () =>
