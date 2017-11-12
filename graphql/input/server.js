@@ -15,8 +15,16 @@ const corsOptions = {
   credentials: true
 }
 
+const allowCrossDomain = function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*')
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
+  res.header('Access-Control-Allow-Headers', 'Content-Type,token')
+  next()
+}
+
 const server = express()
 server.options('*', cors())
+server.use(allowCrossDomain)
 server.use(cors(corsOptions))
 server.use('/graphql', bodyParser.json(), graphqlExpress({ schema: schema }))
 server.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }))
