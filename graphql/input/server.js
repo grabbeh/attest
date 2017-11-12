@@ -23,13 +23,13 @@ const server = express()
 server.use('/graphql', function (req, res, next) {
   // console.log(req.method)
   res.header('Access-Control-Allow-Origin', '*')
-  res.header('Access-Control-Allow-Methods: POST, GET, OPTIONS', '*')
+  // res.header('Access-Control-Allow-Methods: POST, GET, OPTIONS', '*')
   res.header(
     'Access-Control-Allow-Headers',
     'Content-Type, Authorization, Content-Length, X-Requested-With'
   )
   if (req.method === 'OPTIONS') {
-    // console.log('Method = OPTIONS')
+    console.log('Method = OPTIONS')
     res.sendStatus(200)
   } else {
     next()
