@@ -63,7 +63,7 @@ Contract.find().exec((err, contracts) => {
     c.remove()
   })
 }) */
-
+/*
 const contracts = generator(100)
 
 contracts.forEach(c => {
@@ -71,3 +71,4 @@ contracts.forEach(c => {
     if (err) console.log(err)
   })
 })
+*/

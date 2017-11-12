@@ -1,28 +1,8 @@
-import { gql, graphql } from 'react-apollo'
+import { graphql } from 'react-apollo'
+import ContractsQuery from './ContractsQuery'
 import ContractsHolder from './ContractsHolder'
 
-const contracts = gql`
-  query {
-    contracts {
-      id
-      internalParties
-      externalParties
-      currentStatus
-      statuses {
-        status
-        date
-      }
-      tags
-      businessUnit
-      currentStatus
-      assignedTo {
-        firstName
-        lastName
-      }
-    }
-  }
-`
-export default graphql(contracts, {
+export default graphql(ContractsQuery, {
   options: {
     variables: {}
   },

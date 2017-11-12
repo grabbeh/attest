@@ -13,7 +13,7 @@ export default ({ filteredContracts }) => (
           </ul>
         </section>
       </div>
-      : <div className='pa2 bg-light-red light-gray mt2'>
+      : <div className='pa2 bg-light-red black mt2'>
           No matching contracts
         </div>}
   </div>

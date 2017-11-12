@@ -1,4 +1,5 @@
 import ContractHolder from './ContractHolder'
+import DeleteButton from './DeleteButton'
 import Moment from 'react-moment'
 import React from 'react'
 import _ from 'underscore'
@@ -7,6 +8,7 @@ import cn from 'classnames'
 class Contract extends React.Component {
   render () {
     const {
+      id,
       internalParties,
       externalParties,
       tags,
@@ -95,7 +97,7 @@ class Contract extends React.Component {
         <div className='cf' />
         <ul className='fr list pa0 ma0 mt2'>
           <li className='fl mr2'><i className='fa fa-pencil' /></li>
-          <li className='fl mr2 '><i className='fa fa-trash-o' /></li>
+          <li className='fl mr2 '><DeleteButton id={id} /></li>
           <li className='fl mr2'><i className='fa fa-eye' /></li>
           <li className='fl'><i className='fa fa-plus-square' /></li>
         </ul>

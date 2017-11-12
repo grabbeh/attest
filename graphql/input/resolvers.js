@@ -22,6 +22,20 @@ const resolvers = {
   Query: {
     contracts (root, args) {
       return Contract.find()
+    },
+    contract (root, args) {
+      return Contract.findOne({ id: args.id })
+    }
+  },
+  Mutation: {
+    updateContract (root, args) {
+      return Contract.findByIdAndUpdate(args.id, args)
+    },
+    addContract (roots, args) {
+      return Contract.create(args)
+    },
+    deleteContract (root, args) {
+      return Contract.findByIdAndRemove(args.id)
     }
   },
   Contract: {

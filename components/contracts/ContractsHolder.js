@@ -20,7 +20,6 @@ class ContractsHolder extends react.Component {
     let tags = _.uniq(_.flatten(_.pluck(contracts, 'tags')))
     let businessUnits = _.uniq(_.flatten(_.pluck(contracts, 'businessUnit')))
     this.state = {
-      originalContracts: contracts,
       filteredContracts: _.flatten(
         _.values(_.pick(_.groupBy(contracts, 'currentStatus'), statuses))
       ),
@@ -49,24 +48,15 @@ class ContractsHolder extends react.Component {
     this.statuses = new Set(statuses)
     this.tags = new Set()
     this.businessUnits = new Set(businessUnits)
-    this.createCheckbox = this.createCheckbox.bind(this)
-    this.toggleCheckbox = this.toggleCheckbox.bind(this)
-    this.createCheckboxes = this.createCheckboxes.bind(this)
-    this.updateFilterState = this.updateFilterState.bind(this)
-    this.filterContracts = this.filterContracts.bind(this)
-    this.updateSet = this.updateSet.bind(this)
-    this.handleChangeEnd = this.handleChangeEnd.bind(this)
-    this.handleChangeStart = this.handleChangeStart.bind(this)
-    this.resetDates = this.resetDates.bind(this)
   }
 
-  handleChangeStart (date) {
+  handleChangeStart = date => {
     let dateRange = {}
     dateRange.startDate = date
     this.updateFilterState('dateRange', dateRange)
   }
 
-  handleChangeEnd (date) {
+  handleChangeEnd = date => {
     let dateRange = {}
     dateRange.endDate = date
     dateRange.startDate = this.state.filters.dateRange.startDate
@@ -79,25 +69,25 @@ class ContractsHolder extends react.Component {
       let { error } = this.state
       error.finishBeforeStart = false
       this.setState({ error: error })
-      this.filterContracts(this.state.filters)
+      this.filterContracts(this.state.filters, this.props.data.contracts)
     }
   }
 
-  resetDates () {
+  resetDates = () => {
     let dateRange = {}
     dateRange.endDate = null
     dateRange.startDate = null
     this.updateFilterState('dateRange', dateRange)
-    this.filterContracts(this.state.filters)
+    this.filterContracts(this.state.filters, this.props.data.contracts)
   }
 
-  updateFilterState (filterName, content) {
+  updateFilterState = (filterName, content) => {
     let { filters } = this.state
     filters[filterName] = content
     this.setState({ filters: filters })
   }
 
-  updateSet (set, label) {
+  updateSet = (set, label) => {
     if (set.has(label)) {
       set.delete(label)
     } else {
@@ -106,8 +96,8 @@ class ContractsHolder extends react.Component {
     return [...set]
   }
 
-  filterContracts (filters) {
-    let copy = [...this.state.originalContracts]
+  filterContracts = (filters, contracts) => {
+    let copy = contracts
     let { tags, businessUnits, statuses, dateRange } = filters
 
     // tag filters
@@ -146,10 +136,10 @@ class ContractsHolder extends react.Component {
     copy = _.flatten(
       _.values(_.pick(_.groupBy(copy, 'currentStatus'), statuses))
     )
-    this.setState({ filteredContracts: copy })
+    return copy
   }
 
-  createCheckbox (label, checked) {
+  createCheckbox = (label, checked) => {
     return (
       <Checkbox
         checked={checked}
@@ -160,16 +150,14 @@ class ContractsHolder extends react.Component {
     )
   }
 
-  toggleCheckbox (label) {
+  toggleCheckbox = label => {
     let { statuses, tags, businessUnits } = this.state.initialValues
     if (statuses.includes(label)) {
       this.updateFilterState('statuses', this.updateSet(this.statuses, label))
-      this.filterContracts(this.state.filters)
     }
 
     if (tags.includes(label)) {
       this.updateFilterState('tags', this.updateSet(this.tags, label))
-      this.filterContracts(this.state.filters)
     }
 
     if (businessUnits.includes(label)) {
@@ -177,18 +165,19 @@ class ContractsHolder extends react.Component {
         'businessUnits',
         this.updateSet(this.businessUnits, label)
       )
-      this.filterContracts(this.state.filters)
     }
   }
 
-  createCheckboxes (arr, bool) {
+  createCheckboxes = (arr, bool) => {
     return arr.map(a => {
       return this.createCheckbox(a, bool)
     })
   }
 
   render () {
-    let { filteredContracts, initialValues, filters } = this.state
+    let { initialValues, filters } = this.state
+    let { contracts } = this.props.data
+    let filteredContracts = this.filterContracts(filters, contracts)
     return (
       <div className='bg--dark-gray pa3'>
         <Filter
