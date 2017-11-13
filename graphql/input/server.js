@@ -23,8 +23,9 @@ const server = express()
 
 // server.use(cors(corsOptions))
 // server.use('*', cors(corsOptions))
-
+/*
 server.use('/graphql', function (req, res, next) {
+  console.log('Server hit')
   // console.log(req.method)
   res.header('Access-Control-Allow-Origin', '*')
   // res.header('Access-Control-Allow-Methods: POST, GET, OPTIONS', '*')
@@ -38,7 +39,7 @@ server.use('/graphql', function (req, res, next) {
   } else {
     next()
   }
-})
+}) */
 
 server.use(
   '/graphql',

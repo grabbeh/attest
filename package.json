@@ -12,6 +12,7 @@
     "cors": "^2.8.4",
     "express": "^4.15.4",
     "graphql": "^0.11.7",
+    "http-proxy-middleware": "^0.17.4",
     "moment": "^2.19.1",
     "moment-range": "^3.0.3",
     "mongoose": "^4.12.3",
@@ -39,6 +40,7 @@
   },
   "scripts": {
     "dev": "next",
+    "custom": "node index.js",
     "build": "next build",
     "start-next": "NODE_ENV=production forever start index.js",
     "start-graph": "NODE_ENV=production forever start ./graphql/compiled/server.js",
