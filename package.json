@@ -13,6 +13,7 @@
     "express": "^4.15.4",
     "graphql": "^0.11.7",
     "http-proxy-middleware": "^0.17.4",
+    "lodash": "^4.17.4",
     "moment": "^2.19.1",
     "moment-range": "^3.0.3",
     "mongoose": "^4.12.3",
@@ -21,6 +22,7 @@
     "react-apollo": "^1.4.16",
     "react-datepicker": "^0.60.0",
     "react-dom": "^15.6.1",
+    "react-modal": "^3.1.2",
     "react-moment": "^0.6.5",
     "react-motion": "^0.5.2",
     "tachyons-components": "^1.0.0-1",
@@ -39,8 +41,7 @@
     ]
   },
   "scripts": {
-    "dev": "next",
-    "custom": "node index.js",
+    "dev": "node index.js",
     "build": "next build",
     "start-next": "NODE_ENV=production forever start index.js",
     "start-graph": "NODE_ENV=production forever start ./graphql/compiled/server.js",

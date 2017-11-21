@@ -66,10 +66,11 @@ const metaDataGenerator = () => {
   })
   expiryDate = new Date(moment(expiryDate, 'DD-MM-YYYY')).toISOString()
   const rollingTerm = chance.bool()
-
+  const ownerEntity = 'ACME Inc'
   const statuses = statusGenerator(createdAt, currentStatus)
 
   const metaData = {
+    ownerEntity,
     internalParties,
     externalParties,
     id,

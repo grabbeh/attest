@@ -1,27 +1,19 @@
 import React from 'react'
 import { graphql } from 'react-apollo'
-import gql from 'graphql-tag'
 import _ from 'underscore'
-import ContractsQuery from './ContractsQuery'
+import CONTRACTS_QUERY from '../../queries/ContractsQuery'
+import DELETE_CONTRACT_MUTATION from '../../queries/DeleteContractMutation'
 
-function DeleteButton ({ deleteContract, id }) {
+const DeleteButton = ({ deleteContract, id }) => {
   return (
     <button
-      className='f6 link dim mb2 dib light-gray bg-dark-gray'
+      className='f6 link dim mb2 ph0 dib light-gray bg-dark-gray'
       onClick={() => deleteContract(id)}
     >
       <i className='pointer fa fa-trash-o' />
     </button>
   )
 }
-
-const DELETE_CONTRACT_MUTATION = gql`
-  mutation deleteContract($id: ID!) {
-    deleteContract(id: $id) {
-      id
-    }
-  }
-`
 
 export default graphql(DELETE_CONTRACT_MUTATION, {
   props ({ ownProps, mutate }) {
@@ -30,7 +22,7 @@ export default graphql(DELETE_CONTRACT_MUTATION, {
         return mutate({
           variables: { id },
           update: (store, response) => {
-            const data = store.readQuery({ query: ContractsQuery })
+            const data = store.readQuery({ query: CONTRACTS_QUERY })
             let copy = data.contracts
             const revisedContracts = _.without(
               copy,
@@ -39,7 +31,7 @@ export default graphql(DELETE_CONTRACT_MUTATION, {
               })
             )
             data.contracts = revisedContracts
-            store.writeQuery({ query: ContractsQuery, data })
+            store.writeQuery({ query: CONTRACTS_QUERY, data })
           }
         })
       }

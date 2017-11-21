@@ -1,9 +1,7 @@
 import react from 'react'
-import Checkbox from './CheckBox'
 import ContractsList from './ContractsList'
 import _ from 'underscore'
 import Moment from 'moment'
-
 import { extendMoment } from 'moment-range'
 import Filter from './Filter'
 
@@ -139,17 +137,6 @@ class ContractsHolder extends react.Component {
     return copy
   }
 
-  createCheckbox = (label, checked) => {
-    return (
-      <Checkbox
-        checked={checked}
-        label={label}
-        handleCheckboxChange={this.toggleCheckbox}
-        key={label}
-      />
-    )
-  }
-
   toggleCheckbox = label => {
     let { statuses, tags, businessUnits } = this.state.initialValues
     if (statuses.includes(label)) {
@@ -168,29 +155,28 @@ class ContractsHolder extends react.Component {
     }
   }
 
-  createCheckboxes = (arr, bool) => {
-    return arr.map(a => {
-      return this.createCheckbox(a, bool)
-    })
-  }
-
   render () {
     let { initialValues, filters } = this.state
-    let { contracts } = this.props.data
+    let { contracts, statuses, lawyers, tags } = this.props.data
     let filteredContracts = this.filterContracts(filters, contracts)
     return (
       <div className='bg--dark-gray pa3'>
         <Filter
           initialValues={initialValues}
-          createCheckboxes={this.createCheckboxes}
           startDate={filters.dateRange.startDate}
           endDate={filters.dateRange.endDate}
           handleChangeStart={this.handleChangeStart}
           handleChangeEnd={this.handleChangeEnd}
           resetDates={this.resetDates}
           error={this.state.error}
+          toggleCheckbox={this.toggleCheckbox}
         />
-        <ContractsList filteredContracts={filteredContracts} />
+        <ContractsList
+          filteredContracts={filteredContracts}
+          statuses={statuses}
+          lawyers={lawyers}
+          tags={tags}
+        />
       </div>
     )
   }

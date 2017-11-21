@@ -1,11 +1,30 @@
 import ContractHolder from './ContractHolder'
 import DeleteButton from './DeleteButton'
+import EditContractModal from '../../modals/EditContractModal'
 import Moment from 'react-moment'
 import React from 'react'
+import Modal from 'react-modal'
 import _ from 'underscore'
 import cn from 'classnames'
 
 class Contract extends React.Component {
+  constructor () {
+    super()
+    this.state = {
+      modalIsOpen: false,
+      editableContract: false
+    }
+    this.closeModal = this.closeModal.bind(this)
+  }
+
+  openModal = contract => {
+    this.setState({ modalIsOpen: true, editableContract: contract })
+  }
+
+  closeModal = () => {
+    this.setState({ modalIsOpen: false })
+  }
+
   render () {
     const {
       id,
@@ -16,7 +35,10 @@ class Contract extends React.Component {
       businessUnit,
       assignedTo,
       statuses
-    } = this.props
+    } = this.props.contract
+    const lawyers = this.props.lawyers
+    const allStatuses = this.props.statuses
+    const allTags = this.props.tags
 
     let date = null
     if (_.last(statuses).status === 'Executed') {
@@ -96,7 +118,25 @@ class Contract extends React.Component {
         </div>
         <div className='cf' />
         <ul className='fr list pa0 ma0 mt2'>
-          <li className='fl mr2'><i className='fa fa-pencil' /></li>
+          <li className='fl mr2'>
+            <button
+              className=' f6 link dim mb2 ph0 dib light-gray bg-dark-gray'
+              onClick={() => this.openModal(this.props.contract)}
+            >
+              <i className='pointer fa fa-pencil' />
+            </button>
+            {this.state.editableContract
+              ? <EditContractModal
+                isOpen={this.state.modalIsOpen}
+                closeModal={this.closeModal}
+                contract={this.state.editableContract}
+                lawyers={lawyers}
+                statuses={allStatuses}
+                tags={allTags}
+                />
+              : <div />}
+
+          </li>
           <li className='fl mr2 '><DeleteButton id={id} /></li>
           <li className='fl mr2'><i className='fa fa-eye' /></li>
           <li className='fl'><i className='fa fa-plus-square' /></li>

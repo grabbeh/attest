@@ -5,6 +5,9 @@ const typeDefs = `
 type Query {
   contracts: [Contract]
   contract(id: ID!): Contract
+  statuses: [StatusCategories]
+  lawyers: [Lawyer]
+  tags: [Tag]
 }
 
 type Mutation {
@@ -33,6 +36,7 @@ input PostContract {
 
 input PostContractWithID {
   id: ID!
+  ownerEntity: String
   internalParties: [String]
   externalParties: [String]
   executionDate: Date
@@ -55,8 +59,14 @@ type MyType {
    created: Date
 }
 
+type StatusCategories {
+  id: ID!
+  name: String
+}
+
 type Contract {
   id: ID!
+  ownerEntity: String
   internalParties: [String]
   externalParties: [String]
   executionDate: Date
@@ -72,6 +82,10 @@ type Contract {
   client: Boolean
   supplier: Boolean
   assignedTo: Lawyer
+}
+
+type Tag {
+  name: String
 }
 
 type Status {

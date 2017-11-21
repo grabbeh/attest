@@ -1,4 +1,4 @@
-import { Contract, Lawyer } from './connectors'
+import { Contract, Lawyer, Status, Tag } from './connectors'
 import { GraphQLScalarType } from 'graphql'
 import { Kind } from 'graphql/language'
 
@@ -25,6 +25,15 @@ const resolvers = {
     },
     contract (root, args) {
       return Contract.findOne({ id: args.id })
+    },
+    statuses (root, args) {
+      return Status.find()
+    },
+    lawyers (root, args) {
+      return Lawyer.find()
+    },
+    tags (root, args) {
+      return Tag.find()
     }
   },
   Mutation: {

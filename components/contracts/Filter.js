@@ -1,23 +1,23 @@
 import react from 'react'
-
 import HideToggle from './Hide'
 import DatePicker from 'react-datepicker'
+import CheckboxList from './CheckboxList'
 
 class ContractSubList extends react.Component {
-  /* constructor (props) {
+  constructor (props) {
     super(props)
-  } */
+  }
 
   render () {
     const { statuses, tags, businessUnits } = this.props.initialValues
     const {
-      createCheckboxes,
       startDate,
       endDate,
       handleChangeStart,
       handleChangeEnd,
       resetDates,
-      error
+      error,
+      toggleCheckbox
     } = this.props
 
     return (
@@ -25,19 +25,21 @@ class ContractSubList extends react.Component {
         <div className='bg-dark-gray light-gray w-50-ns w-100 mr3-ns mr0 shadow-4 pa3'>
           <div className='b'>Filters</div>
           <HideToggle title='Statuses'>
-            <ul className='mt2 pb2 ma0 bb b--mid-gray pa0 list flex flex-wrap  '>
-              {createCheckboxes(statuses, true)}
-            </ul>
+            <CheckboxList
+              content={statuses}
+              checked
+              toggleCheckbox={toggleCheckbox}
+            />
           </HideToggle>
           <HideToggle title='Tags'>
-            <ul className='mt2 pb2 ma0 bb b--mid-gray pa0 list flex flex-wrap'>
-              {createCheckboxes(tags, false)}
-            </ul>
+            <CheckboxList content={tags} toggleCheckbox={toggleCheckbox} />
           </HideToggle>
           <HideToggle title='Business Units'>
-            <ul className='mt2 ma0 pb2 bb b--mid-gray pa0 list flex flex-wrap'>
-              {createCheckboxes(businessUnits, true)}
-            </ul>
+            <CheckboxList
+              content={businessUnits}
+              checked
+              toggleCheckbox={toggleCheckbox}
+            />
           </HideToggle>
           <HideToggle title='Dates'>
             <div className='fl mt2'>
@@ -55,7 +57,6 @@ class ContractSubList extends react.Component {
                   dateFormat='DD/MM/YYYY'
                 />
               </div>
-
               <div className='fl mr2'>
                 <DatePicker
                   className=' w4 tc pointer'
@@ -70,7 +71,6 @@ class ContractSubList extends react.Component {
                   dateFormat='DD/MM/YYYY'
                 />
               </div>
-
             </div>
             <div className='cf' />
             <div onClick={resetDates} className='pt1  f7 pa1 pointer'>

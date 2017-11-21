@@ -9,10 +9,13 @@ export default () => (
       <meta charSet='utf-8' />
       <meta name='viewport' content='width=device-width' />
       <title>Attest - open source contract management</title>
-      <link rel='stylesheet' href='/static/tachyons.css' />
+      <link
+        rel='stylesheet'
+        href='https://unpkg.com/tachyons@4.9.0/css/tachyons.min.css'
+      />
       <link rel='stylesheet' href='/static/datepicker.css' />
       <link
-        href='https://fonts.googleapis.com/css?family=Montserrat:400,700'
+        href='https://fonts.googleapis.com/css?family=Open+Sans:400,700'
         rel='stylesheet'
       />
 
@@ -26,7 +29,7 @@ export default () => (
       {`
 
       body {
-        font-family: Montserrat, sans-serif;
+        font-family: Open Sans, sans-serif;
       }
 
       .bg-darkest-gray {
@@ -42,17 +45,25 @@ export default () => (
       }
 
       .bg--dark-blue {
-        background-color: #132238
+        background-color: #132238;
+      }
+      
+      .bg-mid-gray {
+        background-color: #595656;
+      }
+
+      .bg--light-gray {
+        background-color: #e5e5e5;
       }
 
       input, button, submit { border:none; } 
 
       .light-gray {
-        color: #a7a3a3;
+        color: #dbd7d7;
       }
 
       input, textarea {
-        font-family: Montserrat, sans-serif;
+        font-family: Open Sans, sans-serif;
       }
 
       .fc-blue {
