@@ -61,6 +61,8 @@ class EditContractModal extends react.Component {
     let { lawyers } = this.props
     lawyers.forEach(lawyer => {
       if (lawyer.id == id) {
+        let newLawyer = lawyer
+        contract.assignedTo = newLawyer
         this.setState({ contract: contract, selectedLawyer: id })
       }
     })
@@ -126,7 +128,7 @@ class EditContractModal extends react.Component {
     )
     let statusRadios = null
     statusRadios = statuses.map(s => (
-      <div className='fl mr2'>
+      <div key={s.name} className='fl mr2'>
         <label
           className={cn(
             s.name === this.state.selectedStatus && 'white',

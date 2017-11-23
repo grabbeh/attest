@@ -1,6 +1,7 @@
 import React from 'react'
 import { graphql } from 'react-apollo'
 import UPDATE_CONTRACT_MUTATION from '../../queries/UpdateContractMutation'
+import CONTRACTS_QUERY from '../../queries/ContractsQuery'
 
 const SubmitEditButton = ({ updateContract, id, contract }) => {
   return (
