@@ -39,7 +39,6 @@ const resolvers = {
   },
   Mutation: {
     updateContract (root, args) {
-      console.log(args.contract)
       return Contract.findByIdAndUpdate(
         mongoose.Types.ObjectId(args.id),
         args.contract
