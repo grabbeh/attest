@@ -14,7 +14,6 @@ export default graphql(UPDATE_CONTRACT_MUTATION, {
   props ({ mutate }) {
     return {
       updateContract (id, contract) {
-        contract.assignedTo = contract.assignedTo.id
         return mutate({
           variables: { id: id, contract: contract }
         })
