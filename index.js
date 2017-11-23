@@ -9,8 +9,8 @@ let GRAPHQL_SERVER = 'http://localhost:8000/graphql'
 
 app.prepare().then(() => {
   const server = express()
-  // proxy graphql requests from client through to server (avoiding CORS issues (I think))
 
+  // proxy graphql requests from client through to server (avoiding CORS issues (I think))
   const newProxy = proxy({
     target: GRAPHQL_SERVER,
     changeOrigin: true

@@ -21,7 +21,7 @@ class Checkbox extends Component {
     const { label } = this.props
     const { isChecked } = this.state
     return (
-      <li key={label} className='pb2 pr2 fl'>
+      <li key={label} className='pb2 mr2 fl'>
         <label>
           <input
             className='dn'

@@ -203,12 +203,11 @@ class EditContractModal extends react.Component {
                   <SubmitEditButton
                     contract={this.state.contract}
                     id={this.state.contract.id}
+                    closeModal={this.props.closeModal}
                     />
                 </div>
-
               </form>
             </div>
-
           </Modal>
           : <div />}
       </div>

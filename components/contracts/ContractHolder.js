@@ -1,7 +1,7 @@
 import React from 'react'
 import cn from 'classnames'
 
-export default ({ children, status }) => (
+export default ({ children }) => (
   <li
     className={cn(
       'f5',
