@@ -56,15 +56,11 @@ class EditContractModal extends react.Component {
   }
 
   handleLawyerChange = e => {
-    console.log(this.state.selectedLawyer)
     let id = e.target.value
     let { contract } = this.state
     let { lawyers } = this.props
     lawyers.forEach(lawyer => {
       if (lawyer.id == id) {
-        // let newLawyer = lawyer
-        contract.assignedTo = id
-        console.log(contract.assignedTo)
         this.setState({ contract: contract, selectedLawyer: id })
       }
     })
