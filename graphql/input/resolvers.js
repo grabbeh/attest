@@ -1,6 +1,7 @@
 import { Contract, Lawyer, Status, Tag } from './connectors'
 import { GraphQLScalarType } from 'graphql'
 import { Kind } from 'graphql/language'
+import mongoose from 'mongoose'
 
 const resolvers = {
   Date: new GraphQLScalarType({
@@ -38,7 +39,10 @@ const resolvers = {
   },
   Mutation: {
     updateContract (root, args) {
-      return Contract.findByIdAndUpdate(args.id, args)
+      return Contract.findByIdAndUpdate(
+        mongoose.Types.ObjectId(args.id),
+        args.contract
+      )
     },
     addContract (roots, args) {
       return Contract.create(args)
@@ -53,13 +57,6 @@ const resolvers = {
         return res
       })
     }
-  }
-}
-
-const fromMongo = item => {
-  return {
-    ...item,
-    id: item._id.toString()
   }
 }
 

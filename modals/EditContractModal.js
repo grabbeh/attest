@@ -61,8 +61,8 @@ class EditContractModal extends react.Component {
     let { lawyers } = this.props
     lawyers.forEach(lawyer => {
       if (lawyer.id == id) {
-        let newLawyer = lawyer
-        contract.assignedTo = newLawyer
+        // let newLawyer = lawyer
+        contract.assignedTo = id
         this.setState({ contract: contract, selectedLawyer: id })
       }
     })
@@ -186,7 +186,6 @@ class EditContractModal extends react.Component {
                 </button>
               </div>
               <div className='b'>Edit Contract</div>
-
               <form>
                 <div className='b mt2'>Tags</div>
                 <div className='pv2 fl list flex flex-wrap bb b--mid-gray'>
@@ -201,7 +200,10 @@ class EditContractModal extends react.Component {
                 <div className='b mt2'>Lawyer</div>
                 <div className='pv2 bb b--mid-gray'>{lawyerSelect}</div>
                 <div className='mt2'>
-                  {' '}<SubmitEditButton contract={this.state.contract} />
+                  <SubmitEditButton
+                    contract={this.state.contract}
+                    id={this.state.contract.id}
+                    />
                 </div>
 
               </form>

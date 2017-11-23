@@ -12,7 +12,7 @@ type Query {
 
 type Mutation {
   addContract(input: PostContract!): Contract
-  updateContract(input: PostContractWithID!): Contract
+  updateContract(id: ID!, contract: PostContractWithID): Contract
   deleteContract(id: ID!): Contract
 }
 
@@ -31,7 +31,7 @@ input PostContract {
   statuses: [StatusInput]
   client: Boolean
   supplier: Boolean
-  assignedTo: LawyerInput
+  assignedTo: Int
 }
 
 input PostContractWithID {
@@ -51,7 +51,7 @@ input PostContractWithID {
   statuses: [StatusInput]
   client: Boolean
   supplier: Boolean
-  assignedTo: LawyerInput
+  assignedTo: Int
 }
 
 scalar Date

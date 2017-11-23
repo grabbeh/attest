@@ -1,23 +1,22 @@
 import React from 'react'
 import { graphql } from 'react-apollo'
-import _ from 'underscore'
-import CONTRACTS_QUERY from '../../queries/ContractsQuery'
 import UPDATE_CONTRACT_MUTATION from '../../queries/UpdateContractMutation'
 
-const SubmitEditButton = ({ updateContract, contract }) => {
+const SubmitEditButton = ({ updateContract, id, contract }) => {
   return (
-    <button onClick={() => updateContract(contract)}>
+    <button onClick={() => updateContract(id, contract)}>
       Submit
     </button>
   )
 }
 
 export default graphql(UPDATE_CONTRACT_MUTATION, {
-  props ({ ownProps, mutate }) {
+  props ({ mutate }) {
     return {
-      updateContract (contract) {
+      updateContract (id, contract) {
+        contract.assignedTo = contract.assignedTo.id
         return mutate({
-          variables: { contract }
+          variables: { id: id, contract: contract }
         })
       }
     }

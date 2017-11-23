@@ -1,8 +1,8 @@
 import { gql } from 'react-apollo'
 
 export default gql`
-mutation updateContract($id: ID!) {
-  updateContract(id: $id) {
+mutation updateContract($id: ID!, $contract: PostContractWithID) {
+  updateContract(id: $id, contract: $contract) {
     ownerEntity
     id
     internalParties
