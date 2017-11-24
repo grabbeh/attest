@@ -42,10 +42,9 @@ const resolvers = {
       args.contract.assignedTo = args.contract.assignedTo.id
       return Contract.findByIdAndUpdate(
         mongoose.Types.ObjectId(args.id),
-        args.contract
-      ).then((res, err) => {
-        return args.contract
-      })
+        args.contract,
+        { new: true }
+      )
     },
     addContract (roots, args) {
       return Contract.create(args)

@@ -25,9 +25,7 @@ export default graphql(UPDATE_CONTRACT_MUTATION, {
           update: (store, response) => {
             let contract = response.data.updateContract
             const data = store.readQuery({ query: CONTRACTS_QUERY })
-            let copy = data.contracts
-            _.extend(_.findWhere(copy, { id: ownProps.id }), contract)
-            data.contracts = copy
+            _.extend(_.findWhere(data.contracts, { id: ownProps.id }), contract)
             store.writeQuery({ query: CONTRACTS_QUERY, data })
             ownProps.closeModal()
           }
