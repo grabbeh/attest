@@ -172,7 +172,8 @@ class EditContractModal extends react.Component {
       <div>
         {contract
           ? <Modal
-            className='ma3 pa0 w-50-ns w-100 center'
+            className='content ma3 pa0 w-50-ns w-100 center'
+            overlayClassName='overlay'
             isOpen={isOpen}
             onRequestClose={closeModal}
             >
@@ -188,17 +189,17 @@ class EditContractModal extends react.Component {
               <div className='b'>Edit Contract</div>
               <form>
                 <div className='b mt2'>Tags</div>
-                <div className='pv2 fl list flex flex-wrap bb b--mid-gray'>
+                <div className='pv2 fl list flex flex-wrap w-100 bb b--mid-gray'>
                   {tagInputs}
                 </div>
                 <div className='cf' />
                 <div className='b mt2'>Status</div>
-                <div className='fl pv2 bb b--mid-gray'>
+                <div className='fl pv2 bb b--mid-gray w-100'>
                   {statusRadios}
                 </div>
                 <div className='cf' />
                 <div className='b mt2'>Lawyer</div>
-                <div className='pv2 bb b--mid-gray'>{lawyerSelect}</div>
+                <div className='pv2 bb b--mid-gray w-100'>{lawyerSelect}</div>
                 <div className='mt2'>
                   <SubmitEditButton
                     contract={this.state.contract}

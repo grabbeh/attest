@@ -39,10 +39,13 @@ const resolvers = {
   },
   Mutation: {
     updateContract (root, args) {
+      args.contract.assignedTo = args.contract.assignedTo.id
       return Contract.findByIdAndUpdate(
         mongoose.Types.ObjectId(args.id),
         args.contract
-      )
+      ).then((res, err) => {
+        return args.contract
+      })
     },
     addContract (roots, args) {
       return Contract.create(args)

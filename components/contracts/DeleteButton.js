@@ -21,7 +21,7 @@ export default graphql(DELETE_CONTRACT_MUTATION, {
       deleteContract (id) {
         return mutate({
           variables: { id },
-          update: (store, response) => {
+          update: store => {
             const data = store.readQuery({ query: CONTRACTS_QUERY })
             let copy = data.contracts
             const revisedContracts = _.without(

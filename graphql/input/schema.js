@@ -31,7 +31,7 @@ input PostContract {
   statuses: [StatusInput]
   client: Boolean
   supplier: Boolean
-  assignedTo: Int
+  assignedTo: LawyerInput
 }
 
 input PostContractWithID {
@@ -51,7 +51,7 @@ input PostContractWithID {
   statuses: [StatusInput]
   client: Boolean
   supplier: Boolean
-  assignedTo: Int
+  assignedTo: LawyerInput
 }
 
 scalar Date

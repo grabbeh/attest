@@ -1,13 +1,14 @@
 import React from 'react'
 import { graphql } from 'react-apollo'
 import UPDATE_CONTRACT_MUTATION from '../../queries/UpdateContractMutation'
+import CONTRACTS_QUERY from '../../queries/ContractsQuery'
+import _ from 'underscore'
 
-const SubmitEditButton = ({ updateContract, id, contract }) => {
+const SubmitEditButton = ({ updateContract }) => {
   const handleClick = e => {
     e.preventDefault()
-    updateContract(id, contract)
+    updateContract()
   }
-
   return (
     <button onClick={handleClick}>
       Submit
@@ -18,13 +19,16 @@ const SubmitEditButton = ({ updateContract, id, contract }) => {
 export default graphql(UPDATE_CONTRACT_MUTATION, {
   props ({ ownProps, mutate }) {
     return {
-      updateContract (id, contract) {
-        contract.assignedTo = contract.assignedTo.id
+      updateContract () {
         return mutate({
-          variables: { id: id, contract: contract },
+          variables: { id: ownProps.id, contract: ownProps.contract },
           update: (store, response) => {
-            console.log(response)
-            // TODO: Update cache with revised information + optimistic response
+            let contract = response.data.updateContract
+            const data = store.readQuery({ query: CONTRACTS_QUERY })
+            let copy = data.contracts
+            _.extend(_.findWhere(copy, { id: ownProps.id }), contract)
+            data.contracts = copy
+            store.writeQuery({ query: CONTRACTS_QUERY, data })
             ownProps.closeModal()
           }
         })

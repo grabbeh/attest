@@ -62,8 +62,43 @@ export default () => (
         color: #dbd7d7;
       }
 
-      input, textarea {
+      .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(31, 30, 30, 0.75);
+      }
+
+  
+        .content {
+          position: absoute;
+          top: 40px;
+          left: 40px;
+          right: 40px;
+          bottom: 40px;
+
+   
+          overflow: auto;
+          WebkitOverflowScrolling: touch;
+      
+          outline: none;
+     
+        }
+      
+
+      input, textarea, select {
         font-family: Open Sans, sans-serif;
+        outline: none;
+        outline: 0;
+        outline-style:none;
+        box-shadow:none;
+        border-color:transparent;
+      }
+
+      input:focus {
+        outline:none;
       }
 
       .fc-blue {
