@@ -15,7 +15,7 @@ const DeleteButton = ({ deleteContract, id }) => {
   )
 }
 
-export default graphql(DELETE_CONTRACT_MUTATION, {
+const DeleteButtonMutation = graphql(DELETE_CONTRACT_MUTATION, {
   props ({ ownProps, mutate }) {
     return {
       deleteContract (id) {
@@ -38,3 +38,5 @@ export default graphql(DELETE_CONTRACT_MUTATION, {
     }
   }
 })(DeleteButton)
+
+export default DeleteButtonMutation

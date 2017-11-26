@@ -3,9 +3,8 @@ import Modal from 'react-modal'
 import SubmitEditButton from '../components/contracts/SubmitEditButton'
 import CheckBox from '../components/contracts/CheckBox'
 import _ from 'underscore'
-import Moment from 'moment'
 import __ from 'lodash'
-
+import Moment from 'moment'
 import cn from 'classnames'
 
 class EditContractModal extends react.Component {
@@ -58,7 +57,7 @@ class EditContractModal extends react.Component {
   handleLawyerChange = e => {
     let id = e.target.value
     let { contract } = this.state
-    let { lawyers } = this.props
+    const { lawyers } = this.props.data
     lawyers.forEach(lawyer => {
       if (lawyer.id == id) {
         let newLawyer = lawyer
@@ -109,7 +108,8 @@ class EditContractModal extends react.Component {
   }
 
   render () {
-    let { isOpen, closeModal, lawyers, statuses } = this.props
+    let { isOpen, closeModal } = this.props
+    let { lawyers, statuses } = this.props.data
     let { contract } = this.state
     let lawyerSelect = null
 
@@ -155,7 +155,7 @@ class EditContractModal extends react.Component {
     ))
     let tagInputs = null
     if (contract.tags) {
-      let { tags } = this.props
+      let { tags } = this.props.data
       let updatedTags = this.processTags(tags, contract.tags)
       tagInputs = updatedTags.map(t => (
         <CheckBox

@@ -12,9 +12,8 @@ class Contract extends React.Component {
     super()
     this.state = {
       modalIsOpen: false,
-      editableContract: false
+      editableContract: ''
     }
-    this.closeModal = this.closeModal.bind(this)
   }
 
   openModal = contract => {
@@ -36,9 +35,7 @@ class Contract extends React.Component {
       assignedTo,
       statuses
     } = this.props.contract
-    const lawyers = this.props.lawyers
-    const allStatuses = this.props.statuses
-    const allTags = this.props.tags
+    const data = this.props
 
     let date = null
     if (_.last(statuses).status === 'Executed') {
@@ -130,9 +127,7 @@ class Contract extends React.Component {
                 isOpen={this.state.modalIsOpen}
                 closeModal={this.closeModal}
                 contract={this.state.editableContract}
-                lawyers={lawyers}
-                statuses={allStatuses}
-                tags={allTags}
+                {...data}
                 />
               : <div />}
 

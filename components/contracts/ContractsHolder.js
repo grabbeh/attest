@@ -1,7 +1,7 @@
 import react from 'react'
 import ContractsList from './ContractsList'
 import _ from 'underscore'
-import Moment from 'moment'
+import Moment, { updateLocale } from 'moment'
 import { extendMoment } from 'moment-range'
 import Filter from './Filter'
 
@@ -10,79 +10,47 @@ const moment = extendMoment(Moment)
 class ContractsHolder extends react.Component {
   constructor (props) {
     super(props)
-    let { contracts } = this.props.data
+    let { contracts, statuses, lawyers, tags } = this.props.data
+    let statusNames = _.pluck(statuses, 'name')
+    let data = { lawyers, statuses, tags }
+
     /* let statuses = _.uniq(
       _.flatten(_.pluck(contracts, 'currentStatus'))
     ).reverse() */
-    let statuses = ['Instructed', 'Drafted', 'Approved', 'Executed']
-    let tags = _.uniq(_.flatten(_.pluck(contracts, 'tags')))
+    let existingTags = _.uniq(_.flatten(_.pluck(contracts, 'tags')))
     let businessUnits = _.uniq(_.flatten(_.pluck(contracts, 'businessUnit')))
     this.state = {
       filteredContracts: _.flatten(
-        _.values(_.pick(_.groupBy(contracts, 'currentStatus'), statuses))
+        _.values(_.pick(_.groupBy(contracts, 'currentStatus'), statusNames))
       ),
       initialValues: {
-        statuses: statuses,
-        dateRange: {
-          startDate: null,
-          endDate: null
-        },
-        tags: tags,
+        statuses: statusNames,
+        tags: existingTags,
         businessUnits: businessUnits
       },
       filters: {
-        statuses: statuses,
+        statuses: statusNames,
         dateRange: {
           startDate: null,
           endDate: null
         },
         tags: [],
         businessUnits: businessUnits
-      },
-      error: {
-        finishBeforeStart: false
       }
     }
-    this.statuses = new Set(statuses)
+    this.statuses = new Set(statusNames)
     this.tags = new Set()
     this.businessUnits = new Set(businessUnits)
   }
 
-  handleChangeStart = date => {
-    let dateRange = {}
-    dateRange.startDate = date
-    this.updateFilterState('dateRange', dateRange)
-  }
-
-  handleChangeEnd = date => {
-    let dateRange = {}
-    dateRange.endDate = date
-    dateRange.startDate = this.state.filters.dateRange.startDate
-    this.updateFilterState('dateRange', dateRange)
-    if (dateRange.endDate.isBefore(dateRange.startDate)) {
-      let { error } = this.state
-      error.finishBeforeStart = true
-      this.setState({ error: error })
-    } else {
-      let { error } = this.state
-      error.finishBeforeStart = false
-      this.setState({ error: error })
-      this.filterContracts(this.state.filters, this.props.data.contracts)
-    }
-  }
-
-  resetDates = () => {
-    let dateRange = {}
-    dateRange.endDate = null
-    dateRange.startDate = null
-    this.updateFilterState('dateRange', dateRange)
-    this.filterContracts(this.state.filters, this.props.data.contracts)
+  setDate = content => {
+    this.updateFilterState('dateRange', content)
   }
 
   updateFilterState = (filterName, content) => {
     let { filters } = this.state
     filters[filterName] = content
-    this.setState({ filters: filters })
+    this.setState({ filters })
   }
 
   updateSet = (set, label) => {
@@ -157,26 +125,19 @@ class ContractsHolder extends react.Component {
 
   render () {
     let { initialValues, filters } = this.state
-    let { contracts, statuses, lawyers, tags } = this.props.data
+    let { contracts } = this.props.data
+    let { statuses, lawyers, tags } = this.props.data
+    let data = { lawyers, statuses, tags }
     let filteredContracts = this.filterContracts(filters, contracts)
     return (
       <div className='bg--dark-gray pa3'>
         <Filter
           initialValues={initialValues}
-          startDate={filters.dateRange.startDate}
-          endDate={filters.dateRange.endDate}
-          handleChangeStart={this.handleChangeStart}
-          handleChangeEnd={this.handleChangeEnd}
-          resetDates={this.resetDates}
           error={this.state.error}
           toggleCheckbox={this.toggleCheckbox}
+          setDate={this.setDate}
         />
-        <ContractsList
-          filteredContracts={filteredContracts}
-          statuses={statuses}
-          lawyers={lawyers}
-          tags={tags}
-        />
+        <ContractsList filteredContracts={filteredContracts} data={data} />
       </div>
     )
   }

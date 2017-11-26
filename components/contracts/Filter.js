@@ -3,22 +3,58 @@ import HideToggle from './Hide'
 import DatePicker from 'react-datepicker'
 import CheckboxList from './CheckboxList'
 
-class ContractSubList extends react.Component {
+class Filter extends react.Component {
   constructor (props) {
     super(props)
+    this.state = {
+      value: '',
+      dateRange: {
+        startDate: null,
+        endDate: null
+      },
+      error: {
+        finishBeforeStart: false
+      }
+    }
+  }
+
+  handleChangeStart = date => {
+    let dateRange = this.state.dateRange
+    dateRange.startDate = date
+    this.setState({ dateRange })
+  }
+
+  handleChangeEnd = date => {
+    let dateRange = {}
+    dateRange.endDate = date
+    dateRange.startDate = this.state.dateRange.startDate
+    this.setState({ dateRange })
+    this.props.setDate(this.state.dateRange)
+    if (dateRange.endDate.isBefore(dateRange.startDate)) {
+      let { error } = this.state
+      error.finishBeforeStart = true
+      this.setState({ error })
+    } else {
+      let { error } = this.state
+      error.finishBeforeStart = false
+      this.setState({ error })
+      this.props.setDate(dateRange)
+    }
+  }
+
+  resetDates = () => {
+    let dateRange = {}
+    dateRange.endDate = null
+    dateRange.startDate = null
+    this.setState({ dateRange })
+    this.props.setDate(dateRange)
   }
 
   render () {
     const { statuses, tags, businessUnits } = this.props.initialValues
-    const {
-      startDate,
-      endDate,
-      handleChangeStart,
-      handleChangeEnd,
-      resetDates,
-      error,
-      toggleCheckbox
-    } = this.props
+    const { toggleCheckbox } = this.props
+    const { startDate, endDate } = this.state.dateRange
+    const { error } = this.state
 
     return (
       <div className='flex'>
@@ -50,12 +86,13 @@ class ContractSubList extends react.Component {
                   selectsStart
                   startDate={startDate}
                   endDate={endDate}
-                  onChange={handleChangeStart}
+                  onChange={this.handleChangeStart}
                   placeholderText='Start date'
                   showMonthDropdown
                   showYearDropdown
                   dateFormat='DD/MM/YYYY'
                 />
+
               </div>
               <div className='fl mr2'>
                 <DatePicker
@@ -64,7 +101,7 @@ class ContractSubList extends react.Component {
                   selectsEnd
                   startDate={startDate}
                   endDate={endDate}
-                  onChange={handleChangeEnd}
+                  onChange={this.handleChangeEnd}
                   placeholderText='End date'
                   showMonthDropdown
                   showYearDropdown
@@ -73,11 +110,10 @@ class ContractSubList extends react.Component {
               </div>
             </div>
             <div className='cf' />
-            <div onClick={resetDates} className='pt1  f7 pa1 pointer'>
+            <div onClick={this.resetDates} className='pt1  f7 pa1 pointer'>
               Clear
             </div>
           </HideToggle>
-
           <div>
             {error.finishBeforeStart &&
               <div className='pt2 pa2 bg-light-red black b mt2'>
@@ -90,4 +126,4 @@ class ContractSubList extends react.Component {
   }
 }
 
-export default ContractSubList
+export default Filter

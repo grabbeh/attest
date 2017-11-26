@@ -18,16 +18,17 @@ const SubmitEditButton = ({ updateContract }) => {
 
 export default graphql(UPDATE_CONTRACT_MUTATION, {
   props ({ ownProps, mutate }) {
+    const { closeModal, contract, id } = ownProps
     return {
       updateContract () {
         return mutate({
-          variables: { id: ownProps.id, contract: ownProps.contract },
+          variables: { id, contract },
           update: (store, response) => {
-            let contract = response.data.updateContract
+            let updatedContract = response.data.updateContract
             const data = store.readQuery({ query: CONTRACTS_QUERY })
-            _.extend(_.findWhere(data.contracts, { id: ownProps.id }), contract)
+            _.extend(_.findWhere(data.contracts, { id }), updatedContract)
             store.writeQuery({ query: CONTRACTS_QUERY, data })
-            ownProps.closeModal()
+            closeModal()
           }
         })
       }

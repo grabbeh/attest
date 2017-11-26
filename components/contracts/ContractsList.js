@@ -1,6 +1,6 @@
 import Contract from './Contract'
 
-export default ({ filteredContracts, lawyers, statuses, tags }) => (
+const ContractsList = ({ filteredContracts, data }) => (
   <div>
     {filteredContracts.length > 0
       ? <div>
@@ -8,13 +8,7 @@ export default ({ filteredContracts, lawyers, statuses, tags }) => (
         <section className='mt3 mb4'>
           <ul className='flex flex-wrap list pa0 ma0'>
             {filteredContracts.map(contract => (
-              <Contract
-                statuses={statuses}
-                lawyers={lawyers}
-                tags={tags}
-                key={contract.id}
-                contract={contract}
-                />
+              <Contract data={data} key={contract.id} contract={contract} />
               ))}
           </ul>
         </section>
@@ -24,3 +18,5 @@ export default ({ filteredContracts, lawyers, statuses, tags }) => (
         </div>}
   </div>
 )
+
+export default ContractsList

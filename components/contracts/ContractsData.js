@@ -2,7 +2,7 @@ import { graphql } from 'react-apollo'
 import ContractsQuery from '../../queries/ContractsQuery'
 import ContractsHolder from './ContractsHolder'
 
-export default graphql(ContractsQuery, {
+const ContractsData = graphql(ContractsQuery, {
   options: {
     variables: {}
   },
@@ -10,3 +10,5 @@ export default graphql(ContractsQuery, {
     data
   })
 })(ContractsHolder)
+
+export default ContractsData
