@@ -23,7 +23,7 @@ class CheckboxList extends React.Component {
   render () {
     let { content, checked } = this.props
     return (
-      <ul className='mt2 pb2 ma0 bb b--mid-gray pa0 list flex flex-wrap  '>
+      <ul className='mt2 pb2 ma0 bb pa0 list flex flex-wrap  '>
         {this.createCheckboxes(content, checked)}
       </ul>
     )

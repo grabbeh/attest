@@ -132,14 +132,15 @@ class EditContractModal extends react.Component {
         <label
           className={cn(
             s.name === this.state.selectedStatus && 'white',
-            s.name === this.state.selectedStatus && 'bg-blue',
+            s.name === this.state.selectedStatus && 'bg-dark-sur',
             'pointer',
             'fr',
             'f6',
             'b',
             'pa1',
             'shadow-4',
-            'bg-dark-gray'
+            'bg-haus',
+            'black'
           )}
         >
           <input
@@ -177,10 +178,10 @@ class EditContractModal extends react.Component {
             isOpen={isOpen}
             onRequestClose={closeModal}
             >
-            <div className='pa3 ma0 bg-dark-gray light-gray'>
+            <div className='pa3 ma0 bg-haus'>
               <div className='fr'>
                 <button
-                  className='f6 link dim mb2 ph0 dib light-gray bg-dark-gray'
+                  className='f6 link dim mb2 ph0 dib bg-haus'
                   onClick={closeModal}
                   >
                   <i className='pointer  fa fa-window-close fa-lg' />
@@ -189,7 +190,7 @@ class EditContractModal extends react.Component {
               <div className='b'>Edit Contract</div>
               <form>
                 <div className='b mt2'>Tags</div>
-                <div className='pv2 fl list flex flex-wrap w-100 bb b--mid-gray'>
+                <div className='pv2 fl list flex flex-wrap w-100 bb '>
                   {tagInputs}
                 </div>
                 <div className='cf' />

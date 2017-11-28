@@ -3,9 +3,6 @@ import ContractsQuery from '../../queries/ContractsQuery'
 import ContractsHolder from './ContractsHolder'
 
 const ContractsData = graphql(ContractsQuery, {
-  options: {
-    variables: {}
-  },
   props: ({ data }) => ({
     data
   })

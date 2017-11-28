@@ -32,8 +32,28 @@ export default () => (
         font-family: Open Sans, sans-serif;
       }
 
+      .bg-peach {
+        background-color: #EFADA0;
+      }
+
+      .bg-light-peach {
+       background-color: #f5c8bf;
+      }
+
       .bg-darkest-gray {
         background-color: #383636;
+      }
+
+      .bg-haus {
+        background-color: #f3f4f4;
+      }
+
+      .bg-pear {
+        background-color: #93DAAB;
+      }
+
+      .bg-dark-pear {
+        background-color: #2E854B;
       }
 
       .bg--dark-gray {
@@ -50,6 +70,18 @@ export default () => (
       
       .bg-mid-gray {
         background-color: #595656;
+      } 
+
+      .bg-dark-peach {
+        background-color: #E37059;
+      }
+
+      .bg-sur {
+        background-color: #96DBE4;
+      }
+
+      .bg-dark-sur {
+        background-color: #24828F;
       }
 
       .bg--light-gray {
@@ -58,8 +90,8 @@ export default () => (
 
       input, button, submit { border:none; } 
 
-      .light-gray {
-        color: #dbd7d7;
+      .light--gray {
+        color: #f7f4f4;
       }
 
       .overlay {
@@ -73,16 +105,13 @@ export default () => (
 
   
         .content {
-          position: absoute;
+          position: absolute;
           top: 40px;
           left: 40px;
           right: 40px;
           bottom: 40px;
-
-   
           overflow: auto;
           WebkitOverflowScrolling: touch;
-      
           outline: none;
      
         }

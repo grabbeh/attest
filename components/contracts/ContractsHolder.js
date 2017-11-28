@@ -1,9 +1,11 @@
 import react from 'react'
 import ContractsList from './ContractsList'
 import _ from 'underscore'
-import Moment, { updateLocale } from 'moment'
+import Moment from 'moment'
 import { extendMoment } from 'moment-range'
 import Filter from './Filter'
+import SummaryBox from './SummaryBox'
+import Title from './Title'
 
 const moment = extendMoment(Moment)
 
@@ -13,7 +15,6 @@ class ContractsHolder extends react.Component {
     let { contracts, statuses, lawyers, tags } = this.props.data
     let statusNames = _.pluck(statuses, 'name')
     let data = { lawyers, statuses, tags }
-
     /* let statuses = _.uniq(
       _.flatten(_.pluck(contracts, 'currentStatus'))
     ).reverse() */
@@ -110,11 +111,9 @@ class ContractsHolder extends react.Component {
     if (statuses.includes(label)) {
       this.updateFilterState('statuses', this.updateSet(this.statuses, label))
     }
-
     if (tags.includes(label)) {
       this.updateFilterState('tags', this.updateSet(this.tags, label))
     }
-
     if (businessUnits.includes(label)) {
       this.updateFilterState(
         'businessUnits',
@@ -125,18 +124,21 @@ class ContractsHolder extends react.Component {
 
   render () {
     let { initialValues, filters } = this.state
-    let { contracts } = this.props.data
-    let { statuses, lawyers, tags } = this.props.data
+    let { contracts, statuses, lawyers, tags } = this.props.data
     let data = { lawyers, statuses, tags }
+    const name = 'ACME INC'
     let filteredContracts = this.filterContracts(filters, contracts)
     return (
-      <div className='bg--dark-gray pa3'>
-        <Filter
-          initialValues={initialValues}
-          error={this.state.error}
-          toggleCheckbox={this.toggleCheckbox}
-          setDate={this.setDate}
-        />
+      <div className='bg-peach pa3'>
+        <Title name={name} />
+        <div className='flex'>
+          <Filter
+            initialValues={initialValues}
+            toggleCheckbox={this.toggleCheckbox}
+            setDate={this.setDate}
+          />
+          <SummaryBox />
+        </div>
         <ContractsList filteredContracts={filteredContracts} data={data} />
       </div>
     )
