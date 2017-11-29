@@ -57,7 +57,7 @@ class Filter extends react.Component {
     const { error } = this.state
 
     return (
-      <div className='bg-white w-50-ns w-100 mr3-ns mr0 pa3'>
+      <div className='bg-haus w-50-ns w-100 mr3-ns mr0 pa3'>
         <div className='f4 b bb pb2'>Filters</div>
         <HideToggle title='Statuses'>
           <CheckboxList

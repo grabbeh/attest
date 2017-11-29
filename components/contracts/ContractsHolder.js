@@ -131,13 +131,13 @@ class ContractsHolder extends react.Component {
     return (
       <div className='bg-peach pa3'>
         <Title name={name} />
-        <div className='flex'>
+        <div className='flex flex-wrap'>
           <Filter
             initialValues={initialValues}
             toggleCheckbox={this.toggleCheckbox}
             setDate={this.setDate}
           />
-          <SummaryBox />
+          <SummaryBox total={filteredContracts.length} />
         </div>
         <ContractsList filteredContracts={filteredContracts} data={data} />
       </div>
