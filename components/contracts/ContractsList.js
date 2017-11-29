@@ -1,13 +1,13 @@
 import Contract from './Contract'
 
-const ContractsList = ({ filteredContracts, data }) => (
+const ContractsList = ({ contracts, data }) => (
   <div>
-    {filteredContracts.length > 0
+    {contracts.length > 0
       ? <div>
         <div className='cf' />
         <section className='mt3 mb4'>
           <ul className='flex flex-wrap list pa0 ma0'>
-            {filteredContracts.map(contract => (
+            {contracts.map(contract => (
               <Contract data={data} key={contract.id} contract={contract} />
               ))}
           </ul>

@@ -1,19 +1,27 @@
-import React from 'react'
 import cn from 'classnames'
 
-export default ({ children, status }) => (
+const StatusBar = ({ status }) => (
   <div
     className={cn(
-      'h2',
-      'w5',
-      'mb3',
-      'pa1',
-      status === 'Executed' && 'bg-green',
-      status === 'Instructed' && 'bg-light-red',
-      status === 'Drafted' && 'bg-light-yellow',
-      status === 'Approved' && 'bg-light-green'
+      'mt1',
+      'b',
+      'pb1',
+      status === 'Executed' && 'bb',
+      status === 'Instructed' && 'bb',
+      status === 'Drafted' && 'bb',
+      status === 'Approved' && 'bb',
+      status === 'Executed' && 'bb--dark-pear',
+      status === 'Instructed' && 'b--light-red',
+      status === 'Drafted' && 'bb--orange',
+      status === 'Approved' && 'bb--pear',
+      status === 'Executed' && 'bw3',
+      status === 'Instructed' && 'bw3',
+      status === 'Drafted' && 'bw3',
+      status === 'Approved' && 'bw3'
     )}
   >
-    {children}
+    {status}
   </div>
 )
+
+export default StatusBar

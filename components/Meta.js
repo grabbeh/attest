@@ -31,6 +31,13 @@ export default () => (
       body {
         font-family: Open Sans, sans-serif;
       }
+      .bg-orange {
+        background-color  t: #f5a871;
+      }
+
+      .bb--orange {
+        border-bottom-color: #f5a871;
+      }
 
       .bg-peach {
         background-color: #EFADA0;
@@ -38,10 +45,6 @@ export default () => (
 
       .bg-light-peach {
        background-color: #f5c8bf;
-      }
-
-      .bg-darkest-gray {
-        background-color: #383636;
       }
 
       .bg-haus {
@@ -52,25 +55,21 @@ export default () => (
         background-color: #93DAAB;
       }
 
+      .bb--pear {
+        border-bottom-color: #93DAAB;
+      }
+
       .bg-dark-pear {
         background-color: #2E854B;
       }
 
-      .bg--dark-gray {
-        background-color: #2a2727;
-      }
-
-      .bg--blue {
-        background-color: #005baa;
+      .bb--dark-pear {
+        border-bottom-color:#2E854B;
       }
 
       .bg--dark-blue {
         background-color: #132238;
       }
-      
-      .bg-mid-gray {
-        background-color: #595656;
-      } 
 
       .bg-dark-peach {
         background-color: #E37059;
@@ -102,19 +101,17 @@ export default () => (
         bottom: 0;
         background-color: rgba(31, 30, 30, 0.75);
       }
-
-  
-        .content {
-          position: absolute;
-          top: 40px;
-          left: 40px;
-          right: 40px;
-          bottom: 40px;
-          overflow: auto;
-          WebkitOverflowScrolling: touch;
-          outline: none;
-     
-        }
+      .content {
+        position: absolute;
+        top: 40px;
+        left: 40px;
+        right: 40px;
+        bottom: 40px;
+        overflow: auto;
+        WebkitOverflowScrolling: touch;
+        outline: none;
+    
+      }
       
 
       input, textarea, select {

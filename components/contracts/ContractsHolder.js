@@ -137,9 +137,12 @@ class ContractsHolder extends react.Component {
             toggleCheckbox={this.toggleCheckbox}
             setDate={this.setDate}
           />
-          <SummaryBox total={filteredContracts.length} />
+          <SummaryBox
+            contracts={filteredContracts}
+            total={filteredContracts.length}
+          />
         </div>
-        <ContractsList filteredContracts={filteredContracts} data={data} />
+        <ContractsList contracts={filteredContracts} data={data} />
       </div>
     )
   }
