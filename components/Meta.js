@@ -31,6 +31,10 @@ export default () => (
       body {
         font-family: Open Sans, sans-serif;
       }
+
+ .bg--blue {
+ background-color: #005baa;
+}
       
       .bg-orange {
         background-color: #f5a871;
