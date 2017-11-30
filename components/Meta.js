@@ -35,6 +35,10 @@ export default () => (
  .bg--blue {
  background-color: #005baa;
 }
+
+      .bg--blue-gray {
+        background-color: #ced7da;
+      }
       
       .bg-orange {
         background-color: #f5a871;

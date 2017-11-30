@@ -129,7 +129,7 @@ class ContractsHolder extends react.Component {
     const name = 'ACME INC'
     let filteredContracts = this.filterContracts(filters, contracts)
     return (
-      <div className='bg-peach pa3'>
+      <div className='bg--blue-gray pa3-ns pt3 pa0'>
         <Title name={name} />
         <div className='flex flex-wrap'>
           <Filter
