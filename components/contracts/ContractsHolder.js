@@ -132,15 +132,19 @@ class ContractsHolder extends react.Component {
       <div className='bg--blue-gray pa3-ns pt3 pa0'>
         <Title name={name} />
         <div className='flex flex-wrap'>
-          <Filter
-            initialValues={initialValues}
-            toggleCheckbox={this.toggleCheckbox}
-            setDate={this.setDate}
-          />
-          <SummaryBox
-            contracts={filteredContracts}
-            total={filteredContracts.length}
-          />
+          <div className='w-50-ns w-100'>
+            <Filter
+              initialValues={initialValues}
+              toggleCheckbox={this.toggleCheckbox}
+              setDate={this.setDate}
+            />
+          </div>
+          <div className='w-50-ns w-100'>
+            <SummaryBox
+              contracts={filteredContracts}
+              total={filteredContracts.length}
+            />
+          </div>
         </div>
         <ContractsList contracts={filteredContracts} data={data} />
       </div>

@@ -1,4 +1,3 @@
-import ContractHolder from './ContractHolder'
 import DeleteButton from './DeleteButton'
 import EditContractModal from '../../modals/EditContractModal'
 import Moment from 'react-moment'
@@ -45,7 +44,7 @@ class Contract extends React.Component {
     const data = this.props
 
     return (
-      <ContractHolder>
+      <div>
         <div>
           {externalParties.map(party => (
             <div key={party} className='pb1 b bb'>{party}</div>
@@ -82,8 +81,7 @@ class Contract extends React.Component {
           <li className='fl'><i className='fa fa-plus-square' /></li>
         </ul>
         <div className='cf' />
-
-      </ContractHolder>
+      </div>
     )
   }
 }
