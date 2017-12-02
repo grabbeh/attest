@@ -34,8 +34,7 @@ class Checkbox extends Component {
             className={cn(
               'pointer',
               'fr',
-              'f6',
-              'b',
+              'f5',
               'pa1',
               'shadow-4',
               isChecked && 'bg-dark-sur',

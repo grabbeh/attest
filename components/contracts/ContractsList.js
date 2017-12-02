@@ -10,13 +10,9 @@ const ContractsList = ({ contracts, data }) => (
         <section className='mt3 mb4'>
           <ul className='flex flex-wrap list pa0 ma0'>
             {contracts.map((contract, index) => (
-              <div className={cn('w-25-ns', 'w-100')}>
-                <ContractHolder key={contract.id} index={index}>
-                  <Contract
-                    data={data}
-                    key={contract.id}
-                    contract={contract}
-                    />
+              <div key={contract.id} className='mb3 w-25-ns w-100'>
+                <ContractHolder index={index}>
+                  <Contract data={data} contract={contract} />
                 </ContractHolder>
               </div>
               ))}

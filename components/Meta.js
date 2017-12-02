@@ -28,16 +28,29 @@ export default () => (
     <style jsx global>
       {`
 
-      body {
-        font-family: Open Sans, sans-serif;
+      @font-face {
+        font-family: 'shapefont';
+        src: 
+          url('/static/fonts/font-bold.otf');
+        font-weight: bold;
       }
 
- .bg--blue {
- background-color: #005baa;
-}
+      @font-face {
+        font-family: 'shapefont';
+        src: 
+          url('/static/fonts/font.otf');
+      }
+
+      body {
+        font-family: 'shapefont';
+      }
+
+      .bg--blue {
+      background-color: #005baa;
+      }
 
       .bg--blue-gray {
-        background-color: #ced7da;
+        background-color: #b8d0d8;
       }
       
       .bg-orange {
@@ -124,7 +137,7 @@ export default () => (
       
 
       input, textarea, select {
-        font-family: Open Sans, sans-serif;
+        font-family: shapefont, sans-serif;
         outline: none;
         outline: 0;
         outline-style:none;
