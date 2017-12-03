@@ -3,11 +3,10 @@ import { graphqlExpress, graphiqlExpress } from 'apollo-server-express'
 import bodyParser from 'body-parser'
 import schema from './schemas/schema'
 import jwt from 'jsonwebtoken'
+import SECRET from '../../config/jwt-secret.js'
 const GRAPHQL_PORT = 8000
 
 const server = express()
-
-const SECRET = 'fdsferwerwr3434534ttregnkgwqeqd'
 
 const addUser = async (req, res) => {
   const token = req.headers['authorization']
