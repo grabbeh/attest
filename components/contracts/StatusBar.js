@@ -1,11 +1,11 @@
 import cn from 'classnames'
 
-const StatusBar = ({ status }) => (
+const StatusBar = ({ status, volume, bold }) => (
   <div
     className={cn(
       'mt1',
-      'b',
       'pb1',
+      bold && 'b',
       status === 'Executed' && 'bb',
       status === 'Instructed' && 'bb',
       status === 'Drafted' && 'bb',
@@ -20,6 +20,7 @@ const StatusBar = ({ status }) => (
       status === 'Approved' && 'bw3'
     )}
   >
+    {volume ? <span>{` ${volume} `}</span> : ''}
     {status}
   </div>
 )

@@ -1,6 +1,7 @@
 import react from 'react'
 import ContractsList from './ContractsList'
 import _ from 'underscore'
+import __ from 'lodash'
 import Moment from 'moment'
 import { extendMoment } from 'moment-range'
 import Filter from './Filter'
@@ -12,22 +13,24 @@ const moment = extendMoment(Moment)
 class ContractsHolder extends react.Component {
   constructor (props) {
     super(props)
-    let { contracts, statuses, lawyers, tags } = this.props.data
-    let statusNames = _.pluck(statuses, 'name')
-    let data = { lawyers, statuses, tags }
-    /* let statuses = _.uniq(
-      _.flatten(_.pluck(contracts, 'currentStatus'))
-    ).reverse() */
-    let existingTags = _.uniq(_.flatten(_.pluck(contracts, 'tags')))
+    let { contracts, allStatuses } = this.props.data
+    let statusNames = _.pluck(allStatuses, 'name')
+    let currentTags = _.uniq(_.flatten(_.pluck(contracts, 'tags')))
     let businessUnits = _.uniq(_.flatten(_.pluck(contracts, 'businessUnit')))
+    let lawyers = _.uniq(
+      _.flatten(_.pluck(contracts, 'assignedTo')).map(a => {
+        return `${a.firstName} ${a.lastName}`
+      })
+    )
     this.state = {
       filteredContracts: _.flatten(
-        _.values(_.pick(_.groupBy(contracts, 'currentStatus'), statusNames))
+        _.values(_.groupBy(contracts, 'currentStatus'))
       ),
       initialValues: {
         statuses: statusNames,
-        tags: existingTags,
-        businessUnits: businessUnits
+        tags: currentTags,
+        businessUnits,
+        lawyers
       },
       filters: {
         statuses: statusNames,
@@ -36,12 +39,14 @@ class ContractsHolder extends react.Component {
           endDate: null
         },
         tags: [],
-        businessUnits: businessUnits
+        businessUnits,
+        lawyers
       }
     }
     this.statuses = new Set(statusNames)
     this.tags = new Set()
     this.businessUnits = new Set(businessUnits)
+    this.lawyers = new Set(lawyers)
   }
 
   setDate = content => {
@@ -64,8 +69,8 @@ class ContractsHolder extends react.Component {
   }
 
   filterContracts = (filters, contracts) => {
-    let copy = contracts
-    let { tags, businessUnits, statuses, dateRange } = filters
+    let copy = __.cloneDeep(contracts)
+    let { tags, businessUnits, statuses, dateRange, lawyers } = filters
 
     // tag filters
     if (tags.length > 0) {
@@ -83,6 +88,16 @@ class ContractsHolder extends react.Component {
     // business unit filter
     copy = _.flatten(
       _.values(_.pick(_.groupBy(copy, 'businessUnit'), businessUnits))
+    )
+
+    // lawyer filter
+    let copyWithLawyers = copy.map(c => {
+      let lawyerName = `${c.assignedTo.firstName} ${c.assignedTo.lastName}`
+      c.lawyerName = lawyerName
+      return c
+    })
+    copy = _.flatten(
+      _.values(_.pick(_.groupBy(copyWithLawyers, 'lawyerName'), lawyers))
     )
 
     // date filters
@@ -107,7 +122,7 @@ class ContractsHolder extends react.Component {
   }
 
   toggleCheckbox = label => {
-    let { statuses, tags, businessUnits } = this.state.initialValues
+    let { statuses, tags, businessUnits, lawyers } = this.state.initialValues
     if (statuses.includes(label)) {
       this.updateFilterState('statuses', this.updateSet(this.statuses, label))
     }
@@ -120,33 +135,34 @@ class ContractsHolder extends react.Component {
         this.updateSet(this.businessUnits, label)
       )
     }
+    if (lawyers.includes(label)) {
+      this.updateFilterState('lawyers', this.updateSet(this.lawyers, label))
+    }
   }
 
   render () {
     let { initialValues, filters } = this.state
-    let { contracts, statuses, lawyers, tags } = this.props.data
-    let data = { lawyers, statuses, tags }
     const name = 'ACME INC'
-    let filteredContracts = this.filterContracts(filters, contracts)
+    let filteredContracts = this.filterContracts(
+      filters,
+      this.props.data.contracts
+    )
     return (
       <div className='bg--blue-gray pa3-ns pt3 pa0'>
         <Title name={name} />
-        <div className='flex flex-wrap'>
-          <div className='w-50-ns w-100'>
+        <ul className='list ma0 pa0 flex flex-wrap'>
+          <li className='w-50-ns w-100'>
             <Filter
               initialValues={initialValues}
               toggleCheckbox={this.toggleCheckbox}
               setDate={this.setDate}
             />
-          </div>
-          <div className='w-50-ns w-100'>
-            <SummaryBox
-              contracts={filteredContracts}
-              total={filteredContracts.length}
-            />
-          </div>
-        </div>
-        <ContractsList contracts={filteredContracts} data={data} />
+          </li>
+          <li className='w-50-ns w-100'>
+            <SummaryBox contracts={filteredContracts} filters={filters} />
+          </li>
+        </ul>
+        <ContractsList contracts={filteredContracts} data={this.props.data} />
       </div>
     )
   }

@@ -51,7 +51,7 @@ class Filter extends react.Component {
   }
 
   render () {
-    const { statuses, tags, businessUnits } = this.props.initialValues
+    const { statuses, tags, businessUnits, lawyers } = this.props.initialValues
     const { toggleCheckbox } = this.props
     const { startDate, endDate } = this.state.dateRange
     const { error } = this.state
@@ -76,8 +76,15 @@ class Filter extends react.Component {
             toggleCheckbox={toggleCheckbox}
           />
         </HideToggle>
+        <HideToggle title='Lawyers'>
+          <CheckboxList
+            content={lawyers}
+            checked
+            toggleCheckbox={toggleCheckbox}
+          />
+        </HideToggle>
         <HideToggle title='Dates'>
-          <div className='fl mt2'>
+          <div className='pl3 fl mt2'>
             <div className='fl mr2'>
               <DatePicker
                 className=' w4 tc pointer w-100 w-80-ns'
@@ -109,7 +116,7 @@ class Filter extends react.Component {
             </div>
           </div>
           <div className='cf' />
-          <div onClick={this.resetDates} className='pt1  f7 pa1 pointer'>
+          <div onClick={this.resetDates} className='pt1 pl3 f7 pa1 pointer'>
             Clear
           </div>
         </HideToggle>

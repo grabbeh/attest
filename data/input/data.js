@@ -52,7 +52,7 @@ const metaDataGenerator = () => {
   const id = chance.guid()
   const tags = randomTags.slice(number(randomTags), number(randomTags) + 1)
   const businessUnit = random(businessUnits)
-  const assignedTo = random([1, 2, 3])
+  const assignedTo = random([1, 2, 3, 4, 5])
 
   let createdAt = chance.date({
     year: chance.year({ min: 1990, max: date.getFullYear() }),

@@ -22,11 +22,11 @@ class HideToggle extends React.Component {
         <div onClick={this.toggle} className='f6 mt2 pointer'>
           {show
             ? <div>
-              <i className='gray fa fa-toggle-down fa-lg mr2' />
+              <i className='fa fa-caret-down mr2' />
               <span className='b f5'>{title}</span>
             </div>
             : <div>
-              <i className='gray fa fa-toggle-up fa-lg mr2' />
+              <i className='fa fa-caret-up mr2' />
               <span className='b f5'>{title}</span>
             </div>}
         </div>

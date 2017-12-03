@@ -46,40 +46,45 @@ class Contract extends React.Component {
     return (
       <div>
         <div>
-          {externalParties.map(party => (
-            <div key={party} className='pb1 b bb'>{party}</div>
-          ))}
+          <div>
+            {externalParties.map(party => (
+              <div key={party} className='pb1 b bb'>{party}</div>
+            ))}
+          </div>
+          <PartyList parties={internalParties} />
+          <div className='cf' />
+          <BusinessUnit businessUnit={businessUnit} />
+          <Lawyer {...assignedTo} />
+          <StatusBar status={currentStatus} bold />
+          {currentStatus === 'Executed'
+            ? <DateBar date={effectiveDate} />
+            : null}
+          {tags ? <TagList tags={tags} /> : null}
+          <div className='cf' />
         </div>
-        <PartyList parties={internalParties} />
-        <div className='cf' />
-        <BusinessUnit businessUnit={businessUnit} />
-        <Lawyer {...assignedTo} />
-        <StatusBar status={currentStatus} />
-        {currentStatus === 'Executed' ? <DateBar date={effectiveDate} /> : null}
-        {tags ? <TagList tags={tags} /> : null}
-        <div className='cf' />
-        <ul className='fr list pa0 mt2'>
-          <li className='fl mr2'>
-            <button
-              className='bg-haus f6 link dim ph0 dib'
-              onClick={() => this.openModal(this.props.contract)}
-            >
-              <i className='pointer fa fa-pencil' />
-            </button>
-            {this.state.editableContract
-              ? <EditContractModal
-                isOpen={this.state.modalIsOpen}
-                closeModal={this.closeModal}
-                contract={this.state.editableContract}
-                {...data}
-                />
-              : <div />}
-
-          </li>
-          <li className='fl mr2 '><DeleteButton id={id} /></li>
-          <li className='fl mr2'><i className='fa fa-eye' /></li>
-          <li className='fl'><i className='fa fa-plus-square' /></li>
-        </ul>
+        <div className='bottom-0'>
+          <ul className='fr list pa0 mt2'>
+            <li className='fl mr2'>
+              <button
+                className='bg-haus f6 link dim ph0 dib'
+                onClick={() => this.openModal(this.props.contract)}
+              >
+                <i className='pointer fa fa-pencil' />
+              </button>
+              {this.state.editableContract
+                ? <EditContractModal
+                  isOpen={this.state.modalIsOpen}
+                  closeModal={this.closeModal}
+                  contract={this.state.editableContract}
+                  {...data}
+                  />
+                : <div />}
+            </li>
+            <li className='fl mr2 '><DeleteButton id={id} /></li>
+            <li className='fl mr2'><i className='fa fa-eye' /></li>
+            <li className='fl'><i className='fa fa-plus-square' /></li>
+          </ul>
+        </div>
         <div className='cf' />
       </div>
     )

@@ -2,15 +2,15 @@ import gql from 'graphql-tag'
 
 export default gql`
 query contracts {
-  statuses {
+  allStatuses {
     name
   }
-  lawyers {
+  allLawyers {
     firstName
     lastName
     id
   }
-  tags {
+  allTags {
     name
   }
   contracts {

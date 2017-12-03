@@ -5,9 +5,9 @@ const typeDefs = `
 type Query {
   contracts: [Contract]
   contract(id: ID!): Contract
-  statuses: [StatusCategories]
-  lawyers: [Lawyer]
-  tags: [Tag]
+  allStatuses: [StatusCategories]
+  allLawyers: [Lawyer]
+  allTags: [Tag]
 }
 
 type Mutation {

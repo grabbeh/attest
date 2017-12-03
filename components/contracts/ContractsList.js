@@ -1,6 +1,5 @@
 import Contract from './Contract'
 import ContractHolder from './ContractHolder'
-import cn from 'classnames'
 
 const ContractsList = ({ contracts, data }) => (
   <div>

@@ -107,7 +107,7 @@ tags.forEach(s => {
     if (err) console.log(err)
   })
 })
-/*
+
 Contract.find().exec((err, contracts) => {
   if (err) console.log(err)
   contracts.forEach(c => {

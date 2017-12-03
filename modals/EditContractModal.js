@@ -57,8 +57,8 @@ class EditContractModal extends react.Component {
   handleLawyerChange = e => {
     let id = e.target.value
     let { contract } = this.state
-    const { lawyers } = this.props.data
-    lawyers.forEach(lawyer => {
+    const { allLawyers } = this.props.data
+    allLawyers.forEach(lawyer => {
       if (lawyer.id == id) {
         let newLawyer = lawyer
         contract.assignedTo = newLawyer
@@ -109,7 +109,8 @@ class EditContractModal extends react.Component {
 
   render () {
     let { isOpen, closeModal } = this.props
-    let { lawyers, statuses } = this.props.data
+    console.log(this.props.data)
+    let { allLawyers, allStatuses } = this.props.data
     let { contract } = this.state
     let lawyerSelect = null
 
@@ -119,7 +120,7 @@ class EditContractModal extends react.Component {
         key={this.state.selectedLawyer}
         onChange={this.handleLawyerChange}
       >
-        {lawyers.map(l => (
+        {allLawyers.map(l => (
           <option key={l.id} value={l.id}>
             {`${l.firstName} ${l.lastName}`}
           </option>
@@ -127,7 +128,7 @@ class EditContractModal extends react.Component {
       </select>
     )
     let statusRadios = null
-    statusRadios = statuses.map(s => (
+    statusRadios = allStatuses.map(s => (
       <div key={s.name} className='fl mr2'>
         <label
           className={cn(
@@ -155,8 +156,8 @@ class EditContractModal extends react.Component {
     ))
     let tagInputs = null
     if (contract.tags) {
-      let { tags } = this.props.data
-      let updatedTags = this.processTags(tags, contract.tags)
+      let { allTags } = this.props.data
+      let updatedTags = this.processTags(allTags, contract.tags)
       tagInputs = updatedTags.map(t => (
         <CheckBox
           key={t.name}

@@ -27,13 +27,13 @@ const resolvers = {
     contract (root, args) {
       return Contract.findOne({ id: args.id })
     },
-    statuses (root, args) {
+    allStatuses (root, args) {
       return Status.find()
     },
-    lawyers (root, args) {
+    allLawyers (root, args) {
       return Lawyer.find()
     },
-    tags (root, args) {
+    allTags (root, args) {
       return Tag.find()
     }
   },
