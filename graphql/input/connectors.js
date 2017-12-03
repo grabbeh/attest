@@ -10,7 +10,7 @@ const lawyers = [
   { firstName: 'Ally', lastName: 'McBeal', id: 2 },
   { firstName: 'Horace', lastName: 'Rumpole', id: 3 }
 ]
-*/
+
 const statuses = [
   { name: 'Instructed' },
   { name: 'Drafted' },
@@ -23,7 +23,7 @@ const tags = [
   { name: 'Renewal' },
   { name: 'High priority' },
   { name: 'Strategic' }
-]
+] */
 
 const StatusSchema = mongoose.Schema({
   name: String
@@ -68,7 +68,14 @@ const LawyerSchema = mongoose.Schema({
 
 const Lawyer = mongoose.model('lawyer', LawyerSchema)
 
-export { Contract, Lawyer, Status, Tag }
+const UserSchema = mongoose.Schema({
+  email: String,
+  password: String
+})
+
+const User = mongoose.model('user', UserSchema)
+
+export { Contract, Lawyer, Status, Tag, User }
 
 // delete existing contracts
 /*
