@@ -58,7 +58,7 @@ class Filter extends react.Component {
 
     return (
       <div className='bg-haus mr3-ns mr0 pa3'>
-        <div className='f4 b bb pb2'>Filters</div>
+        <div className='f4 b bb bw1 pb2'>Filters</div>
         <HideToggle title='Statuses'>
           <CheckboxList
             content={statuses}
