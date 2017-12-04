@@ -22,7 +22,10 @@ class Contract extends React.Component {
   }
 
   openModal = contract => {
-    this.setState({ modalIsOpen: true, editableContract: contract })
+    this.setState({
+      modalIsOpen: true,
+      editableContract: contract
+    })
   }
 
   closeModal = () => {

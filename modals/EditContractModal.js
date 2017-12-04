@@ -25,7 +25,7 @@ class EditContractModal extends react.Component {
     let copy = __.cloneDeep(this.props.contract)
     if (copy) {
       this.setState({
-        contract: copy,
+        contract: _.omit(copy, 'lawyerName'),
         selectedStatus: copy.currentStatus,
         selectedLawyer: copy.assignedTo.id
       })
@@ -109,23 +109,24 @@ class EditContractModal extends react.Component {
 
   render () {
     let { isOpen, closeModal } = this.props
-    console.log(this.props.data)
     let { allLawyers, allStatuses } = this.props.data
     let { contract } = this.state
     let lawyerSelect = null
 
     lawyerSelect = (
-      <select
-        value={this.state.selectedLawyer}
-        key={this.state.selectedLawyer}
-        onChange={this.handleLawyerChange}
-      >
-        {allLawyers.map(l => (
-          <option key={l.id} value={l.id}>
-            {`${l.firstName} ${l.lastName}`}
-          </option>
-        ))}
-      </select>
+      <div className='mb2'>
+        <select
+          value={this.state.selectedLawyer}
+          key={this.state.selectedLawyer}
+          onChange={this.handleLawyerChange}
+        >
+          {allLawyers.map(l => (
+            <option key={l.id} value={l.id}>
+              {`${l.firstName} ${l.lastName}`}
+            </option>
+          ))}
+        </select>
+      </div>
     )
     let statusRadios = null
     statusRadios = allStatuses.map(s => (
@@ -138,8 +139,9 @@ class EditContractModal extends react.Component {
             'fr',
             'f5',
             'pa1',
-            'bg-white,
-            'black'
+            'bg-white',
+            'black',
+            'mb2'
           )}
         >
           <input
@@ -186,7 +188,7 @@ class EditContractModal extends react.Component {
                   <i className='pointer  fa fa-window-close fa-lg' />
                 </button>
               </div>
-              <div className='b'>Edit Contract</div>
+              <div className='b pb2 bb bw1'>Edit Contract</div>
               <form>
                 <div className='b mt2'>Tags</div>
                 <div className='pv2 fl list flex flex-wrap w-100 bb bw1'>
@@ -194,16 +196,15 @@ class EditContractModal extends react.Component {
                 </div>
                 <div className='cf' />
                 <div className='b mt2'>Status</div>
-                <div className='fl pv2 bb b--mid-gray w-100'>
+                <div className='fl pv2 bb bw1 w-100'>
                   {statusRadios}
                 </div>
                 <div className='cf' />
                 <div className='b mt2'>Lawyer</div>
-                <div className='pv2 bb b--mid-gray w-100'>{lawyerSelect}</div>
+                <div className='pv2 bb bw1 w-100 mb2'>{lawyerSelect}</div>
                 <div className='mt2'>
                   <SubmitEditButton
-                    contract={this.state.contract}
-                    id={this.state.contract.id}
+                    contract={contract}
                     closeModal={this.props.closeModal}
                     />
                 </div>

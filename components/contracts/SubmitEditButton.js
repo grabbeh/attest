@@ -18,7 +18,8 @@ const SubmitEditButton = ({ updateContract }) => {
 
 export default graphql(UPDATE_CONTRACT_MUTATION, {
   props ({ ownProps, mutate }) {
-    const { closeModal, contract, id } = ownProps
+    const { closeModal, contract } = ownProps
+    const id = contract.id
     return {
       updateContract () {
         return mutate({
