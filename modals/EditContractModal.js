@@ -190,7 +190,7 @@ class EditContractModal extends react.Component {
               <div className='b'>Edit Contract</div>
               <form>
                 <div className='b mt2'>Tags</div>
-                <div className='pv2 fl list flex flex-wrap w-100 bb '>
+                <div className='pv2 fl list flex flex-wrap w-100 bb bw1'>
                   {tagInputs}
                 </div>
                 <div className='cf' />
