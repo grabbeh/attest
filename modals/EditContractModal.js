@@ -138,8 +138,7 @@ class EditContractModal extends react.Component {
             'fr',
             'f5',
             'pa1',
-            'shadow-4',
-            'bg-haus',
+            'bg-white,
             'black'
           )}
         >
