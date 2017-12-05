@@ -5,6 +5,9 @@ query contracts {
   allStatuses {
     name
   }
+  loggedUser {
+    id
+  }
   allLawyers {
     firstName
     lastName

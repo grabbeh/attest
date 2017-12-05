@@ -14,7 +14,7 @@ const addUser = async (req, res) => {
     const { user } = await jwt.verify(token, SECRET)
     req.user = user
   } catch (error) {
-    // console.log(error)
+    //  console.log(error)
   }
   req.next()
 }

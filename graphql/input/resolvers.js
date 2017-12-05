@@ -41,6 +41,7 @@ const resolvers = {
     },
     loggedUser: async (root, args, { user }) => {
       if (user) {
+        console.log('User!')
         return User.findById(mongoose.Types.ObjectId(user.id))
       }
       return null
