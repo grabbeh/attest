@@ -7,46 +7,34 @@ import { extendMoment } from 'moment-range'
 import Filter from './Filter'
 import SummaryBox from './SummaryBox'
 import Title from './Title'
+import Header from './Header'
 
 const moment = extendMoment(Moment)
 
 class ContractsHolder extends react.Component {
   constructor (props) {
     super(props)
-    let { contracts, allStatuses } = this.props.data
-    let statusNames = _.pluck(allStatuses, 'name')
-    let currentTags = _.uniq(_.flatten(_.pluck(contracts, 'tags')))
-    let businessUnits = _.uniq(_.flatten(_.pluck(contracts, 'businessUnit')))
-    let lawyers = _.uniq(
-      _.flatten(_.pluck(contracts, 'assignedTo')).map(a => {
-        return `${a.firstName} ${a.lastName}`
-      })
-    )
     this.state = {
-      filteredContracts: _.flatten(
-        _.values(_.groupBy(contracts, 'currentStatus'))
-      ),
+      filteredContracts: [],
       initialValues: {
-        statuses: statusNames,
-        tags: currentTags,
-        businessUnits,
-        lawyers
+        statuses: [],
+        tags: [],
+        businessUnits: [],
+        lawyers: []
       },
       filters: {
-        statuses: statusNames,
+        statuses: [],
         dateRange: {
           startDate: null,
           endDate: null
         },
         tags: [],
-        businessUnits,
-        lawyers
+        businessUnits: [],
+        lawyers: []
       }
     }
-    this.statuses = new Set(statusNames)
-    this.tags = new Set()
-    this.businessUnits = new Set(businessUnits)
-    this.lawyers = new Set(lawyers)
+    //  this.setNewData(this.props.data)
+    // state is set when contracts not available resulting in null initial values
   }
 
   setDate = content => {
@@ -140,6 +128,43 @@ class ContractsHolder extends react.Component {
     }
   }
 
+  setNewData = data => {
+    let { contracts, allStatuses } = data
+    let statusNames = _.pluck(allStatuses, 'name')
+    let currentTags = _.uniq(_.flatten(_.pluck(contracts, 'tags')))
+    let businessUnits = _.uniq(_.flatten(_.pluck(contracts, 'businessUnit')))
+    let lawyers = _.uniq(
+      _.flatten(_.pluck(contracts, 'assignedTo')).map(a => {
+        return `${a.firstName} ${a.lastName}`
+      })
+    )
+    let initialValues = {
+      statuses: statusNames,
+      tags: currentTags,
+      businessUnits,
+      lawyers
+    }
+    this.setState({ initialValues })
+    this.updateFilterState('statuses', statusNames)
+    this.updateFilterState('businessUnits', businessUnits)
+    this.updateFilterState('lawyers', lawyers)
+
+    this.statuses = new Set(statusNames)
+    this.tags = new Set()
+    this.businessUnits = new Set(businessUnits)
+    this.lawyers = new Set(lawyers)
+  }
+
+  componentDidMount () {}
+
+  componentWillReceiveProps (nextProps) {
+    this.setNewData(nextProps.data)
+  }
+
+  componentWillUpdate () {}
+
+  componentDidUpdate () {}
+
   render () {
     let { initialValues, filters } = this.state
     const name = 'ACME INC'
@@ -148,21 +173,35 @@ class ContractsHolder extends react.Component {
       this.props.data.contracts
     )
     return (
-      <div className='bg--blue-gray pa3-ns pt3 pa0'>
-        <Title name={name} />
-        <ul className='list ma0 pa0 flex flex-wrap'>
-          <li className='w-50-ns w-100'>
-            <Filter
-              initialValues={initialValues}
-              toggleCheckbox={this.toggleCheckbox}
-              setDate={this.setDate}
-            />
-          </li>
-          <li className='w-50-ns w-100'>
-            <SummaryBox contracts={filteredContracts} filters={filters} />
-          </li>
-        </ul>
-        <ContractsList contracts={filteredContracts} data={this.props.data} />
+      <div ref='root'>
+        {this.props.data.loading
+          ? <div>Loading...</div>
+          : <div>
+            <Header user={this.props.data.loggedUser} />
+            <div className='bg--blue-gray pa3-ns pt3 pa0'>
+              <Title name={name} />
+              <ul className='list ma0 pa0 flex flex-wrap'>
+                <li className='w-50-ns w-100'>
+                  <Filter
+                    initialValues={initialValues}
+                    toggleCheckbox={this.toggleCheckbox}
+                    setDate={this.setDate}
+                    />
+                </li>
+                <li className='w-50-ns w-100'>
+                  <SummaryBox
+                    contracts={filteredContracts}
+                    filters={filters}
+                    />
+                </li>
+              </ul>
+              <ContractsList
+                contracts={filteredContracts}
+                data={this.props.data}
+                />
+            </div>
+          </div>}
+
       </div>
     )
   }

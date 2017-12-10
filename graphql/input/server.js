@@ -4,18 +4,17 @@ import bodyParser from 'body-parser'
 import schema from './schemas/schema'
 import jwt from 'jsonwebtoken'
 import SECRET from '../../config/jwt-secret.js'
-const GRAPHQL_PORT = 8000
 
+const GRAPHQL_PORT = 8000
 const server = express()
 
 const addUser = async (req, res) => {
-  const token = req.headers['authorization']
+  console.log(req.headers)
+  let token = req.headers['authorization'] || null
   try {
     const { user } = await jwt.verify(token, SECRET)
     req.user = user
-  } catch (error) {
-    //  console.log(error)
-  }
+  } catch (error) {}
   req.next()
 }
 

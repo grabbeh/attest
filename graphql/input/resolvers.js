@@ -24,25 +24,31 @@ const resolvers = {
     }
   }),
   Query: {
-    contracts: (root, args) => {
-      return Contract.find()
+    contracts: async (root, args) => {
+      let contracts = await Contract.find()
+      return contracts
     },
     contract: (root, { id }) => {
       return Contract.findOne({ id })
     },
-    allStatuses: (root, args) => {
-      return Status.find()
+    allStatuses: async (root, args) => {
+      let allStatuses = await Status.find()
+      return allStatuses
     },
-    allLawyers: (root, args) => {
-      return Lawyer.find()
+    allLawyers: async (root, args) => {
+      let allLawyers = await Lawyer.find()
+      return allLawyers
     },
-    allTags: (root, args) => {
-      return Tag.find()
+    allTags: async (root, args) => {
+      let allTags = await Tag.find()
+      return allTags
     },
-    loggedUser: async (root, args, { user }) => {
-      if (user) {
-        console.log('User!')
-        return User.findById(mongoose.Types.ObjectId(user.id))
+    loggedUser: async (root, args, context) => {
+      if (context.user) {
+        let loggedUser = await User.findById(
+          mongoose.Types.ObjectId(context.user.id)
+        )
+        return loggedUser
       }
       return null
     },
@@ -79,7 +85,7 @@ const resolvers = {
         throw new Error('Invalid password')
       }
       const token = jwt.sign({ user: _.pick(user, ['id', 'email']) }, SECRET, {
-        expiresIn: '1d'
+        expiresIn: '365d'
       })
       return token
     }

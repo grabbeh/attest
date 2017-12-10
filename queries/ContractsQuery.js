@@ -2,11 +2,12 @@ import gql from 'graphql-tag'
 
 export default gql`
 query contracts {
-  allStatuses {
-    name
-  }
   loggedUser {
     id
+    email
+  }
+  allStatuses {
+    name
   }
   allLawyers {
     firstName
