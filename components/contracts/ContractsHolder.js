@@ -33,8 +33,6 @@ class ContractsHolder extends react.Component {
         lawyers: []
       }
     }
-    //  this.setNewData(this.props.data)
-    // state is set when contracts not available resulting in null initial values
   }
 
   setDate = content => {
@@ -155,15 +153,9 @@ class ContractsHolder extends react.Component {
     this.lawyers = new Set(lawyers)
   }
 
-  componentDidMount () {}
-
   componentWillReceiveProps (nextProps) {
     this.setNewData(nextProps.data)
   }
-
-  componentWillUpdate () {}
-
-  componentDidUpdate () {}
 
   render () {
     let { initialValues, filters } = this.state
@@ -177,7 +169,10 @@ class ContractsHolder extends react.Component {
         {this.props.data.loading
           ? <div>Loading...</div>
           : <div>
-            <Header user={this.props.data.loggedUser} />
+            <Header
+              client={this.props.client}
+              user={this.props.data.loggedUser}
+              />
             <div className='bg--blue-gray pa3-ns pt3 pa0'>
               <Title name={name} />
               <ul className='list ma0 pa0 flex flex-wrap'>

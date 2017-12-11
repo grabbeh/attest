@@ -43,6 +43,10 @@ export default () => (
 
       body {
         font-family: 'shapefont';
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        background-color: #b8d0d8;
       }
 
       .bg--blue {

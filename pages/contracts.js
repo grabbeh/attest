@@ -4,7 +4,7 @@ import withData from '../lib/withData'
 
 const ContractsPage = withData(props => (
   <Page>
-    <ContractsData />
+    <ContractsData client={props.client} />
   </Page>
 ))
 

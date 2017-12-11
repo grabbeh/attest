@@ -5,7 +5,6 @@ import withData from '../lib/withData'
 
 const LoginPage = withData(props => (
   <Page>
-    <Header />
     <LoginForm client={props.client} />
   </Page>
 ))
