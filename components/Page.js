@@ -1,8 +1,10 @@
 import Meta from './Meta'
 
-export default ({ children }) => (
+const Page = ({ children }) => (
   <div>
     <Meta />
     {children}
   </div>
 )
+
+export default Page

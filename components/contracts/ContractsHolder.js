@@ -15,7 +15,6 @@ class ContractsHolder extends react.Component {
   constructor (props) {
     super(props)
     this.state = {
-      filteredContracts: [],
       initialValues: {
         statuses: [],
         tags: [],
@@ -108,6 +107,7 @@ class ContractsHolder extends react.Component {
   }
 
   toggleCheckbox = label => {
+    this.state.filters
     let { statuses, tags, businessUnits, lawyers } = this.state.initialValues
     if (statuses.includes(label)) {
       this.updateFilterState('statuses', this.updateSet(this.statuses, label))
@@ -153,8 +153,18 @@ class ContractsHolder extends react.Component {
     this.lawyers = new Set(lawyers)
   }
 
+  componentDidMount () {
+    this.setNewData(this.props.data)
+  }
+
   componentWillReceiveProps (nextProps) {
-    this.setNewData(nextProps.data)
+    if (this.props.data.loading) {
+      this.setNewData(nextProps.data)
+    }
+  }
+
+  shouldComponentUpdate (nextProps, nextState) {
+    return true
   }
 
   render () {

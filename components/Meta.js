@@ -1,6 +1,6 @@
 import Head from 'next/head'
 
-export default () => (
+const Meta = () => (
   <div>
     <Head>
       <meta name='theme-color' content='#005baa' />
@@ -161,3 +161,5 @@ export default () => (
     </style>
   </div>
 )
+
+export default Meta
