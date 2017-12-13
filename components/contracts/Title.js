@@ -1,5 +1,7 @@
 const Title = ({ name }) => (
-  <div className='w-20-ns w-100 bg-haus f3 b pa3 mb3'>{name}</div>
+  <div className='w-50-ns w-100'>
+    <div className='bg-haus pa3 mr3 mb3 f3 b'>{name}</div>
+  </div>
 )
 
 export default Title

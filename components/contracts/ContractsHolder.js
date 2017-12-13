@@ -15,6 +15,7 @@ class ContractsHolder extends react.Component {
   constructor (props) {
     super(props)
     this.state = {
+      loading: true,
       initialValues: {
         statuses: [],
         tags: [],
@@ -151,6 +152,7 @@ class ContractsHolder extends react.Component {
     this.tags = new Set()
     this.businessUnits = new Set(businessUnits)
     this.lawyers = new Set(lawyers)
+    this.setState({ loading: false })
   }
 
   componentDidMount () {
@@ -175,15 +177,19 @@ class ContractsHolder extends react.Component {
       this.props.data.contracts
     )
     return (
-      <div ref='root'>
-        {this.props.data.loading
-          ? <div>Loading...</div>
+      <div>
+        {this.state.loading || this.props.data.loading
+          ? <div>
+            <div className='f4 b center tc bg-haus mw5 pa3 mt5'>
+                Loading...
+              </div>
+          </div>
           : <div>
             <Header
               client={this.props.client}
               user={this.props.data.loggedUser}
               />
-            <div className='bg--blue-gray pa3-ns pt3 pa0'>
+            <div className='pa3-ns pt3 pa0'>
               <Title name={name} />
               <ul className='list ma0 pa0 flex flex-wrap'>
                 <li className='w-50-ns w-100'>

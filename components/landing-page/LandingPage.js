@@ -1,4 +1,4 @@
-import react from 'react'
+import Link from 'next/link'
 import Line from './Line'
 import Break from './Break'
 import Box from './Box'
@@ -9,7 +9,9 @@ export default () => (
       <div className='fl f3 pa3 white'>
         attest
       </div>
-      <div className='br3 fr pa2 ba ma3 white'>Contact</div>
+      <div className='br3 fr pa2 ba ma3 white'>
+        <Link href='/login'><a className='link white'>Login</a></Link>
+      </div>
       <div className='cf' />
       <div className='b ph5-ns pt4 f2 white tc'>
         An open source platform for contract management

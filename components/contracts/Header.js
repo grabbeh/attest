@@ -22,11 +22,11 @@ class Header extends react.Component {
         <span>Attest</span>
         <span className='fr'>
           {user
-            ? <div className=''>
+            ? <div className='f4-ns f6'>
               <span>{user.email}</span>
-              <span className='ml2 pl2 bl bw1' onClick={this.logout}>
-                  logout
-                </span>
+              <span className='pl2' onClick={this.logout}>
+                <i title='Sign out' className='fa fa-sign-out' />
+              </span>
             </div>
             : <Link href='/login'>
               <a className='link dim black'>Login</a>

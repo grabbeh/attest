@@ -9,6 +9,7 @@ type Query {
   allLawyers: [Lawyer]
   allTags: [Tag]
   allUsers: [User]
+  allBusinessUnits: [BusinessUnit]
   loggedUser: User
 }
 
@@ -118,6 +119,16 @@ input LawyerInput {
   id: Int
   firstName: String
   lastName: String
+}
+
+type BusinessUnit {
+  id: Int
+  name: String
+}
+
+input BusinessUnitInput {
+  id: Int
+  name: String
 }
 
 schema {

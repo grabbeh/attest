@@ -4,26 +4,6 @@ mongoose.Promise = require('bluebird')
 
 const db = require('../../config/db.js')
 mongoose.connect(db, { useMongoClient: true })
-/*
-const lawyers = [
-  { firstName: 'Atticus', lastName: 'Finch', id: 1 },
-  { firstName: 'Ally', lastName: 'McBeal', id: 2 },
-  { firstName: 'Horace', lastName: 'Rumpole', id: 3 }
-]
-
-const statuses = [
-  { name: 'Instructed' },
-  { name: 'Drafted' },
-  { name: 'Approved' },
-  { name: 'Executed' }
-]
-
-const tags = [
-  { name: 'Critical' },
-  { name: 'Renewal' },
-  { name: 'High priority' },
-  { name: 'Strategic' }
-] */
 
 const StatusSchema = mongoose.Schema({
   name: String
@@ -68,6 +48,12 @@ const LawyerSchema = mongoose.Schema({
 
 const Lawyer = mongoose.model('lawyer', LawyerSchema)
 
+const BusinessUnitSchema = mongoose.Schema({
+  name: String
+})
+
+const BusinessUnit = mongoose.model('businessUnit', BusinessUnitSchema)
+
 const UserSchema = mongoose.Schema({
   email: String,
   password: String
@@ -75,46 +61,9 @@ const UserSchema = mongoose.Schema({
 
 const User = mongoose.model('user', UserSchema)
 
-export { Contract, Lawyer, Status, Tag, User }
+export { Contract, Lawyer, Status, Tag, BusinessUnit, User }
 
-// delete existing contracts
 /*
-Lawyer.find().exec((err, lawyers) => {
-  lawyers.forEach(l => {
-    l.remove()
-  })
-})
-
-lawyers.forEach(l => {
-  new Lawyer(l).save((err, res) => {
-    if (err) console.log(err)
-  })
-})
-
-Status.find().exec((err, statuses) => {
-  statuses.forEach(l => {
-    l.remove()
-  })
-})
-
-statuses.forEach(s => {
-  new Status(s).save((err, res) => {
-    if (err) console.log(err)
-  })
-})
-
-Tag.find().exec((err, statuses) => {
-  statuses.forEach(l => {
-    l.remove()
-  })
-})
-
-tags.forEach(s => {
-  new Tag(s).save((err, res) => {
-    if (err) console.log(err)
-  })
-})
-
 Contract.find().exec((err, contracts) => {
   if (err) console.log(err)
   contracts.forEach(c => {

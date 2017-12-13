@@ -46,7 +46,7 @@ const Meta = () => (
         text-rendering: optimizeLegibility;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
-        background-color: #b8d0d8;
+        background-color: #EFADA0;
       }
 
       .bg--blue {

@@ -17,7 +17,8 @@ class EditContractModal extends react.Component {
         }
       },
       selectedStatus: '',
-      selectedLawyer: ''
+      selectedLawyer: '',
+      selectedBusinessUnit: ''
     }
   }
 
@@ -27,7 +28,8 @@ class EditContractModal extends react.Component {
       this.setState({
         contract: _.omit(copy, 'lawyerName'),
         selectedStatus: copy.currentStatus,
-        selectedLawyer: copy.assignedTo.id
+        selectedLawyer: copy.assignedTo.id,
+        selectedBusinessUnit: copy.businessUnit
       })
     }
   }
@@ -63,6 +65,21 @@ class EditContractModal extends react.Component {
         let newLawyer = lawyer
         contract.assignedTo = newLawyer
         this.setState({ contract: contract, selectedLawyer: id })
+      }
+    })
+  }
+
+  handleBusinessUnitChange = e => {
+    let selectedUnit = e.target.value
+    let { contract } = this.state
+    const { allBusinessUnits } = this.props.data
+    allBusinessUnits.forEach(unit => {
+      if (selectedUnit == unit.name) {
+        contract.businessUnit = selectedUnit
+        this.setState({
+          contract: contract,
+          selectedBusinessUnit: selectedUnit
+        })
       }
     })
   }
@@ -109,10 +126,26 @@ class EditContractModal extends react.Component {
 
   render () {
     let { isOpen, closeModal } = this.props
-    let { allLawyers, allStatuses } = this.props.data
+    let { allLawyers, allStatuses, allBusinessUnits } = this.props.data
     let { contract } = this.state
-    let lawyerSelect = null
 
+    let businessUnitSelect = null
+    businessUnitSelect = (
+      <div className='mb2'>
+        <select
+          value={this.state.selectedBusinessUnit}
+          key={this.state.selectedBusinessUnit}
+          onChange={this.handleBusinessUnitChange}
+        >
+          {allBusinessUnits.map(unit => (
+            <option key={unit.name} value={unit.name}>
+              {unit.name}
+            </option>
+          ))}
+        </select>
+      </div>
+    )
+    let lawyerSelect = null
     lawyerSelect = (
       <div className='mb2'>
         <select
@@ -198,6 +231,11 @@ class EditContractModal extends react.Component {
                 <div className='b mt2'>Status</div>
                 <div className='fl pv2 bb bw1 w-100'>
                   {statusRadios}
+                </div>
+                <div className='cf' />
+                <div className='b mt2'>Business Units</div>
+                <div className='fl pv2 bb bw1 w-100'>
+                  {businessUnitSelect}
                 </div>
                 <div className='cf' />
                 <div className='b mt2'>Lawyer</div>

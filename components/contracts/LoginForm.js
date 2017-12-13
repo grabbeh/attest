@@ -35,39 +35,38 @@ class LoginForm extends React.Component {
 
   render () {
     return (
-      <div className='bg--blue-gray'>
+      <div>
         <Header user={this.props.loggedUser} />
-        <div className='bg--blue-gray'>
-          <div className='mt3 center mw6'>
-            <div className='pa3 ma0 bg-haus'>
-              <div className='b pb2 bb bw1'>Login</div>
-              <form>
-                <div className='mt2'>
-                  <input
-                    className='pa2'
-                    value={this.state.email}
-                    name='email'
-                    onChange={this.saveToState}
-                    placeholder='Email'
-                  />
-                </div>
-                <div className='mt2'>
-                  <input
-                    className='pa2'
-                    value={this.state.password}
-                    name='password'
-                    onChange={this.saveToState}
-                    placeholder='password'
-                    type='password'
-                  />
-                </div>
-                <div className='mt3' />
-              </form>
-              <div>
-                <button onClick={this.handleClick}>
-                  Submit
-                </button>
+
+        <div className='mt3 center mw6'>
+          <div className='pa3 ma0 bg-haus'>
+            <div className='b pb2 bb bw1'>Login</div>
+            <form>
+              <div className='mt2'>
+                <input
+                  className='pa2'
+                  value={this.state.email}
+                  name='email'
+                  onChange={this.saveToState}
+                  placeholder='Email'
+                />
               </div>
+              <div className='mt2'>
+                <input
+                  className='pa2'
+                  value={this.state.password}
+                  name='password'
+                  onChange={this.saveToState}
+                  placeholder='password'
+                  type='password'
+                />
+              </div>
+              <div className='mt3' />
+            </form>
+            <div>
+              <button onClick={this.handleClick}>
+                Submit
+              </button>
             </div>
           </div>
         </div>

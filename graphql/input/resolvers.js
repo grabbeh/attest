@@ -1,4 +1,4 @@
-import { Contract, Lawyer, Status, Tag, User } from './connectors'
+import { Contract, Lawyer, Status, Tag, User, BusinessUnit } from './connectors'
 import { GraphQLScalarType } from 'graphql'
 import { Kind } from 'graphql/language'
 import mongoose from 'mongoose'
@@ -42,6 +42,10 @@ const resolvers = {
     allTags: async (root, args) => {
       let allTags = await Tag.find()
       return allTags
+    },
+    allBusinessUnits: async (root, args) => {
+      let allUnits = await BusinessUnit.find()
+      return allUnits
     },
     loggedUser: async (root, args, context) => {
       if (context.user) {

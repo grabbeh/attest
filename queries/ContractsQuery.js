@@ -17,6 +17,9 @@ query contracts {
   allTags {
     name
   }
+  allBusinessUnits {
+    name
+  }
   contracts {
     ownerEntity
     id
