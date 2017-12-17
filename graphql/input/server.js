@@ -9,11 +9,11 @@ const GRAPHQL_PORT = 8000
 const server = express()
 
 const addUser = async (req, res) => {
-  console.log(req.headers)
   let token = req.headers['authorization'] || null
   try {
     const { user } = await jwt.verify(token, SECRET)
     req.user = user
+    // ADD FULL USER INFORMATION TO SESSION THROUGH DB CALL?
   } catch (error) {}
   req.next()
 }

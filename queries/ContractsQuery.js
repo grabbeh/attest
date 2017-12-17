@@ -5,6 +5,7 @@ query contracts {
   loggedUser {
     id
     email
+    parentEntity
   }
   allStatuses {
     name

@@ -1,8 +1,9 @@
 import ContractSquareList from './ContractSquareList'
-import _ from 'underscore'
+import _ from 'lodash'
 import react from 'react'
 import StatusBar from './StatusBar'
 import Moment from 'react-moment'
+import Flex from '../styles/Flex'
 
 class SummaryBox extends react.Component {
   render () {
@@ -30,7 +31,7 @@ class SummaryBox extends react.Component {
             </span>
             : <span>{` for all time`}</span>}
         </div>
-        <div className='flex flex-wrap'>
+        <Flex>
           <ul className='w-100 mb2 list pa0 ma0'>
             {res.map(r => (
               <li key={r.status} className='fl mr4'>
@@ -47,7 +48,7 @@ class SummaryBox extends react.Component {
               </div>
             ))}
           </div>
-        </div>
+        </Flex>
       </div>
     )
   }

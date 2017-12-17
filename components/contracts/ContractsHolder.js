@@ -1,15 +1,15 @@
 import react from 'react'
 import ContractsList from './ContractsList'
-import _ from 'underscore'
-import __ from 'lodash'
-import Moment from 'moment'
-import { extendMoment } from 'moment-range'
+import _ from 'lodash'
 import Filter from './Filter'
 import SummaryBox from './SummaryBox'
 import Title from './Title'
 import Header from './Header'
-
-const moment = extendMoment(Moment)
+import search from '../../lib/search'
+import filter from '../../lib/filterContracts'
+import Flex from '../styles/Flex'
+import SearchInput from './SearchInput'
+import Loading from './Loading'
 
 class ContractsHolder extends react.Component {
   constructor (props) {
@@ -31,8 +31,37 @@ class ContractsHolder extends react.Component {
         tags: [],
         businessUnits: [],
         lawyers: []
-      }
+      },
+      searchTerm: '',
+      liveInput: false
     }
+  }
+
+  handleSearchInput = event => {
+    this.setState({ liveInput: true, searchTerm: event.target.value })
+    clearTimeout(timer)
+    let timer = setTimeout(() => {
+      this.setState({ liveInput: false })
+    }, 1000)
+  }
+
+  clearSearchTerm = event => this.setState({ searchTerm: '' })
+
+  getSearchResults = (value = '', list) => {
+    return search(list, value, {
+      keys: [
+        'ownerEntity',
+        'lawyerName',
+        'currentStatus',
+        'businessUnit',
+        'tags',
+        'internalParties',
+        'externalParties',
+        'statuses.status',
+        'assignedTo.firstName',
+        'assignedTo.lastName'
+      ]
+    })
   }
 
   setDate = content => {
@@ -52,59 +81,6 @@ class ContractsHolder extends react.Component {
       set.add(label)
     }
     return [...set]
-  }
-
-  filterContracts = (filters, contracts) => {
-    let copy = __.cloneDeep(contracts)
-    let { tags, businessUnits, statuses, dateRange, lawyers } = filters
-
-    // tag filters
-    if (tags.length > 0) {
-      copy = _.uniq(
-        _.flatten(
-          tags.map(t => {
-            return copy.filter(c => {
-              return c.tags.includes(t)
-            })
-          })
-        )
-      )
-    }
-
-    // business unit filter
-    copy = _.flatten(
-      _.values(_.pick(_.groupBy(copy, 'businessUnit'), businessUnits))
-    )
-
-    // lawyer filter
-    let copyWithLawyers = copy.map(c => {
-      let lawyerName = `${c.assignedTo.firstName} ${c.assignedTo.lastName}`
-      c.lawyerName = lawyerName
-      return c
-    })
-    copy = _.flatten(
-      _.values(_.pick(_.groupBy(copyWithLawyers, 'lawyerName'), lawyers))
-    )
-
-    // date filters
-    if (
-      dateRange.startDate &&
-      dateRange.startDate.isValid() &&
-      dateRange.endDate &&
-      dateRange.endDate.isValid()
-    ) {
-      let { startDate, endDate } = dateRange
-      const range = moment.range(startDate, endDate)
-      copy = _.filter(copy, s => {
-        let latestDate = moment(_.last(s.statuses).date)
-        return range.contains(latestDate)
-      })
-    }
-    // status filter
-    copy = _.flatten(
-      _.values(_.pick(_.groupBy(copy, 'currentStatus'), statuses))
-    )
-    return copy
   }
 
   toggleCheckbox = label => {
@@ -129,11 +105,11 @@ class ContractsHolder extends react.Component {
 
   setNewData = data => {
     let { contracts, allStatuses } = data
-    let statusNames = _.pluck(allStatuses, 'name')
-    let currentTags = _.uniq(_.flatten(_.pluck(contracts, 'tags')))
-    let businessUnits = _.uniq(_.flatten(_.pluck(contracts, 'businessUnit')))
+    let statusNames = _.map(allStatuses, 'name')
+    let currentTags = _.uniq(_.flatten(_.map(contracts, 'tags')))
+    let businessUnits = _.uniq(_.flatten(_.map(contracts, 'businessUnit')))
     let lawyers = _.uniq(
-      _.flatten(_.pluck(contracts, 'assignedTo')).map(a => {
+      _.flatten(_.map(contracts, 'assignedTo')).map(a => {
         return `${a.firstName} ${a.lastName}`
       })
     )
@@ -171,44 +147,66 @@ class ContractsHolder extends react.Component {
 
   render () {
     let { initialValues, filters } = this.state
+    let { loading, contracts } = this.props.data
+    let { allStatuses, allTags, allBusinessUnits, allLawyers } = this.props.data
+
+    let editFormData = {
+      allBusinessUnits,
+      allLawyers,
+      allTags,
+      allStatuses
+    }
+
     const name = 'ACME INC'
-    let filteredContracts = this.filterContracts(
-      filters,
-      this.props.data.contracts
-    )
+    let filteredContracts = filter(filters, contracts)
+
+    if (!this.state.liveInput) {
+      filteredContracts = this.getSearchResults(
+        this.state.searchTerm,
+        filteredContracts
+      )
+    }
+
     return (
       <div>
-        {this.state.loading || this.props.data.loading
-          ? <div>
-            <div className='f4 b center tc bg-haus mw5 pa3 mt5'>
-                Loading...
-              </div>
-          </div>
+        {this.state.loading || loading
+          ? <Loading />
           : <div>
             <Header
               client={this.props.client}
               user={this.props.data.loggedUser}
               />
-            <div className='pa3-ns pt3 pa0'>
-              <Title name={name} />
-              <ul className='list ma0 pa0 flex flex-wrap'>
-                <li className='w-50-ns w-100'>
+            <div className='pa3-ns pa0 pt3 '>
+              <Flex>
+                <div className='w-50-ns w-100'>
+                  <Title name={name} />
+                </div>
+                <div className='w-50-ns w-100'>
+                  <SearchInput
+                    handleSearchInput={this.handleSearchInput}
+                    searchTerm={this.state.searchTerm}
+                    clear={this.clearSearchTerm}
+                    />
+                </div>
+              </Flex>
+              <Flex>
+                <div className='w-50-ns w-100'>
                   <Filter
                     initialValues={initialValues}
                     toggleCheckbox={this.toggleCheckbox}
                     setDate={this.setDate}
                     />
-                </li>
-                <li className='w-50-ns w-100'>
+                </div>
+                <div className='w-50-ns w-100'>
                   <SummaryBox
                     contracts={filteredContracts}
                     filters={filters}
                     />
-                </li>
-              </ul>
+                </div>
+              </Flex>
               <ContractsList
                 contracts={filteredContracts}
-                data={this.props.data}
+                data={editFormData}
                 />
             </div>
           </div>}

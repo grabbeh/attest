@@ -6,7 +6,7 @@ const ContractsList = ({ contracts, data }) => (
     {contracts.length > 0
       ? <div>
         <div className='cf' />
-        <section className='mt3 mb4'>
+        <section className='mv3'>
           <ul className='flex flex-wrap list pa0 ma0'>
             {contracts.map((contract, index) => (
               <div key={contract.id} className='mb3 w-50-ns w-25-l w-100'>
@@ -18,7 +18,7 @@ const ContractsList = ({ contracts, data }) => (
           </ul>
         </section>
       </div>
-      : <div className='pa2 bg-haus b mt3'>
+      : <div className='pa3 f4 bg-haus b mt3'>
           No matching contracts
         </div>}
   </div>

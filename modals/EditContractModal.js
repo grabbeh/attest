@@ -1,11 +1,12 @@
 import react from 'react'
 import Modal from 'react-modal'
-import SubmitEditButton from '../components/contracts/SubmitEditButton'
 import CheckBox from '../components/contracts/CheckBox'
-import _ from 'underscore'
-import __ from 'lodash'
+import _ from 'lodash'
 import Moment from 'moment'
 import cn from 'classnames'
+import { graphql } from 'react-apollo'
+import UPDATE_CONTRACT_MUTATION from '../queries/UpdateContractMutation'
+import CONTRACTS_QUERY from '../queries/ContractsQuery'
 
 class EditContractModal extends react.Component {
   constructor (props) {
@@ -23,7 +24,7 @@ class EditContractModal extends react.Component {
   }
 
   componentWillMount () {
-    let copy = __.cloneDeep(this.props.contract)
+    let copy = _.cloneDeep(this.props.contract)
     if (copy) {
       this.setState({
         contract: _.omit(copy, 'lawyerName'),
@@ -32,6 +33,11 @@ class EditContractModal extends react.Component {
         selectedBusinessUnit: copy.businessUnit
       })
     }
+  }
+
+  handleClick = e => {
+    e.preventDefault()
+    this.props.updateContract(this.state.contract, this.props.closeModal)
   }
 
   saveToState = e => {
@@ -126,6 +132,7 @@ class EditContractModal extends react.Component {
 
   render () {
     let { isOpen, closeModal } = this.props
+    console.log(this.props)
     let { allLawyers, allStatuses, allBusinessUnits } = this.props.data
     let { contract } = this.state
 
@@ -241,10 +248,7 @@ class EditContractModal extends react.Component {
                 <div className='b mt2'>Lawyer</div>
                 <div className='pv2 bb bw1 w-100 mb2'>{lawyerSelect}</div>
                 <div className='mt2'>
-                  <SubmitEditButton
-                    contract={contract}
-                    closeModal={this.props.closeModal}
-                    />
+                  <button onClick={this.handleClick}>Submit</button>
                 </div>
               </form>
             </div>
@@ -255,4 +259,22 @@ class EditContractModal extends react.Component {
   }
 }
 
-export default EditContractModal
+export default graphql(UPDATE_CONTRACT_MUTATION, {
+  props ({ ownProps, mutate }) {
+    return {
+      updateContract (contract, closeModal) {
+        const id = contract.id
+        return mutate({
+          variables: { id, contract },
+          update: (store, response) => {
+            let updatedContract = response.data.updateContract
+            const data = store.readQuery({ query: CONTRACTS_QUERY })
+            _.extend(_.find(data.contracts, { id }), updatedContract)
+            store.writeQuery({ query: CONTRACTS_QUERY, data })
+            closeModal()
+          }
+        })
+      }
+    }
+  }
+})(EditContractModal)

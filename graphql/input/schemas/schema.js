@@ -10,6 +10,7 @@ type Query {
   allTags: [Tag]
   allUsers: [User]
   allBusinessUnits: [BusinessUnit]
+  allCustomerEntities: [CustomerEntity]
   loggedUser: User
 }
 
@@ -17,14 +18,20 @@ type Mutation {
   addContract(input: PostContract!): Contract
   updateContract(id: ID!, contract: PostContractWithID): Contract
   deleteContract(id: ID!): Contract
-  register(email: String!, password: String!): User!
+  deleteUser(email: String!): User
+  register(email: String!, password: String!, parentEntity: String!): User!
   login(email: String!, password: String!): String
+}
+
+type CustomerEntity {
+  id: ID!
+  name: String!
 }
 
 type User {
   id: ID!
   email: String!
-  createdAt: Date!
+  parentEntity: String!
 }
 
 input PostContract {

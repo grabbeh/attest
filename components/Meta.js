@@ -147,8 +147,8 @@ const Meta = () => (
         outline-style:none;
         box-shadow:none;
         border-color:transparent;
+        background:#f3f4f4;
       }
-
       input:focus {
         outline:none;
       }

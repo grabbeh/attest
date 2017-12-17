@@ -1,4 +1,12 @@
-import { Contract, Lawyer, Status, Tag, User, BusinessUnit } from './connectors'
+import {
+  Contract,
+  Lawyer,
+  Status,
+  Tag,
+  User,
+  BusinessUnit,
+  CustomerEntity
+} from './connectors'
 import { GraphQLScalarType } from 'graphql'
 import { Kind } from 'graphql/language'
 import mongoose from 'mongoose'
@@ -24,9 +32,16 @@ const resolvers = {
     }
   }),
   Query: {
-    contracts: async (root, args) => {
-      let contracts = await Contract.find()
-      return contracts
+    contracts: async (root, args, context) => {
+      if (context.user) {
+        let contracts = await Contract.find({
+          ownerEntity: context.user.parentEntity
+        })
+        return contracts
+      } else {
+        // No contracts if no logged user
+        return null
+      }
     },
     contract: (root, { id }) => {
       return Contract.findOne({ id })
@@ -47,10 +62,14 @@ const resolvers = {
       let allUnits = await BusinessUnit.find()
       return allUnits
     },
+    allCustomerEntities: async (root, args) => {
+      let allCustomerEntities = await CustomerEntity.find()
+      return allCustomerEntities
+    },
     loggedUser: async (root, args, context) => {
       if (context.user) {
         let loggedUser = await User.findById(
-          mongoose.Types.ObjectId(context.user.id)
+          mongoose.Types.ObjectId(context.user._id)
         )
         return loggedUser
       }
@@ -74,6 +93,9 @@ const resolvers = {
     deleteContract: (root, args) => {
       return Contract.findByIdAndRemove(args.id)
     },
+    deleteUser: (root, args) => {
+      return User.find({ email: args.email }).remove()
+    },
     register: async (root, args) => {
       const user = args
       user.password = await bcrypt.hash(user.password, 10)
@@ -88,7 +110,7 @@ const resolvers = {
       if (!isValid) {
         throw new Error('Invalid password')
       }
-      const token = jwt.sign({ user: _.pick(user, ['id', 'email']) }, SECRET, {
+      const token = jwt.sign({ user }, SECRET, {
         expiresIn: '365d'
       })
       return token

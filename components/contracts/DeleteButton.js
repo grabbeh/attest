@@ -1,6 +1,6 @@
 import React from 'react'
 import { graphql } from 'react-apollo'
-import _ from 'underscore'
+import _ from 'lodash'
 import CONTRACTS_QUERY from '../../queries/ContractsQuery'
 import DELETE_CONTRACT_MUTATION from '../../queries/DeleteContractMutation'
 
@@ -26,7 +26,7 @@ const DeleteButtonMutation = graphql(DELETE_CONTRACT_MUTATION, {
             let copy = data.contracts
             const revisedContracts = _.without(
               copy,
-              _.findWhere(copy, {
+              _.find(copy, {
                 id: ownProps.id
               })
             )

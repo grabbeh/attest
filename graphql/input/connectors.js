@@ -56,14 +56,33 @@ const BusinessUnit = mongoose.model('businessUnit', BusinessUnitSchema)
 
 const UserSchema = mongoose.Schema({
   email: String,
-  password: String
+  password: String,
+  parentEntity: String
 })
 
 const User = mongoose.model('user', UserSchema)
 
-export { Contract, Lawyer, Status, Tag, BusinessUnit, User }
+const CustomerEntitySchema = mongoose.Schema({
+  name: String
+})
 
+const CustomerEntity = mongoose.model('customerEntity', CustomerEntitySchema)
+
+export { Contract, Lawyer, Status, Tag, BusinessUnit, User, CustomerEntity }
+
+const customerEntities = [
+  { name: 'B & W Enterprises' },
+  { name: 'Derrick Inc' },
+  { name: 'Albert Inc' }
+]
 /*
+customerEntities.forEach(c => {
+  new CustomerEntity(c).save((err, res) => {
+    if (err) console.log(err)
+    console.log('Done')
+  })
+})
+
 Contract.find().exec((err, contracts) => {
   if (err) console.log(err)
   contracts.forEach(c => {
