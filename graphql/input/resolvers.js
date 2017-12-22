@@ -86,8 +86,10 @@ const resolvers = {
         new: true
       })
     },
-    addContract: (roots, args) => {
-      const contract = args
+    addContract: (roots, args, context) => {
+      let { contract } = args
+      contract.assignedTo = contract.assignedTo.id
+      contract.ownerEntity = context.user.parentEntity
       return Contract.create(contract)
     },
     deleteContract: (root, args) => {

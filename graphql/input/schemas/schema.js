@@ -15,7 +15,7 @@ type Query {
 }
 
 type Mutation {
-  addContract(input: PostContract!): Contract
+  addContract(contract: PostContract): Contract
   updateContract(id: ID!, contract: PostContractWithID): Contract
   deleteContract(id: ID!): Contract
   deleteUser(email: String!): User

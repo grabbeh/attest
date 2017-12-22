@@ -132,7 +132,6 @@ class EditContractModal extends react.Component {
 
   render () {
     let { isOpen, closeModal } = this.props
-    console.log(this.props)
     let { allLawyers, allStatuses, allBusinessUnits } = this.props.data
     let { contract } = this.state
 

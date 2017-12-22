@@ -6,7 +6,7 @@ class SearchInput extends react.Component {
     return (
       <div className='mr0 mb3 mt0-ns bg-haus f3'>
         <input
-          className='b pa3 w-90 bh-haus'
+          className='b pa3 w-80 bh-haus'
           type='search'
           placeholder='Search...'
           value={this.props.searchTerm}
