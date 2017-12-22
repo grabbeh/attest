@@ -82,7 +82,7 @@ customerEntities.forEach(c => {
     console.log('Done')
   })
 })
-*/
+
 Contract.find().exec((err, contracts) => {
   if (err) console.log(err)
   console.log(contracts.length)

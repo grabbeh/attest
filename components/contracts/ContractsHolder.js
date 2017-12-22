@@ -10,9 +10,6 @@ import filter from '../../lib/filterContracts'
 import Flex from '../styles/Flex'
 import SearchInput from './SearchInput'
 import Loading from './Loading'
-import Moment from 'moment'
-import { extendMoment } from 'moment-range'
-const moment = extendMoment(Moment)
 
 class ContractsHolder extends react.Component {
   constructor (props) {
