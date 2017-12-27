@@ -7,6 +7,11 @@ import Input from './Input'
 import cn from 'classnames'
 import CheckBox from './CheckBox'
 import redirect from '../../lib/Redirect'
+import Radio from './Radio'
+import FormInput from '../styles/FormInput'
+import FormTitle from '../styles/FormTitle'
+import ClearFix from '../styles/ClearFix'
+import Select from './Select'
 
 class AddContractForm extends react.Component {
   constructor (props) {
@@ -109,14 +114,17 @@ class AddContractForm extends react.Component {
 
   render () {
     let { allLawyers, allStatuses, allBusinessUnits } = this.props
-    let { contract } = this.state
-
-    let businessUnitSelect = null
-    businessUnitSelect = (
+    let {
+      contract,
+      selectedStatus,
+      selectedLawyer,
+      selectedBusinessUnit
+    } = this.state
+    let businessUnitSelect = (
       <div className='mb2'>
         <select
-          value={this.state.selectedBusinessUnit}
-          key={this.state.selectedBusinessUnit}
+          value={selectedBusinessUnit}
+          key={selectedBusinessUnit}
           onChange={this.handleBusinessUnitChange}
         >
           {allBusinessUnits.map(unit => (
@@ -127,48 +135,7 @@ class AddContractForm extends react.Component {
         </select>
       </div>
     )
-    let lawyerSelect = null
-    lawyerSelect = (
-      <div className='mb2'>
-        <select
-          value={this.state.selectedLawyer}
-          key={this.state.selectedLawyer}
-          onChange={this.handleLawyerChange}
-        >
-          {allLawyers.map(l => (
-            <option key={l.id} value={l.id}>
-              {`${l.firstName} ${l.lastName}`}
-            </option>
-          ))}
-        </select>
-      </div>
-    )
-    let statusRadios = null
-    statusRadios = allStatuses.map(s => (
-      <div key={s.name} className='fl mr2'>
-        <label
-          className={cn(
-            'pointer',
-            'fr',
-            'f5',
-            'pa1',
-            'black',
-            'mb2',
-            s.name === this.state.selectedStatus && 'white',
-            s.name === this.state.selectedStatus && 'bg-dark-sur'
-          )}
-        >
-          <input
-            className='dn'
-            type='radio'
-            value={s.name}
-            checked={s.name === this.state.selectedStatus}
-            onChange={this.handleStatusChange}
-          />
-          {s.name}
-        </label>
-      </div>
-    ))
+
     let tagInputs = null
     let { allTags } = this.props
     tagInputs = allTags.map(t => (
@@ -180,45 +147,50 @@ class AddContractForm extends react.Component {
         value={t.name}
       />
     ))
-
-    console.log(this.state)
-
     let { externalParties } = this.state.contract
-
     return (
       <div>
         <Header client={this.props.client} user={this.props.loggedUser} />
         <div className='center pa3 mw6 bg-haus mt3'>
           <form>
-            <div className='b f4 bb bw1 w-100 pv2'>Add contract</div>
+            <div className='b f4 bb bw1 w-100 pb2'>Add contract</div>
             <Input
               onChange={this.saveToState}
-              value={this.state.externalParties}
+              value={externalParties}
               placeholder='External party'
               label='External party'
               name='externalParty'
             />
-            <div className='cf' />
-            <div className='b mt2'>Tags</div>
+            <ClearFix />
+            <FormTitle>Tags</FormTitle>
             <div className='pv2 fl list flex flex-wrap w-100 bb bw1'>
               {tagInputs}
             </div>
-            <div className='cf' />
-            <div className='b mt2'>Status</div>
-            <div className='fl pv2 bb bw1 w-100'>
-              {statusRadios}
-            </div>
-            <div className='cf' />
-            <div className='b mt2'>Business Units</div>
-            <div className='fl pv2 bb bw1 w-100'>
+            <ClearFix />
+            <FormTitle>Status</FormTitle>
+            <FormInput>
+              <Radio
+                handleChange={this.handleStatusChange}
+                selectedItem={selectedStatus}
+                items={allStatuses}
+              />
+            </FormInput>
+            <ClearFix />
+            <FormTitle>Business Units</FormTitle>
+            <FormInput>
               {businessUnitSelect}
-            </div>
-            <div className='cf' />
-            <div className='b mt2'>Lawyer</div>
-            <div className='pv2 bb bw1 w-100 mb2'>{lawyerSelect}</div>
+            </FormInput>
+            <ClearFix />
+            <FormTitle>Lawyer</FormTitle>
+            <FormInput>
+              <Select
+                selectedItem={selectedLawyer}
+                items={allLawyers}
+                handleChange={this.handleLawyerChange}
+              />
+            </FormInput>
             <input onClick={this.handleClick} type='submit' value='Submit' />
           </form>
-
         </div>
       </div>
     )
