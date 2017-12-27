@@ -12,6 +12,7 @@ import FormInput from '../styles/FormInput'
 import FormTitle from '../styles/FormTitle'
 import ClearFix from '../styles/ClearFix'
 import Select from './Select'
+import FormButton from '../styles/FormButton'
 
 class AddContractForm extends react.Component {
   constructor (props) {
@@ -123,6 +124,7 @@ class AddContractForm extends react.Component {
     let businessUnitSelect = (
       <div className='mb2'>
         <select
+          className='pa1'
           value={selectedBusinessUnit}
           key={selectedBusinessUnit}
           onChange={this.handleBusinessUnitChange}
@@ -138,15 +140,19 @@ class AddContractForm extends react.Component {
 
     let tagInputs = null
     let { allTags } = this.props
-    tagInputs = allTags.map(t => (
-      <CheckBox
-        key={t.name}
-        handleCheckboxChange={this.handleCheckboxChange}
-        checked={false}
-        label={t.name}
-        value={t.name}
-      />
-    ))
+    tagInputs = (
+      <div className='list flex flex-wrap'>
+        {allTags.map(t => (
+          <CheckBox
+            key={t.name}
+            handleCheckboxChange={this.handleCheckboxChange}
+            checked={false}
+            label={t.name}
+            value={t.name}
+          />
+        ))}
+      </div>
+    )
     let { externalParties } = this.state.contract
     return (
       <div>
@@ -154,18 +160,20 @@ class AddContractForm extends react.Component {
         <div className='center pa3 mw6 bg-haus mt3'>
           <form>
             <div className='b f4 bb bw1 w-100 pb2'>Add contract</div>
-            <Input
-              onChange={this.saveToState}
-              value={externalParties}
-              placeholder='External party'
-              label='External party'
-              name='externalParty'
-            />
+            <FormInput>
+              <Input
+                onChange={this.saveToState}
+                value={externalParties}
+                placeholder='External party'
+                label='External party'
+                name='externalParty'
+              />
+            </FormInput>
             <ClearFix />
             <FormTitle>Tags</FormTitle>
-            <div className='pv2 fl list flex flex-wrap w-100 bb bw1'>
+            <FormInput>
               {tagInputs}
-            </div>
+            </FormInput>
             <ClearFix />
             <FormTitle>Status</FormTitle>
             <FormInput>
@@ -189,7 +197,9 @@ class AddContractForm extends react.Component {
                 handleChange={this.handleLawyerChange}
               />
             </FormInput>
-            <input onClick={this.handleClick} type='submit' value='Submit' />
+            <ClearFix />
+            <FormButton onClick={this.handleClick} />
+            <ClearFix />
           </form>
         </div>
       </div>

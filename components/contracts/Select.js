@@ -9,7 +9,12 @@ class Select extends react.Component {
     let { selectedItem, handleChange, items } = this.props
     return (
       <div className='mb2'>
-        <select value={selectedItem} key={selectedItem} onChange={handleChange}>
+        <select
+          className='pa1'
+          value={selectedItem}
+          key={selectedItem}
+          onChange={handleChange}
+        >
           {items.map(l => (
             <option key={l.id} value={l.id}>
               {`${l.firstName} ${l.lastName}`}

@@ -16,12 +16,13 @@ class Input extends react.Component {
   onFocus = () => {
     this.setState({ active: true })
   }
+
   render () {
     const { label, type, placeholder, name, onChange, value } = this.props
     const { active } = this.state
     return (
-      <div className='pv2 w-100 bb bw1'>
-        <label htmlFor={value} className={cn(!active && 'dn', 'b', 'f6')}>
+      <div className='w-100'>
+        <label htmlFor={value} className={cn(!active && 'dn', 'b')}>
           {label}
         </label>
         <div>

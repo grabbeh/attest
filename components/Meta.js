@@ -142,13 +142,9 @@ const Meta = () => (
 
       input, textarea, select {
         font-family: shapefont, sans-serif;
-        outline: none;
-        outline: 0;
-        outline-style:none;
-        box-shadow:none;
-        border-color:transparent;
         background:#f3f4f4;
       }
+      
       input:focus {
         outline:none;
       }
@@ -161,5 +157,12 @@ const Meta = () => (
     </style>
   </div>
 )
+
+/*
+    outline: none;
+        outline: 0;
+        outline-style:none;
+        box-shadow:none;
+        border-color:transparent; */
 
 export default Meta
