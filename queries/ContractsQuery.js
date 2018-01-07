@@ -24,6 +24,7 @@ query contracts {
   contracts {
     ownerEntity
     id
+    expiryDate
     internalParties
     externalParties
     currentStatus

@@ -7,12 +7,12 @@ class HideToggle extends React.Component {
     this.state = {
       show: true
     }
-    this.toggle = this.toggle.bind(this)
   }
 
-  toggle () {
+  toggle = () => {
     this.setState({ show: !this.state.show })
   }
+
   render () {
     let { title, children } = this.props
     let { show } = this.state

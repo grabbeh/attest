@@ -59,12 +59,8 @@ const metaDataGenerator = () => {
     string: true,
     american: false
   })
-  let expiryDate = chance.date({
-    year: chance.year({ min: date.getFullYear(), max: 2025 }),
-    string: true,
-    american: false
-  })
-  expiryDate = new Date(moment(expiryDate, 'DD-MM-YYYY')).toISOString()
+  const expiryDate = expiryDateGenerator(currentStatus)
+  console.log(expiryDate)
   const rollingTerm = chance.bool()
   const ownerEntity = 'ACME Inc'
   const statuses = statusGenerator(createdAt, currentStatus)
@@ -98,6 +94,20 @@ const contractsGenerator = num => {
     contractsData.push(metaDataGenerator())
   }
   return contractsData
+}
+
+const expiryDateGenerator = currentStatus => {
+  const date = new Date()
+  if (currentStatus === 'Executed') {
+    let expiryDate = chance.date({
+      year: chance.year({ min: date.getFullYear(), max: 2025 }),
+      string: true,
+      american: false
+    })
+    return (expiryDate = new Date(
+      moment(expiryDate, 'DD-MM-YYYY')
+    ).toISOString())
+  } else return null
 }
 
 const statusGenerator = (createdDate, currentStatus) => {

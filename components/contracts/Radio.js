@@ -7,8 +7,7 @@ class Radio extends react.Component {
   }
 
   render () {
-    let { items, handleChange } = this.props
-    let selectedItem = this.props.selectedItem
+    let { items, handleChange, selectedItem } = this.props
     return items.map(s => (
       <div key={s.name} className='fl mr2'>
         <label
@@ -16,12 +15,16 @@ class Radio extends react.Component {
             'pointer',
             'fr',
             'f5',
-            'pa1',
+            'pv1',
+            'ph3',
             'black',
             'mb2',
             'bg-white',
+            'bb',
+            'b--blue',
+            'bw1',
             s.name === selectedItem && 'white',
-            s.name === selectedItem && 'bg-dark-sur'
+            s.name === selectedItem && 'bg-blue'
           )}
         >
           <input

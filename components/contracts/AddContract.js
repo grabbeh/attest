@@ -8,11 +8,12 @@ import cn from 'classnames'
 import CheckBox from './CheckBox'
 import redirect from '../../lib/Redirect'
 import Radio from './Radio'
-import FormInput from '../styles/FormInput'
+import FormSection from '../styles/FormSection'
+import FormButton from '../styles/FormButton'
 import FormTitle from '../styles/FormTitle'
 import ClearFix from '../styles/ClearFix'
 import Select from './Select'
-import FormButton from '../styles/FormButton'
+import DatePicker from 'react-datepicker'
 
 class AddContractForm extends react.Component {
   constructor (props) {
@@ -22,6 +23,9 @@ class AddContractForm extends react.Component {
       selectedBusinessUnit: '',
       selectedLawyer: '',
       contract: {
+        executionDate: null,
+        effectiveDate: null,
+        expiryDate: null,
         internalParties: ['ACME Inc'],
         externalParties: [],
         currentStatus: [],
@@ -32,6 +36,24 @@ class AddContractForm extends react.Component {
         assignedTo: { firstName: '', lastName: '', id: '' }
       }
     }
+  }
+
+  handleExecutionDate = date => {
+    let contract = this.state.contract
+    contract.executionDate = date
+    this.setState({ contract })
+  }
+
+  handleEffectiveDate = date => {
+    let contract = this.state.contract
+    contract.effectiveDate = date
+    this.setState({ contract })
+  }
+
+  handleExpiryDate = date => {
+    let contract = this.state.contract
+    contract.expiryDate = date
+    this.setState({ contract })
   }
 
   handleClick = e => {
@@ -55,7 +77,16 @@ class AddContractForm extends react.Component {
   handleStatusChange = e => {
     let { contract } = this.state
     let status = e.target.value
-    let date = new Date().getTime()
+    let date = null
+    if (status !== 'Executed') {
+      contract.executionDate = null
+      this.setState({ contract })
+      date = new Date().getTime()
+    } else {
+      if (contract.executionDate) {
+        date = contract.executionDate.valueOf()
+      } else date = null
+    }
     contract.statuses.push({ status, date })
     contract.currentStatus = status
     this.setState({ selectedStatus: status, contract })
@@ -121,6 +152,7 @@ class AddContractForm extends react.Component {
       selectedLawyer,
       selectedBusinessUnit
     } = this.state
+
     let businessUnitSelect = (
       <div className='mb2'>
         <select
@@ -153,14 +185,22 @@ class AddContractForm extends react.Component {
         ))}
       </div>
     )
-    let { externalParties } = this.state.contract
+    let {
+      externalParties,
+      executionDate,
+      expiryDate,
+      effectiveDate
+    } = this.state.contract
+
     return (
       <div>
         <Header client={this.props.client} user={this.props.loggedUser} />
-        <div className='center pa3 mw6 bg-haus mt3'>
+        <div className='center pa3 mw6 bg-haus mt4 shadow-4'>
           <form>
-            <div className='b f4 bb bw1 w-100 pb2'>Add contract</div>
-            <FormInput>
+            <div className='b f4 bb bw1 b--black-50 w-100 pb2'>
+              Add contract
+            </div>
+            <FormSection>
               <Input
                 onChange={this.saveToState}
                 value={externalParties}
@@ -168,35 +208,74 @@ class AddContractForm extends react.Component {
                 label='External party'
                 name='externalParty'
               />
-            </FormInput>
+            </FormSection>
             <ClearFix />
             <FormTitle>Tags</FormTitle>
-            <FormInput>
+            <FormSection>
               {tagInputs}
-            </FormInput>
+            </FormSection>
             <ClearFix />
             <FormTitle>Status</FormTitle>
-            <FormInput>
+            <FormSection>
               <Radio
                 handleChange={this.handleStatusChange}
                 selectedItem={selectedStatus}
                 items={allStatuses}
               />
-            </FormInput>
+            </FormSection>
             <ClearFix />
-            <FormTitle>Business Units</FormTitle>
-            <FormInput>
+            <FormSection>
+              <FormTitle>Execution date</FormTitle>
+              <DatePicker
+                className='pa2'
+                selected={executionDate}
+                onChange={this.handleExecutionDate}
+                placeholderText='Execution date'
+                showMonthDropdown
+                showYearDropdown
+                dateFormat='DD/MM/YYYY'
+              />
+            </FormSection>
+            <ClearFix />
+            <FormSection>
+              <FormTitle>Effective date</FormTitle>
+              <DatePicker
+                className='pa2'
+                selected={effectiveDate}
+                onChange={this.handleEffectiveDate}
+                placeholderText='Effective date'
+                showMonthDropdown
+                showYearDropdown
+                dateFormat='DD/MM/YYYY'
+              />
+            </FormSection>
+            <ClearFix />
+            <FormSection>
+              <FormTitle>Expiry date</FormTitle>
+              <DatePicker
+                className='pa2'
+                selected={expiryDate}
+                onChange={this.handleExpiryDate}
+                placeholderText='Expiry date'
+                showMonthDropdown
+                showYearDropdown
+                dateFormat='DD/MM/YYYY'
+              />
+            </FormSection>
+            <ClearFix />
+            <FormTitle>Business Unit</FormTitle>
+            <FormSection>
               {businessUnitSelect}
-            </FormInput>
+            </FormSection>
             <ClearFix />
             <FormTitle>Lawyer</FormTitle>
-            <FormInput>
+            <FormSection>
               <Select
                 selectedItem={selectedLawyer}
                 items={allLawyers}
                 handleChange={this.handleLawyerChange}
               />
-            </FormInput>
+            </FormSection>
             <ClearFix />
             <FormButton onClick={this.handleClick} />
             <ClearFix />

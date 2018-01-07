@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
 const Title = ({ name }) => (
-  <div className=' bg-haus pa3 mr3-ns mr0 mb3 b'>
+  <div className=' bg-haus pa3 mr3-ns mr0 mb3 b shadow-4'>
     <div>
       <span className='w-50 f3'> {name}</span>
       <span className='mt1 fr'>

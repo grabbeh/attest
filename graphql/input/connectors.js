@@ -85,9 +85,11 @@ customerEntities.forEach(c => {
 
 Contract.find().exec((err, contracts) => {
   if (err) console.log(err)
-  console.log(contracts.length)
+  contracts.forEach(c => {
+    c.remove()
+  })
 })
-/*
+
 const contracts = generator(100)
 
 contracts.forEach(c => {

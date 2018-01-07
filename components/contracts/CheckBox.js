@@ -35,9 +35,13 @@ class Checkbox extends Component {
               'pointer',
               'fr',
               'f5',
-              'pa1',
+              'pv1',
+              'ph3',
               'bg-white',
-              isChecked && 'bg-dark-sur',
+              'bb',
+              'b--blue',
+              'bw1',
+              isChecked && 'bg-blue',
               isChecked && 'white'
             )}
           >

@@ -21,13 +21,20 @@ class Input extends react.Component {
     const { label, type, placeholder, name, onChange, value } = this.props
     const { active } = this.state
     return (
-      <div className='w-100'>
-        <label htmlFor={value} className={cn(!active && 'dn', 'b')}>
+      <div className='w-100 b'>
+        <label htmlFor={value}>
           {label}
         </label>
         <div>
           <input
-            className='pa1 f5'
+            className={cn(
+              active && 'bb',
+              active && 'b--blue',
+              'bw1',
+              'pa1',
+              'f5',
+              'mv1'
+            )}
             id={value}
             onChange={onChange}
             placeholder={placeholder}

@@ -12,6 +12,7 @@ class Filter extends react.Component {
         startDate: null,
         endDate: null
       },
+      expiryDateSearch: false,
       error: {
         finishBeforeStart: false
       }
@@ -22,6 +23,11 @@ class Filter extends react.Component {
     let dateRange = this.state.dateRange
     dateRange.startDate = date
     this.setState({ dateRange })
+  }
+
+  handleExpiryToggle = () => {
+    this.setState({ expiryDateSearch: !this.state.expiryDateSearch })
+    this.props.toggleExpiryDateSearch(!this.state.expiryDateSearch)
   }
 
   handleChangeEnd = date => {
@@ -57,8 +63,8 @@ class Filter extends react.Component {
     const { error } = this.state
 
     return (
-      <div className='bg-haus mr3-ns mr0 pa3'>
-        <div className='f4 b bb bw1 pb2'>Filters</div>
+      <div className='bg-haus mr3-ns mr0 pa3 shadow-4'>
+        <div className='f4 b bb b--black-50 bw1 pb2'>Filters</div>
         <HideToggle title='Statuses'>
           <CheckboxList
             content={statuses}
@@ -85,9 +91,17 @@ class Filter extends react.Component {
         </HideToggle>
         <HideToggle title='Dates'>
           <div className='pl3 fl mt2'>
-            <div className='fl mr2'>
+            <span className='mr2'>Current status</span>
+            <span onClick={this.handleExpiryToggle}>
+              {this.state.expiryDateSearch
+                ? <i className='fa fa-toggle-on fa-lg' />
+                : <i className='fa fa-toggle-off fa-lg' />}
+            </span>
+            <span className='ml2'>Expiry date</span>
+            <div className='cf' />
+            <div className='fl mt2 mr2'>
               <DatePicker
-                className=' w4 tc pointer w-100 w-80-ns'
+                className=' w4  pointer w-100 w-80-ns'
                 selected={startDate}
                 selectsStart
                 startDate={startDate}
@@ -100,9 +114,9 @@ class Filter extends react.Component {
               />
 
             </div>
-            <div className='fl mr2 mt3 mt0-ns'>
+            <div className='fl mr2 mt2'>
               <DatePicker
-                className=' w4 tc pointer w-100 w-80-ns'
+                className=' w4  pointer w-100 w-80-ns'
                 selected={endDate}
                 selectsEnd
                 startDate={startDate}
@@ -120,6 +134,7 @@ class Filter extends react.Component {
             Clear
           </div>
         </HideToggle>
+
         <div>
           {error.finishBeforeStart &&
             <div className='pt2 pa2 bg-light-red black b mt2'>

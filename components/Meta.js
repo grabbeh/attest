@@ -46,7 +46,7 @@ const Meta = () => (
         text-rendering: optimizeLegibility;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
-        background-color: #EFADA0;
+        background-color: rgb(243, 244, 245);
       }
 
       .bg--blue {
@@ -74,7 +74,7 @@ const Meta = () => (
       }
 
       .bg-haus {
-        background-color: #f3f4f4;
+        background-color: #ffffff;
       }
 
       .bg-pear {
@@ -142,7 +142,7 @@ const Meta = () => (
 
       input, textarea, select {
         font-family: shapefont, sans-serif;
-        background:#f3f4f4;
+        background: white;
       }
       
       input:focus {

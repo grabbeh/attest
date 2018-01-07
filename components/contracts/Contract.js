@@ -51,7 +51,9 @@ class Contract extends React.Component {
         <div>
           <div>
             {externalParties.map(party => (
-              <div key={party} className='pb1 b bb bw1'>{party}</div>
+              <div key={party} className='pb1 b bb b--black-50 bw1'>
+                {party}
+              </div>
             ))}
           </div>
           <PartyList parties={internalParties} />

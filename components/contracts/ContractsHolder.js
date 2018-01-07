@@ -30,11 +30,18 @@ class ContractsHolder extends react.Component {
         },
         tags: [],
         businessUnits: [],
-        lawyers: []
+        lawyers: [],
+        expiryDateSearch: false
       },
       searchTerm: '',
       liveInput: false
     }
+  }
+
+  toggleExpiryDateSearch = bool => {
+    let { filters } = this.state
+    filters.expiryDateSearch = bool
+    this.setState({ filters })
   }
 
   handleSearchInput = event => {
@@ -84,7 +91,6 @@ class ContractsHolder extends react.Component {
   }
 
   toggleCheckbox = label => {
-    this.state.filters
     let { statuses, tags, businessUnits, lawyers } = this.state.initialValues
     if (statuses.includes(label)) {
       this.updateFilterState('statuses', this.updateSet(this.statuses, label))
@@ -195,6 +201,7 @@ class ContractsHolder extends react.Component {
                     initialValues={initialValues}
                     toggleCheckbox={this.toggleCheckbox}
                     setDate={this.setDate}
+                    toggleExpiryDateSearch={this.toggleExpiryDateSearch}
                     />
                 </div>
                 <div className='w-50-ns w-100'>
