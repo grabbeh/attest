@@ -181,11 +181,9 @@ class EditContractModal extends react.Component {
             'f5',
             'ph3',
             'pv1',
-            'bg-white',
-            'bb',
+            'ba',
             'b--blue',
             'bw1',
-            'black',
             'mb2'
           )}
         >
