@@ -63,8 +63,8 @@ class Filter extends react.Component {
     const { error } = this.state
 
     return (
-      <div className='bg-haus mr3-ns mr0 pa3 shadow-4'>
-        <div className='f4 b bb b--black-50 bw1 pb2'>Filters</div>
+      <div className='bg-white mr3-ns mr0 pa3 shadow-4'>
+        <div className='f4 bb b--black-50 bw1 pb2'>Filters</div>
         <HideToggle title='Statuses'>
           <CheckboxList
             content={statuses}
@@ -101,7 +101,7 @@ class Filter extends react.Component {
             <div className='cf' />
             <div className='fl mt2 mr2'>
               <DatePicker
-                className=' w4  pointer w-100 w-80-ns'
+                className='w4'
                 selected={startDate}
                 selectsStart
                 startDate={startDate}
@@ -116,7 +116,7 @@ class Filter extends react.Component {
             </div>
             <div className='fl mr2 mt2'>
               <DatePicker
-                className=' w4  pointer w-100 w-80-ns'
+                className='pl2 w4'
                 selected={endDate}
                 selectsEnd
                 startDate={startDate}

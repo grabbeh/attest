@@ -23,11 +23,11 @@ class HideToggle extends React.Component {
           {show
             ? <div>
               <i className='fa fa-caret-down mr2' />
-              <span className='b f5'>{title}</span>
+              <span className='f5'>{title}</span>
             </div>
             : <div>
-              <i className='fa fa-caret-up mr2' />
-              <span className='b f5'>{title}</span>
+              <i className='fa fa-caret-right mr2' />
+              <span className=' f5'>{title}</span>
             </div>}
         </div>
         <div className={cn(!show && 'dn')}>

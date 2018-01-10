@@ -1,6 +1,8 @@
 import react from 'react'
 import Modal from 'react-modal'
 import CheckBox from '../components/contracts/CheckBox'
+import FormButton from '../components/styles/FormButton'
+import ClearFix from '../components/styles/ClearFix'
 import _ from 'lodash'
 import Moment from 'moment'
 import cn from 'classnames'
@@ -173,12 +175,16 @@ class EditContractModal extends react.Component {
         <label
           className={cn(
             s.name === this.state.selectedStatus && 'white',
-            s.name === this.state.selectedStatus && 'bg-dark-sur',
+            s.name === this.state.selectedStatus && 'bg-blue',
             'pointer',
             'fr',
             'f5',
-            'pa1',
+            'ph3',
+            'pv1',
             'bg-white',
+            'bb',
+            'b--blue',
+            'bw1',
             'black',
             'mb2'
           )}
@@ -218,37 +224,41 @@ class EditContractModal extends react.Component {
             isOpen={isOpen}
             onRequestClose={closeModal}
             >
-            <div className='pa3 ma0 bg-haus'>
+            <div className='pa3 ma0 bg-white'>
               <div className='fr'>
                 <button
-                  className='f6 link dim mb2 ph0 dib bg-haus'
+                  className='f6 link dim mb2 ph0 dib bg-white'
                   onClick={closeModal}
                   >
                   <i className='pointer  fa fa-window-close fa-lg' />
                 </button>
               </div>
-              <div className='b pb2 bb bw1'>Edit Contract</div>
+              <div className='b pb2 bb b--black-50 bw1'>Edit Contract</div>
               <form>
                 <div className='b mt2'>Tags</div>
                 <div className='pv2 fl list flex flex-wrap w-100 bb bw1'>
                   {tagInputs}
                 </div>
-                <div className='cf' />
+                <ClearFix />
                 <div className='b mt2'>Status</div>
-                <div className='fl pv2 bb bw1 w-100'>
+                <div className='fl pv2 bb bw1 b--black-50 w-100'>
                   {statusRadios}
                 </div>
-                <div className='cf' />
+                <ClearFix />
                 <div className='b mt2'>Business Units</div>
-                <div className='fl pv2 bb bw1 w-100'>
+                <div className='fl pv2 bb bw1 b--black-50 w-100'>
                   {businessUnitSelect}
                 </div>
-                <div className='cf' />
+                <ClearFix />
                 <div className='b mt2'>Lawyer</div>
-                <div className='pv2 bb bw1 w-100 mb2'>{lawyerSelect}</div>
-                <div className='mt2'>
-                  <button onClick={this.handleClick}>Submit</button>
+                <div className='pv2 bb bw1 b--black-50 w-100 mb2'>
+                  {lawyerSelect}
                 </div>
+                <ClearFix />
+                <div className='mt2'>
+                  <FormButton onClick={this.handleClick} text='Submit' />
+                </div>
+                <ClearFix />
               </form>
             </div>
           </Modal>

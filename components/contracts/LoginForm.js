@@ -7,6 +7,9 @@ import redirect from '../../lib/Redirect'
 import Link from 'next/link'
 import cookie from 'cookie'
 import Header from './Header'
+import FormButton from '../styles/FormButton'
+import Input from './Input'
+import ClearFix from '../styles/ClearFix'
 
 class LoginForm extends React.Component {
   constructor (props) {
@@ -39,35 +42,33 @@ class LoginForm extends React.Component {
         <Header user={this.props.loggedUser} />
 
         <div className='mt3 center mw6'>
-          <div className='pa3 ma0 bg-haus'>
+          <div className='pa3 ma0 bg-white'>
             <div className='b pb2 bb bw1'>Login</div>
             <form>
               <div className='mt2'>
-                <input
-                  className='pa2'
+                <Input
                   value={this.state.email}
                   name='email'
                   onChange={this.saveToState}
-                  placeholder='Email'
+                  label='Email'
                 />
               </div>
               <div className='mt2'>
-                <input
-                  className='pa2'
+                <Input
                   value={this.state.password}
                   name='password'
                   onChange={this.saveToState}
-                  placeholder='password'
+                  label='Password'
                   type='password'
                 />
               </div>
-              <div className='mt3' />
-            </form>
-            <div>
-              <button onClick={this.handleClick}>
+
+              <FormButton onClick={this.handleClick}>
                 Submit
-              </button>
-            </div>
+              </FormButton>
+              <ClearFix />
+            </form>
+            <div />
           </div>
         </div>
       </div>

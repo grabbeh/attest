@@ -195,7 +195,7 @@ class AddContractForm extends react.Component {
     return (
       <div>
         <Header client={this.props.client} user={this.props.loggedUser} />
-        <div className='center pa3 mw6 bg-haus mt4 shadow-4'>
+        <div className='center pa3 mw6 bg-white mt4 shadow-4'>
           <form>
             <div className='b f4 bb bw1 b--black-50 w-100 pb2'>
               Add contract
@@ -204,7 +204,6 @@ class AddContractForm extends react.Component {
               <Input
                 onChange={this.saveToState}
                 value={externalParties}
-                placeholder='External party'
                 label='External party'
                 name='externalParty'
               />
@@ -227,10 +226,9 @@ class AddContractForm extends react.Component {
             <FormSection>
               <FormTitle>Execution date</FormTitle>
               <DatePicker
-                className='pa2'
+                className='pa1 mv2 ba b--blue bw1'
                 selected={executionDate}
                 onChange={this.handleExecutionDate}
-                placeholderText='Execution date'
                 showMonthDropdown
                 showYearDropdown
                 dateFormat='DD/MM/YYYY'
@@ -240,10 +238,9 @@ class AddContractForm extends react.Component {
             <FormSection>
               <FormTitle>Effective date</FormTitle>
               <DatePicker
-                className='pa2'
+                className='pa1 mv2 ba b--blue bw1'
                 selected={effectiveDate}
                 onChange={this.handleEffectiveDate}
-                placeholderText='Effective date'
                 showMonthDropdown
                 showYearDropdown
                 dateFormat='DD/MM/YYYY'
@@ -253,10 +250,9 @@ class AddContractForm extends react.Component {
             <FormSection>
               <FormTitle>Expiry date</FormTitle>
               <DatePicker
-                className='pa2'
+                className='pa1 mv2 ba b--blue bw1'
                 selected={expiryDate}
                 onChange={this.handleExpiryDate}
-                placeholderText='Expiry date'
                 showMonthDropdown
                 showYearDropdown
                 dateFormat='DD/MM/YYYY'
@@ -277,7 +273,7 @@ class AddContractForm extends react.Component {
               />
             </FormSection>
             <ClearFix />
-            <FormButton onClick={this.handleClick} />
+            <FormButton onClick={this.handleClick} text='Submit' />
             <ClearFix />
           </form>
         </div>

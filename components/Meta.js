@@ -145,9 +145,7 @@ const Meta = () => (
         background: white;
       }
       
-      input:focus {
-        outline:none;
-      }
+    
 
       .fc-blue {
         color: #005baa;

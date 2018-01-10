@@ -27,14 +27,7 @@ class Input extends react.Component {
         </label>
         <div>
           <input
-            className={cn(
-              active && 'bb',
-              active && 'b--blue',
-              'bw1',
-              'pa1',
-              'f5',
-              'mv1'
-            )}
+            className={cn('bw1', 'pa1', 'f5', 'mv2', 'ba', 'b--blue')}
             id={value}
             onChange={onChange}
             placeholder={placeholder}
