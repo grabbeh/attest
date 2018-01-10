@@ -38,7 +38,7 @@ class Checkbox extends Component {
               'pv1',
               'ph3',
               'bg-white',
-              'bb',
+              'ba',
               'b--blue',
               'bw1',
               isChecked && 'bg-blue',

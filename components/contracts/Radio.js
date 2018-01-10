@@ -20,7 +20,7 @@ class Radio extends react.Component {
             'black',
             'mb2',
             'bg-white',
-            'bb',
+            'ba',
             'b--blue',
             'bw1',
             s.name === selectedItem && 'white',

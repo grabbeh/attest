@@ -21,7 +21,7 @@ class Input extends react.Component {
     const { label, type, placeholder, name, onChange, value } = this.props
     const { active } = this.state
     return (
-      <div className='w-100 b'>
+      <div className='w-100 '>
         <label htmlFor={value}>
           {label}
         </label>
