@@ -19,7 +19,7 @@ import Loading from './Loading'
 class AddContractForm extends react.Component {
   constructor (props) {
     super(props)
-    console.log(props)
+
     this.state = {
       selectedStatus: '',
       selectedBusinessUnit: '',

@@ -1,12 +1,8 @@
-import Page from '../components/Page'
+// import Page from '../components/Page'
 import LoginForm from '../components/contracts/LoginForm'
-import Header from '../components/contracts/Header'
+
 import withData from '../lib/withData'
 
-const LoginPage = withData(props => (
-  <Page>
-    <LoginForm client={props.client} />
-  </Page>
-))
+const LoginPage = withData(props => <LoginForm client={props.client} />)
 
 export default LoginPage
