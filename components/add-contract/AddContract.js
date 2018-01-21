@@ -2,24 +2,25 @@ import ADD_CONTRACT_MUTATION from '../../queries/AddContractMutation'
 import CONTRACT_METADATA_QUERY from '../../queries/ContractMetaDataQuery'
 import { graphql, compose } from 'react-apollo'
 import react from 'react'
-import Header from './Header'
-import Input from './Input'
+import Header from '../general/Header'
+import Input from '../general/Input'
 import cn from 'classnames'
-import CheckBox from './CheckBox'
+import CheckBox from '../general/CheckBox'
 import redirect from '../../lib/Redirect'
-import Radio from './Radio'
+import Radio from '../general/Radio'
 import FormSection from '../styles/FormSection'
 import FormButton from '../styles/FormButton'
 import FormTitle from '../styles/FormTitle'
+import SectionTitle from '../styles/SectionTitle'
 import ClearFix from '../styles/ClearFix'
-import Select from './Select'
+import Select from '../general/Select'
 import DatePicker from 'react-datepicker'
-import Loading from './Loading'
+import Loading from '../general/Loading'
 
 class AddContractForm extends react.Component {
   constructor (props) {
     super(props)
-
+    console.log(props)
     this.state = {
       selectedStatus: '',
       selectedBusinessUnit: '',
@@ -196,9 +197,7 @@ class AddContractForm extends react.Component {
           ? <Loading />
           : <div className='center pa3 mw6 bg-white mt4 ba b--black-20'>
             <form>
-              <div className='b f4 bb bw1 b--black-20 w-100 pb2'>
-                  Add contract
-                </div>
+              <FormTitle title='Add contract' />
               <FormSection>
                 <Input
                   onChange={this.saveToState}
@@ -208,12 +207,12 @@ class AddContractForm extends react.Component {
                   />
               </FormSection>
               <ClearFix />
-              <FormTitle>Tags</FormTitle>
+              <SectionTitle subtitle='Tags' />
               <FormSection>
                 {tagInputs}
               </FormSection>
               <ClearFix />
-              <FormTitle>Status</FormTitle>
+              <SectionTitle subtitle='Status' />
               <FormSection>
                 <Radio
                   handleChange={this.handleStatusChange}
@@ -223,7 +222,7 @@ class AddContractForm extends react.Component {
               </FormSection>
               <ClearFix />
               <FormSection>
-                <FormTitle>Execution date</FormTitle>
+                <SectionTitle subtitle='Execution date' />
                 <DatePicker
                   className='pa1 mv2 ba b--blue bw1'
                   selected={executionDate}
@@ -235,7 +234,7 @@ class AddContractForm extends react.Component {
               </FormSection>
               <ClearFix />
               <FormSection>
-                <FormTitle>Effective date</FormTitle>
+                <SectionTitle subtitle='Effective date' />
                 <DatePicker
                   className='pa1 mv2 ba b--blue bw1'
                   selected={effectiveDate}
@@ -247,7 +246,7 @@ class AddContractForm extends react.Component {
               </FormSection>
               <ClearFix />
               <FormSection>
-                <FormTitle>Expiry date</FormTitle>
+                <SectionTitle subtitle='Expiry date' />
                 <DatePicker
                   className='pa1 mv2 ba b--blue bw1'
                   selected={expiryDate}
@@ -258,12 +257,12 @@ class AddContractForm extends react.Component {
                   />
               </FormSection>
               <ClearFix />
-              <FormTitle>Business Unit</FormTitle>
+              <SectionTitle subtitle='Business unit' />
               <FormSection>
                 {businessUnitSelect}
               </FormSection>
               <ClearFix />
-              <FormTitle>Lawyer</FormTitle>
+              <SectionTitle subtitle='Lawyer' />
               <FormSection>
                 <Select
                   selectedItem={selectedLawyer}

@@ -1,7 +1,7 @@
 // import Page from '../components/Page'
-import AddContract from '../components/contracts/AddContract'
-import withData from '../lib/withData'
+import AddContract from '../components/add-contract/AddContract'
+import { AuthPage } from '../components/Page'
 
-const AddContractPage = withData(props => <AddContract client={props.client} />)
+const AddContractPage = AuthPage(props => <AddContract client={props.client} />)
 
 export default AddContractPage

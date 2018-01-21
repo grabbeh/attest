@@ -1,8 +1,9 @@
 import react from 'react'
 import Modal from 'react-modal'
-import CheckBox from '../components/contracts/CheckBox'
+import CheckBox from '../components/general/CheckBox'
 import FormButton from '../components/styles/FormButton'
 import ClearFix from '../components/styles/ClearFix'
+import FormTitle from '../components/styles/FormTitle'
 import _ from 'lodash'
 import Moment from 'moment'
 import cn from 'classnames'
@@ -141,6 +142,7 @@ class EditContractModal extends react.Component {
     businessUnitSelect = (
       <div className='mb2'>
         <select
+          className='pa1'
           value={this.state.selectedBusinessUnit}
           key={this.state.selectedBusinessUnit}
           onChange={this.handleBusinessUnitChange}
@@ -157,6 +159,7 @@ class EditContractModal extends react.Component {
     lawyerSelect = (
       <div className='mb2'>
         <select
+          className='pa1'
           value={this.state.selectedLawyer}
           key={this.state.selectedLawyer}
           onChange={this.handleLawyerChange}
@@ -231,8 +234,9 @@ class EditContractModal extends react.Component {
                   <i className='pointer  fa fa-window-close fa-lg' />
                 </button>
               </div>
-              <div className='b pb2 bb b--black-50 bw1'>Edit Contract</div>
+
               <form>
+                <FormTitle title='Edit contract' />
                 <div className='b mt2'>Tags</div>
                 <div className='pv2 fl list flex flex-wrap w-100 bb bw1'>
                   {tagInputs}

@@ -6,10 +6,11 @@ import USER_QUERY from '../../queries/LoggedUserQuery.js'
 import redirect from '../../lib/Redirect'
 import Link from 'next/link'
 import cookie from 'cookie'
-import Header from './Header'
+import Header from '../general/Header'
 import FormButton from '../styles/FormButton'
-import Input from './Input'
+import Input from '../general/Input'
 import ClearFix from '../styles/ClearFix'
+import FormTitle from '../styles/FormTitle'
 
 class LoginForm extends React.Component {
   constructor (props) {
@@ -40,10 +41,9 @@ class LoginForm extends React.Component {
     return (
       <div>
         <Header user={this.props.loggedUser} />
-
-        <div className='mt3 center mw6'>
-          <div className='pa3 ma0 bg-white'>
-            <div className='b pb2 bb bw1'>Login</div>
+        <div className='mt3 center mw6 '>
+          <div className='pa3 ma0 bg-white ba b--black-20'>
+            <FormTitle title='Login' />
             <form>
               <div className='mt2'>
                 <Input
@@ -76,13 +76,6 @@ class LoginForm extends React.Component {
   }
 }
 
-const userQuery = graphql(USER_QUERY, {
-  props: ({ data: { loading, loggedUser } }) => ({
-    loading,
-    loggedUser
-  })
-})
-
 const loginMutation = graphql(LOGIN_MUTATION, {
   props ({ ownProps, mutate }) {
     return {
@@ -103,6 +96,6 @@ const loginMutation = graphql(LOGIN_MUTATION, {
   }
 })
 
-const LoginFormWithQueries = compose(userQuery, loginMutation)(LoginForm)
+const LoginFormWithQueries = compose(loginMutation)(LoginForm)
 
 export default LoginFormWithQueries

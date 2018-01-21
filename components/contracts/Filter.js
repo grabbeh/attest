@@ -1,7 +1,7 @@
 import react from 'react'
-import HideToggle from './Hide'
+import HideToggle from '../general/Hide'
 import DatePicker from 'react-datepicker'
-import CheckboxList from './CheckboxList'
+import CheckboxList from '../general/CheckboxList'
 
 class Filter extends react.Component {
   constructor (props) {
@@ -134,7 +134,6 @@ class Filter extends react.Component {
             Clear
           </div>
         </HideToggle>
-
         <div>
           {error.finishBeforeStart &&
             <div className='pt2 pa2 bg-light-red black b mt2'>

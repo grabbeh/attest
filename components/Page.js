@@ -1,10 +1,10 @@
-import Meta from './Meta'
+import withData from '../lib/withData'
+import withAuth from '../lib/withAuth'
+// import { compose, withApollo } from 'react-apollo'
+import { compose } from 'redux'
+import { withApollo } from 'react-apollo'
 
-const Page = ({ children }) => (
-  <div>
-    <Meta />
-    {children}
-  </div>
-)
+const Page = compose(withData, withApollo)
+const AuthPage = compose(withData, withAuth, withApollo)
 
-export default Page
+export { Page, AuthPage }

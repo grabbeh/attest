@@ -45,8 +45,12 @@ export default class MyDocument extends Document {
                   url('/static/fonts/font.otf');
               }
 
+              .w-5 { width: 5%}
+              .w-95 { width: 95% }
+                
+
               body {
-                font-family: 'Roboto';
+                font-family: 'shapefont';
                 text-rendering: optimizeLegibility;
                 -webkit-font-smoothing: antialiased;
                 -moz-osx-font-smoothing: grayscale;
@@ -69,7 +73,7 @@ export default class MyDocument extends Document {
                 border-bottom-color: #f5a871;
               }
 
-              .bg-peach {
+              .bg--peach {
                 background-color: #EFADA0;
               }
 
@@ -78,7 +82,7 @@ export default class MyDocument extends Document {
               }
 
               .bg-haus {
-                background-color: #ffffff;
+                background-color: #f3f4f4;
               }
 
               .bg-pear {
@@ -89,10 +93,6 @@ export default class MyDocument extends Document {
                 border-bottom-color: #93DAAB;
               }
 
-              .bg-dark-pear {
-                background-color: #2E854B;
-              }
-
               .bb--dark-pear {
                 border-bottom-color:#2E854B;
               }
@@ -101,7 +101,7 @@ export default class MyDocument extends Document {
                 background-color: #132238;
               }
 
-              .bg-dark-peach {
+              .bg--dark-peach {
                 background-color: #E37059;
               }
 
@@ -143,9 +143,11 @@ export default class MyDocument extends Document {
 
               }
 
+              a:link { text-decoration: none; }
+              a {color: white}
 
               input, textarea, select {
-                font-family: shapefont, sans-serif;
+                font-family: Roboto, sans-serif;
                 background: white;
               }
 

@@ -18,8 +18,8 @@ class Header extends react.Component {
   render () {
     const { user } = this.props
     return (
-      <div className='bg--blue pa2 white f4 '>
-        <span className='b'>Attest</span>
+      <div className='bg--dark-peach pa2 f4 '>
+        <span>Attest</span>
         <span className='fr'>
           {user
             ? <div className='f4-ns f6'>

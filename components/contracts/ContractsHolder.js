@@ -4,12 +4,15 @@ import _ from 'lodash'
 import Filter from './Filter'
 import SummaryBox from './SummaryBox'
 import Title from './Title'
-import Header from './Header'
+import Header from '../general/Header'
 import search from '../../lib/search'
 import filter from '../../lib/filterContracts'
 import Flex from '../styles/Flex'
 import SearchInput from './SearchInput'
-import Loading from './Loading'
+import Loading from '../general/Loading'
+import HideToggle from '../general/Hide'
+import SideColumn from '../side-menu/SideColumn'
+import cn from 'classnames'
 
 class ContractsHolder extends react.Component {
   constructor (props) {
@@ -34,8 +37,13 @@ class ContractsHolder extends react.Component {
         expiryDateSearch: false
       },
       searchTerm: '',
-      liveInput: false
+      liveInput: false,
+      activeMenu: false
     }
+  }
+
+  toggleMenu = () => {
+    this.setState({ activeMenu: !this.state.activeMenu })
   }
 
   toggleExpiryDateSearch = bool => {
@@ -182,40 +190,61 @@ class ContractsHolder extends react.Component {
               client={this.props.client}
               user={this.props.data.loggedUser}
               />
-            <div className='pa3-ns pa0 pt3 '>
-              <Flex>
-                <div className='w-50-ns w-100'>
-                  <Title name={name} />
-                </div>
-                <div className='w-50-ns w-100'>
-                  <SearchInput
-                    handleSearchInput={this.handleSearchInput}
-                    searchTerm={this.state.searchTerm}
-                    clear={this.clearSearchTerm}
-                    />
-                </div>
-              </Flex>
-              <Flex>
-                <div className='w-50-ns w-100'>
-                  <Filter
-                    initialValues={initialValues}
-                    toggleCheckbox={this.toggleCheckbox}
-                    setDate={this.setDate}
-                    toggleExpiryDateSearch={this.toggleExpiryDateSearch}
-                    />
-                </div>
-                <div className='w-50-ns w-100'>
-                  <SummaryBox
+            <Flex>
+              <div
+                className={cn(
+                    !this.state.activeMenu && 'w-5',
+                    this.state.activeMenu && 'w-10-ns'
+                  )}
+                >
+                <SideColumn
+                  active={this.state.activeMenu}
+                  toggleMenu={this.toggleMenu}
+                  />
+              </div>
+              <div
+                className={cn(
+                    !this.state.activeMenu && 'w-95',
+                    this.state.activeMenu && 'w-90-ns'
+                  )}
+                >
+                <div className='pa3-ns pa0 pt3'>
+                  <Flex>
+                    <div className='w-50-ns w-100'>
+                      <Title name={name} />
+                    </div>
+                    <div className='w-50-ns w-100'>
+                      <SearchInput
+                        handleSearchInput={this.handleSearchInput}
+                        searchTerm={this.state.searchTerm}
+                        clear={this.clearSearchTerm}
+                        />
+                    </div>
+                  </Flex>
+                  <Flex>
+                    <div className='w-50-ns w-100'>
+                      <Filter
+                        initialValues={initialValues}
+                        toggleCheckbox={this.toggleCheckbox}
+                        setDate={this.setDate}
+                        toggleExpiryDateSearch={this.toggleExpiryDateSearch}
+                        />
+                    </div>
+                    <div className='w-50-ns w-100'>
+                      <SummaryBox
+                        contracts={filteredContracts}
+                        filters={filters}
+                        />
+                    </div>
+                  </Flex>
+                  <ContractsList
                     contracts={filteredContracts}
-                    filters={filters}
+                    data={editFormData}
                     />
+
                 </div>
-              </Flex>
-              <ContractsList
-                contracts={filteredContracts}
-                data={editFormData}
-                />
-            </div>
+              </div>
+            </Flex>
           </div>}
 
       </div>
