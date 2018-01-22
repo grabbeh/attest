@@ -186,14 +186,11 @@ class ContractsHolder extends react.Component {
         {this.state.loading || loading
           ? <Loading />
           : <div>
-            <Header
-              client={this.props.client}
-              user={this.props.data.loggedUser}
-              />
+            <Header client={this.props.client} user={this.props.user} />
             <Flex>
               <div
                 className={cn(
-                    !this.state.activeMenu && 'w-5',
+                    !this.state.activeMenu && 'w3',
                     this.state.activeMenu && 'w-10-ns'
                   )}
                 >
@@ -204,7 +201,7 @@ class ContractsHolder extends react.Component {
               </div>
               <div
                 className={cn(
-                    !this.state.activeMenu && 'w-95',
+                    !this.state.activeMenu && 'w-94',
                     this.state.activeMenu && 'w-90-ns'
                   )}
                 >

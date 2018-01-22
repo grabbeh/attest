@@ -2,11 +2,6 @@ import gql from 'graphql-tag'
 
 export default gql`
 query contracts {
-  loggedUser {
-    id
-    email
-    parentEntity
-  }
   allStatuses {
     name
   }

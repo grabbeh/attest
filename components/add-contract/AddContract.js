@@ -20,7 +20,6 @@ import Loading from '../general/Loading'
 class AddContractForm extends react.Component {
   constructor (props) {
     super(props)
-    console.log(props)
     this.state = {
       selectedStatus: '',
       selectedBusinessUnit: '',
@@ -192,7 +191,7 @@ class AddContractForm extends react.Component {
 
     return (
       <div>
-        <Header client={this.props.client} user={this.props.loggedUser} />
+        <Header client={this.props.client} user={this.props.user} />
         {this.props.loading
           ? <Loading />
           : <div className='center pa3 mw6 bg-white mt4 ba b--black-20'>

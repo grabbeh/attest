@@ -1,9 +1,8 @@
 import React from 'react'
-import Link from 'next/link'
 import MenuItem from './MenuItem'
 
 const SlimMenu = () => (
-  <div className='tc gray'>
+  <div className='gray'>
     <ul className='list ma0 pa0'>
       <MenuItem url='/contracts' icon='fa fa-search fa-lg' />
       <MenuItem url='/add-contract' icon='fa fa-file-text-o fa-lg' />

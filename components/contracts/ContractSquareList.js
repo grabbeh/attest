@@ -14,7 +14,7 @@ const ContractSquareList = ({ contracts }) => (
             'mb1',
             contract.currentStatus === 'Executed' && 'bg-dark-pear',
             contract.currentStatus === 'Instructed' && 'bg-light-red',
-            contract.currentStatus === 'Drafted' && 'bg-orange',
+            contract.currentStatus === 'Drafted' && 'bg--orange',
             contract.currentStatus === 'Approved' && 'bg-pear'
           )}
         />

@@ -46,7 +46,7 @@ export default class MyDocument extends Document {
               }
 
               .w-5 { width: 5%}
-              .w-95 { width: 95% }
+              .w-94 { width: 94% }
                 
 
               body {
@@ -65,7 +65,7 @@ export default class MyDocument extends Document {
                 background-color: #b8d0d8;
               }
 
-              .bg-orange {
+              .bg--orange {
                 background-color: #f5a871;
               }
 
@@ -95,6 +95,10 @@ export default class MyDocument extends Document {
 
               .bb--dark-pear {
                 border-bottom-color:#2E854B;
+              }
+
+              .bg-dark-pear {
+                background-color: #2E854B;
               }
 
               .bg--dark-blue {
@@ -147,11 +151,11 @@ export default class MyDocument extends Document {
               a {color: white}
 
               input, textarea, select {
-                font-family: Roboto, sans-serif;
+                font-family: shapefont, sans-serif;
                 background: white;
               }
 
-
+              input[type="text"]{font-family: shapefont;}
 
               .fc-blue {
                 color: #005baa;
