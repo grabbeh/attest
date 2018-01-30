@@ -4,7 +4,6 @@ import _ from 'lodash'
 import Filter from './Filter'
 import SummaryBox from './SummaryBox'
 import Title from './Title'
-import Header from '../general/Header'
 import search from '../../lib/search'
 import filter from '../../lib/filterContracts'
 import Flex from '../styles/Flex'
@@ -63,20 +62,7 @@ class ContractsHolder extends react.Component {
   clearSearchTerm = event => this.setState({ searchTerm: '' })
 
   getSearchResults = (value = '', list) => {
-    return search(list, value, {
-      keys: [
-        'ownerEntity',
-        'lawyerName',
-        'currentStatus',
-        'businessUnit',
-        'tags',
-        'internalParties',
-        'externalParties',
-        'statuses.status',
-        'assignedTo.firstName',
-        'assignedTo.lastName'
-      ]
-    })
+    return search(list, value)
   }
 
   setDate = content => {
@@ -180,13 +166,11 @@ class ContractsHolder extends react.Component {
         filteredContracts
       )
     }
-
     return (
       <div>
         {this.state.loading || loading
           ? <Loading />
           : <div>
-            <Header client={this.props.client} user={this.props.user} />
             <Flex>
               <div
                 className={cn(
@@ -210,7 +194,7 @@ class ContractsHolder extends react.Component {
                     <div className='w-50-ns w-100'>
                       <Title name={name} />
                     </div>
-                    <div className='w-50-ns w-100'>
+                    <div className='h-100 w-50-ns w-100'>
                       <SearchInput
                         handleSearchInput={this.handleSearchInput}
                         searchTerm={this.state.searchTerm}
@@ -219,7 +203,7 @@ class ContractsHolder extends react.Component {
                     </div>
                   </Flex>
                   <Flex>
-                    <div className='w-50-ns w-100'>
+                    <div className='h-100 w-50-ns w-100'>
                       <Filter
                         initialValues={initialValues}
                         toggleCheckbox={this.toggleCheckbox}

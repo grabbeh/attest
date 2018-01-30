@@ -4,6 +4,8 @@ import CheckBox from '../components/general/CheckBox'
 import FormButton from '../components/styles/FormButton'
 import ClearFix from '../components/styles/ClearFix'
 import FormTitle from '../components/styles/FormTitle'
+import FormSection from '../components/styles/FormSection'
+import SectionTitle from '../components/styles/SectionTitle'
 import _ from 'lodash'
 import Moment from 'moment'
 import cn from 'classnames'
@@ -142,7 +144,7 @@ class EditContractModal extends react.Component {
     businessUnitSelect = (
       <div className='mb2'>
         <select
-          className='pa1'
+          className='pa1 ba b--blue bw1'
           value={this.state.selectedBusinessUnit}
           key={this.state.selectedBusinessUnit}
           onChange={this.handleBusinessUnitChange}
@@ -159,7 +161,7 @@ class EditContractModal extends react.Component {
     lawyerSelect = (
       <div className='mb2'>
         <select
-          className='pa1'
+          className='pa1 ba b--blue bw1'
           value={this.state.selectedLawyer}
           key={this.state.selectedLawyer}
           onChange={this.handleLawyerChange}
@@ -206,13 +208,15 @@ class EditContractModal extends react.Component {
       let { allTags } = this.props.data
       let updatedTags = this.processTags(allTags, contract.tags)
       tagInputs = updatedTags.map(t => (
-        <CheckBox
-          key={t.name}
-          handleCheckboxChange={this.handleCheckboxChange}
-          checked={t.checked}
-          label={t.name}
-          value={t.name}
-        />
+        <div className='list'>
+          <CheckBox
+            key={t.name}
+            handleCheckboxChange={this.handleCheckboxChange}
+            checked={t.checked}
+            label={t.name}
+            value={t.name}
+          />
+        </div>
       ))
     }
 
@@ -231,31 +235,30 @@ class EditContractModal extends react.Component {
                   className='f6 link dim mb2 ph0 dib bg-white'
                   onClick={closeModal}
                   >
-                  <i className='pointer  fa fa-window-close fa-lg' />
+                  <i className='pointer  fa fa-close fa-lg' />
                 </button>
               </div>
-
               <form>
                 <FormTitle title='Edit contract' />
-                <div className='b mt2'>Tags</div>
-                <div className='pv2 fl list flex flex-wrap w-100 bb bw1'>
+                <FormSection>
+                  <SectionTitle text='Tags' />
                   {tagInputs}
-                </div>
+                </FormSection>
                 <ClearFix />
-                <div className='b mt2'>Status</div>
-                <div className='fl pv2 bb bw1 b--black-50 w-100'>
+                <FormSection>
+                  <SectionTitle text='Status' />
                   {statusRadios}
-                </div>
+                </FormSection>
                 <ClearFix />
-                <div className='b mt2'>Business Units</div>
-                <div className='fl pv2 bb bw1 b--black-50 w-100'>
+                <FormSection>
+                  <SectionTitle text='Business units' />
                   {businessUnitSelect}
-                </div>
+                </FormSection>
                 <ClearFix />
-                <div className='b mt2'>Lawyer</div>
-                <div className='pv2 bb bw1 b--black-50 w-100 mb2'>
+                <FormSection>
+                  <SectionTitle text='Lawyer' />
                   {lawyerSelect}
-                </div>
+                </FormSection>
                 <ClearFix />
                 <div className='mt2'>
                   <FormButton onClick={this.handleClick} text='Submit' />

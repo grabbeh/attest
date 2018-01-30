@@ -6,13 +6,15 @@ const db = require('../../config/db.js')
 mongoose.connect(db, { useMongoClient: true })
 
 const StatusSchema = mongoose.Schema({
-  name: String
+  name: String,
+  masterEntityID: String
 })
 
 const Status = mongoose.model('status', StatusSchema)
 
 const ContractSchema = mongoose.Schema({
   ownerEntity: String,
+  masterEntityID: String,
   internalParties: Array,
   externalParties: Array,
   expiryDate: Date,
@@ -29,13 +31,14 @@ const ContractSchema = mongoose.Schema({
   lastUpdated: Date,
   client: Boolean,
   supplier: Boolean,
-  assignedTo: Number
+  assignedTo: String
 })
 
 const Contract = mongoose.model('contract', ContractSchema)
 
 const TagSchema = mongoose.Schema({
-  name: String
+  name: String,
+  masterEntityID: String
 })
 
 const Tag = mongoose.model('tag', TagSchema)
@@ -43,13 +46,14 @@ const Tag = mongoose.model('tag', TagSchema)
 const LawyerSchema = mongoose.Schema({
   firstName: String,
   lastName: String,
-  id: Number
+  masterEntityID: String
 })
 
 const Lawyer = mongoose.model('lawyer', LawyerSchema)
 
 const BusinessUnitSchema = mongoose.Schema({
-  name: String
+  name: String,
+  masterEntityID: String
 })
 
 const BusinessUnit = mongoose.model('businessUnit', BusinessUnitSchema)
@@ -57,24 +61,19 @@ const BusinessUnit = mongoose.model('businessUnit', BusinessUnitSchema)
 const UserSchema = mongoose.Schema({
   email: String,
   password: String,
-  parentEntity: String
+  masterEntityID: String
 })
 
 const User = mongoose.model('user', UserSchema)
 
-const CustomerEntitySchema = mongoose.Schema({
-  name: String
+const MasterEntitySchema = mongoose.Schema({
+  masterEntity: String
 })
 
-const CustomerEntity = mongoose.model('customerEntity', CustomerEntitySchema)
+const MasterEntity = mongoose.model('masterEntity', MasterEntitySchema)
 
-export { Contract, Lawyer, Status, Tag, BusinessUnit, User, CustomerEntity }
+export { Contract, Lawyer, Status, Tag, BusinessUnit, User, MasterEntity }
 
-const customerEntities = [
-  { name: 'B & W Enterprises' },
-  { name: 'Derrick Inc' },
-  { name: 'Albert Inc' }
-]
 /*
 customerEntities.forEach(c => {
   new CustomerEntity(c).save((err, res) => {

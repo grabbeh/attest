@@ -2,7 +2,6 @@ import ADD_CONTRACT_MUTATION from '../../queries/AddContractMutation'
 import CONTRACT_METADATA_QUERY from '../../queries/ContractMetaDataQuery'
 import { graphql, compose } from 'react-apollo'
 import react from 'react'
-import Header from '../general/Header'
 import Input from '../general/Input'
 import cn from 'classnames'
 import CheckBox from '../general/CheckBox'
@@ -16,6 +15,9 @@ import ClearFix from '../styles/ClearFix'
 import Select from '../general/Select'
 import DatePicker from 'react-datepicker'
 import Loading from '../general/Loading'
+import Flex from '../styles/Flex'
+import SideColumn from '../side-menu/SideColumn'
+import Box from '../styles/Box'
 
 class AddContractForm extends react.Component {
   constructor (props) {
@@ -24,6 +26,7 @@ class AddContractForm extends react.Component {
       selectedStatus: '',
       selectedBusinessUnit: '',
       selectedLawyer: '',
+      externalPartyError: '',
       contract: {
         executionDate: null,
         effectiveDate: null,
@@ -58,9 +61,26 @@ class AddContractForm extends react.Component {
     this.setState({ contract })
   }
 
+  validate = () => {
+    let isError = false
+    const errors = {
+      externalPartyError: ''
+    }
+    if (this.state.contract.externalParties.length < 1) {
+      isError = true
+      errors.externalPartyError = 'Please provide an external party'
+    }
+    this.setState({
+      ...this.state,
+      ...errors
+    })
+    return isError
+  }
+
   handleClick = e => {
     e.preventDefault()
-    this.props.addContract(this.state.contract)
+    const err = this.validate()
+    if (!err) this.props.addContract(this.state.contract)
   }
 
   saveToState = e => {
@@ -156,124 +176,161 @@ class AddContractForm extends react.Component {
     } = this.state
     let { externalParties, executionDate, expiryDate, effectiveDate } = contract
 
-    let businessUnitSelect = (
-      <div className='mb2'>
-        <select
-          className='pa1'
-          value={selectedBusinessUnit}
-          key={selectedBusinessUnit}
-          onChange={this.handleBusinessUnitChange}
-        >
-          {allBusinessUnits.map(unit => (
-            <option key={unit.name} value={unit.name}>
-              {unit.name}
-            </option>
-          ))}
-        </select>
-      </div>
-    )
+    let businessUnitSelect = null
+    if (allBusinessUnits.length > 0) {
+      businessUnitSelect = (
+        <div className='mb2'>
+          <select
+            className='pa1 font ba bw1 b--blue'
+            value={selectedBusinessUnit}
+            key={selectedBusinessUnit}
+            onChange={this.handleBusinessUnitChange}
+          >
+            {allBusinessUnits.map(unit => (
+              <option key={unit.name} value={unit.name}>
+                {unit.name}
+              </option>
+            ))}
+          </select>
+        </div>
+      )
+    }
 
     let tagInputs = null
     let { allTags } = this.props
-    tagInputs = (
-      <div className='list flex flex-wrap'>
-        {allTags.map(t => (
-          <CheckBox
-            key={t.name}
-            handleCheckboxChange={this.handleCheckboxChange}
-            checked={false}
-            label={t.name}
-            value={t.name}
-          />
-        ))}
-      </div>
-    )
+    if (allTags.length > 0) {
+      tagInputs = (
+        <div className='list flex flex-wrap'>
+          {allTags.map(t => (
+            <CheckBox
+              key={t.name}
+              handleCheckboxChange={this.handleCheckboxChange}
+              checked={false}
+              label={t.name}
+              value={t.name}
+            />
+          ))}
+        </div>
+      )
+    }
 
     return (
       <div>
-        <Header client={this.props.client} user={this.props.user} />
         {this.props.loading
           ? <Loading />
-          : <div className='center pa3 mw6 bg-white mt4 ba b--black-20'>
-            <form>
-              <FormTitle title='Add contract' />
-              <FormSection>
-                <Input
-                  onChange={this.saveToState}
-                  value={externalParties}
-                  label='External party'
-                  name='externalParty'
-                  />
-              </FormSection>
-              <ClearFix />
-              <SectionTitle subtitle='Tags' />
-              <FormSection>
-                {tagInputs}
-              </FormSection>
-              <ClearFix />
-              <SectionTitle subtitle='Status' />
-              <FormSection>
-                <Radio
-                  handleChange={this.handleStatusChange}
-                  selectedItem={selectedStatus}
-                  items={allStatuses}
-                  />
-              </FormSection>
-              <ClearFix />
-              <FormSection>
-                <SectionTitle subtitle='Execution date' />
-                <DatePicker
-                  className='pa1 mv2 ba b--blue bw1'
-                  selected={executionDate}
-                  onChange={this.handleExecutionDate}
-                  showMonthDropdown
-                  showYearDropdown
-                  dateFormat='DD/MM/YYYY'
-                  />
-              </FormSection>
-              <ClearFix />
-              <FormSection>
-                <SectionTitle subtitle='Effective date' />
-                <DatePicker
-                  className='pa1 mv2 ba b--blue bw1'
-                  selected={effectiveDate}
-                  onChange={this.handleEffectiveDate}
-                  showMonthDropdown
-                  showYearDropdown
-                  dateFormat='DD/MM/YYYY'
-                  />
-              </FormSection>
-              <ClearFix />
-              <FormSection>
-                <SectionTitle subtitle='Expiry date' />
-                <DatePicker
-                  className='pa1 mv2 ba b--blue bw1'
-                  selected={expiryDate}
-                  onChange={this.handleExpiryDate}
-                  showMonthDropdown
-                  showYearDropdown
-                  dateFormat='DD/MM/YYYY'
-                  />
-              </FormSection>
-              <ClearFix />
-              <SectionTitle subtitle='Business unit' />
-              <FormSection>
-                {businessUnitSelect}
-              </FormSection>
-              <ClearFix />
-              <SectionTitle subtitle='Lawyer' />
-              <FormSection>
-                <Select
-                  selectedItem={selectedLawyer}
-                  items={allLawyers}
-                  handleChange={this.handleLawyerChange}
-                  />
-              </FormSection>
-              <ClearFix />
-              <FormButton onClick={this.handleClick} text='Submit' />
-              <ClearFix />
-            </form>
-          </div>}
+          : <Flex>
+            <div
+              className={cn(
+                  !this.state.activeMenu && 'w3',
+                  this.state.activeMenu && 'w-10-ns'
+                )}
+              >
+              <SideColumn
+                active={this.state.activeMenu}
+                toggleMenu={this.toggleMenu}
+                />
+            </div>
+            <div
+              className={cn(
+                  !this.state.activeMenu && 'w-94',
+                  this.state.activeMenu && 'w-90-ns'
+                )}
+              >
+
+              <Box>
+                <form>
+                  <FormTitle title='Add contract' />
+                  <FormSection>
+                    <Input
+                      onChange={this.saveToState}
+                      value={externalParties}
+                      label='External party'
+                      name='externalParty'
+                      error={this.state.externalPartyError}
+                      />
+                  </FormSection>
+                  <ClearFix />
+
+                  <FormSection>
+                    <SectionTitle text='Tags' />
+                    {tagInputs || <div>Add tags here</div>}
+                  </FormSection>
+                  <ClearFix />
+
+                  <FormSection>
+                    <SectionTitle text='Status' />
+                    {allStatuses.length > 0
+                        ? <Radio
+                          handleChange={this.handleStatusChange}
+                          selectedItem={selectedStatus}
+                          items={allStatuses}
+                          />
+                        : <div>Add statuses here</div>}
+                  </FormSection>
+                  <ClearFix />
+                  {this.state.contract.currentStatus == 'Executed'
+                      ? <div>
+                        <FormSection>
+                          <SectionTitle text='Execution date' />
+                          <DatePicker
+                            className='pa1 mb2 ba b--blue bw1'
+                            selected={executionDate}
+                            onChange={this.handleExecutionDate}
+                            showMonthDropdown
+                            showYearDropdown
+                            dateFormat='DD/MM/YYYY'
+                            />
+                        </FormSection>
+                        <ClearFix />
+                        <FormSection>
+                          <SectionTitle text='Effective date' />
+                          <DatePicker
+                            className='pa1 mb2 ba b--blue bw1'
+                            selected={effectiveDate}
+                            onChange={this.handleEffectiveDate}
+                            showMonthDropdown
+                            showYearDropdown
+                            dateFormat='DD/MM/YYYY'
+                            />
+                        </FormSection>
+                        <ClearFix />
+                        <FormSection>
+                          <SectionTitle text='Expiry date' />
+                          <DatePicker
+                            className='pa1 mb2 ba b--blue bw1'
+                            selected={expiryDate}
+                            onChange={this.handleExpiryDate}
+                            showMonthDropdown
+                            showYearDropdown
+                            dateFormat='DD/MM/YYYY'
+                            />
+                        </FormSection>
+                        <ClearFix />
+                      </div>
+                      : <div />}
+
+                  <FormSection>
+                    <SectionTitle text='Business unit' />
+                    {businessUnitSelect ? businessUnitSelect : <div>Add business units here</div>}
+                  </FormSection>
+                  <ClearFix />
+                  <FormSection>
+                    <SectionTitle text='Lawyer' />
+                    {allLawyers.length > 0
+                        ? <Select
+                          selectedItem={selectedLawyer}
+                          items={allLawyers}
+                          handleChange={this.handleLawyerChange}
+                          />
+                        : <div>Add lawyers here</div>}
+                  </FormSection>
+                  <ClearFix />
+                  <FormButton onClick={this.handleClick} text='Submit' />
+                  <ClearFix />
+                </form>
+              </Box>
+            </div>
+          </Flex>}
       </div>
     )
   }
@@ -281,17 +338,9 @@ class AddContractForm extends react.Component {
 
 const MetaDataQuery = graphql(CONTRACT_METADATA_QUERY, {
   props: ({
-    data: {
-      loading,
-      loggedUser,
-      allBusinessUnits,
-      allTags,
-      allLawyers,
-      allStatuses
-    }
+    data: { loading, allBusinessUnits, allTags, allLawyers, allStatuses }
   }) => ({
     loading,
-    loggedUser,
     allBusinessUnits,
     allTags,
     allLawyers,

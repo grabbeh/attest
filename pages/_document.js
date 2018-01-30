@@ -13,7 +13,7 @@ export default class MyDocument extends Document {
       <html>
         <Head>
           <meta charSet='utf-8' />
-
+          <meta name='viewport' content='width=device-width, initial-scale=1' />
           <title>Attest - open source contract management</title>
           <link
             rel='stylesheet'
@@ -55,6 +55,14 @@ export default class MyDocument extends Document {
                 -webkit-font-smoothing: antialiased;
                 -moz-osx-font-smoothing: grayscale;
                 background-color: rgb(243, 244, 245);
+              }
+
+              .font {
+                font-family: 'shapefont';
+              }
+
+              input {
+                font-family: 'shapefont'; 
               }
 
               .bg--blue {
@@ -121,8 +129,6 @@ export default class MyDocument extends Document {
                 background-color: #e5e5e5;
               }
 
-              input, button, submit { border:none; } 
-
               .light--gray {
                 color: #f7f4f4;
               }
@@ -150,16 +156,11 @@ export default class MyDocument extends Document {
               a:link { text-decoration: none; }
               a {color: white}
 
-              input, textarea, select {
-                font-family: shapefont, sans-serif;
-                background: white;
-              }
-
-              input[type="text"]{font-family: shapefont;}
-
               .fc-blue {
                 color: #005baa;
               }
+
+              input, button, submit { border: none; outline: none;}
 
           `}
           </style>

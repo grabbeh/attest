@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 
 export default gql`
-query contracts {
+query contracts($masterEntityID: String) {
   allStatuses {
     name
   }
@@ -16,8 +16,8 @@ query contracts {
   allBusinessUnits {
     name
   }
-  contracts {
-    ownerEntity
+  contracts(masterEntityID: $masterEntityID) {
+    masterEntityID
     id
     expiryDate
     internalParties

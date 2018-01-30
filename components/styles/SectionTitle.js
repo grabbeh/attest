@@ -1,2 +1,2 @@
-const SectionTitle = ({ subtitle }) => <div className='mt2'>{subtitle}</div>
+const SectionTitle = ({ text }) => <div className='mv2'>{text}</div>
 export default SectionTitle

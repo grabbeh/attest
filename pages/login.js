@@ -1,7 +1,6 @@
-// import Page from '../components/Page'
 import LoginForm from '../components/login-form/LoginForm'
-import { Page } from '../components/Page'
+import { UserPage } from '../components/Page'
 
-const LoginPage = Page(props => <LoginForm client={props.client} />)
+const LoginPage = UserPage(props => <LoginForm {...props} />)
 
 export default LoginPage

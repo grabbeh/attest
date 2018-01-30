@@ -13,7 +13,6 @@ const addUser = async (req, res) => {
   try {
     const { user } = await jwt.verify(token, SECRET)
     req.user = user
-    req.session.user = user
     // ADD FULL USER INFORMATION TO SESSION THROUGH DB CALL?
   } catch (error) {}
   req.next()

@@ -28,7 +28,7 @@
     "moment": "^2.19.1",
     "moment-range": "^3.0.3",
     "mongoose": "^4.12.3",
-    "next": "4.2.1",
+    "next": "^4.2.3",
     "react": "16.2.0",
     "react-apollo": "^2.0.1",
     "react-datepicker": "^0.60.0",

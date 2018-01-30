@@ -3,15 +3,15 @@ import resolvers from '../resolvers'
 
 const typeDefs = `
 type Query {
-  contracts: [Contract]
+  contracts(masterEntityID: String): [Contract]
   contract(id: ID!): Contract
   allStatuses: [StatusCategories]
   allLawyers: [Lawyer]
   allTags: [Tag]
   allUsers: [User]
   allBusinessUnits: [BusinessUnit]
-  allCustomerEntities: [CustomerEntity]
-  loggedUser: User
+  allMasterEntities: [MasterEntity]
+  user: User
 }
 
 type Mutation {
@@ -19,11 +19,12 @@ type Mutation {
   updateContract(id: ID!, contract: PostContractWithID): Contract
   deleteContract(id: ID!): Contract
   deleteUser(email: String!): User
-  register(email: String!, password: String!, parentEntity: String!): User!
+  addUser(email: String!): User
+  createAdminAccount(masterEntity: String!, email: String!, password: String!): String
   login(email: String!, password: String!): String
 }
 
-type CustomerEntity {
+type MasterEntity {
   id: ID!
   name: String!
 }
@@ -31,7 +32,7 @@ type CustomerEntity {
 type User {
   id: ID!
   email: String!
-  parentEntity: String!
+  masterEntityID: String!
 }
 
 input PostContract {
@@ -54,7 +55,7 @@ input PostContract {
 
 input PostContractWithID {
   id: ID!
-  ownerEntity: String
+  masterEntityID: String
   internalParties: [String]
   externalParties: [String]
   executionDate: Date
@@ -84,7 +85,7 @@ type StatusCategories {
 
 type Contract {
   id: ID!
-  ownerEntity: String
+  masterEntityID: String
   internalParties: [String]
   externalParties: [String]
   executionDate: Date
@@ -103,38 +104,43 @@ type Contract {
 }
 
 type Tag {
+  masterEntityID: String
   name: String
 }
 
 type Status {
+  masterEntityID: String
   status: String
   date: Date
 }
 
 input StatusInput {
+  masterEntityID: String
   status: String
   date: Date
 }
 
 type Lawyer {
-  id: Int
+  masterEntityID: String
   firstName: String
   lastName: String
+  id: String
 }
 
 input LawyerInput {
-  id: Int
+  masterEntityID: String
   firstName: String
   lastName: String
+  id: String
 }
 
 type BusinessUnit {
-  id: Int
+  masterEntityID: String
   name: String
 }
 
 input BusinessUnitInput {
-  id: Int
+  masterEntityID: String
   name: String
 }
 

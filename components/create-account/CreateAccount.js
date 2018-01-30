@@ -1,20 +1,21 @@
 import React from 'react'
 import { graphql, compose } from 'react-apollo'
-import LOGIN_MUTATION from '../../queries/LoginMutation'
+import withData from '../../lib/withData'
+import CREATE_ACCOUNT_MUTATION from '../../queries/CreateAccountMutation'
 import redirect from '../../lib/Redirect'
-import cookie from 'cookie'
 import FormButton from '../styles/FormButton'
 import Input from '../general/Input'
 import ClearFix from '../styles/ClearFix'
 import FormTitle from '../styles/FormTitle'
 import Box from '../styles/Box'
 
-class LoginForm extends React.Component {
+class CreateAccountForm extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      masterEntity: ''
     }
   }
 
@@ -31,14 +32,26 @@ class LoginForm extends React.Component {
 
   handleClick = e => {
     e.preventDefault()
-    this.props.login(this.state.email, this.state.password)
+    this.props.createAdminAccount(
+      this.state.masterEntity,
+      this.state.email,
+      this.state.password
+    )
   }
 
   render () {
     return (
       <Box>
-        <FormTitle title='Login' />
+        <FormTitle title='Create new account' />
         <form>
+          <div className='mt2'>
+            <Input
+              value={this.state.masterEntity}
+              name='masterEntity'
+              onChange={this.saveToState}
+              label='Company name'
+            />
+          </div>
           <div className='mt2'>
             <Input
               value={this.state.email}
@@ -56,6 +69,7 @@ class LoginForm extends React.Component {
               type='password'
             />
           </div>
+
           <FormButton onClick={this.handleClick}>
             Submit
           </FormButton>
@@ -67,19 +81,14 @@ class LoginForm extends React.Component {
   }
 }
 
-const loginMutation = graphql(LOGIN_MUTATION, {
-  props ({ ownProps, mutate }) {
+const createAccountMutation = graphql(CREATE_ACCOUNT_MUTATION, {
+  props ({ mutate }) {
     return {
-      login (email, password) {
+      createAdminAccount (masterEntity, email, password) {
         return mutate({
-          variables: { email, password },
+          variables: { masterEntity, email, password },
           update: (store, response) => {
-            document.cookie = cookie.serialize('token', response.data.login, {
-              maxAge: 30 * 24 * 60 * 60 // 30 days
-            })
-            ownProps.client.resetStore().then(() => {
-              redirect({}, '/contracts')
-            })
+            console.log(response)
           }
         })
       }
@@ -87,6 +96,8 @@ const loginMutation = graphql(LOGIN_MUTATION, {
   }
 })
 
-const LoginFormWithQueries = compose(loginMutation)(LoginForm)
+const CreateAccountFormWithMutation = compose(createAccountMutation)(
+  CreateAccountForm
+)
 
-export default LoginFormWithQueries
+export default CreateAccountFormWithMutation

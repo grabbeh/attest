@@ -1,10 +1,11 @@
 import gql from 'graphql-tag'
 
 export default gql`
-  query loggedUser {
-    loggedUser {
+  query user {
+    user {
       id
       email
+      masterEntityID
     }
   }
 `

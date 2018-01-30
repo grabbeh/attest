@@ -18,7 +18,15 @@ class Input extends react.Component {
   }
 
   render () {
-    const { label, type, placeholder, name, onChange, value } = this.props
+    const {
+      label,
+      type,
+      placeholder,
+      name,
+      onChange,
+      value,
+      error
+    } = this.props
     const { active } = this.state
     return (
       <div className='w-100 '>
@@ -27,7 +35,16 @@ class Input extends react.Component {
         </label>
         <div>
           <input
-            className={cn('bw1', 'pa1', 'f5', 'mt1', 'mb2', 'ba', 'b--blue')}
+            className={cn(
+              'bw1',
+              'pa1',
+              'f5',
+              'mt1',
+              'mb2',
+              'ba',
+              'b--blue',
+              'font'
+            )}
             id={value}
             onChange={onChange}
             placeholder={placeholder}
@@ -37,6 +54,7 @@ class Input extends react.Component {
             onFocus={this.onFocus}
           />
         </div>
+        <div className='red b f6'>{error}</div>
       </div>
     )
   }

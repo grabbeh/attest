@@ -1,10 +1,12 @@
 import withData from '../lib/withData'
 import withAuth from '../lib/withAuth'
-// import { compose, withApollo } from 'react-apollo'
+import withUser from '../lib/withUser'
+import withLayout from '../lib/withLayout'
 import { compose } from 'recompose'
 import { withApollo } from 'react-apollo'
 
-const Page = compose(withData, withApollo)
-const AuthPage = compose(withData, withAuth, withApollo)
+const Page = compose(withData, withApollo, withLayout)
+const AuthPage = compose(withData, withAuth, withApollo, withLayout)
+const UserPage = compose(withData, withUser, withApollo, withLayout)
 
-export { Page, AuthPage }
+export { Page, AuthPage, UserPage }

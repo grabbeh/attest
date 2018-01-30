@@ -12,6 +12,11 @@ export default () => (
       <div className='br3 fr pa2 ba ma3 white'>
         <Link href='/login'><a className='link white'>Login</a></Link>
       </div>
+      <div className='br3 fr pa2 ba ma3 white'>
+        <Link href='/create-admin-account'>
+          <a className='link white'>Signup</a>
+        </Link>
+      </div>
       <div className='cf' />
       <div className='b ph5-ns pt4 f2 white tc'>
         An open source platform for contract management

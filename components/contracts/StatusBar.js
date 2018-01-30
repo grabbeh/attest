@@ -14,10 +14,10 @@ const StatusBar = ({ status, volume, bold }) => (
       status === 'Instructed' && 'b--light-red',
       status === 'Drafted' && 'bb--orange',
       status === 'Approved' && 'bb--pear',
-      status === 'Executed' && 'bw3',
-      status === 'Instructed' && 'bw3',
-      status === 'Drafted' && 'bw3',
-      status === 'Approved' && 'bw3'
+      status === 'Executed' && 'bw1',
+      status === 'Instructed' && 'bw1',
+      status === 'Drafted' && 'bw1',
+      status === 'Approved' && 'bw1'
     )}
   >
     {volume ? <span>{` ${volume} `}</span> : ''}

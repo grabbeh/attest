@@ -1,16 +1,12 @@
 import react from 'react'
 
 class Select extends react.Component {
-  constructor (props) {
-    super(props)
-  }
-
   render () {
     let { selectedItem, handleChange, items } = this.props
     return (
       <div className='mb2'>
         <select
-          className='pa1'
+          className='pa1 font ba bw1 b--blue'
           value={selectedItem}
           key={selectedItem}
           onChange={handleChange}

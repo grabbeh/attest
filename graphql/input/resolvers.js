@@ -5,14 +5,13 @@ import {
   Tag,
   User,
   BusinessUnit,
-  CustomerEntity
+  MasterEntity
 } from './connectors'
 import { GraphQLScalarType } from 'graphql'
 import { Kind } from 'graphql/language'
 import mongoose from 'mongoose'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
-import _ from 'lodash'
 
 const resolvers = {
   Date: new GraphQLScalarType({
@@ -32,46 +31,49 @@ const resolvers = {
     }
   }),
   Query: {
-    contracts: async (root, args, context) => {
-      if (context.user) {
-        let contracts = await Contract.find({
-          ownerEntity: context.user.parentEntity
-        })
-        return contracts
-      } else {
-        // No contracts if no logged user
-        return null
-      }
+    contracts: async (root, { masterEntityID }, context) => {
+      let contracts = await Contract.find({
+        masterEntityID: masterEntityID
+      })
+      return contracts
     },
     contract: (root, { id }) => {
       return Contract.findOne({ id })
     },
-    allStatuses: async (root, args) => {
-      let allStatuses = await Status.find()
+    allStatuses: async (root, args, context) => {
+      let allStatuses = await Status.find({
+        masterEntityID: context.user.masterEntityID
+      })
       return allStatuses
     },
-    allLawyers: async (root, args) => {
-      let allLawyers = await Lawyer.find()
+    allLawyers: async (root, args, context) => {
+      let allLawyers = await Lawyer.find({
+        masterEntityID: context.user.masterEntityID
+      })
       return allLawyers
     },
-    allTags: async (root, args) => {
-      let allTags = await Tag.find()
+    allTags: async (root, args, { user }) => {
+      let allTags = await Tag.find({
+        masterEntityID: user.masterEntityID
+      })
       return allTags
     },
-    allBusinessUnits: async (root, args) => {
-      let allUnits = await BusinessUnit.find()
+    allBusinessUnits: async (root, args, context) => {
+      let allUnits = await BusinessUnit.find({
+        masterEntityID: context.user.masterEntityID
+      })
       return allUnits
     },
-    allCustomerEntities: async (root, args) => {
-      let allCustomerEntities = await CustomerEntity.find()
+    allMasterEntities: async (root, args) => {
+      let allCustomerEntities = await MasterEntity.find()
       return allCustomerEntities
     },
-    loggedUser: async (root, args, context) => {
+    user: async (root, args, context) => {
       if (context.user) {
-        let loggedUser = await User.findById(
+        let user = await User.findById(
           mongoose.Types.ObjectId(context.user._id)
         )
-        return loggedUser
+        return user
       }
       return null
     },
@@ -86,10 +88,14 @@ const resolvers = {
         new: true
       })
     },
-    addContract: (roots, args, context) => {
-      let { contract } = args
-      contract.assignedTo = contract.assignedTo.id
-      contract.ownerEntity = context.user.parentEntity
+    addContract: (roots, { contract }, { user }) => {
+      if (contract.assignedTo && contract.assignedTo.id) {
+        contract.assignedTo = contract.assignedTo.id
+      } else {
+        contract.assignedTo = 'UNASSIGNED'
+      }
+      contract.masterEntityID = user.masterEntityID
+      console.log(contract)
       return Contract.create(contract)
     },
     deleteContract: (root, args) => {
@@ -98,7 +104,18 @@ const resolvers = {
     deleteUser: (root, args) => {
       return User.find({ email: args.email }).remove()
     },
-    register: async (root, args) => {
+    createAdminAccount: async (root, { masterEntity, email, password }) => {
+      const newMasterEntity = await MasterEntity.create({ masterEntity })
+      const existingUser = await User.findOne({ email })
+      if (existingUser) throw new Error('Email already registered')
+      password = await bcrypt.hash(password, 10)
+      let masterEntityID = newMasterEntity._id
+      let user = { email, password, masterEntityID }
+
+      return User.create(user)
+      // Maybe just let user create account w/out validation for now
+    },
+    addUser: async (root, args) => {
       const user = args
       user.password = await bcrypt.hash(user.password, 10)
       return User.create(user)
@@ -120,7 +137,7 @@ const resolvers = {
   },
   Contract: {
     assignedTo: async contract => {
-      let response = await Lawyer.findOne({ id: contract.assignedTo })
+      let response = await Lawyer.find({ id: contract.assignedTo })
       return response
     }
   }

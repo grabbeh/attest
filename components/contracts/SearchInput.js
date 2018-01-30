@@ -7,7 +7,7 @@ class SearchInput extends react.Component {
       <div className='mr0 mb3 mt0-ns pa3 bg-white f4 ba b--black-20'>
         <i className='mr2 gray fa fa-search' />
         <input
-          className='pa1 w-80 bg-white'
+          className='font pa1 w-80 bg-white'
           type='search'
           placeholder='Search Contracts'
           value={this.props.searchTerm}
