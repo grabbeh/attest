@@ -15,7 +15,7 @@ class CreateAccountForm extends React.Component {
     this.state = {
       email: '',
       password: '',
-      masterEntity: ''
+      name: ''
     }
   }
 
@@ -33,7 +33,7 @@ class CreateAccountForm extends React.Component {
   handleClick = e => {
     e.preventDefault()
     this.props.createAdminAccount(
-      this.state.masterEntity,
+      this.state.name,
       this.state.email,
       this.state.password
     )
@@ -46,8 +46,8 @@ class CreateAccountForm extends React.Component {
         <form>
           <div className='mt2'>
             <Input
-              value={this.state.masterEntity}
-              name='masterEntity'
+              value={this.state.name}
+              name='name'
               onChange={this.saveToState}
               label='Company name'
             />
@@ -84,9 +84,9 @@ class CreateAccountForm extends React.Component {
 const createAccountMutation = graphql(CREATE_ACCOUNT_MUTATION, {
   props ({ mutate }) {
     return {
-      createAdminAccount (masterEntity, email, password) {
+      createAdminAccount (name, email, password) {
         return mutate({
-          variables: { masterEntity, email, password },
+          variables: { name, email, password },
           update: (store, response) => {
             console.log(response)
           }

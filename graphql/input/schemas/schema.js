@@ -5,12 +5,9 @@ const typeDefs = `
 type Query {
   contracts(masterEntityID: String): [Contract]
   contract(id: ID!): Contract
-  allStatuses: [StatusCategories]
-  allLawyers: [Lawyer]
-  allTags: [Tag]
-  allUsers: [User]
-  allBusinessUnits: [BusinessUnit]
+  masterEntity(masterEntityID: String): MasterEntity
   allMasterEntities: [MasterEntity]
+  allUsers: [User]
   user: User
 }
 
@@ -20,13 +17,29 @@ type Mutation {
   deleteContract(id: ID!): Contract
   deleteUser(email: String!): User
   addUser(email: String!): User
-  createAdminAccount(masterEntity: String!, email: String!, password: String!): String
+  createAdminAccount(name: String!, email: String!, password: String!): String
+  updateMasterEntity(id: ID!, masterEntity: PostMasterEntity): MasterEntity
   login(email: String!, password: String!): String
 }
 
 type MasterEntity {
   id: ID!
   name: String!
+  businessUnits: [String]
+  tags: [String]
+  lawyers: [String]
+  statuses: [String]
+  relatedEntities: [String]
+}
+
+input PostMasterEntity {
+  id: ID!
+  name: String
+  businessUnits: [String]
+  tags: [String]
+  lawyers: [String]
+  statuses: [String]
+  relatedEntities: [String]
 }
 
 type User {

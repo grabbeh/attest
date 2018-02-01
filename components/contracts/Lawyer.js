@@ -1,9 +1,13 @@
-const LawyerName = ({ firstName, lastName }) => (
+const LawyerName = props => (
   <div>
-    <span>
-      <i className='mr2 mt1 fa fa-id-card-o' />
-      {`${firstName} ${lastName}`}
-    </span>
+    {!props === null
+      ? <div>
+        <span>
+          <i className='mr2 mt1 fa fa-id-card-o' />
+          {`${props.firstName} ${props.lastName}`}
+        </span>
+      </div>
+      : <div />}
   </div>
 )
 

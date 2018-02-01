@@ -109,9 +109,11 @@ class ContractsHolder extends react.Component {
     let currentTags = _.uniq(_.flatten(_.map(contracts, 'tags')))
     let businessUnits = _.uniq(_.flatten(_.map(contracts, 'businessUnit')))
     let lawyers = _.uniq(
-      _.flatten(_.map(contracts, 'assignedTo')).map(a => {
-        return `${a.firstName} ${a.lastName}`
-      })
+      _.pick(
+        _.flatten(_.map(contracts, 'assignedTo'), _.identity).map(a => {
+          return `${a.firstName} ${a.lastName}`
+        })
+      )
     )
     let initialValues = {
       statuses: statusNames,
@@ -160,7 +162,7 @@ class ContractsHolder extends react.Component {
     const name = 'ACME INC'
     let filteredContracts = filter(filters, contracts)
 
-    if (!this.state.liveInput) {
+    if (this.state.searchTerm.length > 0 && !this.state.liveInput) {
       filteredContracts = this.getSearchResults(
         this.state.searchTerm,
         filteredContracts

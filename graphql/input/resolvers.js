@@ -1,12 +1,4 @@
-import {
-  Contract,
-  Lawyer,
-  Status,
-  Tag,
-  User,
-  BusinessUnit,
-  MasterEntity
-} from './connectors'
+import { Contract, Lawyer, User, MasterEntity } from './connectors'
 import { GraphQLScalarType } from 'graphql'
 import { Kind } from 'graphql/language'
 import mongoose from 'mongoose'
@@ -40,40 +32,18 @@ const resolvers = {
     contract: (root, { id }) => {
       return Contract.findOne({ id })
     },
-    allStatuses: async (root, args, context) => {
-      let allStatuses = await Status.find({
-        masterEntityID: context.user.masterEntityID
-      })
-      return allStatuses
-    },
-    allLawyers: async (root, args, context) => {
-      let allLawyers = await Lawyer.find({
-        masterEntityID: context.user.masterEntityID
-      })
-      return allLawyers
-    },
-    allTags: async (root, args, { user }) => {
-      let allTags = await Tag.find({
-        masterEntityID: user.masterEntityID
-      })
-      return allTags
-    },
-    allBusinessUnits: async (root, args, context) => {
-      let allUnits = await BusinessUnit.find({
-        masterEntityID: context.user.masterEntityID
-      })
-      return allUnits
-    },
     allMasterEntities: async (root, args) => {
       let allCustomerEntities = await MasterEntity.find()
       return allCustomerEntities
     },
-    user: async (root, args, context) => {
-      if (context.user) {
-        let user = await User.findById(
-          mongoose.Types.ObjectId(context.user._id)
-        )
-        return user
+    masterEntity: async (root, { masterEntityID }) => {
+      let entity = await MasterEntity.findById(masterEntityID)
+      return entity
+    },
+    user: async (root, args, { user }) => {
+      if (user) {
+        let fullUser = await User.findById(mongoose.Types.ObjectId(user._id))
+        return fullUser
       }
       return null
     },
@@ -82,6 +52,16 @@ const resolvers = {
     }
   },
   Mutation: {
+    updateMasterEntity: (root, { masterEntity }) => {
+      console.log('Mutation requested')
+      return MasterEntity.findByIdAndUpdate(
+        mongoose.Types.ObjectId(masterEntity.id),
+        masterEntity,
+        {
+          new: true
+        }
+      )
+    },
     updateContract: (root, { contract, id }) => {
       contract.assignedTo = contract.assignedTo.id
       return Contract.findByIdAndUpdate(mongoose.Types.ObjectId(id), contract, {
@@ -95,7 +75,6 @@ const resolvers = {
         contract.assignedTo = 'UNASSIGNED'
       }
       contract.masterEntityID = user.masterEntityID
-      console.log(contract)
       return Contract.create(contract)
     },
     deleteContract: (root, args) => {
@@ -104,14 +83,13 @@ const resolvers = {
     deleteUser: (root, args) => {
       return User.find({ email: args.email }).remove()
     },
-    createAdminAccount: async (root, { masterEntity, email, password }) => {
-      const newMasterEntity = await MasterEntity.create({ masterEntity })
+    createAdminAccount: async (root, { name, email, password }) => {
+      const newMasterEntity = await MasterEntity.create({ name })
       const existingUser = await User.findOne({ email })
       if (existingUser) throw new Error('Email already registered')
       password = await bcrypt.hash(password, 10)
       let masterEntityID = newMasterEntity._id
       let user = { email, password, masterEntityID }
-
       return User.create(user)
       // Maybe just let user create account w/out validation for now
     },

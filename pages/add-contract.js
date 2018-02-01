@@ -1,4 +1,3 @@
-// import Page from '../components/Page'
 import AddContract from '../components/add-contract/AddContract'
 import { AuthPage } from '../components/Page'
 

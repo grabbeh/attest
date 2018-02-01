@@ -1,9 +1,13 @@
-const BusinessUnit = ({ businessUnit }) => (
+const BusinessUnit = props => (
   <div>
-    <span>
-      <i className='mr2 mt1 fa fa-building-o' />
-      {businessUnit}
-    </span>
+    {props.length > 0
+      ? <div>
+        <span>
+          <i className='mr2 mt1 fa fa-building-o' />
+          {props.businessUnit}
+        </span>
+      </div>
+      : <div />}
   </div>
 )
 

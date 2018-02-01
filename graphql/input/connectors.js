@@ -5,13 +5,6 @@ mongoose.Promise = require('bluebird')
 const db = require('../../config/db.js')
 mongoose.connect(db, { useMongoClient: true })
 
-const StatusSchema = mongoose.Schema({
-  name: String,
-  masterEntityID: String
-})
-
-const Status = mongoose.model('status', StatusSchema)
-
 const ContractSchema = mongoose.Schema({
   ownerEntity: String,
   masterEntityID: String,
@@ -36,13 +29,6 @@ const ContractSchema = mongoose.Schema({
 
 const Contract = mongoose.model('contract', ContractSchema)
 
-const TagSchema = mongoose.Schema({
-  name: String,
-  masterEntityID: String
-})
-
-const Tag = mongoose.model('tag', TagSchema)
-
 const LawyerSchema = mongoose.Schema({
   firstName: String,
   lastName: String,
@@ -50,13 +36,6 @@ const LawyerSchema = mongoose.Schema({
 })
 
 const Lawyer = mongoose.model('lawyer', LawyerSchema)
-
-const BusinessUnitSchema = mongoose.Schema({
-  name: String,
-  masterEntityID: String
-})
-
-const BusinessUnit = mongoose.model('businessUnit', BusinessUnitSchema)
 
 const UserSchema = mongoose.Schema({
   email: String,
@@ -67,24 +46,29 @@ const UserSchema = mongoose.Schema({
 const User = mongoose.model('user', UserSchema)
 
 const MasterEntitySchema = mongoose.Schema({
-  masterEntity: String
+  name: String,
+  businessUnits: Array,
+  statuses: Array,
+  tags: Array,
+  lawyers: Array,
+  relatedEntities: Array
 })
 
 const MasterEntity = mongoose.model('masterEntity', MasterEntitySchema)
 
-export { Contract, Lawyer, Status, Tag, BusinessUnit, User, MasterEntity }
+export { Contract, Lawyer, User, MasterEntity }
 
 /*
-customerEntities.forEach(c => {
+mastEntities.forEach(c => {
   new CustomerEntity(c).save((err, res) => {
     if (err) console.log(err)
     console.log('Done')
   })
 })
 
-Contract.find().exec((err, contracts) => {
+User.find().exec((err, ents) => {
   if (err) console.log(err)
-  contracts.forEach(c => {
+  ents.forEach(c => {
     c.remove()
   })
 })

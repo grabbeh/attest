@@ -38,7 +38,7 @@ class AddContractForm extends react.Component {
         tags: [],
         businessUnit: '',
         currentStatus: '',
-        assignedTo: { firstName: '', lastName: '', id: '' }
+        assignedTo: { firstName: '', lastName: '' }
       }
     }
   }
@@ -117,8 +117,8 @@ class AddContractForm extends react.Component {
   handleLawyerChange = e => {
     let id = e.target.value
     let { contract } = this.state
-    const { allLawyers } = this.props
-    allLawyers.forEach(lawyer => {
+    const { lawyers } = this.props
+    lawyers.forEach(lawyer => {
       if (lawyer.id == id) {
         let newLawyer = lawyer
         contract.assignedTo = newLawyer
@@ -130,8 +130,8 @@ class AddContractForm extends react.Component {
   handleBusinessUnitChange = e => {
     let selectedUnit = e.target.value
     let { contract } = this.state
-    const { allBusinessUnits } = this.props
-    allBusinessUnits.forEach(unit => {
+    const { businessUnits } = this.props
+    businessUnits.forEach(unit => {
       if (selectedUnit == unit.name) {
         contract.businessUnit = selectedUnit
         this.setState({
@@ -140,12 +140,6 @@ class AddContractForm extends react.Component {
         })
       }
     })
-  }
-
-  addTag = tag => {
-    let { contract } = this.state
-    contract.tags.push(tag)
-    this.setState({ contract: contract })
   }
 
   updateSet = (set, label) => {
@@ -159,15 +153,16 @@ class AddContractForm extends react.Component {
 
   handleCheckboxChange = label => {
     let { contract } = this.state
-    let { tags } = this.state.contract
-    let tagSet = new Set(tags)
+    let { currentTags } = this.state.contract
+    let tagSet = new Set(currentTags)
     let updated = this.updateSet(tagSet, label)
     contract.tags = updated
     this.setState({ contract: contract })
   }
 
   render () {
-    let { loading, allLawyers, allStatuses, allBusinessUnits } = this.props
+    let { loading, businessUnits, lawyers, tags, statuses } = this.props
+
     let {
       contract,
       selectedStatus,
@@ -177,7 +172,7 @@ class AddContractForm extends react.Component {
     let { externalParties, executionDate, expiryDate, effectiveDate } = contract
 
     let businessUnitSelect = null
-    if (allBusinessUnits.length > 0) {
+    if (businessUnits.length) {
       businessUnitSelect = (
         <div className='mb2'>
           <select
@@ -186,7 +181,7 @@ class AddContractForm extends react.Component {
             key={selectedBusinessUnit}
             onChange={this.handleBusinessUnitChange}
           >
-            {allBusinessUnits.map(unit => (
+            {businessUnits.map(unit => (
               <option key={unit.name} value={unit.name}>
                 {unit.name}
               </option>
@@ -197,11 +192,10 @@ class AddContractForm extends react.Component {
     }
 
     let tagInputs = null
-    let { allTags } = this.props
-    if (allTags.length > 0) {
+    if (tags.length > 0) {
       tagInputs = (
         <div className='list flex flex-wrap'>
-          {allTags.map(t => (
+          {tags.map(t => (
             <CheckBox
               key={t.name}
               handleCheckboxChange={this.handleCheckboxChange}
@@ -259,11 +253,11 @@ class AddContractForm extends react.Component {
 
                   <FormSection>
                     <SectionTitle text='Status' />
-                    {allStatuses.length > 0
+                    {statuses.length > 0
                         ? <Radio
                           handleChange={this.handleStatusChange}
                           selectedItem={selectedStatus}
-                          items={allStatuses}
+                          items={statuses}
                           />
                         : <div>Add statuses here</div>}
                   </FormSection>
@@ -311,15 +305,15 @@ class AddContractForm extends react.Component {
 
                   <FormSection>
                     <SectionTitle text='Business unit' />
-                    {businessUnitSelect ? businessUnitSelect : <div>Add business units here</div>}
+                    {businessUnitSelect || <div>Add business units here</div>}
                   </FormSection>
                   <ClearFix />
                   <FormSection>
                     <SectionTitle text='Lawyer' />
-                    {allLawyers.length > 0
+                    {lawyers.length > 0
                         ? <Select
                           selectedItem={selectedLawyer}
-                          items={allLawyers}
+                          items={lawyers}
                           handleChange={this.handleLawyerChange}
                           />
                         : <div>Add lawyers here</div>}
@@ -337,19 +331,22 @@ class AddContractForm extends react.Component {
 }
 
 const MetaDataQuery = graphql(CONTRACT_METADATA_QUERY, {
+  options: props => ({
+    variables: { masterEntityID: props.user.masterEntityID }
+  }),
   props: ({
-    data: { loading, allBusinessUnits, allTags, allLawyers, allStatuses }
+    data: { loading, masterEntity: { businessUnits, statuses, tags, lawyers } }
   }) => ({
     loading,
-    allBusinessUnits,
-    allTags,
-    allLawyers,
-    allStatuses
+    businessUnits,
+    statuses,
+    tags,
+    lawyers
   })
 })
 
 const AddContractMutation = graphql(ADD_CONTRACT_MUTATION, {
-  props ({ ownProps, mutate }) {
+  props ({ mutate }) {
     return {
       addContract (contract) {
         return mutate({

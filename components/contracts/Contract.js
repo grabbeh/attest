@@ -43,7 +43,9 @@ class Contract extends React.Component {
       assignedTo,
       statuses
     } = this.props.contract
-    let effectiveDate = _.last(statuses).date
+    if (statuses.length > 0) {
+      let effectiveDate = _.last(statuses).date
+    }
     const data = this.props
 
     return (

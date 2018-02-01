@@ -73,10 +73,15 @@ class Filter extends react.Component {
           />
         </HideToggle>
         <HideToggle title='Tags'>
-          <CheckboxList content={tags} toggleCheckbox={toggleCheckbox} />
+          <CheckboxList
+            error='Please add filters'
+            content={tags}
+            toggleCheckbox={toggleCheckbox}
+          />
         </HideToggle>
         <HideToggle title='Business Units'>
           <CheckboxList
+            error='Please add filters'
             content={businessUnits}
             checked
             toggleCheckbox={toggleCheckbox}
@@ -84,6 +89,7 @@ class Filter extends react.Component {
         </HideToggle>
         <HideToggle title='Lawyers'>
           <CheckboxList
+            error='Please add filters'
             content={lawyers}
             checked
             toggleCheckbox={toggleCheckbox}

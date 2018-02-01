@@ -2,20 +2,6 @@ import gql from 'graphql-tag'
 
 export default gql`
 query contracts($masterEntityID: String) {
-  allStatuses {
-    name
-  }
-  allLawyers {
-    firstName
-    lastName
-    id
-  }
-  allTags {
-    name
-  }
-  allBusinessUnits {
-    name
-  }
   contracts(masterEntityID: $masterEntityID) {
     masterEntityID
     id

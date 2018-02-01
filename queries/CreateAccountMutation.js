@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 
 export default gql`
-mutation createAdminAccount($masterEntity: String!, $email: String!, $password: String!) {
-  createAdminAccount(masterEntity: $masterEntity, email: $email, password: $password) 
+mutation createAdminAccount($name: String!, $email: String!, $password: String!) {
+  createAdminAccount(name: $name, email: $email, password: $password) 
 }
 `
