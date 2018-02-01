@@ -43,8 +43,7 @@ class Input extends react.Component {
               'mb2',
               'ba',
               'b--blue',
-              'font',
-              'fl'
+              'font'
             )}
             id={value}
             onChange={onChange}
