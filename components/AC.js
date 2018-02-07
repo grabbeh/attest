@@ -22,6 +22,7 @@ import Box from '../styles/Box'
 class AddContractForm extends react.Component {
   constructor (props) {
     super(props)
+    console.log(props)
     this.state = {
       selectedStatus: '',
       selectedBusinessUnit: '',
@@ -159,7 +160,12 @@ class AddContractForm extends react.Component {
 
   render () {
     let { loading } = this.props.data
-
+    let {
+      businessUnits,
+      lawyers,
+      tags,
+      statuses
+    } = this.props.data.masterEntity
     let {
       contract,
       selectedStatus,
@@ -169,140 +175,137 @@ class AddContractForm extends react.Component {
 
     let { externalParties, executionDate, expiryDate, effectiveDate } = contract
 
-    if (this.props.data.masterEntity) {
-      let {
-        businessUnits,
-        lawyers,
-        tags,
-        statuses
-      } = this.props.data.masterEntity
-
-      let businessUnitSelect = null
-      if (businessUnits && businessUnits.length) {
-        businessUnitSelect = (
-          <div className='mb2'>
-            <select
-              className='pa1 font ba bw1 b--blue'
-              value={selectedBusinessUnit}
-              key={selectedBusinessUnit}
-              onChange={this.handleBusinessUnitChange}
-            >
-              {businessUnits.map(unit => (
-                <option key={unit.name} value={unit.name}>
-                  {unit.name}
-                </option>
-              ))}
-            </select>
-          </div>
-        )
-      }
-
-      let tagInputs = null
-      if (tags && tags.length) {
-        tagInputs = (
-          <div className='list flex flex-wrap'>
-            {tags.map(t => (
-              <CheckBox
-                key={t.name}
-                handleCheckboxChange={this.handleCheckboxChange}
-                checked={false}
-                label={t.name}
-                value={t.name}
-              />
+    let businessUnitSelect = null
+    if (businessUnits.length > 0) {
+      businessUnitSelect = (
+        <div className='mb2'>
+          <select
+            className='pa1 font ba bw1 b--blue'
+            value={selectedBusinessUnit}
+            key={selectedBusinessUnit}
+            onChange={this.handleBusinessUnitChange}
+          >
+            {businessUnits.map(unit => (
+              <option key={unit.name} value={unit.name}>
+                {unit.name}
+              </option>
             ))}
-          </div>
-        )
-      }
-      return (
-        <Box>
-          <form>
-            <FormTitle title='Add contract' />
-            <FormSection>
-              <Input
-                onChange={this.saveToState}
-                value={externalParties}
-                label='External party'
-                name='externalParty'
-                error={this.state.externalPartyError}
-              />
-            </FormSection>
-            <ClearFix />
-            <FormSection>
-              <SectionTitle text='Tags' />
-              {tagInputs || <div>Add tags here</div>}
-            </FormSection>
-            <ClearFix />
-            <FormSection>
-              <SectionTitle text='Status' />
-              {statuses && statuses.length
-                ? <Radio
-                  handleChange={this.handleStatusChange}
-                  selectedItem={selectedStatus}
-                  items={statuses}
-                  />
-                : <div>Add statuses here</div>}
-            </FormSection>
-            <ClearFix />
-            <FormSection>
-              <SectionTitle text='Execution date' />
-              <DatePicker
-                className='pa1 mb2 ba b--blue bw1'
-                selected={executionDate}
-                onChange={this.handleExecutionDate}
-                showMonthDropdown
-                showYearDropdown
-                dateFormat='DD/MM/YYYY'
-              />
-            </FormSection>
-            <ClearFix />
-            <FormSection>
-              <SectionTitle text='Effective date' />
-              <DatePicker
-                className='pa1 mb2 ba b--blue bw1'
-                selected={effectiveDate}
-                onChange={this.handleEffectiveDate}
-                showMonthDropdown
-                showYearDropdown
-                dateFormat='DD/MM/YYYY'
-              />
-            </FormSection>
-            <ClearFix />
-            <FormSection>
-              <SectionTitle text='Expiry date' />
-              <DatePicker
-                className='pa1 mb2 ba b--blue bw1'
-                selected={expiryDate}
-                onChange={this.handleExpiryDate}
-                showMonthDropdown
-                showYearDropdown
-                dateFormat='DD/MM/YYYY'
-              />
-            </FormSection>
-            <ClearFix />
-
-            <FormSection>
-              <SectionTitle text='Business unit' />
-              {businessUnitSelect || <div>Add business units here</div>}
-            </FormSection>
-            <ClearFix />
-            <FormSection>
-              <SectionTitle text='Lawyer' />
-              {lawyers && lawyers.length > 0
-                ? <Select
-                  selectedItem={selectedLawyer}
-                  items={lawyers}
-                  handleChange={this.handleLawyerChange}
-                  />
-                : <div>Add lawyers here</div>}
-            </FormSection>
-            <ClearFix />
-            <FormButton onClick={this.handleClick} text='Submit' />
-            <ClearFix />
-          </form>
-        </Box>
+          </select>
+        </div>
       )
     }
-    return <Loading />
+
+    let tagInputs = null
+    if (tags.length > 0) {
+      tagInputs = (
+        <div className='list flex flex-wrap'>
+          {tags.map(t => (
+            <CheckBox
+              key={t.name}
+              handleCheckboxChange={this.handleCheckboxChange}
+              checked={false}
+              label={t.name}
+              value={t.name}
+            />
+          ))}
+        </div>
+      )
+    }
+
+    return (
+      <div>
+        {loading
+          ? <Loading />
+          : <Box>
+            <form>
+              <FormTitle title='Add contract' />
+              <FormSection>
+                <Input
+                  onChange={this.saveToState}
+                  value={externalParties}
+                  label='External party'
+                  name='externalParty'
+                  error={this.state.externalPartyError}
+                  />
+              </FormSection>
+              <ClearFix />
+
+              <FormSection>
+                <SectionTitle text='Tags' />
+                {tagInputs || <div>Add tags here</div>}
+              </FormSection>
+              <ClearFix />
+
+              <FormSection>
+                <SectionTitle text='Status' />
+                {statuses.length > 0
+                    ? <Radio
+                      handleChange={this.handleStatusChange}
+                      selectedItem={selectedStatus}
+                      items={statuses}
+                      />
+                    : <div>Add statuses here</div>}
+              </FormSection>
+              <ClearFix />
+              <FormSection>
+                <SectionTitle text='Execution date' />
+                <DatePicker
+                  className='pa1 mb2 ba b--blue bw1'
+                  selected={executionDate}
+                  onChange={this.handleExecutionDate}
+                  showMonthDropdown
+                  showYearDropdown
+                  dateFormat='DD/MM/YYYY'
+                  />
+              </FormSection>
+              <ClearFix />
+              <FormSection>
+                <SectionTitle text='Effective date' />
+                <DatePicker
+                  className='pa1 mb2 ba b--blue bw1'
+                  selected={effectiveDate}
+                  onChange={this.handleEffectiveDate}
+                  showMonthDropdown
+                  showYearDropdown
+                  dateFormat='DD/MM/YYYY'
+                  />
+              </FormSection>
+              <ClearFix />
+              <FormSection>
+                <SectionTitle text='Expiry date' />
+                <DatePicker
+                  className='pa1 mb2 ba b--blue bw1'
+                  selected={expiryDate}
+                  onChange={this.handleExpiryDate}
+                  showMonthDropdown
+                  showYearDropdown
+                  dateFormat='DD/MM/YYYY'
+                  />
+              </FormSection>
+              <ClearFix />
+
+              <FormSection>
+                <SectionTitle text='Business unit' />
+                {businessUnitSelect || <div>Add business units here</div>}
+              </FormSection>
+              <ClearFix />
+              <FormSection>
+                <SectionTitle text='Lawyer' />
+                {lawyers.length > 0
+                    ? <Select
+                      selectedItem={selectedLawyer}
+                      items={lawyers}
+                      handleChange={this.handleLawyerChange}
+                      />
+                    : <div>Add lawyers here</div>}
+              </FormSection>
+              <ClearFix />
+              <FormButton onClick={this.handleClick} text='Submit' />
+              <ClearFix />
+            </form>
+          </Box>}
+      </div>
+    )
   }
 }
 

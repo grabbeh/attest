@@ -3,42 +3,44 @@ import resolvers from '../resolvers'
 
 const typeDefs = `
 type Query {
-  contracts(masterEntityID: String): [Contract]
+  contracts: [Contract]
   contract(id: ID!): Contract
-  masterEntity(masterEntityID: String): MasterEntity
-  allMasterEntities: [MasterEntity]
+  masterEntity: MasterEntity
   allUsers: [User]
   user: User
+  currentTags: [String]
+  currentBusinessUnits: [String]
+  currentLawyers: [String]
+  currentStatuses: [String]
 }
 
 type Mutation {
   addContract(contract: PostContract): Contract
-  updateContract(id: ID!, contract: PostContractWithID): Contract
+  updateContract(contract: PostContractWithID): Contract
   deleteContract(id: ID!): Contract
   deleteUser(email: String!): User
   addUser(email: String!): User
   createAdminAccount(name: String!, email: String!, password: String!): String
-  updateMasterEntity(id: ID!, masterEntity: PostMasterEntity): MasterEntity
+  updateMasterEntity(masterEntity: PostMasterEntity): MasterEntity
   login(email: String!, password: String!): String
 }
 
 type MasterEntity {
-  id: ID!
-  name: String!
-  businessUnits: [String]
-  tags: [String]
+  id: ID
+  name: String
+  businessUnits: [BusinessUnit]
+  tags: [Tag]
   lawyers: [String]
-  statuses: [String]
+  statuses: [Status]
   relatedEntities: [String]
 }
 
 input PostMasterEntity {
-  id: ID!
   name: String
-  businessUnits: [String]
-  tags: [String]
+  businessUnits: [BusinessUnitInput]
+  tags: [TagInput]
   lawyers: [String]
-  statuses: [String]
+  statuses: [StatusInput]
   relatedEntities: [String]
 }
 
@@ -55,19 +57,19 @@ input PostContract {
   effectiveDate: Date
   expiryDate: Date
   rollingTerm: Boolean
-  tags: [String]
-  businessUnit: String
+  tags: [TagInput]
+  businessUnit: BusinessUnitInput
   createdAt: Date
   lastUpdated: Date
-  currentStatus: String
-  statuses: [StatusInput]
+  currentStatus: ContractStatusInput
+  statuses: [ContractStatusInput]
   client: Boolean
   supplier: Boolean
   assignedTo: LawyerInput
 }
 
 input PostContractWithID {
-  id: ID!
+  id: ID
   masterEntityID: String
   internalParties: [String]
   externalParties: [String]
@@ -75,12 +77,12 @@ input PostContractWithID {
   effectiveDate: Date
   expiryDate: Date
   rollingTerm: Boolean
-  tags: [String]
-  businessUnit: String
+  tags: [TagInput]
+  businessUnit: BusinessUnitInput
   createdAt: Date
   lastUpdated: Date
-  currentStatus: String
-  statuses: [StatusInput]
+  currentStatus: ContractStatusInput
+  statuses: [ContractStatusInput]
   client: Boolean
   supplier: Boolean
   assignedTo: LawyerInput
@@ -89,11 +91,6 @@ input PostContractWithID {
 scalar Date
 type MyType {
    created: Date
-}
-
-type StatusCategories {
-  id: ID!
-  name: String
 }
 
 type Contract {
@@ -105,56 +102,65 @@ type Contract {
   effectiveDate: Date
   expiryDate: Date
   rollingTerm: Boolean
-  tags: [String]
-  businessUnit: String
+  tags: [Tag]
+  businessUnit: BusinessUnit
   createdAt: Date
   lastUpdated: Date
-  currentStatus: String
-  statuses: [Status]
+  currentStatus: ContractStatus
+  statuses: [ContractStatus]
   client: Boolean
   supplier: Boolean
   assignedTo: Lawyer
 }
 
-type Tag {
-  masterEntityID: String
+input ContractStatusInput {
   name: String
+  date: Date
+  color: String
 }
 
-type Status {
-  masterEntityID: String
-  status: String
+type ContractStatus {
+  name: String
   date: Date
+  color: String
 }
 
 input StatusInput {
-  masterEntityID: String
-  status: String
-  date: Date
+  name: String
+  color: String
+}
+
+type Status {
+  name: String
+  color: String
+}
+
+type Tag {
+  name: String
+}
+
+input TagInput {
+  name: String
+}
+
+type BusinessUnit {
+  name: String
+}
+
+input BusinessUnitInput {
+  name: String
 }
 
 type Lawyer {
-  masterEntityID: String
   firstName: String
   lastName: String
   id: String
 }
 
 input LawyerInput {
-  masterEntityID: String
   firstName: String
   lastName: String
   id: String
-}
-
-type BusinessUnit {
-  masterEntityID: String
-  name: String
-}
-
-input BusinessUnitInput {
-  masterEntityID: String
-  name: String
 }
 
 schema {

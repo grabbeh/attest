@@ -1,11 +1,21 @@
 import gql from 'graphql-tag'
 
 export default gql`
-mutation updateMasterEntity($id: ID!, $masterEntity: PostMasterEntity) {
-  updateMasterEntity(id: $id, masterEntity: $masterEntity) {
+mutation updateMasterEntity($masterEntity: PostMasterEntity) {
+  updateMasterEntity(masterEntity: $masterEntity) {
     id
     name
-    businessUnits
+    businessUnits {
+      name
+    }
+    statuses {
+      name
+      color
+    }
+    tags {
+      name
+    }
+    relatedEntities
   }
 }
 `

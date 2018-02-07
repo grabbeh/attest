@@ -70,8 +70,8 @@ class EditContractModal extends react.Component {
   handleLawyerChange = e => {
     let id = e.target.value
     let { contract } = this.state
-    const { allLawyers } = this.props.data
-    allLawyers.forEach(lawyer => {
+    const { lawyers } = this.props.data
+    lawyers.forEach(lawyer => {
       if (lawyer.id == id) {
         let newLawyer = lawyer
         contract.assignedTo = newLawyer
@@ -83,9 +83,9 @@ class EditContractModal extends react.Component {
   handleBusinessUnitChange = e => {
     let selectedUnit = e.target.value
     let { contract } = this.state
-    const { allBusinessUnits } = this.props.data
-    allBusinessUnits.forEach(unit => {
-      if (selectedUnit == unit.name) {
+    const { businessUnits } = this.props.data
+    businessUnits.forEach(unit => {
+      if (selectedUnit == unit) {
         contract.businessUnit = selectedUnit
         this.setState({
           contract: contract,
@@ -101,17 +101,17 @@ class EditContractModal extends react.Component {
     this.setState({ contract: contract })
   }
 
-  processTags = (allTags, currentTags) => {
-    let result = allTags.map(tag => {
+  processTags = (tags, currentTags) => {
+    let result = tags.map(tag => {
       let checked = false
       currentTags.map(a => {
-        if (a === tag.name) {
+        if (a === tag) {
           checked = true
         }
       })
       return {
         checked: checked,
-        name: tag.name
+        name: tag
       }
     })
     return result
@@ -137,7 +137,7 @@ class EditContractModal extends react.Component {
 
   render () {
     let { isOpen, closeModal } = this.props
-    let { allLawyers, allStatuses, allBusinessUnits } = this.props.data
+    let { lawyers, statuses, businessUnits } = this.props.data
     let { contract } = this.state
 
     let businessUnitSelect = null
@@ -149,38 +149,40 @@ class EditContractModal extends react.Component {
           key={this.state.selectedBusinessUnit}
           onChange={this.handleBusinessUnitChange}
         >
-          {allBusinessUnits.map(unit => (
-            <option key={unit.name} value={unit.name}>
-              {unit.name}
+          {businessUnits.map(unit => (
+            <option key={unit} value={unit}>
+              {unit}
             </option>
           ))}
         </select>
       </div>
     )
     let lawyerSelect = null
-    lawyerSelect = (
-      <div className='mb2'>
-        <select
-          className='pa1 ba b--blue bw1'
-          value={this.state.selectedLawyer}
-          key={this.state.selectedLawyer}
-          onChange={this.handleLawyerChange}
-        >
-          {allLawyers.map(l => (
-            <option key={l.id} value={l.id}>
-              {`${l.firstName} ${l.lastName}`}
-            </option>
-          ))}
-        </select>
-      </div>
-    )
+    if (lawyers.length > 0) {
+      lawyerSelect = (
+        <div className='mb2'>
+          <select
+            className='pa1 ba b--blue bw1'
+            value={this.state.selectedLawyer}
+            key={this.state.selectedLawyer}
+            onChange={this.handleLawyerChange}
+          >
+            {lawyers.map(l => (
+              <option key={l.id} value={l.id}>
+                {`${l.firstName} ${l.lastName}`}
+              </option>
+            ))}
+          </select>
+        </div>
+      )
+    }
     let statusRadios = null
-    statusRadios = allStatuses.map(s => (
-      <div key={s.name} className='fl mr2'>
+    statusRadios = statuses.map(s => (
+      <div key={s} className='fl mr2'>
         <label
           className={cn(
-            s.name === this.state.selectedStatus && 'white',
-            s.name === this.state.selectedStatus && 'bg-blue',
+            s === this.state.selectedStatus && 'white',
+            s === this.state.selectedStatus && 'bg-blue',
             'pointer',
             'fr',
             'f5',
@@ -195,18 +197,18 @@ class EditContractModal extends react.Component {
           <input
             className='dn'
             type='radio'
-            value={s.name}
-            checked={s.name === this.state.selectedStatus}
+            value={s}
+            checked={s === this.state.selectedStatus}
             onChange={this.handleStatusChange}
           />
-          {s.name}
+          {s}
         </label>
       </div>
     ))
     let tagInputs = null
     if (contract.tags) {
-      let { allTags } = this.props.data
-      let updatedTags = this.processTags(allTags, contract.tags)
+      let { tags } = this.props.data
+      let updatedTags = this.processTags(tags, contract.tags)
       tagInputs = updatedTags.map(t => (
         <div className='list'>
           <CheckBox
@@ -277,9 +279,9 @@ export default graphql(UPDATE_CONTRACT_MUTATION, {
   props ({ ownProps, mutate }) {
     return {
       updateContract (contract, closeModal) {
-        const id = contract.id
+        let id = contract.id
         return mutate({
-          variables: { id, contract },
+          variables: { contract },
           update: (store, response) => {
             let updatedContract = response.data.updateContract
             const data = store.readQuery({ query: CONTRACTS_QUERY })

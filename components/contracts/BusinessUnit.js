@@ -1,10 +1,10 @@
 const BusinessUnit = props => (
   <div>
-    {props.length > 0
+    {props
       ? <div>
         <span>
           <i className='mr2 mt1 fa fa-building-o' />
-          {props.businessUnit}
+          {props.businessUnit.name}
         </span>
       </div>
       : <div />}

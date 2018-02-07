@@ -1,20 +1,24 @@
-import { AuthPage } from '../components/Page'
+import withData from '../lib/withData'
 import { graphql } from 'react-apollo'
 import react from 'react'
 import gql from 'graphql-tag'
+import Link from 'next/link'
+import { Page, UserPage } from '../components/Page'
 
 const DATA_QUERY = gql`
-  query masterEntity($masterEntityID: String) {
-    masterEntity(masterEntityID: $masterEntityID) {
-      businessUnits
-      statuses
-      tags
-      lawyers
+  query masterEntity {
+    masterEntity {
+      businessUnits {
+        name
+      }
+      statuses {
+        name
+      }
   }
 }
 `
 
-const TestPageWithData = AuthPage(props => <TestPageWithQuery {...props} />)
+const TestPageWithData = UserPage(props => <TestPageWithQuery {...props} />)
 
 class TestComponent extends react.Component {
   constructor (props) {
@@ -23,14 +27,16 @@ class TestComponent extends react.Component {
   }
 
   render () {
-    return <div>Test</div>
+    return (
+      <div>
+        <div>Test</div>
+        <Link href='/test-two'><a>Link</a></Link>
+      </div>
+    )
   }
 }
 
 const TestPageWithQuery = graphql(DATA_QUERY, {
-  options: props => ({
-    variables: { masterEntityID: props.user.masterEntityID }
-  }),
   props: ({ data }) => ({
     data
   })

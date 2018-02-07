@@ -12,13 +12,24 @@ const ContractSchema = mongoose.Schema({
   externalParties: Array,
   expiryDate: Date,
   rollingTerm: Boolean,
-  tags: Array,
-  businessUnit: String,
-  currentStatus: String,
+  tags: [
+    {
+      name: String
+    }
+  ],
+  businessUnit: {
+    name: String
+  },
+  currentStatus: {
+    name: String,
+    date: Date,
+    color: String
+  },
   statuses: [
     {
       status: String,
-      date: Date
+      date: Date,
+      color: String
     }
   ],
   lastUpdated: Date,
@@ -47,9 +58,19 @@ const User = mongoose.model('user', UserSchema)
 
 const MasterEntitySchema = mongoose.Schema({
   name: String,
-  businessUnits: Array,
-  statuses: Array,
-  tags: Array,
+  businessUnits: [
+    {
+      name: String
+    }
+  ],
+  statuses: [
+    {
+      name: String,
+      date: Date,
+      color: String
+    }
+  ],
+  tags: [{ name: String }],
   lawyers: Array,
   relatedEntities: Array
 })
@@ -57,22 +78,14 @@ const MasterEntitySchema = mongoose.Schema({
 const MasterEntity = mongoose.model('masterEntity', MasterEntitySchema)
 
 export { Contract, Lawyer, User, MasterEntity }
-
 /*
-mastEntities.forEach(c => {
-  new CustomerEntity(c).save((err, res) => {
-    if (err) console.log(err)
-    console.log('Done')
-  })
-})
-
 User.find().exec((err, ents) => {
   if (err) console.log(err)
   ents.forEach(c => {
     c.remove()
   })
 })
-
+/*
 const contracts = generator(100)
 
 contracts.forEach(c => {

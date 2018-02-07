@@ -9,14 +9,14 @@ class CheckboxList extends React.Component {
   createCheckboxes = (arr, checked) => {
     let check = checked || false
     const { toggleCheckbox, error } = this.props
-    if (arr.length > 0 && arr[0].length > 0) {
-      return arr.map(label => {
+    if (arr.length > 0) {
+      return arr.map((item, i) => {
         return (
           <Checkbox
             checked={check}
-            label={label}
+            label={item}
             handleCheckboxChange={toggleCheckbox}
-            key={label}
+            key={i}
           />
         )
       })

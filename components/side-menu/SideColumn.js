@@ -1,27 +1,22 @@
 import React from 'react'
 import SlimMenu from './SlimMenu'
-import ClearFix from '../../components/styles/ClearFix'
+import Flex from '../styles/Flex'
 
 class SideColumn extends React.Component {
   render () {
     return (
-      <div className='bg-dark-gray h-100'>
-        <div className='ml3 pl1 mt3 fixed'>
-          {this.props.active
-            ? <i
-              onClick={this.props.toggleMenu}
-              className='gray fa fa-chevron-left fa-lg'
-              />
-            : <div>
-              <i
-                onClick={this.props.toggleMenu}
-                className='gray fa fa-chevron-right fa-lg'
-                />
-              <ClearFix />
+      <Flex>
+        <div className='w-5'>
+          <div className='bg-dark-gray h-100'>
+            <div className='ml3 pl1 fixed'>
               <SlimMenu />
-            </div>}
+            </div>
+          </div>
         </div>
-      </div>
+        <div className='w-90'>
+          {this.props.children}
+        </div>
+      </Flex>
     )
   }
 }

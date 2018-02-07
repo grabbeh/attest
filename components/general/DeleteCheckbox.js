@@ -18,11 +18,14 @@ class Checkbox extends Component {
   }
 
   render () {
-    const { label } = this.props
+    const { label, color } = this.props
     const { isChecked } = this.state
     return (
       <li key={label} className='fl pb2 mr2 fl white f5'>
-        <div className='fl pv1 ph3 bg-blue white'>
+        <div
+          style={{ background: color }}
+          className={cn('fl', 'pv1', 'ph3', 'bg-blue', 'white')}
+        >
           {label}
         </div>
         <label>

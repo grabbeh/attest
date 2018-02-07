@@ -1,25 +1,25 @@
 import gql from 'graphql-tag'
 
 export default gql`
-mutation updateContract($id: ID!, $contract: PostContractWithID) {
-  updateContract(id: $id, contract: $contract) {
-    ownerEntity
+mutation updateContract($contract: PostContractWithID) {
+  updateContract(contract: $contract) {
+    masterEntityID
     id
     internalParties
     externalParties
     currentStatus
     statuses {
-      status
+      color
+      name
       date
     }
-    tags
-    businessUnit
-    currentStatus
-    assignedTo {
-      firstName
-      lastName
-      id
+    tags {
+      name
     }
+    businessUnit {
+      name
+    }
+    currentStatus
   }
 }
 `

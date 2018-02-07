@@ -14,7 +14,7 @@ class SearchInput extends react.Component {
           onChange={this.props.handleSearchInput}
         />
         <div
-          className={cn(!this.props.searchTerm && 'dn', 'fr', 'pa1', 'b', 'f3')}
+          className={cn(!this.props.searchTerm && 'dn', 'fr', 'pa1', 'b', 'f4')}
           onClick={this.props.clear}
         >
           <i className='fa fa-close' />

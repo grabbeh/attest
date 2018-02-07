@@ -1,27 +1,12 @@
 import cn from 'classnames'
 
-const StatusBar = ({ status, volume, bold }) => (
+const StatusBar = ({ status: { name, color }, volume, bold }) => (
   <div
-    className={cn(
-      'mt1',
-      'pb1',
-      bold && 'b',
-      status === 'Executed' && 'bb',
-      status === 'Instructed' && 'bb',
-      status === 'Drafted' && 'bb',
-      status === 'Approved' && 'bb',
-      status === 'Executed' && 'bb--dark-pear',
-      status === 'Instructed' && 'b--light-red',
-      status === 'Drafted' && 'bb--orange',
-      status === 'Approved' && 'bb--pear',
-      status === 'Executed' && 'bw1',
-      status === 'Instructed' && 'bw1',
-      status === 'Drafted' && 'bw1',
-      status === 'Approved' && 'bw1'
-    )}
+    style={{ borderBottomColor: color }}
+    className={cn('bw1 bb mt1', 'pb1', bold && 'b')}
   >
     {volume ? <span>{` ${volume} `}</span> : ''}
-    {status}
+    {name}
   </div>
 )
 

@@ -5,14 +5,22 @@ mutation addContract($contract: PostContract) {
   addContract(contract: $contract) {
     internalParties
     externalParties
-    currentStatus
-    statuses {
-      status
+    currentStatus {
+      name 
+      color
       date
     }
-    tags
-    businessUnit
-    currentStatus
+    statuses {
+      name
+      color
+      date
+    }
+    tags {
+      name
+    }
+    businessUnit {
+      name
+    }
     assignedTo {
       firstName
       lastName

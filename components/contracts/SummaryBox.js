@@ -19,8 +19,8 @@ class SummaryBox extends react.Component {
     const { startDate, endDate } = filters.dateRange
     return (
       <div className='h-100 bg-white mt3 mt0-ns pa3 ba b--black-20'>
-        <div className='f4 bb b--black-20 bw1 pb2'>Summary</div>
-        <div className='mt3 f5 b'>
+        <div className='b f4 bb b--black-20 bw1 pb2'>Summary</div>
+        <div className='mt3 f5'>
           {`${contracts.length}`}
           {startDate && startDate.isValid()
             ? <span>

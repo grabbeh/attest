@@ -1,7 +1,7 @@
 import { Contract, Lawyer, User, MasterEntity } from './connectors'
 import { GraphQLScalarType } from 'graphql'
 import { Kind } from 'graphql/language'
-import mongoose from 'mongoose'
+import _ from 'lodash'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
@@ -23,26 +23,60 @@ const resolvers = {
     }
   }),
   Query: {
-    contracts: async (root, { masterEntityID }, context) => {
+    contracts: async (root, args, { user }) => {
       let contracts = await Contract.find({
-        masterEntityID: masterEntityID
+        masterEntityID: user.masterEntityID
       })
       return contracts
     },
     contract: (root, { id }) => {
       return Contract.findOne({ id })
     },
-    allMasterEntities: async (root, args) => {
-      let allCustomerEntities = await MasterEntity.find()
-      return allCustomerEntities
+    currentTags: async (root, args, { user }) => {
+      let contracts = await Contract.find({
+        masterEntityID: user.masterEntityID
+      })
+      let tags = _.uniq(
+        _.map(_.flatten(_.concat(_.map(contracts, 'tags'))), 'name')
+      )
+      return tags
     },
-    masterEntity: async (root, { masterEntityID }) => {
-      let entity = await MasterEntity.findById(masterEntityID)
+    currentBusinessUnits: async (root, args, { user }) => {
+      let contracts = await Contract.find({
+        masterEntityID: user.masterEntityID
+      })
+      let businessUnits = _.uniq(
+        _.map(_.map(contracts, 'businessUnit'), 'name')
+      )
+      return businessUnits
+    },
+    currentStatuses: async (root, args, { user }) => {
+      let contracts = await Contract.find({
+        masterEntityID: user.masterEntityID
+      })
+      let statuses = _.uniq(_.map(_.map(contracts, 'currentStatus'), 'name'))
+      return statuses
+    },
+    currentLawyers: async (root, args, { user }) => {
+      let contracts = await Contract.find({
+        masterEntityID: user.masterEntityID
+      })
+      let lawyers = _.uniq(
+        _.pick(
+          _.flatten(_.map(contracts, 'assignedTo'), _.identity).map(a => {
+            return `${a.firstName} ${a.lastName}`
+          })
+        )
+      )
+      return []
+    },
+    masterEntity: async (root, args, { user }) => {
+      let entity = await MasterEntity.findById(user.masterEntityID)
       return entity
     },
     user: async (root, args, { user }) => {
       if (user) {
-        let fullUser = await User.findById(mongoose.Types.ObjectId(user._id))
+        let fullUser = await User.findById(user._id)
         return fullUser
       }
       return null
@@ -52,19 +86,14 @@ const resolvers = {
     }
   },
   Mutation: {
-    updateMasterEntity: (root, { masterEntity }) => {
-      console.log('Mutation requested')
-      return MasterEntity.findByIdAndUpdate(
-        mongoose.Types.ObjectId(masterEntity.id),
-        masterEntity,
-        {
-          new: true
-        }
-      )
+    updateMasterEntity: (root, { masterEntity }, { user }) => {
+      return MasterEntity.findByIdAndUpdate(user.masterEntityID, masterEntity, {
+        new: true
+      })
     },
-    updateContract: (root, { contract, id }) => {
+    updateContract: (root, { contract }) => {
       contract.assignedTo = contract.assignedTo.id
-      return Contract.findByIdAndUpdate(mongoose.Types.ObjectId(id), contract, {
+      return Contract.findByIdAndUpdate(contract.id, contract, {
         new: true
       })
     },

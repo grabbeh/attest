@@ -2,10 +2,6 @@ import cn from 'classnames'
 import react from 'react'
 
 class Radio extends react.Component {
-  constructor (props) {
-    super(props)
-  }
-
   render () {
     let { items, handleChange, selectedItem } = this.props
     return items.map(s => (
@@ -32,7 +28,7 @@ class Radio extends react.Component {
             type='radio'
             value={s.name}
             checked={s.name === selectedItem}
-            onChange={handleChange}
+            onChange={() => handleChange(s)}
           />
           {s.name}
         </label>

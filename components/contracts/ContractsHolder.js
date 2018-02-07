@@ -10,7 +10,6 @@ import Flex from '../styles/Flex'
 import SearchInput from './SearchInput'
 import Loading from '../general/Loading'
 import HideToggle from '../general/Hide'
-import SideColumn from '../side-menu/SideColumn'
 import cn from 'classnames'
 
 class ContractsHolder extends react.Component {
@@ -39,10 +38,6 @@ class ContractsHolder extends react.Component {
       liveInput: false,
       activeMenu: false
     }
-  }
-
-  toggleMenu = () => {
-    this.setState({ activeMenu: !this.state.activeMenu })
   }
 
   toggleExpiryDateSearch = bool => {
@@ -86,50 +81,57 @@ class ContractsHolder extends react.Component {
 
   toggleCheckbox = label => {
     let { statuses, tags, businessUnits, lawyers } = this.state.initialValues
-    if (statuses.includes(label)) {
-      this.updateFilterState('statuses', this.updateSet(this.statuses, label))
-    }
-    if (tags.includes(label)) {
-      this.updateFilterState('tags', this.updateSet(this.tags, label))
-    }
-    if (businessUnits.includes(label)) {
-      this.updateFilterState(
-        'businessUnits',
-        this.updateSet(this.businessUnits, label)
-      )
-    }
-    if (lawyers.includes(label)) {
-      this.updateFilterState('lawyers', this.updateSet(this.lawyers, label))
-    }
+    statuses = statuses.map(s => {
+      return { filter: s, type: 'status', category: 'statuses' }
+    })
+
+    tags = tags.map(t => {
+      return { filter: t, type: 'tag', category: 'tags' }
+    })
+
+    businessUnits = businessUnits.map(b => {
+      return { filter: b, type: 'businessUnit', category: 'businessUnits' }
+    })
+
+    lawyers = lawyers.map(l => {
+      return { filter: l, type: 'lawyer', category: 'lawyers' }
+    })
+
+    let filters = _.concat(statuses, tags, businessUnits, lawyers)
+    filters.forEach(f => {
+      if (f.filter === label) {
+        this.updateFilterState(
+          f.category,
+          this.updateSet(this.set[f.category], label)
+        )
+      }
+    })
   }
 
   setNewData = data => {
-    let { contracts, allStatuses } = data
-    let statusNames = _.map(allStatuses, 'name')
-    let currentTags = _.uniq(_.flatten(_.map(contracts, 'tags')))
-    let businessUnits = _.uniq(_.flatten(_.map(contracts, 'businessUnit')))
-    let lawyers = _.uniq(
-      _.pick(
-        _.flatten(_.map(contracts, 'assignedTo'), _.identity).map(a => {
-          return `${a.firstName} ${a.lastName}`
-        })
-      )
-    )
+    let {
+      contracts,
+      currentStatuses,
+      currentTags,
+      currentBusinessUnits,
+      currentLawyers
+    } = data
+
     let initialValues = {
-      statuses: statusNames,
+      statuses: currentStatuses,
       tags: currentTags,
-      businessUnits,
-      lawyers
+      businessUnits: currentBusinessUnits,
+      lawyers: currentLawyers
     }
     this.setState({ initialValues })
-    this.updateFilterState('statuses', statusNames)
-    this.updateFilterState('businessUnits', businessUnits)
-    this.updateFilterState('lawyers', lawyers)
 
-    this.statuses = new Set(statusNames)
-    this.tags = new Set()
-    this.businessUnits = new Set(businessUnits)
-    this.lawyers = new Set(lawyers)
+    this.set = {
+      statuses: new Set(),
+      tags: new Set(),
+      businessUnits: new Set(),
+      lawyers: new Set()
+    }
+
     this.setState({ loading: false })
   }
 
@@ -143,95 +145,68 @@ class ContractsHolder extends react.Component {
     }
   }
 
-  shouldComponentUpdate (nextProps, nextState) {
-    return true
-  }
-
   render () {
     let { initialValues, filters } = this.state
-    let { loading, contracts } = this.props.data
-    let { allStatuses, allTags, allBusinessUnits, allLawyers } = this.props.data
+    if (!this.props.data.loading) {
+      let { contracts } = this.props.data
+      let {
+        statuses,
+        tags,
+        businessUnits,
+        lawyers,
+        name
+      } = this.props.data.masterEntity
 
-    let editFormData = {
-      allBusinessUnits,
-      allLawyers,
-      allTags,
-      allStatuses
-    }
+      let editFormData = {
+        businessUnits,
+        lawyers,
+        tags,
+        statuses
+      }
 
-    const name = 'ACME INC'
-    let filteredContracts = filter(filters, contracts)
+      let filteredContracts = filter(filters, contracts)
 
-    if (this.state.searchTerm.length > 0 && !this.state.liveInput) {
-      filteredContracts = this.getSearchResults(
-        this.state.searchTerm,
-        filteredContracts
-      )
-    }
-    return (
-      <div>
-        {this.state.loading || loading
-          ? <Loading />
-          : <div>
+      if (this.state.searchTerm.length > 0 && !this.state.liveInput) {
+        filteredContracts = this.getSearchResults(
+          this.state.searchTerm,
+          filteredContracts
+        )
+      }
+      return (
+        <div>
+
+          <div className='pa3-ns pa0 pt3'>
             <Flex>
-              <div
-                className={cn(
-                    !this.state.activeMenu && 'w3',
-                    this.state.activeMenu && 'w-10-ns'
-                  )}
-                >
-                <SideColumn
-                  active={this.state.activeMenu}
-                  toggleMenu={this.toggleMenu}
-                  />
+              <div className='w-50-ns w-100'>
+                <Title name={name} />
               </div>
-              <div
-                className={cn(
-                    !this.state.activeMenu && 'w-94',
-                    this.state.activeMenu && 'w-90-ns'
-                  )}
-                >
-                <div className='pa3-ns pa0 pt3'>
-                  <Flex>
-                    <div className='w-50-ns w-100'>
-                      <Title name={name} />
-                    </div>
-                    <div className='h-100 w-50-ns w-100'>
-                      <SearchInput
-                        handleSearchInput={this.handleSearchInput}
-                        searchTerm={this.state.searchTerm}
-                        clear={this.clearSearchTerm}
-                        />
-                    </div>
-                  </Flex>
-                  <Flex>
-                    <div className='h-100 w-50-ns w-100'>
-                      <Filter
-                        initialValues={initialValues}
-                        toggleCheckbox={this.toggleCheckbox}
-                        setDate={this.setDate}
-                        toggleExpiryDateSearch={this.toggleExpiryDateSearch}
-                        />
-                    </div>
-                    <div className='w-50-ns w-100'>
-                      <SummaryBox
-                        contracts={filteredContracts}
-                        filters={filters}
-                        />
-                    </div>
-                  </Flex>
-                  <ContractsList
-                    contracts={filteredContracts}
-                    data={editFormData}
-                    />
-
-                </div>
+              <div className='h-100 w-50-ns w-100'>
+                <SearchInput
+                  handleSearchInput={this.handleSearchInput}
+                  searchTerm={this.state.searchTerm}
+                  clear={this.clearSearchTerm}
+                />
               </div>
             </Flex>
-          </div>}
-
-      </div>
-    )
+            <Flex>
+              <div className='h-100 w-50-ns w-100'>
+                <Filter
+                  initialValues={initialValues}
+                  toggleCheckbox={this.toggleCheckbox}
+                  setDate={this.setDate}
+                  toggleExpiryDateSearch={this.toggleExpiryDateSearch}
+                />
+              </div>
+              <div className='w-50-ns w-100'>
+                <SummaryBox contracts={filteredContracts} filters={filters} />
+              </div>
+            </Flex>
+            <ContractsList contracts={filteredContracts} data={editFormData} />
+          </div>
+        </div>
+      )
+    }
+    return <Loading />
   }
 }
 

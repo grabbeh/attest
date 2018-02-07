@@ -5,7 +5,6 @@ export default gql`
     user {
       id
       email
-      masterEntityID
     }
   }
 `
