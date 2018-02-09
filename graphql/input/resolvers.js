@@ -61,13 +61,14 @@ const resolvers = {
       let contracts = await Contract.find({
         masterEntityID: user.masterEntityID
       })
+      /*
       let lawyers = _.uniq(
         _.pick(
           _.flatten(_.map(contracts, 'assignedTo'), _.identity).map(a => {
             return `${a.firstName} ${a.lastName}`
           })
         )
-      )
+      ) */
       return []
     },
     masterEntity: async (root, args, { user }) => {

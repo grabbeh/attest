@@ -102,13 +102,14 @@ class AddContractForm extends react.Component {
     let newStatus = { ...e, date }
     contract.statuses.push(newStatus)
     contract.currentStatus = newStatus
+    console.log(contract)
     this.setState({ selectedStatus: e.name, contract })
   }
 
   handleLawyerChange = e => {
     let id = e.target.value
     let { contract } = this.state
-    const { lawyers } = this.props.data
+    const { lawyers } = this.props.data.masterEntity
     lawyers.forEach(lawyer => {
       if (lawyer.id == id) {
         let newLawyer = lawyer
@@ -121,7 +122,7 @@ class AddContractForm extends react.Component {
   handleBusinessUnitChange = e => {
     let selectedUnit = e.target.value
     let { contract } = this.state
-    const { businessUnits } = this.props.data
+    const { businessUnits } = this.props.data.masterEntity
     businessUnits.forEach(unit => {
       if (selectedUnit == unit.name) {
         contract.businessUnit = { name: selectedUnit }

@@ -70,7 +70,6 @@ input PostContract {
 
 input PostContractWithID {
   id: ID
-  masterEntityID: String
   internalParties: [String]
   externalParties: [String]
   executionDate: Date

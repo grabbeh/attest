@@ -3,14 +3,16 @@ import gql from 'graphql-tag'
 export default gql`
 mutation updateContract($contract: PostContractWithID) {
   updateContract(contract: $contract) {
-    masterEntityID
-    id
     internalParties
     externalParties
-    currentStatus
-    statuses {
+    currentStatus {
+      name 
       color
+      date
+    }
+    statuses {
       name
+      color
       date
     }
     tags {
@@ -19,7 +21,11 @@ mutation updateContract($contract: PostContractWithID) {
     businessUnit {
       name
     }
-    currentStatus
+    assignedTo {
+      firstName
+      lastName
+      id
+    }
   }
 }
 `

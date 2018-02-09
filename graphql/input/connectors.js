@@ -27,7 +27,7 @@ const ContractSchema = mongoose.Schema({
   },
   statuses: [
     {
-      status: String,
+      name: String,
       date: Date,
       color: String
     }

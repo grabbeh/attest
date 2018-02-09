@@ -30,12 +30,13 @@ class EditContractModal extends react.Component {
 
   componentWillMount () {
     let copy = _.cloneDeep(this.props.contract)
+    console.log(copy)
     if (copy) {
       this.setState({
         contract: _.omit(copy, 'lawyerName'),
-        selectedStatus: copy.currentStatus,
+        selectedStatus: copy.currentStatus.name,
         selectedLawyer: copy.assignedTo.id,
-        selectedBusinessUnit: copy.businessUnit
+        selectedBusinessUnit: copy.businessUnit.name
       })
     }
   }
@@ -59,12 +60,13 @@ class EditContractModal extends react.Component {
   }
 
   handleStatusChange = e => {
+    console.log(e)
     let { contract } = this.state
-    let status = e.target.value
     let date = new Date().getTime()
-    contract.statuses.push({ status, date })
-    contract.currentStatus = status
-    this.setState({ selectedStatus: status, contract: contract })
+    let newStatus = { ...e, date }
+    contract.statuses.push(newStatus)
+    contract.currentStatus = newStatus
+    this.setState({ selectedStatus: newStatus.name, contract: contract })
   }
 
   handleLawyerChange = e => {
@@ -105,13 +107,13 @@ class EditContractModal extends react.Component {
     let result = tags.map(tag => {
       let checked = false
       currentTags.map(a => {
-        if (a === tag) {
+        if (a.name === tag.name) {
           checked = true
         }
       })
       return {
         checked: checked,
-        name: tag
+        name: tag.name
       }
     })
     return result
@@ -123,13 +125,18 @@ class EditContractModal extends react.Component {
     } else {
       set.add(label)
     }
-    return [...set]
+    return [...set].map(s => {
+      return { name: s }
+    })
   }
 
   handleCheckboxChange = label => {
     let { contract } = this.state
     let { tags } = this.state.contract
-    let tagSet = new Set(tags)
+    let tagNames = tags.map(t => {
+      return t.name
+    })
+    let tagSet = new Set(tagNames)
     let updated = this.updateSet(tagSet, label)
     contract.tags = updated
     this.setState({ contract: contract })
@@ -150,8 +157,8 @@ class EditContractModal extends react.Component {
           onChange={this.handleBusinessUnitChange}
         >
           {businessUnits.map(unit => (
-            <option key={unit} value={unit}>
-              {unit}
+            <option key={unit.name} value={unit.name}>
+              {unit.name}
             </option>
           ))}
         </select>
@@ -178,11 +185,11 @@ class EditContractModal extends react.Component {
     }
     let statusRadios = null
     statusRadios = statuses.map(s => (
-      <div key={s} className='fl mr2'>
+      <div key={s.name} className='fl mr2'>
         <label
           className={cn(
-            s === this.state.selectedStatus && 'white',
-            s === this.state.selectedStatus && 'bg-blue',
+            s.name === this.state.selectedStatus && 'white',
+            s.name === this.state.selectedStatus && 'bg-blue',
             'pointer',
             'fr',
             'f5',
@@ -197,11 +204,11 @@ class EditContractModal extends react.Component {
           <input
             className='dn'
             type='radio'
-            value={s}
-            checked={s === this.state.selectedStatus}
-            onChange={this.handleStatusChange}
+            value={s.name}
+            checked={s.name === this.state.selectedStatus}
+            onChange={() => this.handleStatusChange(s)}
           />
-          {s}
+          {s.name}
         </label>
       </div>
     ))
@@ -209,10 +216,10 @@ class EditContractModal extends react.Component {
     if (contract.tags) {
       let { tags } = this.props.data
       let updatedTags = this.processTags(tags, contract.tags)
-      tagInputs = updatedTags.map(t => (
+      tagInputs = updatedTags.map((t, i) => (
         <div className='list'>
           <CheckBox
-            key={t.name}
+            key={i}
             handleCheckboxChange={this.handleCheckboxChange}
             checked={t.checked}
             label={t.name}
@@ -279,6 +286,7 @@ export default graphql(UPDATE_CONTRACT_MUTATION, {
   props ({ ownProps, mutate }) {
     return {
       updateContract (contract, closeModal) {
+        console.log(contract)
         let id = contract.id
         return mutate({
           variables: { contract },
