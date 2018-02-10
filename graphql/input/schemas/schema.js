@@ -136,18 +136,22 @@ type Status {
 
 type Tag {
   name: String
+  color: String
 }
 
 input TagInput {
   name: String
+  color: String
 }
 
 type BusinessUnit {
   name: String
+  color: String
 }
 
 input BusinessUnitInput {
   name: String
+  color: String
 }
 
 type Lawyer {

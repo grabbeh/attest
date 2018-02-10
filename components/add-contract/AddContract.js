@@ -18,10 +18,12 @@ import Loading from '../general/Loading'
 import Flex from '../styles/Flex'
 import SideColumn from '../side-menu/SideColumn'
 import Box from '../styles/Box'
+import _ from 'lodash'
 
 class AddContractForm extends react.Component {
   constructor (props) {
     super(props)
+    console.log(props)
     this.state = {
       selectedStatus: '',
       selectedBusinessUnit: '',
@@ -102,7 +104,6 @@ class AddContractForm extends react.Component {
     let newStatus = { ...e, date }
     contract.statuses.push(newStatus)
     contract.currentStatus = newStatus
-    console.log(contract)
     this.setState({ selectedStatus: e.name, contract })
   }
 
@@ -134,27 +135,22 @@ class AddContractForm extends react.Component {
     })
   }
 
-  updateSet = (set, label) => {
-    if (set.has(label)) {
-      set.delete(label)
-    } else {
-      set.add(label)
-    }
-    return [...set].map(s => {
-      return { name: s }
-    })
-  }
-
   handleCheckboxChange = label => {
-    let { contract } = this.state
-    let { tags } = this.state.contract
+    let { tags } = this.props.data.masterEntity
+    let selectedTags = this.state.contract.tags
+    let relevantTag = _.find(tags, { name: label })
+    if (_.find(selectedTags, { name: label })) {
+      _.remove(selectedTags, { name: label })
+    } else {
+      selectedTags.push(relevantTag)
+    }
 
-    let tagNames = tags.map(t => {
-      return t.name
-    })
-    let tagSet = new Set(tagNames)
-    let updated = this.updateSet(tagSet, label)
-    contract.tags = updated
+    let { contract } = this.state
+    //  let { selectedTags } = this.state.contract
+
+    contract.tags = selectedTags
+
+    console.log(selectedTags)
     this.setState({ contract: contract })
   }
 
@@ -280,7 +276,6 @@ class AddContractForm extends react.Component {
               />
             </FormSection>
             <ClearFix />
-
             <FormSection>
               <SectionTitle text='Business unit' />
               {businessUnitSelect || <div>Add business units here</div>}

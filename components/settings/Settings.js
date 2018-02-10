@@ -19,19 +19,50 @@ import Flex from '../styles/Flex'
 import SideColumn from '../side-menu/SideColumn'
 import Box from '../styles/Box'
 import DeleteCheckbox from '../general/DeleteCheckbox'
+import { GithubPicker } from 'react-color'
+import _ from 'lodash'
 
 class SettingsForm extends react.Component {
   constructor (props) {
     super(props)
     this.state = {
-      businessUnits: props.masterEntity.businessUnits,
-      businessUnit: '',
-      tags: props.masterEntity.tags,
-      tag: '',
-      statuses: props.masterEntity.statuses,
-      statusName: '',
-      statusColor: ''
+      businessUnits: '',
+      businessUnitName: '',
+      tags: '',
+      tagName: '',
+      statuses: '',
+      statusName: ''
     }
+  }
+
+  setStatusColor = (label, color, index) => {
+    let { statuses } = this.state
+    let status = statuses[index]
+    let revisedStatus = { ...status }
+    revisedStatus.color = color
+    let revisedStatuses = [...statuses]
+    revisedStatuses.splice(index, 1, revisedStatus)
+    this.setState({ statuses: revisedStatuses })
+  }
+
+  setTagColor = (label, color, index) => {
+    let { tags } = this.state
+    let tag = tags[index]
+    let revisedTag = { ...tag }
+    revisedTag.color = color
+    let revisedTags = [...tags]
+    revisedTags.splice(index, 1, revisedTag)
+    this.setState({ tags: revisedTags })
+  }
+
+  setBusinessUnitColor = (label, color, index) => {
+    let { businessUnits } = this.state
+    let unit = businessUnits[index]
+    let revisedUnit = { ...unit }
+    revisedUnit.color = color
+    let revisedUnits = [...businessUnits]
+    revisedUnits.splice(index, 1, revisedUnit)
+    this.setState({ businessUnits: revisedUnits })
   }
 
   handleSubmit = e => {
@@ -46,164 +77,143 @@ class SettingsForm extends react.Component {
     this.setState({ [name]: value })
   }
 
-  addBusinessUnit = e => {
-    let { businessUnits, businessUnit } = this.state
-    let newUnit = { name: businessUnit }
+  addBusinessUnit = () => {
+    let { businessUnits, businessUnitName } = this.state
+    let newUnit = { name: businessUnitName }
     let revised = [newUnit, ...businessUnits]
-    this.setState({ businessUnits: revised, businessUnit: '' })
-  }
-
-  addTag = e => {
-    let { tags, tag } = this.state
-    let newTag = { name: tag }
-    let revised = [newTag, ...tags]
-    this.setState({ tags: revised, tag: '' })
-  }
-
-  addStatus = e => {
-    let { statuses, state, statusName, statusColor } = this.state
-    let status = { name: statusName, color: statusColor }
-    let revised = [status, ...statuses]
-    this.setState({ statuses: revised, statusName: '', statusColor: '' })
-  }
-
-  deleteBusinessUnit = e => {
-    let { businessUnits } = this.state
-    let revisedBusinessUnits = [...businessUnits]
-    var index = businessUnits.indexOf(e)
-
-    if (index > -1) {
-      revisedBusinessUnits.splice(index, 1)
-    }
-    this.setState({ businessUnits: revisedBusinessUnits })
-  }
-
-  deleteTag = e => {
-    let { tags } = this.state
-    var index = tags.indexOf(e)
-    let revisedTags = [...tags]
-    if (index > -1) {
-      revisedTags.splice(index, 1)
-    }
-    this.setState({ tags: revisedTags })
-  }
-
-  deleteStatus = e => {
-    let { statuses } = this.state
-
-    let names = statuses.map(s => {
-      return s.name
+    this.setState({
+      businessUnits: revised,
+      businessUnitName: ''
     })
+  }
 
-    let index = names.indexOf(e)
-    let revisedStatuses = [...statuses]
-    if (index > -1) {
-      revisedStatuses.splice(index, 1)
-    }
-    this.setState({ statuses: revisedStatuses })
+  addTag = () => {
+    let { tags, tagName } = this.state
+    let newTag = { name: tagName }
+    let revised = [newTag, ...tags]
+    this.setState({ tags: revised, tagName: '' })
+  }
+
+  addStatus = () => {
+    let { statuses, state, statusName } = this.state
+    let status = { name: statusName }
+    let revised = [status, ...statuses]
+    this.setState({ statuses: revised, statusName: '' })
+  }
+
+  deleteBusinessUnit = (label, index) => {
+    let revised = [...this.state.businessUnits]
+    revised.splice(index, 1)
+    this.setState({ businessUnits: revised })
+  }
+
+  deleteTag = (label, index) => {
+    let revised = [...this.state.tags]
+    revised.splice(index, 1)
+    this.setState({ tags: revised })
+  }
+
+  deleteStatus = (label, index) => {
+    let revised = [...this.state.statuses]
+    revised.splice(index, 1)
+    this.setState({ statuses: revised })
   }
 
   render () {
-    let {
-      businessUnit,
-      businessUnits,
-      tag,
-      tags,
-      statusName,
-      statusColor,
-      statuses
-    } = this.state
-    return (
-      <div>
-        {this.props.loading
-          ? <Loading />
-          : <Box>
-            <form>
-              <FormTitle title='Filters' />
-              <FormSection>
-                <Input
-                  onChange={this.saveToState}
-                  value={businessUnit}
-                  label='Business unit'
-                  name='businessUnit'
-                  onClick={this.addBusinessUnit}
-                  />
-                <ClearFix />
-                <ul className='mt1 list ma0 pa0'>
-                  {businessUnits.map(b => (
-                    <DeleteCheckbox
-                      checked
-                      handleCheckboxChange={this.deleteBusinessUnit}
-                      label={b.name}
-                      key={b.name}
-                      />
-                    ))}
-                </ul>
-              </FormSection>
+    if (this.props.data.masterEntity) {
+      let { businessUnitName, tagName, statusName } = this.state
+      let { businessUnits, tags, statuses } = this.props.data.masterEntity
+      return (
+        <Box>
+          <form>
+            <FormTitle title='Filters' />
+            <FormSection>
+              <Input
+                onChange={this.saveToState}
+                value={businessUnitName}
+                label='Business unit'
+                name='businessUnitName'
+                onClick={this.addBusinessUnit}
+              />
               <ClearFix />
-              <FormSection>
-                <Input
-                  onChange={this.saveToState}
-                  value={tag}
-                  label='Tag'
-                  name='tag'
-                  onClick={this.addTag}
+              <ul className='mt1 list ma0 pa0'>
+                {businessUnits.map((b, i) => (
+                  <DeleteCheckbox
+                    checked
+                    handleCheckboxChange={this.deleteBusinessUnit}
+                    label={b.name}
+                    key={i}
+                    index={i}
+                    color={b.color}
+                    setColor={this.setBusinessUnitColor}
                   />
-                <ClearFix />
-                <ul className='mt1 list ma0 pa0'>
-                  {tags.map((t, i) => (
-                    <DeleteCheckbox
-                      checked
-                      handleCheckboxChange={this.deleteTag}
-                      label={t.name}
-                      key={t.name}
-                      />
-                    ))}
-                </ul>
-              </FormSection>
+                ))}
+              </ul>
+            </FormSection>
+            <ClearFix />
+            <FormSection>
+              <Input
+                onChange={this.saveToState}
+                value={tagName}
+                label='Tag'
+                name='tagName'
+                onClick={this.addTag}
+              />
               <ClearFix />
-              <FormSection>
-                <Input
-                  onChange={this.saveToState}
-                  value={statusName}
-                  label='Status'
-                  name='statusName'
+              <ul className='mt1 list ma0 pa0'>
+                {tags.map((t, i) => (
+                  <DeleteCheckbox
+                    checked
+                    handleCheckboxChange={this.deleteTag}
+                    label={t.name}
+                    key={i}
+                    index={i}
+                    color={t.color}
+                    setColor={this.setTagColor}
                   />
-                <ClearFix />
-                <Input
-                  onChange={this.saveToState}
-                  value={statusColor}
-                  label='Color'
-                  name='statusColor'
-                  onClick={this.addStatus}
+                ))}
+              </ul>
+            </FormSection>
+            <ClearFix />
+            <FormSection>
+              <Input
+                onChange={this.saveToState}
+                value={statusName}
+                label='Status'
+                name='statusName'
+                onClick={this.addStatus}
+              />
+              <ClearFix />
+
+              <ClearFix />
+              <ul className='mt1 list ma0 pa0'>
+                {statuses.map((s, i) => (
+                  <DeleteCheckbox
+                    checked
+                    handleCheckboxChange={this.deleteStatus}
+                    label={s.name}
+                    key={i}
+                    index={i}
+                    color={s.color}
+                    setColor={this.setStatusColor}
                   />
-                <ClearFix />
-                <ul className='mt1 list ma0 pa0'>
-                  {statuses.map(s => (
-                    <DeleteCheckbox
-                      checked
-                      handleCheckboxChange={this.deleteStatus}
-                      label={s.name}
-                      key={s.name}
-                      color={s.color}
-                      />
-                    ))}
-                </ul>
-              </FormSection>
-              <ClearFix />
-              <FormButton onClick={this.handleSubmit} text='Submit' />
-              <ClearFix />
-            </form>
-          </Box>}
-      </div>
-    )
+                ))}
+              </ul>
+            </FormSection>
+            <ClearFix />
+            <FormButton onClick={this.handleSubmit} text='Submit' />
+            <ClearFix />
+          </form>
+        </Box>
+      )
+    }
+    return <Loading />
   }
 }
 
 const MasterEntityMetaDataQuery = graphql(MASTER_ENTITY_METADATA_QUERY, {
-  props: ({ data: { loading, masterEntity } }) => ({
-    loading,
-    masterEntity
+  props: ({ data }) => ({
+    data
   })
 })
 

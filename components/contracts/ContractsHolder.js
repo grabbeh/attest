@@ -32,7 +32,7 @@ class ContractsHolder extends react.Component {
         tags: [],
         businessUnits: [],
         lawyers: [],
-        expiryDateSearch: false
+        selectedDateOption: ''
       },
       searchTerm: '',
       liveInput: false,
@@ -40,9 +40,9 @@ class ContractsHolder extends react.Component {
     }
   }
 
-  toggleExpiryDateSearch = bool => {
+  selectDateOption = s => {
     let { filters } = this.state
-    filters.expiryDateSearch = bool
+    filters.selectedDateOption = s.name
     this.setState({ filters })
   }
 
@@ -147,7 +147,7 @@ class ContractsHolder extends react.Component {
 
   render () {
     let { initialValues, filters } = this.state
-    if (!this.props.data.loading) {
+    if (this.props.data.contracts) {
       let { contracts } = this.props.data
       let {
         statuses,
@@ -174,13 +174,12 @@ class ContractsHolder extends react.Component {
       }
       return (
         <div>
-
           <div className='pa3-ns pa0 pt3'>
             <Flex>
               <div className='w-50-ns w-100'>
                 <Title name={name} />
               </div>
-              <div className='h-100 w-50-ns w-100'>
+              <div className='w-50-ns w-100'>
                 <SearchInput
                   handleSearchInput={this.handleSearchInput}
                   searchTerm={this.state.searchTerm}
@@ -189,12 +188,12 @@ class ContractsHolder extends react.Component {
               </div>
             </Flex>
             <Flex>
-              <div className='h-100 w-50-ns w-100'>
+              <div className='w-50-ns w-100'>
                 <Filter
                   initialValues={initialValues}
                   toggleCheckbox={this.toggleCheckbox}
                   setDate={this.setDate}
-                  toggleExpiryDateSearch={this.toggleExpiryDateSearch}
+                  selectDateOption={this.selectDateOption}
                 />
               </div>
               <div className='w-50-ns w-100'>

@@ -24,19 +24,21 @@ class EditContractModal extends react.Component {
       },
       selectedStatus: '',
       selectedLawyer: '',
-      selectedBusinessUnit: ''
+      selectedBusinessUnit: '',
+      initialContractTags: []
     }
   }
 
   componentWillMount () {
     let copy = _.cloneDeep(this.props.contract)
-    console.log(copy)
     if (copy) {
       this.setState({
         contract: _.omit(copy, 'lawyerName'),
         selectedStatus: copy.currentStatus.name,
         selectedLawyer: copy.assignedTo.id,
-        selectedBusinessUnit: copy.businessUnit.name
+        selectedBusinessUnit: copy.businessUnit.name,
+        initialContractTags: copy.tags,
+        initialStatus: copy.currentStatus
       })
     }
   }
@@ -60,7 +62,6 @@ class EditContractModal extends react.Component {
   }
 
   handleStatusChange = e => {
-    console.log(e)
     let { contract } = this.state
     let date = new Date().getTime()
     let newStatus = { ...e, date }
@@ -145,7 +146,7 @@ class EditContractModal extends react.Component {
   render () {
     let { isOpen, closeModal } = this.props
     let { lawyers, statuses, businessUnits } = this.props.data
-    let { contract } = this.state
+    let { contract, initialContractTags, initialStatus } = this.state
 
     let businessUnitSelect = null
     businessUnitSelect = (
@@ -184,6 +185,7 @@ class EditContractModal extends react.Component {
       )
     }
     let statusRadios = null
+    statuses = _.uniqBy(_.concat(statuses, initialStatus), 'name')
     statusRadios = statuses.map(s => (
       <div key={s.name} className='fl mr2'>
         <label
@@ -215,11 +217,12 @@ class EditContractModal extends react.Component {
     let tagInputs = null
     if (contract.tags) {
       let { tags } = this.props.data
+      tags = _.uniqBy(_.concat(tags, initialContractTags), 'name')
       let updatedTags = this.processTags(tags, contract.tags)
       tagInputs = updatedTags.map((t, i) => (
         <div className='list'>
           <CheckBox
-            key={i}
+            key={t.color}
             handleCheckboxChange={this.handleCheckboxChange}
             checked={t.checked}
             label={t.name}
@@ -286,7 +289,6 @@ export default graphql(UPDATE_CONTRACT_MUTATION, {
   props ({ ownProps, mutate }) {
     return {
       updateContract (contract, closeModal) {
-        console.log(contract)
         let id = contract.id
         return mutate({
           variables: { contract },

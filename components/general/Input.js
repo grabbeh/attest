@@ -10,14 +10,6 @@ class Input extends react.Component {
     }
   }
 
-  onBlur = () => {
-    this.setState({ active: false })
-  }
-
-  onFocus = () => {
-    this.setState({ active: true })
-  }
-
   render () {
     const {
       label,
@@ -26,9 +18,11 @@ class Input extends react.Component {
       name,
       onChange,
       value,
-      error
+      error,
+      onFocus,
+      onBlur
     } = this.props
-    const { active } = this.state
+
     return (
       <div>
         <label htmlFor={value}>
@@ -54,7 +48,8 @@ class Input extends react.Component {
               value={value}
               type={type}
               name={name}
-              onFocus={this.onFocus}
+              onFocus={onFocus}
+              onBlur={onBlur}
             />
             {this.props.onClick
               ? <div

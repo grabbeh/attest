@@ -14,11 +14,13 @@ const ContractSchema = mongoose.Schema({
   rollingTerm: Boolean,
   tags: [
     {
-      name: String
+      name: String,
+      color: String
     }
   ],
   businessUnit: {
-    name: String
+    name: String,
+    color: String
   },
   currentStatus: {
     name: String,
@@ -60,7 +62,8 @@ const MasterEntitySchema = mongoose.Schema({
   name: String,
   businessUnits: [
     {
-      name: String
+      name: String,
+      color: String
     }
   ],
   statuses: [
@@ -70,7 +73,7 @@ const MasterEntitySchema = mongoose.Schema({
       color: String
     }
   ],
-  tags: [{ name: String }],
+  tags: [{ name: String, color: String }],
   lawyers: Array,
   relatedEntities: Array
 })

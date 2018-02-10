@@ -50,6 +50,7 @@ export default class MyDocument extends Document {
                 
 
               body {
+                height: 100%;
                 font-family: 'shapefont';
                 text-rendering: optimizeLegibility;
                 -webkit-font-smoothing: antialiased;

@@ -5,6 +5,7 @@ export default gql`
     masterEntity {
       businessUnits {
         name
+        color
       }
       statuses {
         name
@@ -12,6 +13,7 @@ export default gql`
       }
       tags {
         name
+        color
       }
       lawyers
   }

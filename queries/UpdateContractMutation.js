@@ -17,9 +17,11 @@ mutation updateContract($contract: PostContractWithID) {
     }
     tags {
       name
+      color
     }
     businessUnit {
       name
+      color
     }
     assignedTo {
       firstName

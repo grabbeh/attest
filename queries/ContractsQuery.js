@@ -14,9 +14,11 @@ query contracts {
     }
     tags {
       name
+      color
     }
     businessUnit {
       name
+      color
     }
     currentStatus {
       name

@@ -2,6 +2,7 @@ import react from 'react'
 import HideToggle from '../general/Hide'
 import DatePicker from 'react-datepicker'
 import CheckboxList from '../general/CheckboxList'
+import Radio from '../general/Radio'
 
 class Filter extends react.Component {
   constructor (props) {
@@ -12,7 +13,8 @@ class Filter extends react.Component {
         startDate: null,
         endDate: null
       },
-      expiryDateSearch: false,
+      dateSearchOptions: [{ name: 'General' }, { name: 'Expiry date' }],
+      selectedDateOption: 'General',
       error: {
         finishBeforeStart: false
       }
@@ -25,9 +27,9 @@ class Filter extends react.Component {
     this.setState({ dateRange })
   }
 
-  handleExpiryToggle = () => {
-    this.setState({ expiryDateSearch: !this.state.expiryDateSearch })
-    this.props.toggleExpiryDateSearch(!this.state.expiryDateSearch)
+  selectDateOption = s => {
+    this.props.selectDateOption(s)
+    this.setState({ selectedDateOption: s.name })
   }
 
   handleChangeEnd = date => {
@@ -60,7 +62,7 @@ class Filter extends react.Component {
     const { statuses, tags, businessUnits, lawyers } = this.props.initialValues
     const { toggleCheckbox } = this.props
     const { startDate, endDate } = this.state.dateRange
-    const { error } = this.state
+    const { error, dateSearchOptions, selectedDateOption } = this.state
 
     return (
       <div className='bg-white mr3-ns mr0 pa3 ba b--black-20'>
@@ -91,17 +93,15 @@ class Filter extends react.Component {
         </HideToggle>
         <HideToggle title='Dates'>
           <div className='pl3 fl mt2'>
-            <span className='mr2'>Current status</span>
-            <span onClick={this.handleExpiryToggle}>
-              {this.state.expiryDateSearch
-                ? <i className='fa fa-toggle-on fa-lg' />
-                : <i className='fa fa-toggle-off fa-lg' />}
-            </span>
-            <span className='ml2'>Expiry date</span>
+            <Radio
+              items={dateSearchOptions}
+              selectedItem={selectedDateOption}
+              handleChange={this.selectDateOption}
+            />
             <div className='cf' />
             <div className='fl mt2 mr2'>
               <DatePicker
-                className='w4'
+                className='w4 font b--blue ba bw1 pa1 tc'
                 selected={startDate}
                 selectsStart
                 startDate={startDate}
@@ -116,7 +116,7 @@ class Filter extends react.Component {
             </div>
             <div className='fl mr2 mt2'>
               <DatePicker
-                className='pl2 w4'
+                className='pl2 w4 font b--blue ba bw1 pa1 tc'
                 selected={endDate}
                 selectsEnd
                 startDate={startDate}

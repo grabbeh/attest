@@ -7,6 +7,7 @@ mutation updateMasterEntity($masterEntity: PostMasterEntity) {
     name
     businessUnits {
       name
+      color
     }
     statuses {
       name
@@ -14,6 +15,7 @@ mutation updateMasterEntity($masterEntity: PostMasterEntity) {
     }
     tags {
       name
+      color
     }
     relatedEntities
   }
