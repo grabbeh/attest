@@ -1,4 +1,3 @@
-import React from 'react'
 import { graphql } from 'react-apollo'
 import _ from 'lodash'
 import CONTRACTS_QUERY from '../../queries/ContractsQuery'
@@ -24,12 +23,7 @@ const DeleteButtonMutation = graphql(DELETE_CONTRACT_MUTATION, {
           update: store => {
             const data = store.readQuery({ query: CONTRACTS_QUERY })
             let copy = data.contracts
-            const revisedContracts = _.without(
-              copy,
-              _.find(copy, {
-                id: ownProps.id
-              })
-            )
+            const revisedContracts = _.without(copy, _.find(copy, { id }))
             data.contracts = revisedContracts
             store.writeQuery({ query: CONTRACTS_QUERY, data })
           }

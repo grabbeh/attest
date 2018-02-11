@@ -4,8 +4,8 @@ import ContractsHolder from './ContractsHolder'
 import Loading from '../general/Loading'
 
 const ContractsContainer = props => {
-  if (props.loading) return <Loading />
-  else return <ContractsHolder {...props} />
+  if (!props.loading) return <ContractsHolder {...props} />
+  return <Loading />
 }
 
 const ContractsQuery = graphql(CONTRACTS_QUERY, {

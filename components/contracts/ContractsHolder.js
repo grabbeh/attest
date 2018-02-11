@@ -85,6 +85,10 @@ class ContractsHolder extends react.Component {
     return [...set]
   }
 
+  componentWillReceiveProps (nextProps) {
+    this.setState({ contracts: nextProps.contracts })
+  }
+
   toggleCheckbox = label => {
     let { statuses, tags, businessUnits, lawyers } = this.state.initialValues
     statuses = statuses.map(s => {
@@ -112,12 +116,6 @@ class ContractsHolder extends react.Component {
         )
       }
     })
-  }
-
-  componentWillReceiveProps (nextProps) {
-    if (this.props.loading) {
-      this.setNewData(nextProps)
-    }
   }
 
   render () {

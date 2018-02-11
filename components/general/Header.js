@@ -9,10 +9,9 @@ class Header extends react.Component {
   }
 
   logout = () => {
+    redirect({}, '/')
+    this.props.client.resetStore()
     document.cookie = cookie.serialize('token', '')
-    this.props.client.resetStore().then(() => {
-      redirect({}, '/')
-    })
   }
 
   render () {

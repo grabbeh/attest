@@ -222,7 +222,7 @@ class EditContractModal extends react.Component {
       tagInputs = updatedTags.map((t, i) => (
         <div className='list'>
           <CheckBox
-            key={t.color}
+            key={t.name}
             handleCheckboxChange={this.handleCheckboxChange}
             checked={t.checked}
             label={t.name}
@@ -294,7 +294,7 @@ export default graphql(UPDATE_CONTRACT_MUTATION, {
           variables: { contract },
           update: (store, response) => {
             let updatedContract = response.data.updateContract
-            const data = store.readQuery({ query: CONTRACTS_QUERY })
+            let data = store.readQuery({ query: CONTRACTS_QUERY })
             _.extend(_.find(data.contracts, { id }), updatedContract)
             store.writeQuery({ query: CONTRACTS_QUERY, data })
             closeModal()

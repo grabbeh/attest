@@ -6,7 +6,7 @@ import MASTER_ENTITY_METADATA_QUERY
 import UPDATE_MASTER_ENTITY_MUTATION
   from '../../queries/UpdateMasterEntityMutation'
 
-const SettingsData = props => {
+const SettingsContainer = props => {
   if (props.loading) return <Loading />
   else return <Settings {...props} />
 }
@@ -37,6 +37,6 @@ const UpdateMasterEntityMutation = graphql(UPDATE_MASTER_ENTITY_MUTATION, {
 const SettingsFormWithQueries = compose(
   MasterEntityMetaDataQuery,
   UpdateMasterEntityMutation
-)(SettingsData)
+)(SettingsContainer)
 
 export default SettingsFormWithQueries

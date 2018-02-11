@@ -18,7 +18,7 @@ const ContractsList = ({ contracts, data }) => (
           </ul>
         </section>
       </div>
-      : <div className='pa3 f4 bg-white b mt3'>
+      : <div className='ba b--black-20 pa3 f4 bg-white b mt3'>
           No matching contracts
         </div>}
   </div>

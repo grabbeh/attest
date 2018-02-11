@@ -6,8 +6,8 @@ import Loading from '../general/Loading'
 import redirect from '../../lib/Redirect'
 
 const AddContractContainer = props => {
-  if (props.loading) return <Loading />
-  else return <AddContractForm {...props} />
+  if (!props.loading) return <AddContractForm {...props} />
+  return <Loading />
 }
 
 const MetaDataQuery = graphql(CONTRACT_METADATA_QUERY, {

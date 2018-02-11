@@ -39,6 +39,7 @@ query contracts {
     name
     businessUnits {
       name
+      color
     }
     statuses {
       name
@@ -46,6 +47,7 @@ query contracts {
     }
     tags {
       name
+      color
     }
     lawyers
   }

@@ -5,6 +5,7 @@ mutation updateContract($contract: PostContractWithID) {
   updateContract(contract: $contract) {
     internalParties
     externalParties
+    id
     currentStatus {
       name 
       color
