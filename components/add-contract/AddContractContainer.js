@@ -1,5 +1,6 @@
 import ADD_CONTRACT_MUTATION from '../../queries/AddContractMutation'
 import CONTRACT_METADATA_QUERY from '../../queries/ContractMetaDataQuery'
+import CONTRACTS_QUERY from '../../queries/ContractsQuery'
 import { graphql, compose } from 'react-apollo'
 import AddContractForm from './AddContract'
 import Loading from '../general/Loading'
@@ -24,6 +25,10 @@ const AddContractMutation = graphql(ADD_CONTRACT_MUTATION, {
         return mutate({
           variables: { contract },
           update: (store, response) => {
+            let contract = response.data.addContract
+            let data = store.readQuery({ query: CONTRACTS_QUERY })
+            data.contracts.push(contract)
+            store.writeQuery({ query: CONTRACTS_QUERY, data })
             redirect({}, '/contracts')
           }
         })

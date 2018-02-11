@@ -3,6 +3,8 @@ import gql from 'graphql-tag'
 export default gql`
 mutation addContract($contract: PostContract) {
   addContract(contract: $contract) {
+    id
+    expiryDate
     internalParties
     externalParties
     currentStatus {
