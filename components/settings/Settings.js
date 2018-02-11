@@ -1,8 +1,3 @@
-import MASTER_ENTITY_METADATA_QUERY
-  from '../../queries/MasterEntityMetaDataQuery'
-import UPDATE_MASTER_ENTITY_MUTATION
-  from '../../queries/UpdateMasterEntityMutation'
-import { graphql, compose } from 'react-apollo'
 import react from 'react'
 import Input from '../general/Input'
 import cn from 'classnames'
@@ -14,7 +9,6 @@ import FormButton from '../styles/FormButton'
 import FormTitle from '../styles/FormTitle'
 import SectionTitle from '../styles/SectionTitle'
 import ClearFix from '../styles/ClearFix'
-import Loading from '../general/Loading'
 import Flex from '../styles/Flex'
 import SideColumn from '../side-menu/SideColumn'
 import Box from '../styles/Box'
@@ -26,43 +20,37 @@ class SettingsForm extends react.Component {
   constructor (props) {
     super(props)
     this.state = {
-      businessUnits: '',
+      businessUnits: props.masterEntity.businessUnits,
       businessUnitName: '',
-      tags: '',
+      tags: props.masterEntity.tags,
       tagName: '',
-      statuses: '',
+      statuses: props.masterEntity.statuses,
       statusName: ''
     }
   }
 
   setStatusColor = (label, color, index) => {
     let { statuses } = this.state
-    let status = statuses[index]
-    let revisedStatus = { ...status }
-    revisedStatus.color = color
-    let revisedStatuses = [...statuses]
-    revisedStatuses.splice(index, 1, revisedStatus)
-    this.setState({ statuses: revisedStatuses })
+    let revisedStatus = { ...statuses[index], color }
+    let copy = [...statuses]
+    copy.splice(index, 1, revisedStatus)
+    this.setState({ statuses: copy })
   }
 
   setTagColor = (label, color, index) => {
     let { tags } = this.state
-    let tag = tags[index]
-    let revisedTag = { ...tag }
-    revisedTag.color = color
-    let revisedTags = [...tags]
-    revisedTags.splice(index, 1, revisedTag)
-    this.setState({ tags: revisedTags })
+    let revisedTag = { ...tags[index], color }
+    let copy = [...tags]
+    copy.splice(index, 1, revisedTag)
+    this.setState({ tags: copy })
   }
 
   setBusinessUnitColor = (label, color, index) => {
     let { businessUnits } = this.state
-    let unit = businessUnits[index]
-    let revisedUnit = { ...unit }
-    revisedUnit.color = color
-    let revisedUnits = [...businessUnits]
-    revisedUnits.splice(index, 1, revisedUnit)
-    this.setState({ businessUnits: revisedUnits })
+    let revisedUnit = { ...businessUnits[index], color }
+    let copy = [...businessUnits]
+    copy.splice(index, 1, revisedUnit)
+    this.setState({ businessUnits: copy })
   }
 
   handleSubmit = e => {
@@ -79,25 +67,19 @@ class SettingsForm extends react.Component {
 
   addBusinessUnit = () => {
     let { businessUnits, businessUnitName } = this.state
-    let newUnit = { name: businessUnitName }
-    let revised = [newUnit, ...businessUnits]
-    this.setState({
-      businessUnits: revised,
-      businessUnitName: ''
-    })
+    let revised = [{ name: businessUnitName }, ...businessUnits]
+    this.setState({ businessUnits: revised, businessUnitName: '' })
   }
 
   addTag = () => {
     let { tags, tagName } = this.state
-    let newTag = { name: tagName }
-    let revised = [newTag, ...tags]
+    let revised = [{ name: tagName }, ...tags]
     this.setState({ tags: revised, tagName: '' })
   }
 
   addStatus = () => {
     let { statuses, state, statusName } = this.state
-    let status = { name: statusName }
-    let revised = [status, ...statuses]
+    let revised = [{ name: statusName }, ...statuses]
     this.setState({ statuses: revised, statusName: '' })
   }
 
@@ -120,24 +102,31 @@ class SettingsForm extends react.Component {
   }
 
   render () {
-    if (this.props.data.masterEntity) {
-      let { businessUnitName, tagName, statusName } = this.state
-      let { businessUnits, tags, statuses } = this.props.data.masterEntity
-      return (
-        <Box>
-          <form>
-            <FormTitle title='Filters' />
-            <FormSection>
-              <Input
-                onChange={this.saveToState}
-                value={businessUnitName}
-                label='Business unit'
-                name='businessUnitName'
-                onClick={this.addBusinessUnit}
-              />
-              <ClearFix />
-              <ul className='mt1 list ma0 pa0'>
-                {businessUnits.map((b, i) => (
+    let {
+      businessUnitName,
+      tagName,
+      statusName,
+      businessUnits,
+      tags,
+      statuses
+    } = this.state
+
+    return (
+      <Box>
+        <form>
+          <FormTitle title='Filters' />
+          <FormSection>
+            <Input
+              onChange={this.saveToState}
+              value={businessUnitName}
+              label='Business unit'
+              name='businessUnitName'
+              onClick={this.addBusinessUnit}
+            />
+            <ClearFix />
+            <ul className='mt1 list ma0 pa0'>
+              {businessUnits &&
+                businessUnits.map((b, i) => (
                   <DeleteCheckbox
                     checked
                     handleCheckboxChange={this.deleteBusinessUnit}
@@ -148,20 +137,21 @@ class SettingsForm extends react.Component {
                     setColor={this.setBusinessUnitColor}
                   />
                 ))}
-              </ul>
-            </FormSection>
+            </ul>
+          </FormSection>
+          <ClearFix />
+          <FormSection>
+            <Input
+              onChange={this.saveToState}
+              value={tagName}
+              label='Tag'
+              name='tagName'
+              onClick={this.addTag}
+            />
             <ClearFix />
-            <FormSection>
-              <Input
-                onChange={this.saveToState}
-                value={tagName}
-                label='Tag'
-                name='tagName'
-                onClick={this.addTag}
-              />
-              <ClearFix />
-              <ul className='mt1 list ma0 pa0'>
-                {tags.map((t, i) => (
+            <ul className='mt1 list ma0 pa0'>
+              {tags &&
+                tags.map((t, i) => (
                   <DeleteCheckbox
                     checked
                     handleCheckboxChange={this.deleteTag}
@@ -172,22 +162,22 @@ class SettingsForm extends react.Component {
                     setColor={this.setTagColor}
                   />
                 ))}
-              </ul>
-            </FormSection>
+            </ul>
+          </FormSection>
+          <ClearFix />
+          <FormSection>
+            <Input
+              onChange={this.saveToState}
+              value={statusName}
+              label='Status'
+              name='statusName'
+              onClick={this.addStatus}
+            />
             <ClearFix />
-            <FormSection>
-              <Input
-                onChange={this.saveToState}
-                value={statusName}
-                label='Status'
-                name='statusName'
-                onClick={this.addStatus}
-              />
-              <ClearFix />
-
-              <ClearFix />
-              <ul className='mt1 list ma0 pa0'>
-                {statuses.map((s, i) => (
+            <ClearFix />
+            <ul className='mt1 list ma0 pa0'>
+              {statuses &&
+                statuses.map((s, i) => (
                   <DeleteCheckbox
                     checked
                     handleCheckboxChange={this.deleteStatus}
@@ -198,44 +188,15 @@ class SettingsForm extends react.Component {
                     setColor={this.setStatusColor}
                   />
                 ))}
-              </ul>
-            </FormSection>
-            <ClearFix />
-            <FormButton onClick={this.handleSubmit} text='Submit' />
-            <ClearFix />
-          </form>
-        </Box>
-      )
-    }
-    return <Loading />
+            </ul>
+          </FormSection>
+          <ClearFix />
+          <FormButton onClick={this.handleSubmit} text='Submit' />
+          <ClearFix />
+        </form>
+      </Box>
+    )
   }
 }
 
-const MasterEntityMetaDataQuery = graphql(MASTER_ENTITY_METADATA_QUERY, {
-  props: ({ data }) => ({
-    data
-  })
-})
-
-const UpdateMasterEntityMutation = graphql(UPDATE_MASTER_ENTITY_MUTATION, {
-  props ({ mutate }) {
-    return {
-      updateMasterEntity (masterEntity) {
-        return mutate({
-          variables: { masterEntity },
-          update: (store, response) => {
-            console.log(response)
-            // redirect({}, '/contracts')
-          }
-        })
-      }
-    }
-  }
-})
-
-const SettingsFormWithQueries = compose(
-  MasterEntityMetaDataQuery,
-  UpdateMasterEntityMutation
-)(SettingsForm)
-
-export default SettingsFormWithQueries
+export default SettingsForm

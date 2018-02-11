@@ -1,6 +1,6 @@
-import ContractsData from '../components/contracts/ContractsData'
+import ContractsContainer from '../components/contracts/ContractsContainer'
 import { AuthPage } from '../components/Page'
 
-const ContractsPage = AuthPage(props => <ContractsData {...props} />)
+const ContractsPage = AuthPage(props => <ContractsContainer {...props} />)
 
 export default ContractsPage

@@ -16,12 +16,12 @@ class ContractsHolder extends react.Component {
   constructor (props) {
     super(props)
     this.state = {
-      loading: true,
+      contracts: props.contracts,
       initialValues: {
-        statuses: [],
-        tags: [],
-        businessUnits: [],
-        lawyers: []
+        statuses: props.currentStatuses,
+        tags: props.currentTags,
+        businessUnits: props.currentBusinessUnits,
+        lawyers: props.currentLawyers
       },
       filters: {
         statuses: [],
@@ -37,6 +37,12 @@ class ContractsHolder extends react.Component {
       searchTerm: '',
       liveInput: false,
       activeMenu: false
+    }
+    this.set = {
+      statuses: new Set(),
+      tags: new Set(),
+      businessUnits: new Set(),
+      lawyers: new Set()
     }
   }
 
@@ -108,104 +114,59 @@ class ContractsHolder extends react.Component {
     })
   }
 
-  setNewData = data => {
-    let {
-      contracts,
-      currentStatuses,
-      currentTags,
-      currentBusinessUnits,
-      currentLawyers
-    } = data
-
-    let initialValues = {
-      statuses: currentStatuses,
-      tags: currentTags,
-      businessUnits: currentBusinessUnits,
-      lawyers: currentLawyers
-    }
-    this.setState({ initialValues })
-
-    this.set = {
-      statuses: new Set(),
-      tags: new Set(),
-      businessUnits: new Set(),
-      lawyers: new Set()
-    }
-
-    this.setState({ loading: false })
-  }
-
-  componentDidMount () {
-    this.setNewData(this.props.data)
-  }
-
   componentWillReceiveProps (nextProps) {
-    if (this.props.data.loading) {
-      this.setNewData(nextProps.data)
+    if (this.props.loading) {
+      this.setNewData(nextProps)
     }
   }
 
   render () {
-    let { initialValues, filters } = this.state
-    if (this.props.data.contracts) {
-      let { contracts } = this.props.data
-      let {
-        statuses,
-        tags,
-        businessUnits,
-        lawyers,
-        name
-      } = this.props.data.masterEntity
+    let { initialValues, filters, contracts } = this.state
+    let { name } = this.props.masterEntity
 
-      let editFormData = {
-        businessUnits,
-        lawyers,
-        tags,
-        statuses
-      }
+    let filteredContracts = filter(filters, contracts)
 
-      let filteredContracts = filter(filters, contracts)
-
-      if (this.state.searchTerm.length > 0 && !this.state.liveInput) {
-        filteredContracts = this.getSearchResults(
-          this.state.searchTerm,
-          filteredContracts
-        )
-      }
-      return (
-        <div>
-          <div className='pa3-ns pa0 pt3'>
-            <Flex>
-              <div className='w-50-ns w-100'>
-                <Title name={name} />
-              </div>
-              <div className='w-50-ns w-100'>
-                <SearchInput
-                  handleSearchInput={this.handleSearchInput}
-                  searchTerm={this.state.searchTerm}
-                  clear={this.clearSearchTerm}
-                />
-              </div>
-            </Flex>
-            <Flex>
-              <div className='w-50-ns w-100'>
-                <Filter
-                  initialValues={initialValues}
-                  toggleCheckbox={this.toggleCheckbox}
-                  setDate={this.setDate}
-                  selectDateOption={this.selectDateOption}
-                />
-              </div>
-              <div className='w-50-ns w-100'>
-                <SummaryBox contracts={filteredContracts} filters={filters} />
-              </div>
-            </Flex>
-            <ContractsList contracts={filteredContracts} data={editFormData} />
-          </div>
-        </div>
+    if (this.state.searchTerm.length > 0 && !this.state.liveInput) {
+      filteredContracts = this.getSearchResults(
+        this.state.searchTerm,
+        filteredContracts
       )
     }
-    return <Loading />
+    return (
+      <div>
+        <div className='pa3-ns pa0 pt3'>
+          <Flex>
+            <div className='w-50-ns w-100'>
+              <Title name={name} />
+            </div>
+            <div className='w-50-ns w-100'>
+              <SearchInput
+                handleSearchInput={this.handleSearchInput}
+                searchTerm={this.state.searchTerm}
+                clear={this.clearSearchTerm}
+              />
+            </div>
+          </Flex>
+          <Flex>
+            <div className='w-50-ns w-100'>
+              <Filter
+                initialValues={initialValues}
+                toggleCheckbox={this.toggleCheckbox}
+                setDate={this.setDate}
+                selectDateOption={this.selectDateOption}
+              />
+            </div>
+            <div className='w-50-ns w-100'>
+              <SummaryBox contracts={filteredContracts} filters={filters} />
+            </div>
+          </Flex>
+          <ContractsList
+            contracts={filteredContracts}
+            data={this.props.masterEntity}
+          />
+        </div>
+      </div>
+    )
   }
 }
 
