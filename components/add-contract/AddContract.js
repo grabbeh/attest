@@ -19,11 +19,11 @@ import _ from 'lodash'
 class AddContractForm extends react.Component {
   constructor (props) {
     super(props)
-
     this.state = {
       selectedStatus: '',
       selectedBusinessUnit: '',
       selectedLawyer: '',
+      initialTags: [],
       externalPartyError: '',
       lawyers: props.masterEntity.lawyers,
       tags: props.masterEntity.tags,
@@ -43,6 +43,23 @@ class AddContractForm extends react.Component {
         assignedTo: { firstName: '', lastName: '' }
       }
     }
+  }
+
+  processTags = (allTags, currentTags) => {
+    let result = allTags.map(tag => {
+      let checked = false
+      currentTags.map(a => {
+        if (a.name === tag.name) {
+          checked = true
+        }
+      })
+      return {
+        checked: checked,
+        name: tag.name,
+        color: tag.color
+      }
+    })
+    return result
   }
 
   handleExecutionDate = date => {
@@ -82,7 +99,9 @@ class AddContractForm extends react.Component {
   handleClick = e => {
     e.preventDefault()
     const err = this.validate()
-    if (!err) this.props.addContract(this.state.contract)
+    if (!err) {
+      this.props.handleContract(this.state.contract, this.props.closeModal)
+    }
   }
 
   saveToState = e => {
@@ -110,7 +129,7 @@ class AddContractForm extends react.Component {
   handleLawyerChange = e => {
     let id = e.target.value
     let { contract } = this.state
-    const { lawyers } = this.props.data.masterEntity
+    const { lawyers } = this.props.masterEntity
     lawyers.forEach(lawyer => {
       if (lawyer.id == id) {
         let newLawyer = lawyer
@@ -138,18 +157,35 @@ class AddContractForm extends react.Component {
   handleCheckboxChange = label => {
     let { tags } = this.props.masterEntity
     let selectedTags = this.state.contract.tags
+
     let relevantTag = _.find(tags, { name: label })
     if (_.find(selectedTags, { name: label })) {
       _.remove(selectedTags, { name: label })
     } else {
       selectedTags.push(relevantTag)
     }
-
+    console.log(selectedTags)
     let { contract } = this.state
-    //  let { selectedTags } = this.state.contract
-
     contract.tags = selectedTags
-    this.setState({ contract: contract })
+    this.setState({ contract })
+  }
+  /*
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.contract) {
+      this.setState({ contract: nextProps.contract })
+    }
+  } */
+
+  componentWillMount () {
+    if (this.props.contract) {
+      let { contract } = this.props
+      this.setState({
+        contract,
+        selectedStatus: contract.currentStatus.name,
+        selectedBusinessUnit: contract.businessUnit.name,
+        initialTags: contract.tags
+      })
+    }
   }
 
   render () {
@@ -158,6 +194,7 @@ class AddContractForm extends react.Component {
       selectedStatus,
       selectedLawyer,
       selectedBusinessUnit,
+      initialTags,
       businessUnits,
       lawyers,
       tags,
@@ -187,25 +224,27 @@ class AddContractForm extends react.Component {
     }
 
     let tagInputs = null
-    if (tags && tags.length) {
-      tagInputs = (
-        <div className='list flex flex-wrap'>
-          {tags.map(t => (
-            <CheckBox
-              key={t.name}
-              handleCheckboxChange={this.handleCheckboxChange}
-              checked={false}
-              label={t.name}
-              value={t.name}
-            />
-          ))}
+    if (tags) {
+      tags = _.uniqBy(_.concat(tags, initialTags), 'name')
+      let updatedTags = this.processTags(tags, contract.tags)
+      tagInputs = updatedTags.map((t, i) => (
+        <div className='list'>
+          <CheckBox
+            key={t.name}
+            handleCheckboxChange={this.handleCheckboxChange}
+            checked={t.checked}
+            label={t.name}
+            value={t.name}
+            color={t.color}
+          />
         </div>
-      )
+      ))
     }
+
     return (
       <Box>
         <form>
-          <FormTitle title='Add contract' />
+          <FormTitle title={this.props.title} />
           <FormSection>
             <Input
               onChange={this.saveToState}

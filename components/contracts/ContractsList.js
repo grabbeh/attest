@@ -1,17 +1,20 @@
 import Contract from './Contract'
 import ContractHolder from './ContractHolder'
 
-const ContractsList = ({ contracts, data }) => (
+const ContractsList = props => (
   <div>
-    {contracts.length > 0
+    {props.contracts.length > 0
       ? <div>
         <div className='cf' />
         <section className='mv3'>
           <ul className='flex flex-wrap list pa0 ma0'>
-            {contracts.map((contract, index) => (
+            {props.contracts.map((contract, index) => (
               <div key={contract.id} className='mb3 w-50-ns w-25-l w-100'>
                 <ContractHolder index={index}>
-                  <Contract data={data} contract={contract} />
+                  <Contract
+                    masterEntity={props.masterEntity}
+                    contract={contract}
+                    />
                 </ContractHolder>
               </div>
               ))}

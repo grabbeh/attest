@@ -7,7 +7,7 @@ import Loading from '../general/Loading'
 import redirect from '../../lib/Redirect'
 
 const AddContractContainer = props => {
-  if (!props.loading) return <AddContractForm {...props} />
+  if (!props.loading) return <AddContractForm title='Add Contract' {...props} />
   return <Loading />
 }
 
@@ -21,7 +21,7 @@ const MetaDataQuery = graphql(CONTRACT_METADATA_QUERY, {
 const AddContractMutation = graphql(ADD_CONTRACT_MUTATION, {
   props ({ mutate }) {
     return {
-      addContract (contract) {
+      handleContract (contract) {
         return mutate({
           variables: { contract },
           update: (store, response) => {

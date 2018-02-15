@@ -1,5 +1,5 @@
 import DeleteButton from './DeleteButton'
-import EditContractModal from '../../modals/EditContractModal'
+import EditContractContainer from '../../modals/EditContractContainer'
 import Moment from 'react-moment'
 import React from 'react'
 import Modal from 'react-modal'
@@ -46,7 +46,7 @@ class Contract extends React.Component {
     if (statuses.length > 0) {
       let effectiveDate = _.last(statuses).date
     }
-    const data = this.props
+    const { masterEntity } = this.props
 
     return (
       <div>
@@ -79,11 +79,11 @@ class Contract extends React.Component {
                 <i className='pointer fa fa-pencil' />
               </button>
               {this.state.editableContract
-                ? <EditContractModal
+                ? <EditContractContainer
                   isOpen={this.state.modalIsOpen}
                   closeModal={this.closeModal}
                   contract={this.state.editableContract}
-                  {...data}
+                  masterEntity={masterEntity}
                   />
                 : <div />}
             </li>

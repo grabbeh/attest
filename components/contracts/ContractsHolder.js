@@ -160,7 +160,7 @@ class ContractsHolder extends react.Component {
           </Flex>
           <ContractsList
             contracts={filteredContracts}
-            data={this.props.masterEntity}
+            masterEntity={this.props.masterEntity}
           />
         </div>
       </div>
