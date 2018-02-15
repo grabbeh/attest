@@ -92,15 +92,15 @@ class ContractsHolder extends react.Component {
   toggleCheckbox = label => {
     let { statuses, tags, businessUnits, lawyers } = this.state.initialValues
     statuses = statuses.map(s => {
-      return { filter: s, type: 'status', category: 'statuses' }
+      return { filter: s.name, type: 'status', category: 'statuses' }
     })
 
     tags = tags.map(t => {
-      return { filter: t, type: 'tag', category: 'tags' }
+      return { filter: t.name, type: 'tag', category: 'tags' }
     })
 
     businessUnits = businessUnits.map(b => {
-      return { filter: b, type: 'businessUnit', category: 'businessUnits' }
+      return { filter: b.name, type: 'businessUnit', category: 'businessUnits' }
     })
 
     lawyers = lawyers.map(l => {

@@ -1,6 +1,6 @@
 const ContractSquareList = ({ contracts }) => (
   <div>
-    <div className='dim pointer'>
+    <div className='fl dim pointer'>
       {contracts.map(contract => (
         <div
           key={contract.id}

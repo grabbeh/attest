@@ -39,7 +39,21 @@ const resolvers = {
       let tags = _.uniq(
         _.map(_.flatten(_.concat(_.map(contracts, 'tags'))), 'name')
       )
-      return tags
+      let entity = await MasterEntity.findById(user.masterEntityID)
+
+      let updatedTags = tags.map(name => {
+        let color = 'blue'
+        entity.tags.map(i => {
+          if (i.name === name) {
+            color = i.color
+          }
+        })
+        return {
+          color,
+          name
+        }
+      })
+      return updatedTags
     },
     currentBusinessUnits: async (root, args, { user }) => {
       let contracts = await Contract.find({
@@ -48,14 +62,41 @@ const resolvers = {
       let businessUnits = _.uniq(
         _.map(_.map(contracts, 'businessUnit'), 'name')
       )
-      return businessUnits
+      let entity = await MasterEntity.findById(user.masterEntityID)
+      let updatedUnits = businessUnits.map(name => {
+        let color = 'blue'
+        entity.businessUnits.map(i => {
+          if (i.name === name) {
+            color = i.color
+          }
+        })
+        return {
+          color,
+          name
+        }
+      })
+      return updatedUnits
     },
     currentStatuses: async (root, args, { user }) => {
       let contracts = await Contract.find({
         masterEntityID: user.masterEntityID
       })
       let statuses = _.uniq(_.map(_.map(contracts, 'currentStatus'), 'name'))
-      return statuses
+      let entity = await MasterEntity.findById(user.masterEntityID)
+      let updatedStatuses = statuses.map(name => {
+        let color = 'blue'
+        entity.statuses.map(i => {
+          if (i.name === name) {
+            color = i.color
+          }
+        })
+        return {
+          color,
+          name
+        }
+      })
+
+      return updatedStatuses
     },
     currentLawyers: async (root, args, { user }) => {
       let contracts = await Contract.find({
@@ -98,7 +139,7 @@ const resolvers = {
         new: true
       })
     },
-    addContract: (roots, { contract }, { user }) => {
+    addContract: (root, { contract }, { user }) => {
       if (contract.assignedTo && contract.assignedTo.id) {
         contract.assignedTo = contract.assignedTo.id
       } else {
@@ -141,6 +182,36 @@ const resolvers = {
         expiresIn: '365d'
       })
       return token
+    }
+  },
+  Status: {
+    color: async (status, args, { user }) => {
+      let entity = await MasterEntity.findById(user.masterEntityID)
+      let color = status.color
+      entity.statuses.forEach(s => {
+        if (s.name === status.name) color = s.color
+      })
+      return color
+    }
+  },
+  Tag: {
+    color: async (tag, args, { user }) => {
+      let entity = await MasterEntity.findById(user.masterEntityID)
+      let color = tag.color
+      entity.tags.forEach(t => {
+        if (t.name === tag.name) color = t.color
+      })
+      return color
+    }
+  },
+  BusinessUnit: {
+    color: async (businessUnit, args, { user }) => {
+      let entity = await MasterEntity.findById(user.masterEntityID)
+      let color = businessUnit.color
+      entity.businessUnits.forEach(b => {
+        if (b.name === businessUnit.name) color = b.color
+      })
+      return color
     }
   },
   Contract: {

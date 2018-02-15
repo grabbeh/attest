@@ -2,7 +2,6 @@ import DeleteButton from './DeleteButton'
 import EditContractContainer from '../../modals/EditContractContainer'
 import Moment from 'react-moment'
 import React from 'react'
-import Modal from 'react-modal'
 import _ from 'lodash'
 import cn from 'classnames'
 import StatusBar from './StatusBar'
@@ -43,17 +42,14 @@ class Contract extends React.Component {
       assignedTo,
       statuses
     } = this.props.contract
-    if (statuses.length > 0) {
-      let effectiveDate = _.last(statuses).date
-    }
+    let latestDate = _.last(statuses).date
     const { masterEntity } = this.props
-
     return (
       <div>
         <div>
           <div>
             {externalParties.map(party => (
-              <div key={party} className='pb1 b bb b--black-20 bw1'>
+              <div key={party} className='f4 pb1 b bb b--black-20 bw1'>
                 {party}
               </div>
             ))}
@@ -63,9 +59,7 @@ class Contract extends React.Component {
           <BusinessUnit businessUnit={businessUnit} />
           <Lawyer {...assignedTo} />
           <StatusBar status={currentStatus} bold />
-          {currentStatus === 'Executed'
-            ? <DateBar date={effectiveDate} />
-            : null}
+          <DateBar date={latestDate} />
           {tags ? <TagList tags={tags} /> : null}
           <div className='cf' />
         </div>

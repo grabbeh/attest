@@ -1,4 +1,4 @@
-import Contract from './Contract'
+import ContractBox from './ContractBox'
 import ContractHolder from './ContractHolder'
 
 const ContractsList = props => (
@@ -11,7 +11,7 @@ const ContractsList = props => (
             {props.contracts.map((contract, index) => (
               <div key={contract.id} className='mb3 w-50-ns w-25-l w-100'>
                 <ContractHolder index={index}>
-                  <Contract
+                  <ContractBox
                     masterEntity={props.masterEntity}
                     contract={contract}
                     />

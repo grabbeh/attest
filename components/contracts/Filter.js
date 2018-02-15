@@ -2,6 +2,7 @@ import react from 'react'
 import HideToggle from '../general/Hide'
 import DatePicker from 'react-datepicker'
 import CheckboxList from '../general/CheckboxList'
+import CheckboxListTwo from '../general/CheckboxListTwo'
 import Radio from '../general/Radio'
 
 class Filter extends react.Component {
@@ -68,17 +69,17 @@ class Filter extends react.Component {
       <div className='bg-white mr3-ns mr0 pa3 ba b--black-20'>
         <div className='f4 b bb b--black-20 bw1 pb2'>Filters</div>
         <HideToggle title='Statuses'>
-          <CheckboxList content={statuses} toggleCheckbox={toggleCheckbox} />
+          <CheckboxListTwo content={statuses} toggleCheckbox={toggleCheckbox} />
         </HideToggle>
         <HideToggle title='Tags'>
-          <CheckboxList
+          <CheckboxListTwo
             error='Please add filters'
             content={tags}
             toggleCheckbox={toggleCheckbox}
           />
         </HideToggle>
         <HideToggle title='Business Units'>
-          <CheckboxList
+          <CheckboxListTwo
             error='Please add filters'
             content={businessUnits}
             toggleCheckbox={toggleCheckbox}

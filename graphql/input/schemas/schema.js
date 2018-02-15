@@ -8,10 +8,10 @@ type Query {
   masterEntity: MasterEntity
   allUsers: [User]
   user: User
-  currentTags: [String]
-  currentBusinessUnits: [String]
+  currentTags: [Tag]
+  currentBusinessUnits: [BusinessUnit]
   currentLawyers: [String]
-  currentStatuses: [String]
+  currentStatuses: [Status]
 }
 
 type Mutation {

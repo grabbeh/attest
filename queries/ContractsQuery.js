@@ -31,9 +31,18 @@ query contracts {
       id
     }
   }
-  currentTags 
-  currentStatuses
-  currentBusinessUnits
+  currentTags {
+    name
+    color
+  }
+  currentStatuses {
+    name
+    color
+  }
+  currentBusinessUnits {
+    name
+    color
+  }
   currentLawyers
   masterEntity {
     name

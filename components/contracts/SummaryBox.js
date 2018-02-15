@@ -7,10 +7,14 @@ import Flex from '../styles/Flex'
 
 class SummaryBox extends react.Component {
   render () {
-    let o = _.groupBy(this.props.contracts, 'currentStatus')
+    let o = _.groupBy(this.props.contracts, 'currentStatus.name')
     let res = _.keys(o).map(k => {
+      let status = {
+        name: o[k][0].currentStatus.name,
+        color: o[k][0].currentStatus.color
+      }
       return {
-        status: k,
+        status,
         volume: o[k].length
       }
     })
@@ -34,7 +38,7 @@ class SummaryBox extends react.Component {
         <Flex>
           <ul className='w-100 mb2 list pa0 ma0'>
             {res.map(r => (
-              <li key={r.status} className='fl mr4'>
+              <li key={r.status.name} className='fl mr4'>
                 <StatusBar status={r.status} volume={r.volume} />
               </li>
             ))}
@@ -43,7 +47,7 @@ class SummaryBox extends react.Component {
           <div className='cf:after' />
           <div>
             {arr.map(contracts => (
-              <div key={contracts[0].id}>
+              <div className='fl' key={contracts[0].id}>
                 <ContractSquareList contracts={contracts} />
               </div>
             ))}
