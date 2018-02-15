@@ -14,6 +14,16 @@ class SummaryBox extends react.Component {
         volume: o[k].length
       }
     })
+    // For status bar
+    var resFour = _.keys(_.groupBy(_.map(contracts, function(x){
+        return x.currentStatus.name}))).map(function(i){
+          return {
+            status: i,
+            volume: i.length
+          }
+        })
+    
+    
     let arr = _.values(o)
     let { contracts, filters } = this.props
     const { startDate, endDate } = filters.dateRange
