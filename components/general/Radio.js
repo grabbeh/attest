@@ -2,11 +2,21 @@ import cn from 'classnames'
 import react from 'react'
 
 class Radio extends react.Component {
+  
+  getStyle (color) {
+    const { selectedItem } = this.props
+    return {
+      backgroundColor: selectedItem ? color : '',
+      borderColor: color
+    }
+  }
+  
   render () {
     let { items, handleChange, selectedItem } = this.props
     return items.map(s => (
       <div key={s.name} className='fl mr2'>
         <label
+          style={this.getStyle(s.color)}
           className={cn(
             'pointer',
             'fr',
@@ -19,8 +29,7 @@ class Radio extends react.Component {
             'ba',
             'b--blue',
             'bw1',
-            s.name === selectedItem && 'white',
-            s.name === selectedItem && 'bg-blue'
+            s.name === selectedItem && 'white'
           )}
         >
           <input
