@@ -17,11 +17,13 @@ class Header extends react.Component {
   render () {
     const { user } = this.props
     return (
-      <div className='bg--dark-peach pa2 f4 '>
-        <span>Attest</span>
+      <div className='relative front bg--dark-peach pa2 f3'>
+        <span className='b dark-gray'>
+          <i className='mr2 fa fa-file' />Attest
+        </span>
         <span className='fr'>
           {user
-            ? <div className='f4-ns f6'>
+            ? <div className='mt1 f4-ns f6'>
               <span>{user.email}</span>
               <span className='pl2' onClick={this.logout}>
                 <i title='Sign out' className='fa fa-sign-out' />

@@ -11,7 +11,7 @@ import SectionTitle from '../styles/SectionTitle'
 import ClearFix from '../styles/ClearFix'
 import Flex from '../styles/Flex'
 import SideColumn from '../side-menu/SideColumn'
-import Box from '../styles/Box'
+import CenterBox from '../styles/CenterBox'
 import DeleteCheckbox from '../general/DeleteCheckbox'
 import { GithubPicker } from 'react-color'
 import _ from 'lodash'
@@ -112,7 +112,7 @@ class SettingsForm extends react.Component {
     } = this.state
 
     return (
-      <Box>
+      <CenterBox>
         <form>
           <FormTitle title='Filters' />
           <FormSection>
@@ -194,7 +194,7 @@ class SettingsForm extends react.Component {
           <FormButton onClick={this.handleSubmit} text='Submit' />
           <ClearFix />
         </form>
-      </Box>
+      </CenterBox>
     )
   }
 }

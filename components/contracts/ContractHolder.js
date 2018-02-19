@@ -12,11 +12,11 @@ const ContractHolder = ({ children, index }) => (
       'bg-white',
       'f5',
       'pa3',
-      'mb3',
       'overflow-hidden',
       'h-100',
       'ba',
-      'b--black-20'
+      'b--black-20',
+      'dark-gray'
     )}
   >
     {children}

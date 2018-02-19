@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import Line from './Line'
 import Break from './Break'
-import Box from './Box'
 
 export default () => (
   <div>
@@ -38,14 +37,14 @@ export default () => (
           <div className='mt2 bg-light-yellow w-100 pa2'>
             <Line />
             <Line />
-            <Line />
+            <Line medium />
             <div className='mt1 fl bg-black h1 w2' />
             <div className='cf' />
           </div>
           <div className='mt2 bg-light-red w-100 pa2'>
             <Line />
             <Line />
-            <Line />
+            <Line short />
             <div className='mt1 fl bg-navy h1 w2' />
             <div className='mt1 fl ml2 h1 w2 bg-purple pl2' />
             <div className='cf' />
@@ -55,7 +54,7 @@ export default () => (
             <Line />
             <Line />
             <div className='mt1 fl bg-navy h1 w2' />
-            <Box />
+
             <div className='mt1 fl ml2 h1 w2 bg-gray pl2' />
             <div className='cf' />
           </div>
@@ -66,19 +65,19 @@ export default () => (
           <Line />
           <Line />
           <Line />
-          <Line />
+          <Line medium />
           <Break />
           <Line />
           <Line />
           <Line />
           <Line />
           <Line />
-          <Line />
-          <Line />
+          <Line medium />
+          <Line short />
           <Break />
           <Line />
-          <Line />
-          <Line />
+          <Line medium />
+          <Line medium />
 
           <div className='mt3 pa2 bg-dark-blue'>
 

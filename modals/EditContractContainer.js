@@ -4,24 +4,28 @@ import { graphql, compose } from 'react-apollo'
 import AddContractForm from '../components/add-contract/AddContract'
 import Loading from '../components/general/Loading'
 import Modal from 'react-modal'
+import Box from '../components/styles/Box'
+import _ from 'lodash'
 
 const EditContractContainer = props => {
   if (!props.loading) {
     return (
       <Modal
-        className='content ma3 pa0 w-50-ns w-100 center'
+        className='content'
         overlayClassName='overlay'
         onRequestClose={props.closeModal}
         isOpen={props.isOpen}
       >
-        <AddContractForm
-          closeModal={props.closeModal}
-          isOpen={props.isOpen}
-          masterEntity={props.masterEntity}
-          contract={props.contract}
-          title='Edit Contract'
-          handleContract={props.handleContract}
-        />
+        <Box>
+          <AddContractForm
+            closeModal={props.closeModal}
+            isOpen={props.isOpen}
+            masterEntity={props.masterEntity}
+            contract={props.contract}
+            title='Edit Contract'
+            handleContract={props.handleContract}
+          />
+        </Box>
       </Modal>
     )
   }

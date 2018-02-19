@@ -3,7 +3,7 @@ import { graphql } from 'react-apollo'
 import react from 'react'
 import gql from 'graphql-tag'
 import Link from 'next/link'
-import { Page, UserPage } from '../components/Page'
+import { Page, AuthPage } from '../components/Page'
 
 const DATA_QUERY = gql`
   query masterEntity {
@@ -18,7 +18,7 @@ const DATA_QUERY = gql`
 }
 `
 
-const TestPageWithData = UserPage(props => <TestPageWithQuery {...props} />)
+const TestPageWithData = AuthPage(props => <TestPageWithQuery {...props} />)
 
 class TestComponent extends react.Component {
   constructor (props) {
@@ -28,8 +28,7 @@ class TestComponent extends react.Component {
 
   render () {
     return (
-      <div>
-        <div>Test</div>
+      <div className='height blue'>
         <Link href='/test-two'><a>Link</a></Link>
       </div>
     )

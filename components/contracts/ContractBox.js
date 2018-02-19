@@ -10,6 +10,7 @@ import TagList from './TagList'
 import Lawyer from './Lawyer'
 import BusinessUnit from './BusinessUnit'
 import PartyList from './PartyList'
+import Link from 'next/link'
 
 class Contract extends React.Component {
   constructor () {
@@ -70,20 +71,19 @@ class Contract extends React.Component {
                 className='bg-white f6 link dim ph0 dib'
                 onClick={() => this.openModal(this.props.contract)}
               >
-                <i className='pointer fa fa-pencil' />
+                <i className='pointer fa fa-pencil fa-lg' />
               </button>
-              {this.state.editableContract
-                ? <EditContractContainer
+              {this.state.editableContract &&
+                <EditContractContainer
                   isOpen={this.state.modalIsOpen}
                   closeModal={this.closeModal}
                   contract={this.state.editableContract}
                   masterEntity={masterEntity}
-                  />
-                : <div />}
+                />}
             </li>
             <li className='fl mr2 '><DeleteButton id={id} /></li>
-            <li className='fl mr2'><i className='fa fa-eye' /></li>
-            <li className='fl'><i className='fa fa-plus-square' /></li>
+            <li className='fl mr2'><i className='fa fa-eye fa-lg' /></li>
+            <li className='fl'><i className='fa fa-plus-square fa-lg' /></li>
           </ul>
         </div>
         <div className='cf' />

@@ -1,9 +1,17 @@
-import styled from 'tachyons-components'
+import styled, { css } from 'styled-components'
 
-const Line = styled('div')`
-bb mt1 dark-gray  
-${props => (props.short ? 'w1' : '')}
-${props => (props.medium ? 'w2' : '')}
+const Line = styled.div.attrs({
+  className: 'bb mt1 dark-gray'
+})`
+
+
+${props => props.medium && css`
+    width: 50px;
+  `}
+
+  ${props => props.short && css`
+    width: 25px;
+  `}
+
 `
-
 export default Line

@@ -1,6 +1,5 @@
-import styled from 'tachyons-components'
+const ClearFix = () => {
+  return <div className='cf' />
+}
 
-const ClearFix = styled('div')`
-cf
-`
 export default ClearFix

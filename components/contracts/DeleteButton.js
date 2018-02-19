@@ -9,7 +9,7 @@ const DeleteButton = ({ deleteContract, id }) => {
       className='bg-white f6 link dim ph0 dib'
       onClick={() => deleteContract(id)}
     >
-      <i className='pointer fa fa-trash-o' />
+      <i className='pointer fa fa-trash-o fa-lg' />
     </button>
   )
 }

@@ -5,9 +5,14 @@ import { graphql, compose } from 'react-apollo'
 import AddContractForm from './AddContract'
 import Loading from '../general/Loading'
 import redirect from '../../lib/Redirect'
+import CenterBox from '../styles/CenterBox'
 
 const AddContractContainer = props => {
-  if (!props.loading) return <AddContractForm title='Add Contract' {...props} />
+  if (!props.loading) {
+    return (
+      <CenterBox><AddContractForm title='Add Contract' {...props} /></CenterBox>
+    )
+  }
   return <Loading />
 }
 

@@ -7,8 +7,8 @@ class SideColumn extends React.Component {
     return (
       <Flex>
         <div className='w-5'>
-          <div className='bg-dark-gray h-100'>
-            <div className='ml3 pl1 fixed'>
+          <div className='pa3 pt4 bg-dark-gray height fixed'>
+            <div>
               <SlimMenu />
             </div>
           </div>

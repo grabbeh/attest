@@ -7,7 +7,7 @@ import FormButton from '../styles/FormButton'
 import Input from '../general/Input'
 import ClearFix from '../styles/ClearFix'
 import FormTitle from '../styles/FormTitle'
-import Box from '../styles/Box'
+import CenterBox from '../styles/CenterBox'
 
 class LoginForm extends React.Component {
   constructor (props) {
@@ -36,7 +36,7 @@ class LoginForm extends React.Component {
 
   render () {
     return (
-      <Box>
+      <CenterBox>
         <FormTitle title='Login' />
         <form>
           <div className='mt2'>
@@ -62,7 +62,7 @@ class LoginForm extends React.Component {
           <ClearFix />
         </form>
         <div />
-      </Box>
+      </CenterBox>
     )
   }
 }

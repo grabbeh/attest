@@ -228,9 +228,8 @@ class AddContractForm extends react.Component {
       tags = _.uniqBy(_.concat(tags, initialTags), 'name')
       let updatedTags = this.processTags(tags, contract.tags)
       tagInputs = updatedTags.map((t, i) => (
-        <div className='list'>
+        <div key={i} className='list'>
           <CheckBox
-            key={t.name}
             handleCheckboxChange={this.handleCheckboxChange}
             checked={t.checked}
             label={t.name}
@@ -242,91 +241,89 @@ class AddContractForm extends react.Component {
     }
 
     return (
-      <Box>
-        <form>
-          <FormTitle title={this.props.title} />
-          <FormSection>
-            <Input
-              onChange={this.saveToState}
-              value={externalParties}
-              label='External party'
-              name='externalParty'
-              error={this.state.externalPartyError}
-            />
-          </FormSection>
-          <ClearFix />
-          <FormSection>
-            <SectionTitle text='Tags' />
-            {tagInputs || <div>Add tags here</div>}
-          </FormSection>
-          <ClearFix />
-          <FormSection>
-            <SectionTitle text='Status' />
-            {statuses && statuses.length
-              ? <Radio
-                handleChange={this.handleStatusChange}
-                selectedItem={selectedStatus}
-                items={statuses}
-                />
-              : <div>Add statuses here</div>}
-          </FormSection>
-          <ClearFix />
-          <FormSection>
-            <SectionTitle text='Execution date' />
-            <DatePicker
-              className='pa1 mb2 ba b--blue bw1'
-              selected={executionDate}
-              onChange={this.handleExecutionDate}
-              showMonthDropdown
-              showYearDropdown
-              dateFormat='DD/MM/YYYY'
-            />
-          </FormSection>
-          <ClearFix />
-          <FormSection>
-            <SectionTitle text='Effective date' />
-            <DatePicker
-              className='pa1 mb2 ba b--blue bw1'
-              selected={effectiveDate}
-              onChange={this.handleEffectiveDate}
-              showMonthDropdown
-              showYearDropdown
-              dateFormat='DD/MM/YYYY'
-            />
-          </FormSection>
-          <ClearFix />
-          <FormSection>
-            <SectionTitle text='Expiry date' />
-            <DatePicker
-              className='pa1 mb2 ba b--blue bw1'
-              selected={expiryDate}
-              onChange={this.handleExpiryDate}
-              showMonthDropdown
-              showYearDropdown
-              dateFormat='DD/MM/YYYY'
-            />
-          </FormSection>
-          <ClearFix />
-          <FormSection>
-            <SectionTitle text='Business unit' />
-            {businessUnitSelect || <div>Add business units here</div>}
-          </FormSection>
-          <ClearFix />
-          <FormSection>
-            <SectionTitle text='Lawyer' />
-            {lawyers && lawyers.length > 0
-              ? <Select
-                selectedItem={selectedLawyer}
-                items={lawyers}
-                handleChange={this.handleLawyerChange}
-                />
-              : <div>Add lawyers here</div>}
-          </FormSection>
-          <ClearFix />
-          <FormButton onClick={this.handleClick} text='Submit' />
-          <ClearFix />
-        </form>
-      </Box>
+      <form>
+        <FormTitle title={this.props.title} />
+        <FormSection>
+          <Input
+            onChange={this.saveToState}
+            value={externalParties}
+            label='External party'
+            name='externalParty'
+            error={this.state.externalPartyError}
+          />
+        </FormSection>
+        <ClearFix />
+        <FormSection>
+          <SectionTitle text='Tags' />
+          {tagInputs || <div>Add tags here</div>}
+        </FormSection>
+        <ClearFix />
+        <FormSection>
+          <SectionTitle text='Status' />
+          {statuses && statuses.length
+            ? <Radio
+              handleChange={this.handleStatusChange}
+              selectedItem={selectedStatus}
+              items={statuses}
+              />
+            : <div>Add statuses here</div>}
+        </FormSection>
+        <ClearFix />
+        <FormSection>
+          <SectionTitle text='Execution date' />
+          <DatePicker
+            className='pa1 mb2 ba b--blue bw1'
+            selected={executionDate}
+            onChange={this.handleExecutionDate}
+            showMonthDropdown
+            showYearDropdown
+            dateFormat='DD/MM/YYYY'
+          />
+        </FormSection>
+        <ClearFix />
+        <FormSection>
+          <SectionTitle text='Effective date' />
+          <DatePicker
+            className='pa1 mb2 ba b--blue bw1'
+            selected={effectiveDate}
+            onChange={this.handleEffectiveDate}
+            showMonthDropdown
+            showYearDropdown
+            dateFormat='DD/MM/YYYY'
+          />
+        </FormSection>
+        <ClearFix />
+        <FormSection>
+          <SectionTitle text='Expiry date' />
+          <DatePicker
+            className='pa1 mb2 ba b--blue bw1'
+            selected={expiryDate}
+            onChange={this.handleExpiryDate}
+            showMonthDropdown
+            showYearDropdown
+            dateFormat='DD/MM/YYYY'
+          />
+        </FormSection>
+        <ClearFix />
+        <FormSection>
+          <SectionTitle text='Business unit' />
+          {businessUnitSelect || <div>Add business units here</div>}
+        </FormSection>
+        <ClearFix />
+        <FormSection>
+          <SectionTitle text='Lawyer' />
+          {lawyers && lawyers.length > 0
+            ? <Select
+              selectedItem={selectedLawyer}
+              items={lawyers}
+              handleChange={this.handleLawyerChange}
+              />
+            : <div>Add lawyers here</div>}
+        </FormSection>
+        <ClearFix />
+        <FormButton onClick={this.handleClick} text='Submit' />
+        <ClearFix />
+      </form>
     )
   }
 }

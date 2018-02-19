@@ -1,11 +1,16 @@
 import Document, { Head, Main, NextScript } from 'next/document'
+import { ServerStyleSheet } from 'styled-components'
 import flush from 'styled-jsx/server'
 
 export default class MyDocument extends Document {
   static getInitialProps ({ renderPage }) {
-    const { html, head, errorHtml, chunks } = renderPage()
+    const sheet = new ServerStyleSheet()
     const styles = flush()
-    return { html, head, errorHtml, chunks, styles }
+    const page = renderPage(App => props =>
+      sheet.collectStyles(<App {...props} />))
+    const styleTags = sheet.getStyleElement()
+    console.log(page)
+    return { ...page, styleTags, styles }
   }
 
   render () {
@@ -32,6 +37,16 @@ export default class MyDocument extends Document {
           <style jsx global>
             {`
 
+            .height {
+              height: 100vh;
+              top: 0;
+              bottom: 0;
+            }
+
+            .front {
+              z-index: 1000;
+            }
+
               @font-face {
                 font-family: 'shapefont';
                 src: 
@@ -48,9 +63,11 @@ export default class MyDocument extends Document {
               .w-5 { width: 5%}
               .w-94 { width: 94% }
                 
-
+              html, body {
+                height: 100vh;
+              }
               body {
-                height: 100%;
+                
                 font-family: 'shapefont';
                 text-rendering: optimizeLegibility;
                 -webkit-font-smoothing: antialiased;
@@ -145,17 +162,13 @@ export default class MyDocument extends Document {
               .content {
                 position: absolute;
                 top: 40px;
-                left: 40px;
-                right: 40px;
+                left: 300px;
+                right: 300px;
                 bottom: 40px;
                 overflow: auto;
                 WebkitOverflowScrolling: touch;
                 outline: none;
-
               }
-
-              a:link { text-decoration: none; }
-              a {color: white}
 
               .fc-blue {
                 color: #005baa;
@@ -165,6 +178,7 @@ export default class MyDocument extends Document {
 
           `}
           </style>
+          {this.props.styleTags}
         </Head>
         <body>
           <Main />
