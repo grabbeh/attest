@@ -9,6 +9,7 @@ import _ from 'lodash'
 
 const EditContractContainer = props => {
   if (!props.loading) {
+    console.log(props)
     return (
       <Modal
         className='content'
@@ -40,11 +41,11 @@ const EditContractMutation = graphql(UPDATE_CONTRACT_MUTATION, {
         return mutate({
           variables: { contract },
           update: (store, response) => {
-            let updatedContract = response.data.handleContract
-            let data = store.readQuery({ query: CONTRACTS_QUERY })
-            _.extend(_.find(data.contracts, { id }), updatedContract)
-            store.writeQuery({ query: CONTRACTS_QUERY, data })
             closeModal()
+            let contract = response.data.handleContract
+            let data = store.readQuery({ query: CONTRACTS_QUERY })
+            _.extend(_.find(data.contracts, { id }), contract)
+            store.writeQuery({ query: CONTRACTS_QUERY, data })
           }
         })
       }

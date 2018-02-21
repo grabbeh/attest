@@ -33,7 +33,7 @@ class AddContractForm extends react.Component {
         executionDate: null,
         effectiveDate: null,
         expiryDate: null,
-        internalParties: ['ACME Inc'],
+        internalParties: [],
         externalParties: [],
         currentStatus: [],
         statuses: [],
@@ -107,7 +107,7 @@ class AddContractForm extends react.Component {
   saveToState = e => {
     let { contract } = this.state
     let { name, value, type } = e.target
-    contract.externalParties = value
+    contract.externalParties = [value]
     this.setState({ contract })
   }
 
@@ -164,7 +164,6 @@ class AddContractForm extends react.Component {
     } else {
       selectedTags.push(relevantTag)
     }
-    console.log(selectedTags)
     let { contract } = this.state
     contract.tags = selectedTags
     this.setState({ contract })

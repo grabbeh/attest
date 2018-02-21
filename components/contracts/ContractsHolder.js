@@ -32,7 +32,7 @@ class ContractsHolder extends react.Component {
         tags: [],
         businessUnits: [],
         lawyers: [],
-        selectedDateOption: ''
+        selectedDateOption: 'GENERAL'
       },
       searchTerm: '',
       liveInput: false,
@@ -121,9 +121,7 @@ class ContractsHolder extends react.Component {
   render () {
     let { initialValues, filters, contracts } = this.state
     let { name } = this.props.masterEntity
-
     let filteredContracts = filter(filters, contracts)
-
     if (this.state.searchTerm.length > 0 && !this.state.liveInput) {
       filteredContracts = this.getSearchResults(
         this.state.searchTerm,
