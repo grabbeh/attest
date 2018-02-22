@@ -62,21 +62,18 @@ class AddContractForm extends react.Component {
     return result
   }
 
-  handleExecutionDate = date => {
-    let contract = this.state.contract
-    contract.executionDate = date
+  handleExecutionDate = executionDate => {
+    let contract = { ...this.state.contract, executionDate }
     this.setState({ contract })
   }
 
-  handleEffectiveDate = date => {
-    let contract = this.state.contract
-    contract.effectiveDate = date
+  handleEffectiveDate = effectiveDate => {
+    let contract = { ...this.state.contract, effectiveDate }
     this.setState({ contract })
   }
 
-  handleExpiryDate = date => {
-    let contract = this.state.contract
-    contract.expiryDate = date
+  handleExpiryDate = expiryDate => {
+    let contract = { ...this.state.contract, expiryDate }
     this.setState({ contract })
   }
 
