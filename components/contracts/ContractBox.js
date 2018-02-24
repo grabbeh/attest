@@ -22,6 +22,7 @@ class Contract extends React.Component {
   }
 
   openModal = contract => {
+    console.log(contract)
     this.setState({
       modalIsOpen: true,
       editableContract: contract

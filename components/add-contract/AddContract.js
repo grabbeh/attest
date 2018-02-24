@@ -166,24 +166,16 @@ class AddContractForm extends react.Component {
     contract.tags = selectedTags
     this.setState({ contract })
   }
-  /*
-  componentWillReceiveProps (nextProps) {
-    if (nextProps.contract) {
-      this.setState({ contract: nextProps.contract })
-    }
-  } */
+
+  createDate (num) {
+    if (num) return moment(num)
+    else return null
+  }
 
   componentWillMount () {
     if (this.props.contract) {
       let { contract } = this.props
-      if (contract.expiryDate) {
-        let expiryDate = moment(contract.expiryDate)
-        contract.expiryDate = expiryDate
-      }
-      if (contract.executionDate) {
-        let executionDate = moment(contract.executionDate)
-        contract.executionDate = expiryDate
-      }
+
       this.setState({
         contract,
         selectedStatus: contract.currentStatus.name,
@@ -205,7 +197,6 @@ class AddContractForm extends react.Component {
       tags,
       statuses
     } = this.state
-
     let { externalParties, executionDate, expiryDate, effectiveDate } = contract
 
     let businessUnitSelect = null
@@ -278,7 +269,7 @@ class AddContractForm extends react.Component {
           <SectionTitle text='Execution date' />
           <DatePicker
             className='pa1 mb2 ba b--blue bw1'
-            selected={executionDate}
+            selected={this.createDate(executionDate)}
             onChange={this.handleExecutionDate}
             showMonthDropdown
             showYearDropdown
@@ -290,7 +281,7 @@ class AddContractForm extends react.Component {
           <SectionTitle text='Effective date' />
           <DatePicker
             className='pa1 mb2 ba b--blue bw1'
-            selected={effectiveDate}
+            selected={this.createDate(effectiveDate)}
             onChange={this.handleEffectiveDate}
             showMonthDropdown
             showYearDropdown
@@ -302,7 +293,7 @@ class AddContractForm extends react.Component {
           <SectionTitle text='Expiry date' />
           <DatePicker
             className='pa1 mb2 ba b--blue bw1'
-            selected={expiryDate}
+            selected={this.createDate(expiryDate)}
             onChange={this.handleExpiryDate}
             showMonthDropdown
             showYearDropdown

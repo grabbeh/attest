@@ -11,6 +11,8 @@ const ContractSchema = mongoose.Schema({
   internalParties: Array,
   externalParties: Array,
   expiryDate: Date,
+  effectiveDate: Date,
+  executionDate: Date,
   rollingTerm: Boolean,
   tags: [
     {

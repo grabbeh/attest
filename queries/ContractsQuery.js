@@ -5,6 +5,8 @@ query contracts {
   contracts {
     id
     expiryDate
+    effectiveDate
+    executionDate
     internalParties
     externalParties
     statuses {
