@@ -15,6 +15,7 @@ import Flex from '../styles/Flex'
 import SideColumn from '../side-menu/SideColumn'
 import Box from '../styles/Box'
 import _ from 'lodash'
+import moment from 'moment'
 
 class AddContractForm extends react.Component {
   constructor (props) {
@@ -178,6 +179,14 @@ class AddContractForm extends react.Component {
   componentWillMount () {
     if (this.props.contract) {
       let { contract } = this.props
+      if (contract.expiryDate) {
+        let expiryDate = moment(contract.expiryDate)
+        contract.expiryDate = expiryDate
+      }
+      if (contract.executionDate) {
+        let executionDate = moment(contract.executionDate)
+        contract.executionDate = expiryDate
+      }
       this.setState({
         contract,
         selectedStatus: contract.currentStatus.name,
