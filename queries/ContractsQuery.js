@@ -36,14 +36,17 @@ query contracts {
   currentTags {
     name
     color
+    checked
   }
   currentStatuses {
     name
     color
+    checked
   }
   currentBusinessUnits {
     name
     color
+    checked
   }
   currentLawyers
   masterEntity {

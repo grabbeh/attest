@@ -23,37 +23,43 @@ class SummaryBox extends react.Component {
     let { contracts, filters } = this.props
     const { startDate, endDate } = filters.dateRange
     return (
-      <div className='h-100 bg-white mt3 mt0-ns pa3 ba b--black-20'>
-        <div className='b f4 bb b--black-20 bw1 pb2'>Summary</div>
-        <div className='mt3 f5'>
-          {`${contracts.length}`}
-          {startDate && startDate.isValid()
-            ? <span>
-              {` between `}
-              <Moment format='D MMMM YYYY' date={startDate} />
-              {` and `}
-              <Moment format='D MMMM YYYY' date={endDate} />
-            </span>
-            : <span>{` for all time`}</span>}
-        </div>
-        <Flex>
-          <ul className='w-100 mb2 list pa0 ma0'>
-            {res.map(r => (
-              <li key={r.status.name} className='fl mr4'>
-                <StatusBar status={r.status} volume={r.volume} />
-              </li>
-            ))}
-
-          </ul>
-          <div className='cf:after' />
-          <div>
-            {arr.map(contracts => (
-              <div className='fl' key={contracts[0].id}>
-                <ContractSquareList contracts={contracts} />
+      <div>
+        {contracts &&
+          contracts.length > 0 &&
+          <div className='h-100 bg-white pv3'>
+            <Flex>
+              <div className='b f4 bw1 pb1 mr3'>Summary</div>
+              <div className='f4'>
+                {`${contracts.length}`}
+                {startDate && startDate.isValid()
+                  ? <span>
+                    {` between `}
+                    <Moment format='D MMMM YYYY' date={startDate} />
+                    {` and `}
+                    <Moment format='D MMMM YYYY' date={endDate} />
+                  </span>
+                  : <span>{` for all time`}</span>}
               </div>
-            ))}
-          </div>
-        </Flex>
+            </Flex>
+            <Flex>
+              <ul className='f4 w-100 mb2 list pa0 ma0'>
+                {res.map(r => (
+                  <li key={r.status.name} className='fl mr4'>
+                    <StatusBar status={r.status} volume={r.volume} />
+                  </li>
+                ))}
+
+              </ul>
+              <div className='cf:after' />
+              <div>
+                {arr.map(contracts => (
+                  <div className='fl' key={contracts[0].id}>
+                    <ContractSquareList contracts={contracts} />
+                  </div>
+                ))}
+              </div>
+            </Flex>
+          </div>}
       </div>
     )
   }

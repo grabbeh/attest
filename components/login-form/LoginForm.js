@@ -74,12 +74,11 @@ const loginMutation = graphql(LOGIN_MUTATION, {
         return mutate({
           variables: { email, password },
           update: (store, response) => {
+            redirect({}, '/contracts')
             document.cookie = cookie.serialize('token', response.data.login, {
               maxAge: 30 * 24 * 60 * 60 // 30 days
             })
-            ownProps.client.resetStore().then(() => {
-              redirect({}, '/contracts')
-            })
+            ownProps.client.resetStore()
           }
         })
       }

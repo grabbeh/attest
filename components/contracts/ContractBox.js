@@ -22,7 +22,6 @@ class Contract extends React.Component {
   }
 
   openModal = contract => {
-    console.log(contract)
     this.setState({
       modalIsOpen: true,
       editableContract: contract
@@ -69,7 +68,7 @@ class Contract extends React.Component {
           <ul className='fr list pa0 mt2'>
             <li className='fl mr2'>
               <button
-                className='bg-white f6 link dim ph0 dib'
+                className='bg-light-gray f6 link dim ph0 dib'
                 onClick={() => this.openModal(this.props.contract)}
               >
                 <i className='pointer fa fa-pencil fa-lg' />
@@ -83,7 +82,9 @@ class Contract extends React.Component {
                 />}
             </li>
             <li className='fl mr2 '><DeleteButton id={id} /></li>
-            <li className='fl mr2'><i className='fa fa-eye fa-lg' /></li>
+            <li className='fl mr2'>
+              <i className='fa fa-eye fa-lg' />
+            </li>
             <li className='fl'><i className='fa fa-plus-square fa-lg' /></li>
           </ul>
         </div>

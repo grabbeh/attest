@@ -18,16 +18,16 @@ class Checkbox extends Component {
   }
 
   getStyle () {
-    const { color } = this.props
+    const { color, checked } = this.props
     return {
-      backgroundColor: this.state.isChecked ? color : '',
+      backgroundColor: checked ? color : '',
       borderColor: color
     }
   }
 
   render () {
-    const { label, color } = this.props
-    const { isChecked } = this.state
+    const { label, color, checked } = this.props
+
     return (
       <li key={label} className='pb2 mr2 fl'>
         <label>
@@ -35,7 +35,7 @@ class Checkbox extends Component {
             className='dn'
             type='checkbox'
             value={label}
-            checked={isChecked}
+            checked={checked}
             onChange={this.toggleCheckboxChange}
           />
           <div
@@ -51,8 +51,8 @@ class Checkbox extends Component {
               'bw1',
               'ba',
               'b--blue',
-              isChecked && 'bg-blue',
-              isChecked && 'white'
+              checked && 'bg-blue',
+              checked && 'white'
             )}
           >
             {label}

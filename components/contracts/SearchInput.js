@@ -4,12 +4,11 @@ import react from 'react'
 class SearchInput extends react.Component {
   render () {
     return (
-      <div className='h3 mr0 mb3 mt0-ns pa3 bg-white f4 ba b--black-20'>
-        <i className='mr2 gray fa fa-search' />
+      <div className='w-50 pv1 f5'>
+        <span className='f4 b mr2'>Search</span>
         <input
-          className='bb bw1 b--black-20 font pa1 w-80 bg-white'
+          className='bb bw1 b--black-20 f4 font pa1 w-80 bg-white'
           type='search'
-          placeholder='Search Contracts'
           value={this.props.searchTerm}
           onChange={this.props.handleSearchInput}
         />

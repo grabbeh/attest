@@ -5,7 +5,7 @@ class HideToggle extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      show: true
+      show: props.show
     }
   }
 
@@ -14,23 +14,28 @@ class HideToggle extends React.Component {
   }
 
   render () {
-    let { title, children } = this.props
+    let { title, children, active, current } = this.props
     let { show } = this.state
-
     return (
       <div>
-        <div onClick={this.toggle} className='f6 mt2 pointer'>
+        <div onClick={this.toggle} className='mv2 pointer mr2'>
           {show
             ? <div>
-              <i className='fa fa-caret-down mr2' />
-              <span className='f5'>{title}</span>
+              <span
+                className={cn(active && 'bg-light-gray', 'ph3', 'pv2', 'f4')}
+                >
+                {title}
+              </span>
             </div>
             : <div>
-              <i className='fa fa-caret-right mr2' />
-              <span className=' f5'>{title}</span>
+              <span
+                className={cn(active && 'bg-light-gray', 'ph3', 'pv2', 'f4')}
+                >
+                {title}
+              </span>
             </div>}
         </div>
-        <div className={cn(!show && 'dn')}>
+        <div className={cn(!show && 'dn', 'absolute', 'shadow-4', 'bg-white')}>
           {children}
         </div>
       </div>

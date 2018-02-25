@@ -17,32 +17,20 @@ class ContractsHolder extends react.Component {
     super(props)
     this.state = {
       contracts: props.contracts,
-      initialValues: {
-        statuses: props.currentStatuses,
-        tags: props.currentTags,
-        businessUnits: props.currentBusinessUnits,
-        lawyers: props.currentLawyers
-      },
       filters: {
-        statuses: [],
+        statuses: props.currentStatuses,
         dateRange: {
           startDate: null,
           endDate: null
         },
-        tags: [],
-        businessUnits: [],
-        lawyers: [],
+        tags: props.currentTags,
+        businessUnits: props.currentBusinessUnits,
+        lawyers: props.currentLawyers,
         selectedDateOption: 'GENERAL'
       },
       searchTerm: '',
       liveInput: false,
       activeMenu: false
-    }
-    this.set = {
-      statuses: new Set(),
-      tags: new Set(),
-      businessUnits: new Set(),
-      lawyers: new Set()
     }
   }
 
@@ -77,49 +65,78 @@ class ContractsHolder extends react.Component {
   }
 
   updateSet = (set, label) => {
-    if (set.has(label)) {
-      set.delete(label)
-    } else {
-      set.add(label)
-    }
-    return [...set]
+    let copy = _.cloneDeep(set)
+    copy.forEach(s => {
+      if (s.name === label) s.checked = !s.checked
+    })
+    return copy
   }
 
   componentWillReceiveProps (nextProps) {
     this.setState({ contracts: nextProps.contracts })
   }
 
+  clearFilters = () => {
+    let filters = {
+      statuses: this.props.currentStatuses,
+      dateRange: {
+        startDate: null,
+        endDate: null
+      },
+      tags: this.props.currentTags,
+      businessUnits: this.props.currentBusinessUnits,
+      lawyers: [],
+      selectedDateOption: 'GENERAL'
+    }
+    this.setState({ filters })
+  }
+
   toggleCheckbox = label => {
-    let { statuses, tags, businessUnits, lawyers } = this.state.initialValues
+    let { statuses, tags, businessUnits, lawyers } = this.state.filters
     statuses = statuses.map(s => {
-      return { filter: s.name, type: 'status', category: 'statuses' }
+      return {
+        checked: s.checked,
+        name: s.name,
+        type: 'status',
+        category: 'statuses'
+      }
     })
 
     tags = tags.map(t => {
-      return { filter: t.name, type: 'tag', category: 'tags' }
+      return { checked: t.checked, name: t.name, type: 'tag', category: 'tags' }
     })
 
     businessUnits = businessUnits.map(b => {
-      return { filter: b.name, type: 'businessUnit', category: 'businessUnits' }
+      return {
+        checked: b.checked,
+        name: b.name,
+        type: 'businessUnit',
+        category: 'businessUnits'
+      }
     })
 
     lawyers = lawyers.map(l => {
-      return { filter: l, type: 'lawyer', category: 'lawyers' }
+      return {
+        checked: l.checked,
+        name: l,
+        type: 'lawyer',
+        category: 'lawyers'
+      }
     })
 
     let filters = _.concat(statuses, tags, businessUnits, lawyers)
     filters.forEach(f => {
-      if (f.filter === label) {
+      if (f.name === label) {
         this.updateFilterState(
           f.category,
-          this.updateSet(this.set[f.category], label)
+          this.updateSet(this.state.filters[f.category], label)
         )
       }
     })
   }
 
   render () {
-    let { initialValues, filters, contracts } = this.state
+    let { filters, contracts } = this.state
     let { name } = this.props.masterEntity
     let filteredContracts = filter(filters, contracts)
     if (this.state.searchTerm.length > 0 && !this.state.liveInput) {
@@ -129,38 +146,25 @@ class ContractsHolder extends react.Component {
       )
     }
     return (
-      <div>
-        <div className='pa3-ns pa0 pt3'>
-          <Flex>
-            <div className='w-50-ns w-100'>
-              <Title name={name} />
-            </div>
-            <div className='w-50-ns w-100'>
-              <SearchInput
-                handleSearchInput={this.handleSearchInput}
-                searchTerm={this.state.searchTerm}
-                clear={this.clearSearchTerm}
-              />
-            </div>
-          </Flex>
-          <Flex>
-            <div className='w-50-ns w-100'>
-              <Filter
-                initialValues={initialValues}
-                toggleCheckbox={this.toggleCheckbox}
-                setDate={this.setDate}
-                selectDateOption={this.selectDateOption}
-              />
-            </div>
-            <div className='w-50-ns w-100'>
-              <SummaryBox contracts={filteredContracts} filters={filters} />
-            </div>
-          </Flex>
-          <ContractsList
-            contracts={filteredContracts}
-            masterEntity={this.props.masterEntity}
-          />
-        </div>
+      <div className='pa3-ns pa0 pt3'>
+        <Title name={name} />
+        <Filter
+          filters={filters}
+          toggleCheckbox={this.toggleCheckbox}
+          clearFilters={this.clearFilters}
+          setDate={this.setDate}
+          selectDateOption={this.selectDateOption}
+        />
+        <SearchInput
+          handleSearchInput={this.handleSearchInput}
+          searchTerm={this.state.searchTerm}
+          clear={this.clearSearchTerm}
+        />
+        <SummaryBox contracts={filteredContracts} filters={filters} />
+        <ContractsList
+          contracts={filteredContracts}
+          masterEntity={this.props.masterEntity}
+        />
       </div>
     )
   }

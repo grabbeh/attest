@@ -43,6 +43,7 @@ const resolvers = {
 
       let updatedTags = tags.map(name => {
         let color = 'blue'
+        let checked = false
         entity.tags.map(i => {
           if (i.name === name) {
             color = i.color
@@ -50,7 +51,8 @@ const resolvers = {
         })
         return {
           color,
-          name
+          name,
+          checked
         }
       })
       return updatedTags
@@ -65,6 +67,7 @@ const resolvers = {
       let entity = await MasterEntity.findById(user.masterEntityID)
       let updatedUnits = businessUnits.map(name => {
         let color = 'blue'
+        let checked = false
         entity.businessUnits.map(i => {
           if (i.name === name) {
             color = i.color
@@ -72,7 +75,8 @@ const resolvers = {
         })
         return {
           color,
-          name
+          name,
+          checked
         }
       })
       return updatedUnits
@@ -85,6 +89,7 @@ const resolvers = {
       let entity = await MasterEntity.findById(user.masterEntityID)
       let updatedStatuses = statuses.map(name => {
         let color = 'blue'
+        let checked = false
         entity.statuses.map(i => {
           if (i.name === name) {
             color = i.color
@@ -92,7 +97,8 @@ const resolvers = {
         })
         return {
           color,
-          name
+          name,
+          checked
         }
       })
 

@@ -6,14 +6,12 @@ class SideColumn extends React.Component {
   render () {
     return (
       <Flex>
-        <div className='w-5'>
+        <div>
           <div className='pa3 pt4 bg-dark-gray height fixed'>
-            <div>
-              <SlimMenu />
-            </div>
+            <SlimMenu />
           </div>
         </div>
-        <div className='w-90'>
+        <div className='ml5 w-100'>
           {this.props.children}
         </div>
       </Flex>

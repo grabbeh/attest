@@ -132,11 +132,13 @@ input StatusInput {
 type Status {
   name: String
   color: String
+  checked: Boolean
 }
 
 type Tag {
   name: String
   color: String
+  checked: Boolean
 }
 
 input TagInput {
@@ -147,6 +149,7 @@ input TagInput {
 type BusinessUnit {
   name: String
   color: String
+  checked: Boolean
 }
 
 input BusinessUnitInput {
@@ -158,6 +161,7 @@ type Lawyer {
   firstName: String
   lastName: String
   id: String
+  checked: Boolean
 }
 
 input LawyerInput {

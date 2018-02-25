@@ -9,14 +9,11 @@ const ContractHolder = ({ children, index }) => (
       (index + 1) % 4 !== 0 && 'mr0',
       (index + 1) % 2 === 0 && 'mr0-ns',
       (index + 1) % 2 !== 0 && 'mr3-ns',
-      'bg-white',
       'f5',
       'pa3',
       'overflow-hidden',
       'h-100',
-      'ba',
-      'b--black-20',
-      'dark-gray'
+      'bg-light-gray'
     )}
   >
     {children}

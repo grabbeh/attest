@@ -59,19 +59,18 @@ export default class MyDocument extends Document {
                   url('/static/fonts/font.otf');
               }
 
-              .w-5 { width: 5%}
-              .w-94 { width: 94% }
+            
+         
                 
               html, body {
                 height: 100vh;
               }
+
               body {
-                
                 font-family: 'shapefont';
                 text-rendering: optimizeLegibility;
                 -webkit-font-smoothing: antialiased;
                 -moz-osx-font-smoothing: grayscale;
-                background-color: rgb(243, 244, 245);
               }
 
               .font {
@@ -179,7 +178,7 @@ export default class MyDocument extends Document {
           </style>
           {this.props.styleTags}
         </Head>
-        <body>
+        <body className='dark-gray'>
           <Main />
           <NextScript />
         </body>

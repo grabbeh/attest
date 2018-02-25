@@ -6,7 +6,7 @@ import DELETE_CONTRACT_MUTATION from '../../queries/DeleteContractMutation'
 const DeleteButton = ({ deleteContract, id }) => {
   return (
     <button
-      className='bg-white f6 link dim ph0 dib'
+      className='f6 bg-light-gray link dim ph0 dib'
       onClick={() => deleteContract(id)}
     >
       <i className='pointer fa fa-trash-o fa-lg' />
