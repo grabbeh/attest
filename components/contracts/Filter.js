@@ -42,12 +42,12 @@ class Filter extends react.Component {
     this.setState({ dateRange })
     this.props.setDate(this.state.dateRange)
     if (dateRange.endDate.isBefore(dateRange.startDate)) {
-      let { error } = this.state
-      error.finishBeforeStart = true
+      let finishBeforeStart = true
+      let error = { ...this.state.error, finishBeforeStart }
       this.setState({ error })
     } else {
-      let { error } = this.state
-      error.finishBeforeStart = false
+      let finishBeforeStart = false
+      let error = { ...this.state.eror, finishBeforeStart }
       this.setState({ error })
       this.props.setDate(dateRange)
     }
@@ -66,6 +66,11 @@ class Filter extends react.Component {
     else return true
   }
 
+  dateRangeCheck = dR => {
+    if (dR.startDate && dR.endDate) return true
+    else return false
+  }
+
   render () {
     const { statuses, tags, businessUnits, lawyers } = this.props.filters
     const selectedStatuses = this.checked(statuses)
@@ -73,19 +78,24 @@ class Filter extends react.Component {
     const selectedTags = this.checked(tags)
     const { toggleCheckbox, filters, clearFilters } = this.props
     const { startDate, endDate } = this.state.dateRange
+    const selectedDateRange = this.dateRangeCheck(this.state.dateRange)
     const { error, dateSearchOptions, selectedDateOption } = this.state
 
     return (
       <div className='mb2'>
         <Flex>
           <div className='mt2 b f4 mr3'>Filters</div>
-          <HideToggle active={selectedStatuses} show={false} title='Statuses'>
+          <HideToggle
+            filterUsed={selectedStatuses}
+            show={false}
+            title='Statuses'
+          >
             <CheckboxListTwo
               content={statuses}
               toggleCheckbox={toggleCheckbox}
             />
           </HideToggle>
-          <HideToggle active={selectedTags} show={false} title='Tags'>
+          <HideToggle filterUsed={selectedTags} show={false} title='Tags'>
             <CheckboxListTwo
               error='Please add filters'
               content={tags}
@@ -93,7 +103,7 @@ class Filter extends react.Component {
             />
           </HideToggle>
           <HideToggle
-            active={selectedBusinessUnits}
+            filterUsed={selectedBusinessUnits}
             show={false}
             title='Business Units'
           >
@@ -103,14 +113,14 @@ class Filter extends react.Component {
               toggleCheckbox={toggleCheckbox}
             />
           </HideToggle>
-          <HideToggle active={false} show={false} title='Lawyers'>
+          <HideToggle filterUsed={false} show={false} title='Lawyers'>
             <CheckboxList
               error='Please add filters'
               content={lawyers}
               toggleCheckbox={toggleCheckbox}
             />
           </HideToggle>
-          <HideToggle show={false} title='Dates'>
+          <HideToggle filterUsed={selectedDateRange} show={false} title='Dates'>
             <div className='pl3 fl mt2'>
               <Radio
                 items={dateSearchOptions}

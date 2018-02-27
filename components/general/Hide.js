@@ -14,7 +14,7 @@ class HideToggle extends React.Component {
   }
 
   render () {
-    let { title, children, active, current } = this.props
+    let { title, children, filterUsed, current } = this.props
     let { show } = this.state
     return (
       <div>
@@ -22,14 +22,24 @@ class HideToggle extends React.Component {
           {show
             ? <div>
               <span
-                className={cn(active && 'bg-light-gray', 'ph3', 'pv2', 'f4')}
+                className={cn(
+                    filterUsed && 'bg-light-gray',
+                    'ph3',
+                    'pv2',
+                    'f4'
+                  )}
                 >
                 {title}
               </span>
             </div>
             : <div>
               <span
-                className={cn(active && 'bg-light-gray', 'ph3', 'pv2', 'f4')}
+                className={cn(
+                    filterUsed && 'bg-light-gray',
+                    'ph3',
+                    'pv2',
+                    'f4'
+                  )}
                 >
                 {title}
               </span>

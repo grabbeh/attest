@@ -10,7 +10,7 @@ class Header extends react.Component {
 
   logout = () => {
     redirect({}, '/')
-    this.props.client.resetStore()
+    this.props.client.resetStore().then()
     document.cookie = cookie.serialize('token', '')
   }
 
@@ -30,7 +30,7 @@ class Header extends react.Component {
               </span>
             </div>
             : <Link href='/login'>
-              <a className='link dim'>Login</a>
+              <a className='link dark-gray dim'>Login</a>
             </Link>}
         </span>
       </div>
