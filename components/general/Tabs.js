@@ -1,6 +1,12 @@
 import react, { Component } from 'react'
+import * as PropTypes from 'prop-types'
 
 class Tabs extends Component {
+  static childContextTypes = {
+    activeIndex: PropTypes.number.isRequired,
+    onSelectTab: PropTypes.func.isRequired
+  }
+
   state = {
     activeIndex: 0
   }
@@ -24,3 +30,5 @@ class Tabs extends Component {
     )
   }
 }
+
+export default Tabs
