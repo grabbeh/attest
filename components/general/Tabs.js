@@ -8,7 +8,7 @@ class Tabs extends Component {
   }
 
   state = {
-    activeIndex: 0
+    activeIndex: null
   }
 
   getChildContext () {

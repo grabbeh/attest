@@ -6,11 +6,13 @@ import CheckboxListTwo from '../general/CheckboxListTwo'
 import Radio from '../general/Radio'
 import Flex from '../styles/Flex'
 import _ from 'lodash'
+import BouncyDiv from '../styles/BouncyDiv'
 
 class Filter extends react.Component {
   constructor (props) {
     super(props)
     this.state = {
+      activeFilter: null,
       value: '',
       dateRange: {
         startDate: null,
@@ -21,6 +23,14 @@ class Filter extends react.Component {
       error: {
         finishBeforeStart: false
       }
+    }
+  }
+
+  toggleFilter = activeFilter => {
+    if (activeFilter === this.state.activeFilter) {
+      this.setState({ activeFilter: null })
+    } else {
+      this.setState({ activeFilter })
     }
   }
 
@@ -35,19 +45,19 @@ class Filter extends react.Component {
     this.setState({ selectedDateOption: s.name })
   }
 
-  handleChangeEnd = date => {
-    let dateRange = {}
-    dateRange.endDate = date
-    dateRange.startDate = this.state.dateRange.startDate
+  handleChangeEnd = endDate => {
+    let { error } = this.state
+    let { startDate } = this.state.dateRange
+    let dateRange = { startDate, endDate }
     this.setState({ dateRange })
     this.props.setDate(this.state.dateRange)
     if (dateRange.endDate.isBefore(dateRange.startDate)) {
       let finishBeforeStart = true
-      let error = { ...this.state.error, finishBeforeStart }
+      let error = { ...error, finishBeforeStart }
       this.setState({ error })
     } else {
       let finishBeforeStart = false
-      let error = { ...this.state.eror, finishBeforeStart }
+      let error = { ...error, finishBeforeStart }
       this.setState({ error })
       this.props.setDate(dateRange)
     }
@@ -79,23 +89,37 @@ class Filter extends react.Component {
     const { toggleCheckbox, filters, clearFilters } = this.props
     const { startDate, endDate } = this.state.dateRange
     const selectedDateRange = this.dateRangeCheck(this.state.dateRange)
-    const { error, dateSearchOptions, selectedDateOption } = this.state
+    const {
+      error,
+      dateSearchOptions,
+      selectedDateOption,
+      activeFilter
+    } = this.state
 
     return (
-      <div className='mb2'>
+      <BouncyDiv>
         <Flex>
           <div className='mt2 b f4 mr3'>Filters</div>
           <HideToggle
+            toggleFilter={this.toggleFilter}
+            activeFilter={activeFilter}
             filterUsed={selectedStatuses}
             show={false}
             title='Statuses'
           >
             <CheckboxListTwo
+              error='Please add filters'
               content={statuses}
               toggleCheckbox={toggleCheckbox}
             />
           </HideToggle>
-          <HideToggle filterUsed={selectedTags} show={false} title='Tags'>
+          <HideToggle
+            toggleFilter={this.toggleFilter}
+            activeFilter={activeFilter}
+            filterUsed={selectedTags}
+            show={false}
+            title='Tags'
+          >
             <CheckboxListTwo
               error='Please add filters'
               content={tags}
@@ -103,6 +127,8 @@ class Filter extends react.Component {
             />
           </HideToggle>
           <HideToggle
+            toggleFilter={this.toggleFilter}
+            activeFilter={activeFilter}
             filterUsed={selectedBusinessUnits}
             show={false}
             title='Business Units'
@@ -113,14 +139,26 @@ class Filter extends react.Component {
               toggleCheckbox={toggleCheckbox}
             />
           </HideToggle>
-          <HideToggle filterUsed={false} show={false} title='Lawyers'>
+          <HideToggle
+            toggleFilter={this.toggleFilter}
+            activeFilter={activeFilter}
+            filterUsed={false}
+            show={false}
+            title='Lawyers'
+          >
             <CheckboxList
               error='Please add filters'
               content={lawyers}
               toggleCheckbox={toggleCheckbox}
             />
           </HideToggle>
-          <HideToggle filterUsed={selectedDateRange} show={false} title='Dates'>
+          <HideToggle
+            toggleFilter={this.toggleFilter}
+            activeFilter={activeFilter}
+            filterUsed={selectedDateRange}
+            show={false}
+            title='Dates'
+          >
             <div className='pl3 fl mt2'>
               <Radio
                 items={dateSearchOptions}
@@ -171,14 +209,14 @@ class Filter extends react.Component {
 
           {
             <div
-              className='f4 underline-hover mt2 pointer'
+              className='ml3 f4 underline-hover mt2 pointer'
               onClick={clearFilters}
             >
               Reset
             </div>
           }
         </Flex>
-      </div>
+      </BouncyDiv>
     )
   }
 }

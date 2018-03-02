@@ -3,6 +3,7 @@ import * as PropTypes from 'prop-types'
 
 class TabList extends Component {
   static contextTypes = {
+    activeIndex: PropTypes.number.isRequired,
     onSelectTab: PropTypes.func.isRequired
   }
   render () {
