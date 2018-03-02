@@ -6,11 +6,16 @@ import AddContractForm from './AddContract'
 import Loading from '../general/Loading'
 import redirect from '../../lib/Redirect'
 import CenterBox from '../styles/CenterBox'
+import FadeRightDiv from '../styles/FadeRightDiv'
 
 const AddContractContainer = props => {
   if (!props.loading) {
     return (
-      <CenterBox><AddContractForm title='Add Contract' {...props} /></CenterBox>
+      <CenterBox>
+        <FadeRightDiv>
+          <AddContractForm title='Add Contract' {...props} />
+        </FadeRightDiv>
+      </CenterBox>
     )
   }
   return <Loading />

@@ -43,7 +43,7 @@ class Checkbox extends Component {
             className={cn(
               'pointer',
               'fr',
-              'f5',
+              'f4',
               'pv1',
               'ph3',
               'bg-white',

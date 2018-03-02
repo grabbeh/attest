@@ -8,6 +8,7 @@ import Input from '../general/Input'
 import ClearFix from '../styles/ClearFix'
 import FormTitle from '../styles/FormTitle'
 import CenterBox from '../styles/CenterBox'
+import FadeRightDiv from '../styles/FadeRightDiv'
 
 class CreateAccountForm extends React.Component {
   constructor (props) {
@@ -42,40 +43,42 @@ class CreateAccountForm extends React.Component {
   render () {
     return (
       <CenterBox>
-        <FormTitle title='Create new account' />
-        <form>
-          <div className='mt2'>
-            <Input
-              value={this.state.name}
-              name='name'
-              onChange={this.saveToState}
-              label='Company name'
-            />
-          </div>
-          <div className='mt2'>
-            <Input
-              value={this.state.email}
-              name='email'
-              onChange={this.saveToState}
-              label='Email'
-            />
-          </div>
-          <div className='mt2'>
-            <Input
-              value={this.state.password}
-              name='password'
-              onChange={this.saveToState}
-              label='Password'
-              type='password'
-            />
-          </div>
+        <FadeRightDiv>
+          <FormTitle title='Create new account' />
+          <form>
+            <div className='mt2'>
+              <Input
+                value={this.state.name}
+                name='name'
+                onChange={this.saveToState}
+                label='Company name'
+              />
+            </div>
+            <div className='mt2'>
+              <Input
+                value={this.state.email}
+                name='email'
+                onChange={this.saveToState}
+                label='Email'
+              />
+            </div>
+            <div className='mt2'>
+              <Input
+                value={this.state.password}
+                name='password'
+                onChange={this.saveToState}
+                label='Password'
+                type='password'
+              />
+            </div>
 
-          <FormButton onClick={this.handleClick}>
-            Submit
-          </FormButton>
-          <ClearFix />
-        </form>
-        <div />
+            <FormButton onClick={this.handleClick}>
+              Submit
+            </FormButton>
+            <ClearFix />
+          </form>
+          <div />
+        </FadeRightDiv>
       </CenterBox>
     )
   }

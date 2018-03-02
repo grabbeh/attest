@@ -19,11 +19,10 @@ class Radio extends react.Component {
           className={cn(
             'pointer',
             'fr',
-            'f5',
+            'f4',
             'pv1',
             'ph3',
             'mb2',
-            'bg-white',
             'ba',
             'b--blue',
             'bw1',

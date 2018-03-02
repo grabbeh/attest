@@ -204,7 +204,7 @@ class AddContractForm extends react.Component {
       businessUnitSelect = (
         <div className='mb2'>
           <select
-            className='pa1 font ba bw1 b--blue'
+            className='pa1 font pa1 mb2 bb bw1 b--black-20'
             value={selectedBusinessUnit}
             key={selectedBusinessUnit}
             onChange={this.handleBusinessUnitChange}
@@ -251,24 +251,28 @@ class AddContractForm extends react.Component {
         <ClearFix />
         <FormSection>
           <SectionTitle text='Tags' />
-          {tagInputs || <div>Add tags here</div>}
+          <div className='mt2'>
+            {tagInputs || <div>Add tags here</div>}
+          </div>
         </FormSection>
         <ClearFix />
         <FormSection>
           <SectionTitle text='Status' />
-          {statuses && statuses.length
-            ? <Radio
-              handleChange={this.handleStatusChange}
-              selectedItem={selectedStatus}
-              items={statuses}
-              />
-            : <div>Add statuses here</div>}
+          <div className='mt2'>
+            {statuses && statuses.length
+              ? <Radio
+                handleChange={this.handleStatusChange}
+                selectedItem={selectedStatus}
+                items={statuses}
+                />
+              : <div>Add statuses here</div>}
+          </div>
         </FormSection>
         <ClearFix />
         <FormSection>
           <SectionTitle text='Execution date' />
           <DatePicker
-            className='pa1 mb2 ba b--blue bw1'
+            className='font mt2 pa1 mb2 bb bw1 b--black-20'
             selected={this.createDate(executionDate)}
             onChange={this.handleExecutionDate}
             showMonthDropdown
@@ -280,7 +284,7 @@ class AddContractForm extends react.Component {
         <FormSection>
           <SectionTitle text='Effective date' />
           <DatePicker
-            className='pa1 mb2 ba b--blue bw1'
+            className='font mt2 pa1 mb2 bb bw1 b--black-20'
             selected={this.createDate(effectiveDate)}
             onChange={this.handleEffectiveDate}
             showMonthDropdown
@@ -292,7 +296,7 @@ class AddContractForm extends react.Component {
         <FormSection>
           <SectionTitle text='Expiry date' />
           <DatePicker
-            className='pa1 mb2 ba b--blue bw1'
+            className='font mt2 pa1 mb2 bb bw1 b--black-20'
             selected={this.createDate(expiryDate)}
             onChange={this.handleExpiryDate}
             showMonthDropdown
@@ -314,7 +318,7 @@ class AddContractForm extends react.Component {
               items={lawyers}
               handleChange={this.handleLawyerChange}
               />
-            : <div>Add lawyers here</div>}
+            : <div className=' mt2'>Add lawyers here</div>}
         </FormSection>
         <ClearFix />
         <FormButton onClick={this.handleClick} text='Submit' />

@@ -5,10 +5,11 @@ import MASTER_ENTITY_METADATA_QUERY
   from '../../queries/MasterEntityMetaDataQuery'
 import UPDATE_MASTER_ENTITY_MUTATION
   from '../../queries/UpdateMasterEntityMutation'
+import FadeRightDiv from '../styles/FadeRightDiv'
 
 const SettingsContainer = props => {
   if (props.loading) return <Loading />
-  else return <Settings {...props} />
+  else return <FadeRightDiv><Settings {...props} /></FadeRightDiv>
 }
 
 const MasterEntityMetaDataQuery = graphql(MASTER_ENTITY_METADATA_QUERY, {

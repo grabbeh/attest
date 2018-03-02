@@ -33,7 +33,7 @@ class Checkbox extends Component {
     const { label, color } = this.props
     const { isChecked, showPicker } = this.state
     return (
-      <li key={label} className='fl pb2 mr2 fl white f5'>
+      <li key={label} className='fl pb2 mr2 fl white'>
         <div style={{ background: color }} className='fl pv1 ph3 bg-blue white'>
           {label}
         </div>

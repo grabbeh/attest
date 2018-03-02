@@ -60,7 +60,7 @@ export default class MyDocument extends Document {
 
             .example-leave.example-leave-active {
               opacity: 0.01;
-              transition: opacity 300ms ease-in;
+              transition: opacity 500ms ease-in;
             }
 
             .height {
@@ -86,9 +86,6 @@ export default class MyDocument extends Document {
                   url('/static/fonts/font.otf');
               }
 
-            
-         
-                
               html, body {
                 height: 100vh;
               }

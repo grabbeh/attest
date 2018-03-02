@@ -11,6 +11,7 @@ import SearchInput from './SearchInput'
 import Loading from '../general/Loading'
 import HideToggle from '../general/Hide'
 import cn from 'classnames'
+import FadeRightDiv from '../styles/FadeRightDiv'
 
 class ContractsHolder extends react.Component {
   constructor (props) {
@@ -147,24 +148,26 @@ class ContractsHolder extends react.Component {
     }
     return (
       <div className='pa3-ns pa0 pt3'>
-        <Title name={name} />
-        <Filter
-          filters={filters}
-          toggleCheckbox={this.toggleCheckbox}
-          clearFilters={this.clearFilters}
-          setDate={this.setDate}
-          selectDateOption={this.selectDateOption}
-        />
-        <SearchInput
-          handleSearchInput={this.handleSearchInput}
-          searchTerm={this.state.searchTerm}
-          clear={this.clearSearchTerm}
-        />
-        <SummaryBox contracts={filteredContracts} filters={filters} />
-        <ContractsList
-          contracts={filteredContracts}
-          masterEntity={this.props.masterEntity}
-        />
+        <FadeRightDiv>
+          <Title name={name} />
+          <Filter
+            filters={filters}
+            toggleCheckbox={this.toggleCheckbox}
+            clearFilters={this.clearFilters}
+            setDate={this.setDate}
+            selectDateOption={this.selectDateOption}
+          />
+          <SearchInput
+            handleSearchInput={this.handleSearchInput}
+            searchTerm={this.state.searchTerm}
+            clear={this.clearSearchTerm}
+          />
+          <SummaryBox contracts={filteredContracts} filters={filters} />
+          <ContractsList
+            contracts={filteredContracts}
+            masterEntity={this.props.masterEntity}
+          />
+        </FadeRightDiv>
       </div>
     )
   }

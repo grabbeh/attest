@@ -6,7 +6,7 @@ class Select extends react.Component {
     return (
       <div className='mb2'>
         <select
-          className='pa1 font ba bw1 b--blue'
+          className='pa1 f4 font ba bw1 b--blue'
           value={selectedItem}
           key={selectedItem}
           onChange={handleChange}

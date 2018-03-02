@@ -6,7 +6,6 @@ import CheckboxListTwo from '../general/CheckboxListTwo'
 import Radio from '../general/Radio'
 import Flex from '../styles/Flex'
 import _ from 'lodash'
-import BouncyDiv from '../styles/BouncyDiv'
 
 class Filter extends react.Component {
   constructor (props) {
@@ -97,126 +96,124 @@ class Filter extends react.Component {
     } = this.state
 
     return (
-      <BouncyDiv>
-        <Flex>
-          <div className='mt2 b f4 mr3'>Filters</div>
-          <HideToggle
-            toggleFilter={this.toggleFilter}
-            activeFilter={activeFilter}
-            filterUsed={selectedStatuses}
-            show={false}
-            title='Statuses'
-          >
-            <CheckboxListTwo
-              error='Please add filters'
-              content={statuses}
-              toggleCheckbox={toggleCheckbox}
+      <Flex>
+        <div className='mt2 b f4 mr3'>Filters</div>
+        <HideToggle
+          toggleFilter={this.toggleFilter}
+          activeFilter={activeFilter}
+          filterUsed={selectedStatuses}
+          show={false}
+          title='Statuses'
+        >
+          <CheckboxListTwo
+            error='Please add filters'
+            content={statuses}
+            toggleCheckbox={toggleCheckbox}
+          />
+        </HideToggle>
+        <HideToggle
+          toggleFilter={this.toggleFilter}
+          activeFilter={activeFilter}
+          filterUsed={selectedTags}
+          show={false}
+          title='Tags'
+        >
+          <CheckboxListTwo
+            error='Please add filters'
+            content={tags}
+            toggleCheckbox={toggleCheckbox}
+          />
+        </HideToggle>
+        <HideToggle
+          toggleFilter={this.toggleFilter}
+          activeFilter={activeFilter}
+          filterUsed={selectedBusinessUnits}
+          show={false}
+          title='Business Units'
+        >
+          <CheckboxListTwo
+            error='Please add filters'
+            content={businessUnits}
+            toggleCheckbox={toggleCheckbox}
+          />
+        </HideToggle>
+        <HideToggle
+          toggleFilter={this.toggleFilter}
+          activeFilter={activeFilter}
+          filterUsed={false}
+          show={false}
+          title='Lawyers'
+        >
+          <CheckboxList
+            error='Please add filters'
+            content={lawyers}
+            toggleCheckbox={toggleCheckbox}
+          />
+        </HideToggle>
+        <HideToggle
+          toggleFilter={this.toggleFilter}
+          activeFilter={activeFilter}
+          filterUsed={selectedDateRange}
+          show={false}
+          title='Dates'
+        >
+          <div className='pl3 fl mt2'>
+            <Radio
+              items={dateSearchOptions}
+              selectedItem={selectedDateOption}
+              handleChange={this.selectDateOption}
             />
-          </HideToggle>
-          <HideToggle
-            toggleFilter={this.toggleFilter}
-            activeFilter={activeFilter}
-            filterUsed={selectedTags}
-            show={false}
-            title='Tags'
-          >
-            <CheckboxListTwo
-              error='Please add filters'
-              content={tags}
-              toggleCheckbox={toggleCheckbox}
-            />
-          </HideToggle>
-          <HideToggle
-            toggleFilter={this.toggleFilter}
-            activeFilter={activeFilter}
-            filterUsed={selectedBusinessUnits}
-            show={false}
-            title='Business Units'
-          >
-            <CheckboxListTwo
-              error='Please add filters'
-              content={businessUnits}
-              toggleCheckbox={toggleCheckbox}
-            />
-          </HideToggle>
-          <HideToggle
-            toggleFilter={this.toggleFilter}
-            activeFilter={activeFilter}
-            filterUsed={false}
-            show={false}
-            title='Lawyers'
-          >
-            <CheckboxList
-              error='Please add filters'
-              content={lawyers}
-              toggleCheckbox={toggleCheckbox}
-            />
-          </HideToggle>
-          <HideToggle
-            toggleFilter={this.toggleFilter}
-            activeFilter={activeFilter}
-            filterUsed={selectedDateRange}
-            show={false}
-            title='Dates'
-          >
-            <div className='pl3 fl mt2'>
-              <Radio
-                items={dateSearchOptions}
-                selectedItem={selectedDateOption}
-                handleChange={this.selectDateOption}
-              />
-              <div className='cf' />
-              <div className='fl mt2 mr2'>
-                <DatePicker
-                  className='w4 font b--blue ba bw1 pa1 tc'
-                  selected={startDate}
-                  selectsStart
-                  startDate={startDate}
-                  endDate={endDate}
-                  onChange={this.handleChangeStart}
-                  placeholderText='Start date'
-                  showMonthDropdown
-                  showYearDropdown
-                  dateFormat='DD/MM/YYYY'
-                />
-              </div>
-              <div className='fl mr2 mt2'>
-                <DatePicker
-                  className='pl2 w4 font b--blue ba bw1 pa1 tc'
-                  selected={endDate}
-                  selectsEnd
-                  startDate={startDate}
-                  endDate={endDate}
-                  onChange={this.handleChangeEnd}
-                  placeholderText='End date'
-                  showMonthDropdown
-                  showYearDropdown
-                  dateFormat='DD/MM/YYYY'
-                />
-              </div>
-            </div>
             <div className='cf' />
-            <div onClick={this.resetDates} className='pt1 pl3 f7 pa1 pointer'>
-              Clear
+            <div className='fl mt2 mr2'>
+              <DatePicker
+                className='w4 font b--blue ba bw1 pa1 tc'
+                selected={startDate}
+                selectsStart
+                startDate={startDate}
+                endDate={endDate}
+                onChange={this.handleChangeStart}
+                placeholderText='Start date'
+                showMonthDropdown
+                showYearDropdown
+                dateFormat='DD/MM/YYYY'
+              />
             </div>
-            <div>
-              {error.finishBeforeStart &&
-                <div className='pa2 red b'>
-                  End date is before the start date
-                </div>}
+            <div className='fl mr2 mt2'>
+              <DatePicker
+                className='pl2 w4 font b--blue ba bw1 pa1 tc'
+                selected={endDate}
+                selectsEnd
+                startDate={startDate}
+                endDate={endDate}
+                onChange={this.handleChangeEnd}
+                placeholderText='End date'
+                showMonthDropdown
+                showYearDropdown
+                dateFormat='DD/MM/YYYY'
+              />
             </div>
-          </HideToggle>
+          </div>
+          <div className='cf' />
+          <div onClick={this.resetDates} className='pt1 pl3 f7 pa1 pointer'>
+            Clear
+          </div>
+          <div>
+            {error.finishBeforeStart &&
+              <div className='pa2 red b'>
+                End date is before the start date
+              </div>}
+          </div>
+        </HideToggle>
 
-          {
-            <div
-              className='ml3 f4 underline-hover mt2 pointer'
-              onClick={clearFilters}
-            >
-              Reset
-            </div>
-          }
-        </Flex>
-      </BouncyDiv>
+        {
+          <div
+            className='ml3 f4 underline-hover mt2 pointer'
+            onClick={clearFilters}
+          >
+            Reset
+          </div>
+        }
+      </Flex>
     )
   }
 }

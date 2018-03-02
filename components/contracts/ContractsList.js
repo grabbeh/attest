@@ -28,7 +28,6 @@ const ContractsList = props => (
               </div>
               ))}
           </CSSTransitionGroup>
-
         </section>
       </div>
       : <div className='bg-light-gray pa3 f4 b mt3'>

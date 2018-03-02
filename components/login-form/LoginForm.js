@@ -8,6 +8,7 @@ import Input from '../general/Input'
 import ClearFix from '../styles/ClearFix'
 import FormTitle from '../styles/FormTitle'
 import CenterBox from '../styles/CenterBox'
+import FadeRightDiv from '../styles/FadeRightDiv'
 
 class LoginForm extends React.Component {
   constructor (props) {
@@ -37,17 +38,15 @@ class LoginForm extends React.Component {
   render () {
     return (
       <CenterBox>
-        <FormTitle title='Login' />
-        <form>
-          <div className='mt2'>
+        <FadeRightDiv>
+          <FormTitle title='Login' />
+          <form className='pt2'>
             <Input
               value={this.state.email}
               name='email'
               onChange={this.saveToState}
               label='Email'
             />
-          </div>
-          <div className='mt2'>
             <Input
               value={this.state.password}
               name='password'
@@ -55,13 +54,13 @@ class LoginForm extends React.Component {
               label='Password'
               type='password'
             />
-          </div>
-          <FormButton onClick={this.handleClick}>
-            Submit
-          </FormButton>
-          <ClearFix />
-        </form>
-        <div />
+            <FormButton onClick={this.handleClick}>
+              Submit
+            </FormButton>
+            <ClearFix />
+          </form>
+          <div />
+        </FadeRightDiv>
       </CenterBox>
     )
   }
