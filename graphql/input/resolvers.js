@@ -23,6 +23,9 @@ const resolvers = {
     }
   }),
   Query: {
+    thing: () => {
+      return 'Hello World'
+    },
     contracts: async (root, args, { user }) => {
       let contracts = await Contract.find({
         masterEntityID: user.masterEntityID

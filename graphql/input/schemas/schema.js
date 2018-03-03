@@ -12,6 +12,7 @@ type Query {
   currentBusinessUnits: [BusinessUnit]
   currentLawyers: [String]
   currentStatuses: [Status]
+  thing: String
 }
 
 type Mutation {

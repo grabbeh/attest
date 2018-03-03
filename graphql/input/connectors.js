@@ -2,9 +2,6 @@ import mongoose from 'mongoose'
 import generator from '../../data/compiled/data'
 mongoose.Promise = require('bluebird')
 
-const db = require('../../config/db.js')
-mongoose.connect(db, { useMongoClient: true })
-
 const ContractSchema = mongoose.Schema({
   ownerEntity: String,
   masterEntityID: String,

@@ -1,26 +1,23 @@
 import withData from '../lib/withData'
+import withUser from '../lib/withUser'
 import { graphql } from 'react-apollo'
-import react from 'react'
+import { Component } from 'react'
 import gql from 'graphql-tag'
 import Link from 'next/link'
-import { Page, AuthPage } from '../components/Page'
+import { Page, UserPage } from '../components/Page'
 
 const DATA_QUERY = gql`
-  query masterEntity {
+  query  {
+    thing
     masterEntity {
-      businessUnits {
-        name
-      }
-      statuses {
-        name
-      }
-  }
+      id
+    }
 }
 `
 
-const TestPageWithData = AuthPage(props => <TestPageWithQuery {...props} />)
+const TestPageWithData = withData(props => <TestPageWithQuery {...props} />)
 
-class TestComponent extends react.Component {
+class TestComponent extends Component {
   constructor (props) {
     super(props)
     console.log(props)

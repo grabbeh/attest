@@ -17,6 +17,7 @@ export default class MyDocument extends Document {
       <html>
         <Head>
           <meta charSet='utf-8' />
+          <meta charset='utf-8' />
           <meta name='viewport' content='width=device-width, initial-scale=1' />
           <title>Attest - open source contract management</title>
           <link
@@ -24,11 +25,6 @@ export default class MyDocument extends Document {
             href='https://unpkg.com/tachyons@4.9.0/css/tachyons.min.css'
           />
           <link rel='stylesheet' href='/static/datepicker.css' />
-          <link
-            href='https://fonts.googleapis.com/css?family=Roboto:400,700'
-            rel='stylesheet'
-          />
-
           <link
             href='https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'
             rel='stylesheet'
