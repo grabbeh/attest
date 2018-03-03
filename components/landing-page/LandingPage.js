@@ -20,7 +20,7 @@ class LandingPage extends Component {
         <div className='mh6'>
           <div className='pt4 f3'>
             <div className='fl b dark-gray'>
-              <i className='mr2 fa fa-file' />Attest
+              attest
             </div>
             <div className='fr'>
               {this.props.user
