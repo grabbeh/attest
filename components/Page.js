@@ -7,7 +7,8 @@ import { compose } from 'recompose'
 import { withApollo } from 'react-apollo'
 
 const Page = compose(withData, withApollo, withLayout)
+const LandingPage = compose(withData, withUser, withApollo)
 const AuthPage = compose(withData, withAuth, withApollo, withAuthLayout)
 const UserPage = compose(withData, withUser, withApollo, withLayout)
 
-export { Page, AuthPage, UserPage }
+export { Page, AuthPage, UserPage, LandingPage }

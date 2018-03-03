@@ -11,11 +11,11 @@ import FadeRightDiv from '../styles/FadeRightDiv'
 const AddContractContainer = props => {
   if (!props.loading) {
     return (
-      <CenterBox>
-        <FadeRightDiv>
+      <FadeRightDiv>
+        <CenterBox>
           <AddContractForm title='Add Contract' {...props} />
-        </FadeRightDiv>
-      </CenterBox>
+        </CenterBox>
+      </FadeRightDiv>
     )
   }
   return <Loading />

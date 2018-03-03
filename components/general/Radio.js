@@ -18,6 +18,7 @@ class Radio extends react.Component {
           style={this.getStyle(s)}
           className={cn(
             'pointer',
+            'bg-white',
             'fr',
             'f4',
             'pv1',

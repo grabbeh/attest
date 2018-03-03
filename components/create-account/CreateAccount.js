@@ -20,12 +20,6 @@ class CreateAccountForm extends React.Component {
     }
   }
 
-  componentDidMount () {
-    if (this.props.user) {
-      redirect({}, '/contracts')
-    }
-  }
-
   saveToState = e => {
     let { name, value, type } = e.target
     this.setState({ [name]: value })
@@ -42,8 +36,9 @@ class CreateAccountForm extends React.Component {
 
   render () {
     return (
-      <CenterBox>
-        <FadeRightDiv>
+      <FadeRightDiv>
+        <CenterBox>
+
           <FormTitle title='Create new account' />
           <form>
             <div className='mt2'>
@@ -78,8 +73,9 @@ class CreateAccountForm extends React.Component {
             <ClearFix />
           </form>
           <div />
-        </FadeRightDiv>
-      </CenterBox>
+
+        </CenterBox>
+      </FadeRightDiv>
     )
   }
 }

@@ -1,122 +1,105 @@
 import Link from 'next/link'
-import Line from './Line'
-import Break from './Break'
+import PageExample from '../landing-page/PageExample'
+import { graphql, compose } from 'react-apollo'
+import LOGIN_MUTATION from '../../queries/LoginMutation'
+import redirect from '../../lib/Redirect'
+import cookie from 'cookie'
+import { Component } from 'react'
+import ClearFix from '../styles/ClearFix'
 
-export default () => (
-  <div>
-    <div className='bg--blue pb3'>
-      <div className='fl f3 pa3 white'>
-        attest
-      </div>
-      <div className='br3 fr pa2 ba ma3 white'>
-        <Link href='/login'><a className='link white'>Login</a></Link>
-      </div>
-      <div className='br3 fr pa2 ba ma3 white'>
-        <Link href='/create-admin-account'>
-          <a className='link white'>Signup</a>
-        </Link>
-      </div>
-      <div className='cf' />
-      <div className='b ph5-ns pt4 f2 white tc'>
-        An open source platform for contract management
-      </div>
-      <div className='ph2 pt3 f4 tc light-green'>
-        Easily get visibility on contract volume,  progress and status
-      </div>
-      <div className='center mt4 mw6-ns mw6 mw6-ns bg-white mb4 pa3'>
-        <div className='b mb2 dark-gray'>ACME INC</div>
-        <div className='w-70-ns w-100 fl pr2-ns pr0'>
-          <div className='bg-light-yellow w-100 pa2'>
-            <Line />
-            <Line />
-            <Line />
-            <div className='mt1 fl bg-navy h1 w2' />
-            <div className='mt1 fl ml2 h1 w2 bg-red pl2' />
-            <div className='cf' />
-          </div>
-          <div className='mt2 bg-light-yellow w-100 pa2'>
-            <Line />
-            <Line />
-            <Line medium />
-            <div className='mt1 fl bg-black h1 w2' />
-            <div className='cf' />
-          </div>
-          <div className='mt2 bg-light-red w-100 pa2'>
-            <Line />
-            <Line />
-            <Line short />
-            <div className='mt1 fl bg-navy h1 w2' />
-            <div className='mt1 fl ml2 h1 w2 bg-purple pl2' />
-            <div className='cf' />
-          </div>
-          <div className='mt2 bg-green w-100 pa2'>
-            <Line />
-            <Line />
-            <Line />
-            <div className='mt1 fl bg-navy h1 w2' />
+class LandingPage extends Component {
+  logout = () => {
+    redirect({}, '/')
+    this.props.client.resetStore().then()
+    document.cookie = cookie.serialize('token', '')
+  }
 
-            <div className='mt1 fl ml2 h1 w2 bg-gray pl2' />
-            <div className='cf' />
-          </div>
-        </div>
-        <div className='fl bg-light-gray w-30-ns w-100 mt0-ns mt2 pt1 pa2'>
-          <Line />
-          <Line />
-          <Line />
-          <Line />
-          <Line />
-          <Line medium />
-          <Break />
-          <Line />
-          <Line />
-          <Line />
-          <Line />
-          <Line />
-          <Line medium />
-          <Line short />
-          <Break />
-          <Line />
-          <Line medium />
-          <Line medium />
-
-          <div className='mt3 pa2 bg-dark-blue'>
-
-            <div className='fl w-50 pr2'>
-              <div className='h3 bg-light-blue' />
+  render () {
+    return (
+      <div className='bg-light-peach'>
+        <div className='mh6'>
+          <div className='pt4 f3'>
+            <div className='fl b dark-gray'>
+              <i className='mr2 fa fa-file' />Attest
             </div>
-            <div className='fl h3  w-50 bg-pink' />
-            <div className='cf' />
+            <div className='fr'>
+              {this.props.user
+                ? <div>
+                  <span>{this.props.user.email}</span>
+                  <span className='pl3 dark-gray' onClick={this.logout}>
+                    <i title='Sign out' className='fa fa-sign-out' />
+                  </span>
+                </div>
+                : <Link href='/login'>
+                  <a className='dim link black'>Login</a>
+                </Link>}
+            </div>
+          </div>
+          <ClearFix />
+          <div className='mt5'>
+            <div className='f2 b dark-gray'>
+              An open source platform for contract management
+            </div>
+            <div className='f3 mt4 dark-gray'>
+              Easily get visibility on contract volume,  progress and status
+            </div>
+            <div className='f5 mt4'>
+              <div className='grow fl br2 shadow-3 pv2 ph3 tc bg-blue mr4'>
+                <Link href='/create-admin-account'>
+                  <a className='link white'>CREATE ACCOUNT</a>
+                </Link>
+              </div>
+              <div
+                className='grow fl br2 shadow-3 pv2 ph3 tc pointer bg-navy white mr4'
+                onClick={this.props.login}
+              >
+                VIEW DEMO
+              </div>
+              <div className='grow fl br2 shadow-3 pv2 ph3 tc bg-lightest-blue'>
+                <Link href='https://github.com/grabbeh/attest'>
+                  <a className='link dark-gray'>GITHUB</a>
+                </Link>
+              </div>
+
+            </div>
+            <ClearFix />
+            <div className='center mt4 mb5'>
+              <PageExample />
+            </div>
           </div>
         </div>
-        <div className='cf' />
-      </div>
-    </div>
-    <div className='pv3 bg-gray'>
-      <div className='tc white f3'>Join us on </div>
-      <div className='center mw5 pa3'>
-        <a href='https://github.com/grabbeh/attest'>
-          <img
-            className='mb3'
-            src='https://assets-cdn.github.com/images/modules/logos_page/GitHub-Logo.png'
-          />
-          <img src='https://assets-cdn.github.com/images/modules/logos_page/Octocat.png' />
-        </a>
-      </div>
-    </div>
-    <div>
-      <div className='pa4 bg-color-white'>
-        <div className='tc f3 black mb3 fc-blue'>Apache 2.0 licensed</div>
-        <div className='mw5 center'>
-          <img src='https://www.apache.org/foundation/press/kit/asf_logo.svg' />
+        <div className='bg--dark-blue pa4'>
+          <div className='white tc f4'>
+            "Probably not the future of contract management"
+          </div>
+          <div className='white mt2 fr'>- nameless VC</div>
+          <div className='cf' />
         </div>
       </div>
-    </div>
-    <div className=' bg--dark-blue pa4'>
-      <div className='white tc f4'>
-        "Probably not the future of contract management"
-      </div>
-      <div className='white mt2 fr'>- nameless VC</div>
-      <div className='cf' />
-    </div>
-  </div>
-)
+    )
+  }
+}
+
+const loginMutation = graphql(LOGIN_MUTATION, {
+  props ({ ownProps, mutate }) {
+    return {
+      login () {
+        return mutate({
+          variables: { email: 'demo@demo.co.uk', password: 'demo' },
+          update: (store, response) => {
+            document.cookie = cookie.serialize('token', response.data.login, {
+              maxAge: 30 * 24 * 60 * 60 // 30 days
+            })
+            ownProps.client.resetStore().then(() => {
+              redirect({}, '/contracts')
+            })
+          }
+        })
+      }
+    }
+  }
+})
+
+const LandingPageWithLogin = compose(loginMutation)(LandingPage)
+
+export default LandingPageWithLogin

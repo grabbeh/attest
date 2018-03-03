@@ -37,8 +37,9 @@ class LoginForm extends React.Component {
 
   render () {
     return (
-      <CenterBox>
-        <FadeRightDiv>
+      <FadeRightDiv>
+        <CenterBox>
+
           <FormTitle title='Login' />
           <form className='pt2'>
             <Input
@@ -60,8 +61,9 @@ class LoginForm extends React.Component {
             <ClearFix />
           </form>
           <div />
-        </FadeRightDiv>
-      </CenterBox>
+
+        </CenterBox>
+      </FadeRightDiv>
     )
   }
 }

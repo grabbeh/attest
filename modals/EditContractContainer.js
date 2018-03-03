@@ -6,27 +6,30 @@ import Loading from '../components/general/Loading'
 import Modal from 'react-modal'
 import Box from '../components/styles/Box'
 import _ from 'lodash'
+import FadeRightDiv from '../components/styles/FadeRightDiv'
 
 const EditContractContainer = props => {
   if (!props.loading) {
     return (
-      <Modal
-        className='content'
-        overlayClassName='overlay'
-        onRequestClose={props.closeModal}
-        isOpen={props.isOpen}
-      >
-        <Box>
-          <AddContractForm
-            closeModal={props.closeModal}
-            isOpen={props.isOpen}
-            masterEntity={props.masterEntity}
-            contract={props.contract}
-            title='Edit Contract'
-            handleContract={props.handleContract}
-          />
-        </Box>
-      </Modal>
+      <FadeRightDiv>
+        <Modal
+          className='content'
+          overlayClassName='overlay'
+          onRequestClose={props.closeModal}
+          isOpen={props.isOpen}
+        >
+          <Box>
+            <AddContractForm
+              closeModal={props.closeModal}
+              isOpen={props.isOpen}
+              masterEntity={props.masterEntity}
+              contract={props.contract}
+              title='Edit Contract'
+              handleContract={props.handleContract}
+            />
+          </Box>
+        </Modal>
+      </FadeRightDiv>
     )
   }
   return <Loading />
