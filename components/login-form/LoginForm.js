@@ -56,7 +56,7 @@ class LoginForm extends React.Component {
               type='password'
             />
             <FormButton onClick={this.handleClick}>
-              Submit
+              SUBMIT
             </FormButton>
             <ClearFix />
           </form>

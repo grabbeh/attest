@@ -17,7 +17,7 @@ class LandingPage extends Component {
   render () {
     return (
       <div className='bg-light-peach'>
-        <div className='mh6'>
+        <div className='mh6-ns mh3'>
           <div className='pt4 f3'>
             <div className='fl b dark-gray'>
               attest
@@ -44,18 +44,18 @@ class LandingPage extends Component {
               Easily get visibility on contract volume,  progress and status
             </div>
             <div className='f5 mt4'>
-              <div className='grow fl br2 shadow-3 pv2 ph3 tc bg-blue mr4'>
+              <div className='pointer w-100 w-20-ns grow fl br2 shadow-3 pv2 ph3 tc bg-blue mr4'>
                 <Link href='/create-admin-account'>
                   <a className='link white'>CREATE ACCOUNT</a>
                 </Link>
               </div>
               <div
-                className='grow fl br2 shadow-3 pv2 ph3 tc pointer bg-navy white mr4'
+                className='w-100 w-20-ns mt2 mt0-ns grow fl br2 shadow-3 pv2 ph3 tc pointer bg-navy white mr4'
                 onClick={this.props.login}
               >
                 VIEW DEMO
               </div>
-              <div className='grow fl br2 shadow-3 pv2 ph3 tc bg-lightest-blue'>
+              <div className='pointer w-100 w-20-ns mt2 mt0-ns grow fl br2 shadow-3 pv2 ph3 tc bg-lightest-blue'>
                 <Link href='https://github.com/grabbeh/attest'>
                   <a className='link dark-gray'>GITHUB</a>
                 </Link>
