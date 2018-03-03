@@ -9,9 +9,9 @@ import ClearFix from '../styles/ClearFix'
 
 class LandingPage extends Component {
   logout = () => {
-    redirect({}, '/')
-    this.props.client.resetStore().then()
+    this.props.client.resetStore()
     document.cookie = cookie.serialize('token', '')
+    redirect({}, '/')
   }
 
   render () {
@@ -38,7 +38,7 @@ class LandingPage extends Component {
           <ClearFix />
           <div className='mt5'>
             <div className='f2 b dark-gray'>
-              An open source platform for contract management
+              An open source contract management platform
             </div>
             <div className='f3 mt4 dark-gray'>
               Easily get visibility on contract volume,  progress and status

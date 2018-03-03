@@ -4,14 +4,10 @@ import redirect from '../../lib/Redirect'
 import cookie from 'cookie'
 
 class Header extends react.Component {
-  constructor (props) {
-    super(props)
-  }
-
   logout = () => {
-    redirect({}, '/')
-    this.props.client.resetStore().then()
+    this.props.client.resetStore()
     document.cookie = cookie.serialize('token', '')
+    redirect({}, '/')
   }
 
   render () {

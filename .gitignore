@@ -32,6 +32,7 @@ build/Release
 /data/compiled
 /config
 /static/fonts
+package-lock.json
 
 jspm_packages
 ./next
