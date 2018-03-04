@@ -1,5 +1,6 @@
 import React from 'react'
 import cn from 'classnames'
+import FadeInDiv from '../styles/FadeInDiv'
 
 class HideToggle extends React.Component {
   setFilter = () => {
@@ -17,16 +18,10 @@ class HideToggle extends React.Component {
             {title}
           </span>
         </div>
-        <div
-          className={cn(
-            activeFilter !== title && 'dn',
-            'absolute',
-            'shadow-4',
-            'bg-white'
-          )}
-        >
+
+        <FadeInDiv activeFilter={activeFilter} title={title}>
           {children}
-        </div>
+        </FadeInDiv>
       </div>
     )
   }

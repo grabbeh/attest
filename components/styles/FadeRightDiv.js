@@ -3,7 +3,7 @@ import { fadeInRightBig } from 'react-animations'
 
 const fadeAnimation = keyframes`${fadeInRightBig}`
 
-const BouncyDiv = styled.div`
+const FadeInRightDiv = styled.div`
   animation: 1s ${fadeAnimation};
 `
-export default BouncyDiv
+export default FadeInRightDiv

@@ -2,10 +2,6 @@ import Checkbox from './CheckBox'
 import React from 'react'
 
 class CheckboxList extends React.Component {
-  constructor (props) {
-    super(props)
-  }
-
   createCheckboxes = (arr, checked) => {
     let check = checked || false
     const { toggleCheckbox, error } = this.props
