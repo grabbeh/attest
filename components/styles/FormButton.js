@@ -1,6 +1,6 @@
 const FormButton = ({ onClick, text }) => (
   <input
-    className='fr pv2 ph3 br2 mt3 bg-green white shadow-4'
+    className='fr pv2 ph3 font f5 w-20 br2 mt3 bg-green white shadow-4'
     onClick={onClick}
     type='submit'
     value={text}

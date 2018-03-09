@@ -36,22 +36,22 @@ class LandingPage extends Component {
               Easily get visibility on contract volume,  progress and status
             </div>
             <div className='f5 mt4'>
-              <div className='pointer w-100 w-20-l grow fl br2 shadow-3 pv2 ph3 tc bg-blue mr4'>
+              <button className='pointer w-100 w-20-l grow fl br2 shadow-3 pv2 ph3 tc bg-blue mr4'>
                 <Link href='/create-admin-account'>
                   <a className='link white'>CREATE ACCOUNT</a>
                 </Link>
-              </div>
-              <div
+              </button>
+              <button
                 className='w-100 w-20-l mt2 mt0-l grow fl br2 shadow-3 pv2 ph3 tc pointer bg-navy white mr4'
                 onClick={this.props.login}
               >
                 VIEW DEMO
-              </div>
-              <div className='pointer w-100 w-20-l mt2 mt0-l grow fl br2 shadow-3 pv2 ph3 tc bg-lightest-blue'>
+              </button>
+              <button className='pointer w-100 w-20-l mt2 mt0-l grow fl br2 shadow-3 pv2 ph3 tc bg-lightest-blue'>
                 <Link href='https://github.com/grabbeh/attest'>
                   <a className='link dark-gray'>GITHUB</a>
                 </Link>
-              </div>
+              </button>
 
             </div>
             <ClearFix />

@@ -166,11 +166,14 @@ const resolvers = {
     createAdminAccount: async (root, { name, email, password }) => {
       const newMasterEntity = await MasterEntity.create({ name })
       const existingUser = await User.findOne({ email })
-      if (existingUser) throw new Error('Email already registered')
+      if (existingUser) {
+        throw new Error('Email already registered')
+      }
       password = await bcrypt.hash(password, 10)
       let masterEntityID = newMasterEntity._id
       let user = { email, password, masterEntityID }
       return User.create(user)
+
       // Maybe just let user create account w/out validation for now
     },
     addUser: async (root, args) => {

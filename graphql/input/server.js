@@ -1,5 +1,6 @@
 import express from 'express'
 import { graphqlExpress, graphiqlExpress } from 'apollo-server-express'
+import { formatError } from 'apollo-errors'
 import bodyParser from 'body-parser'
 import schema from './schemas/schema'
 import jwt from 'jsonwebtoken'
@@ -38,6 +39,7 @@ server.use(
   '/graphql',
   bodyParser.json(),
   graphqlExpress(req => ({
+    formatError,
     schema,
     context: {
       SECRET,

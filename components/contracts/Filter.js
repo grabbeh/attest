@@ -157,7 +157,7 @@ class Filter extends react.Component {
           show={false}
           title='Dates'
         >
-          <div className='pl3 fl mt2'>
+          <div className='pl3 fl mt3'>
             <Radio
               items={dateSearchOptions}
               selectedItem={selectedDateOption}
@@ -166,7 +166,7 @@ class Filter extends react.Component {
             <div className='cf' />
             <div className='fl mt2 mr2'>
               <DatePicker
-                className='w4 font b--blue ba bw1 pa1 tc'
+                className='w4 f4 font b--blue ba bw1 pa1 tc'
                 selected={startDate}
                 selectsStart
                 startDate={startDate}
@@ -180,7 +180,7 @@ class Filter extends react.Component {
             </div>
             <div className='fl mr2 mt2'>
               <DatePicker
-                className='pl2 w4 font b--blue ba bw1 pa1 tc'
+                className='pl2 w4 f4 font b--blue ba bw1 pa1 tc'
                 selected={endDate}
                 selectsEnd
                 startDate={startDate}

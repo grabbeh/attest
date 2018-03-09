@@ -5,6 +5,7 @@ import CREATE_ACCOUNT_MUTATION from '../../queries/CreateAccountMutation'
 import redirect from '../../lib/Redirect'
 import FormButton from '../styles/FormButton'
 import Input from '../general/Input'
+import Error from '../general/Error'
 import ClearFix from '../styles/ClearFix'
 import FormTitle from '../styles/FormTitle'
 import CenterBox from '../styles/CenterBox'
@@ -16,7 +17,8 @@ class CreateAccountForm extends React.Component {
     this.state = {
       email: '',
       password: '',
-      name: ''
+      name: '',
+      error: ''
     }
   }
 
@@ -25,20 +27,21 @@ class CreateAccountForm extends React.Component {
     this.setState({ [name]: value })
   }
 
+  setError = error => {
+    this.setState({ error })
+  }
+
   handleClick = e => {
     e.preventDefault()
-    this.props.createAdminAccount(
-      this.state.name,
-      this.state.email,
-      this.state.password
-    )
+    const { name, email, password } = this.state
+    this.props.createAdminAccount(name, email, password, this.setError)
   }
 
   render () {
+    let { email, name, password, error } = this.state
     return (
       <FadeRightDiv>
         <CenterBox>
-
           <FormTitle title='Create new account' />
           <form>
             <div className='mt2'>
@@ -66,14 +69,11 @@ class CreateAccountForm extends React.Component {
                 type='password'
               />
             </div>
-
-            <FormButton onClick={this.handleClick}>
-              Submit
-            </FormButton>
+            <FormButton onClick={this.handleClick} text='SUBMIT' />
+            <ClearFix />
+            <Error error={error} />
             <ClearFix />
           </form>
-          <div />
-
         </CenterBox>
       </FadeRightDiv>
     )
@@ -81,18 +81,20 @@ class CreateAccountForm extends React.Component {
 }
 
 const createAccountMutation = graphql(CREATE_ACCOUNT_MUTATION, {
-  props ({ mutate }) {
-    return {
-      createAdminAccount (name, email, password) {
-        return mutate({
-          variables: { name, email, password },
-          update: (store, response) => {
-            console.log(response)
-          }
+  props: ({ mutate }) => ({
+    createAdminAccount: (name, email, password, setError) => {
+      mutate({
+        variables: { name, email, password, setError }
+      })
+        .then(res => {
+          redirect({}, '/login')
         })
-      }
+        .catch(e => {
+          let error = e.graphQLErrors[0].message
+          setError(error)
+        })
     }
-  }
+  })
 })
 
 const CreateAccountFormWithMutation = compose(createAccountMutation)(
