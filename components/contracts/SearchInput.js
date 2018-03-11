@@ -4,7 +4,7 @@ import react from 'react'
 class SearchInput extends react.Component {
   render () {
     return (
-      <div className='w-50 pv1 f5'>
+      <div className='w-50-l w-100 pv1 f5'>
         <span className='f4 b mr2'>Search</span>
         <input
           className='bb bw1 b--black-20 f4 font pa1 w-80 bg-white'

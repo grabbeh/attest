@@ -26,7 +26,6 @@ const UpdateMasterEntityMutation = graphql(UPDATE_MASTER_ENTITY_MUTATION, {
         return mutate({
           variables: { masterEntity },
           update: (store, response) => {
-            console.log(response)
             // redirect({}, '/contracts')
           }
         })

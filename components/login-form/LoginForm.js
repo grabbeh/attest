@@ -55,9 +55,7 @@ class LoginForm extends React.Component {
               label='Password'
               type='password'
             />
-            <FormButton onClick={this.handleClick}>
-              SUBMIT
-            </FormButton>
+            <FormButton onClick={this.handleClick} text='SUBMIT' />
             <ClearFix />
           </form>
           <div />

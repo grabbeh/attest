@@ -138,7 +138,6 @@ class ContractsHolder extends react.Component {
   }
 
   render () {
-    console.log(this.props)
     let { filters, contracts } = this.state
     let { name } = this.props.masterEntity
     let filteredContracts = filter(filters, contracts)
