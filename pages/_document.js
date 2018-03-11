@@ -29,8 +29,9 @@ export default class MyDocument extends Document {
             href='https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'
             rel='stylesheet'
           />
-          <style jsx global>
-            {`
+          <style
+            dangerouslySetInnerHTML={{
+              __html: `
               
               @font-face {
                 font-family: 'shapefont';
@@ -51,8 +52,9 @@ export default class MyDocument extends Document {
                 -moz-osx-font-smoothing: grayscale;
               }
 
-          `}
-          </style>
+          `
+            }}
+          />
           <style>
             {`
 
