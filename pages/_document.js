@@ -92,6 +92,10 @@ export default class MyDocument extends Document {
             }
 
             .front {
+              z-index: 500;
+            }
+
+            .front-two {
               z-index: 1000;
             }
 

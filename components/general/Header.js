@@ -13,9 +13,9 @@ class Header extends react.Component {
   render () {
     const { user, toggle } = this.props
     return (
-      <div className='relative front bg--dark-peach pa2 f3'>
+      <div className='relative front-two bg--dark-peach pa2 f3'>
         <span onClick={toggle} className='dark-gray'>
-          <i className='mr2 fa fa-bars' />
+          <i className='mr3 fa fa-bars' />
         </span>
         <span className='b dark-gray'>
           Attest
