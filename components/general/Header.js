@@ -11,18 +11,21 @@ class Header extends react.Component {
   }
 
   render () {
-    const { user } = this.props
+    const { user, toggle } = this.props
     return (
       <div className='relative front bg--dark-peach pa2 f3'>
+        <span onClick={toggle} className='dark-gray'>
+          <i className='mr2 fa fa-bars' />
+        </span>
         <span className='b dark-gray'>
-          <i className='mr2 fa fa-file' />Attest
+          Attest
         </span>
         <span className='fr'>
           {user
             ? <div className='mt1 f4-ns f6'>
-              <span><i className='dark-gray fa fa-user-circle' /></span>
+              <span><i className='dark-gray fa fa-user-circle fa-lg' /></span>
               <span className='pl2' onClick={this.logout}>
-                <i title='Sign out' className='fa fa-sign-out' />
+                <i title='Sign out' className='fa fa-sign-out fa-lg' />
               </span>
             </div>
             : <Link href='/login'>

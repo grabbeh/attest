@@ -190,7 +190,7 @@ class SettingsForm extends react.Component {
             </ul>
           </FormSection>
           <ClearFix />
-          <FormButton onClick={this.handleSubmit} text='Submit' />
+          <FormButton onClick={this.handleSubmit} text='SUBMIT' />
           <ClearFix />
         </form>
       </CenterBox>

@@ -179,10 +179,10 @@ export default class MyDocument extends Document {
               }
               .content {
                 position: absolute;
-                top: 40px;
-                left: 300px;
-                right: 300px;
-                bottom: 40px;
+                top: 0px;
+                left: 0px;
+                right:0px;
+                bottom: 0px;
                 overflow: auto;
                 WebkitOverflowScrolling: touch;
                 outline: none;

@@ -17,7 +17,7 @@ class CheckboxList extends React.Component {
           />
         )
       })
-    } else return <div>{error}</div>
+    } else return <div className='f4'>{error}</div>
   }
 
   render () {

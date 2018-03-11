@@ -1,19 +1,19 @@
 import React from 'react'
 import SlimMenu from './SlimMenu'
 import Flex from '../styles/Flex'
+import MenuAnimation from '../styles/MenuAnimation'
+import PageAnimation from '../styles/PageAnimation'
 
 class SideColumn extends React.Component {
   render () {
     return (
       <Flex>
-        <div>
-          <div className='pa3 pt4 bg-dark-gray height fixed'>
-            <SlimMenu />
-          </div>
-        </div>
-        <div className='ml5 w-100'>
+        <MenuAnimation showMenu={this.props.showMenu}>
+          <SlimMenu />
+        </MenuAnimation>
+        <PageAnimation showMenu={this.props.showMenu}>
           {this.props.children}
-        </div>
+        </PageAnimation>
       </Flex>
     )
   }

@@ -13,7 +13,7 @@ const EditContractContainer = props => {
     return (
       <FadeRightDiv>
         <Modal
-          className='content'
+          className='content ml7-l ml5-m ml4-ns mw7 mt5-l mt0'
           overlayClassName='overlay'
           onRequestClose={props.closeModal}
           isOpen={props.isOpen}

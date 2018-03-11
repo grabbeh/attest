@@ -52,12 +52,12 @@ class Input extends react.Component {
           onBlur={onBlur}
         />
         {this.props.onClick &&
-          <div
-            className='fr ml2 b bg-green white pv2 ph3 br2'
+          <button
+            className='fr ml2 f5 bg-green white pv2 ph3 br2'
             onClick={this.props.onClick}
           >
-            Add
-          </div>}
+            ADD
+          </button>}
         <div className='red b f6'>{error}</div>
       </div>
     )

@@ -12,6 +12,7 @@ import Loading from '../general/Loading'
 import HideToggle from '../general/Hide'
 import cn from 'classnames'
 import FadeRightDiv from '../styles/FadeRightDiv'
+import PageAnimation from '../styles/PageAnimation'
 
 class ContractsHolder extends react.Component {
   constructor (props) {
@@ -137,6 +138,7 @@ class ContractsHolder extends react.Component {
   }
 
   render () {
+    console.log(this.props)
     let { filters, contracts } = this.state
     let { name } = this.props.masterEntity
     let filteredContracts = filter(filters, contracts)
