@@ -31,6 +31,30 @@ export default class MyDocument extends Document {
           />
           <style jsx global>
             {`
+              
+              @font-face {
+                font-family: 'shapefont';
+                src: 
+                  url('/static/fonts/font-bold.otf');
+                font-weight: bold;
+              }
+
+              @font-face {
+                font-family: 'shapefont';
+                src: 
+                  url('/static/fonts/font.otf');
+              }
+              body {
+                font-family: 'shapefont';
+                text-rendering: optimizeLegibility;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+              }
+
+          `}
+          </style>
+          <style>
+            {`
 
               .example-appear {
                 opacity: 0.01;
@@ -69,29 +93,12 @@ export default class MyDocument extends Document {
               z-index: 1000;
             }
 
-              @font-face {
-                font-family: 'shapefont';
-                src: 
-                  url('/static/fonts/font-bold.otf');
-                font-weight: bold;
-              }
-
-              @font-face {
-                font-family: 'shapefont';
-                src: 
-                  url('/static/fonts/font.otf');
-              }
 
               html, body {
                 height: 100vh;
               }
 
-              body {
-                font-family: 'shapefont';
-                text-rendering: optimizeLegibility;
-                -webkit-font-smoothing: antialiased;
-                -moz-osx-font-smoothing: grayscale;
-              }
+      
 
               .font {
                 font-family: 'shapefont';
