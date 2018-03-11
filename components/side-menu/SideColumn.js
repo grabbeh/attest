@@ -9,7 +9,7 @@ class SideColumn extends React.Component {
     return (
       <Flex>
         <MenuAnimation showMenu={this.props.showMenu}>
-          <SlimMenu />
+          <SlimMenu selectedUrl={this.props.url} />
         </MenuAnimation>
         <PageAnimation showMenu={this.props.showMenu}>
           {this.props.children}
