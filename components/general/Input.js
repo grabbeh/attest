@@ -29,7 +29,6 @@ class Input extends react.Component {
         <label className='mr3' htmlFor={value}>
           {label}
         </label>
-
         <input
           className={cn(
             'bw1',
