@@ -52,6 +52,15 @@ export default class MyDocument extends Document {
                 -moz-osx-font-smoothing: grayscale;
               }
 
+              .font {
+                font-family: 'shapefont';
+              }
+
+              input {
+                font-family: 'shapefont'; 
+                border-radius: 0
+              }
+
           `
             }}
           />
@@ -106,13 +115,7 @@ export default class MyDocument extends Document {
 
       
 
-              .font {
-                font-family: 'shapefont';
-              }
-
-              input {
-                font-family: 'shapefont'; 
-              }
+           
 
               .bg--blue {
               background-color: #005baa;
