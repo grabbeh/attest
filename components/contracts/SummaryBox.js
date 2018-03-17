@@ -4,6 +4,7 @@ import react from 'react'
 import StatusBar from './StatusBar'
 import Moment from 'react-moment'
 import Flex from '../styles/Flex'
+import { CSSTransitionGroup } from 'react-transition-group'
 
 class SummaryBox extends react.Component {
   render () {
@@ -42,22 +43,38 @@ class SummaryBox extends react.Component {
               </div>
             </Flex>
             <Flex>
-              <ul className='f4 w-100 mb2 list pa0 ma0'>
+
+              <CSSTransitionGroup
+                className='flex flex-wrap list w-100 f4 mb2 pa0 ma0'
+                component='ul'
+                transitionName='example'
+                transitionEnterTimeout={500}
+                transitionLeaveTimeout={500}
+                transitionAppearTimeout={500}
+                transitionAppear
+              >
                 {res.map(r => (
                   <li key={r.status.name} className='fl mr4'>
                     <StatusBar status={r.status} volume={r.volume} />
                   </li>
                 ))}
 
-              </ul>
+              </CSSTransitionGroup>
               <div className='cf:after' />
-              <div>
+              <CSSTransitionGroup
+                component='div'
+                transitionName='example'
+                transitionEnterTimeout={500}
+                transitionLeaveTimeout={500}
+                transitionAppearTimeout={500}
+                transitionAppear
+              >
                 {arr.map(contracts => (
                   <div className='fl' key={contracts[0].id}>
                     <ContractSquareList contracts={contracts} />
                   </div>
                 ))}
-              </div>
+              </CSSTransitionGroup>
             </Flex>
           </div>}
       </div>
