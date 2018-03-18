@@ -26,9 +26,8 @@ mutation addContract($contract: PostContract) {
       color
     }
     assignedTo {
-      firstName
-      lastName
-      id
+      name
+      email
     }
   }
 }

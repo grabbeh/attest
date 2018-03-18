@@ -1,5 +1,5 @@
 const FormSection = ({ children }) => (
-  <div className='fl pv2 w-100'>
+  <div className='pv2'>
     {children}
   </div>
 )

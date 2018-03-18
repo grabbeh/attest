@@ -22,6 +22,7 @@ const EditContractContainer = props => {
             <AddContractForm
               closeModal={props.closeModal}
               isOpen={props.isOpen}
+              allUsers={props.allUsers}
               masterEntity={props.masterEntity}
               contract={props.contract}
               title='Edit Contract'

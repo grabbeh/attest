@@ -2,6 +2,11 @@ import gql from 'graphql-tag'
 
 export default gql`
   query masterEntity {
+    allUsers {
+      email
+      name
+      id
+    }
     masterEntity {
       businessUnits {
         name
@@ -15,7 +20,6 @@ export default gql`
         name
         color
       }
-      lawyers
       relatedEntities
   }
 }

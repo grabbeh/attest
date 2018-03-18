@@ -1,2 +1,2 @@
-const FormTitle = ({ title }) => <div className='b f3 w-100 pb2'>{title}</div>
+const FormTitle = props => <div className='b f3 pb1'>{props.title}</div>
 export default FormTitle

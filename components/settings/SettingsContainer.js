@@ -1,4 +1,4 @@
-import Settings from './Settings'
+import SettingsHolder from './SettingsHolder'
 import { graphql, compose } from 'react-apollo'
 import Loading from '../general/Loading'
 import MASTER_ENTITY_METADATA_QUERY
@@ -9,13 +9,14 @@ import FadeRightDiv from '../styles/FadeRightDiv'
 
 const SettingsContainer = props => {
   if (props.loading) return <Loading />
-  else return <FadeRightDiv><Settings {...props} /></FadeRightDiv>
+  else return <FadeRightDiv><SettingsHolder {...props} /></FadeRightDiv>
 }
 
 const MasterEntityMetaDataQuery = graphql(MASTER_ENTITY_METADATA_QUERY, {
-  props: ({ data: { loading, masterEntity } }) => ({
+  props: ({ data: { loading, masterEntity, allUsers } }) => ({
     loading,
-    masterEntity
+    masterEntity,
+    allUsers
   })
 })
 

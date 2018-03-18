@@ -6,7 +6,6 @@ import Radio from '../general/Radio'
 import FormSection from '../styles/FormSection'
 import FormButton from '../styles/FormButton'
 import FormTitle from '../styles/FormTitle'
-import SectionTitle from '../styles/SectionTitle'
 import ClearFix from '../styles/ClearFix'
 import Flex from '../styles/Flex'
 import SideColumn from '../side-menu/SideColumn'
@@ -64,19 +63,22 @@ class SettingsForm extends react.Component {
     this.setState({ [name]: value })
   }
 
-  addBusinessUnit = () => {
+  addBusinessUnit = e => {
+    e.preventDefault()
     let { businessUnits, businessUnitName } = this.state
     let revised = [{ name: businessUnitName }, ...businessUnits]
     this.setState({ businessUnits: revised, businessUnitName: '' })
   }
 
-  addTag = () => {
+  addTag = e => {
+    e.preventDefault()
     let { tags, tagName } = this.state
     let revised = [{ name: tagName }, ...tags]
     this.setState({ tags: revised, tagName: '' })
   }
 
-  addStatus = () => {
+  addStatus = e => {
+    e.preventDefault()
     let { statuses, state, statusName } = this.state
     let revised = [{ name: statusName }, ...statuses]
     this.setState({ statuses: revised, statusName: '' })
@@ -111,89 +113,86 @@ class SettingsForm extends react.Component {
     } = this.state
 
     return (
-      <CenterBox>
-        <form>
-          <FormTitle title='Filters' />
-          <FormSection>
-            <Input
-              onChange={this.saveToState}
-              value={businessUnitName}
-              label='Business unit'
-              name='businessUnitName'
-              onClick={this.addBusinessUnit}
-            />
-            <ClearFix />
-            <ul className='mt1 list ma0 pa0'>
-              {businessUnits &&
-                businessUnits.map((b, i) => (
-                  <DeleteCheckbox
-                    checked
-                    handleCheckboxChange={this.deleteBusinessUnit}
-                    label={b.name}
-                    key={i}
-                    index={i}
-                    color={b.color}
-                    setColor={this.setBusinessUnitColor}
-                  />
-                ))}
-            </ul>
-          </FormSection>
+      <form className='mr3 f4'>
+        <FormSection>
+          <Input
+            onChange={this.saveToState}
+            value={businessUnitName}
+            label='Business unit'
+            name='businessUnitName'
+            onClick={this.addBusinessUnit}
+          />
           <ClearFix />
-          <FormSection>
-            <Input
-              onChange={this.saveToState}
-              value={tagName}
-              label='Tag'
-              name='tagName'
-              onClick={this.addTag}
-            />
-            <ClearFix />
-            <ul className='mt1 list ma0 pa0'>
-              {tags &&
-                tags.map((t, i) => (
-                  <DeleteCheckbox
-                    checked
-                    handleCheckboxChange={this.deleteTag}
-                    label={t.name}
-                    key={i}
-                    index={i}
-                    color={t.color}
-                    setColor={this.setTagColor}
-                  />
-                ))}
-            </ul>
-          </FormSection>
+          <ul className='mt1 list ma0 pa0'>
+            {businessUnits &&
+              businessUnits.map((b, i) => (
+                <DeleteCheckbox
+                  checked
+                  handleCheckboxChange={this.deleteBusinessUnit}
+                  label={b.name}
+                  key={i}
+                  index={i}
+                  color={b.color}
+                  setColor={this.setBusinessUnitColor}
+                />
+              ))}
+          </ul>
+        </FormSection>
+        <ClearFix />
+        <FormSection>
+          <Input
+            onChange={this.saveToState}
+            value={tagName}
+            label='Tag'
+            name='tagName'
+            onClick={this.addTag}
+          />
           <ClearFix />
-          <FormSection>
-            <Input
-              onChange={this.saveToState}
-              value={statusName}
-              label='Status'
-              name='statusName'
-              onClick={this.addStatus}
-            />
-            <ClearFix />
-            <ClearFix />
-            <ul className='mt1 list ma0 pa0'>
-              {statuses &&
-                statuses.map((s, i) => (
-                  <DeleteCheckbox
-                    checked
-                    handleCheckboxChange={this.deleteStatus}
-                    label={s.name}
-                    key={i}
-                    index={i}
-                    color={s.color}
-                    setColor={this.setStatusColor}
-                  />
-                ))}
-            </ul>
-          </FormSection>
+          <ul className='mt1 list ma0 pa0'>
+            {tags &&
+              tags.map((t, i) => (
+                <DeleteCheckbox
+                  checked
+                  handleCheckboxChange={this.deleteTag}
+                  label={t.name}
+                  key={i}
+                  index={i}
+                  color={t.color}
+                  setColor={this.setTagColor}
+                />
+              ))}
+          </ul>
+        </FormSection>
+        <ClearFix />
+        <FormSection>
+          <Input
+            onChange={this.saveToState}
+            value={statusName}
+            label='Status'
+            name='statusName'
+            onClick={this.addStatus}
+          />
           <ClearFix />
-          <FormButton onClick={this.handleSubmit} text='SUBMIT' />
           <ClearFix />
-        </form>
-      </CenterBox>
+          <ul className='mt1 list ma0 pa0'>
+            {statuses &&
+              statuses.map((s, i) => (
+                <DeleteCheckbox
+                  checked
+                  handleCheckboxChange={this.deleteStatus}
+                  label={s.name}
+                  key={i}
+                  index={i}
+                  color={s.color}
+                  setColor={this.setStatusColor}
+                />
+              ))}
+          </ul>
+        </FormSection>
+        <ClearFix />
+        <FormButton onClick={this.handleSubmit} text='SUBMIT' />
+        <ClearFix />
+      </form>
     )
   }
 }

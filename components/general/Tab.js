@@ -1,12 +1,16 @@
 import { Component } from 'react'
+import cn from 'classnames'
 
 class Tab extends Component {
   render () {
     const { isActive, isDisabled, onSelect } = this.props
-    console.log(this.props)
     return (
       <div
-        className={isDisabled ? 'bg-white' : isActive ? 'bg-gray' : 'tab'}
+        className={cn(
+          isActive && 'bg-light-gray',
+          isDisabled && 'bg-white',
+          'f4 fl pv2 ph3 mr3  '
+        )}
         onClick={isDisabled ? null : onSelect}
       >
         {this.props.children}

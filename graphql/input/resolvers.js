@@ -1,9 +1,10 @@
-import { Contract, Lawyer, User, MasterEntity } from './connectors'
+import { Contract, User, MasterEntity } from './connectors'
 import { GraphQLScalarType } from 'graphql'
 import { Kind } from 'graphql/language'
 import _ from 'lodash'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
+import mongoose from 'mongoose'
 
 const resolvers = {
   Date: new GraphQLScalarType({
@@ -23,9 +24,6 @@ const resolvers = {
     }
   }),
   Query: {
-    thing: () => {
-      return 'Hello World'
-    },
     contracts: async (root, args, { user }) => {
       let contracts = await Contract.find({
         masterEntityID: user.masterEntityID
@@ -104,22 +102,16 @@ const resolvers = {
           checked
         }
       })
-
       return updatedStatuses
     },
     currentLawyers: async (root, args, { user }) => {
       let contracts = await Contract.find({
         masterEntityID: user.masterEntityID
       })
-      /*
       let lawyers = _.uniq(
-        _.pick(
-          _.flatten(_.map(contracts, 'assignedTo'), _.identity).map(a => {
-            return `${a.firstName} ${a.lastName}`
-          })
-        )
-      ) */
-      return []
+        _.pick(_.flatten(_.map(contracts, 'assignedTo'), _.identity))
+      )
+      return lawyers
     },
     masterEntity: async (root, args, { user }) => {
       let entity = await MasterEntity.findById(user.masterEntityID)
@@ -132,8 +124,8 @@ const resolvers = {
       }
       return null
     },
-    allUsers: (root, args) => {
-      return User.find()
+    allUsers: (root, args, { user }) => {
+      return User.find({ masterEntityID: user.masterEntityID })
     }
   },
   Mutation: {
@@ -150,20 +142,19 @@ const resolvers = {
     },
     addContract: (root, { contract }, { user }) => {
       if (contract.assignedTo && contract.assignedTo.id) {
+        console.log('ID found')
         contract.assignedTo = contract.assignedTo.id
-      } else {
-        contract.assignedTo = 'UNASSIGNED'
-      }
+      } else contract.assignedTo = 'UNASSIGNED'
       contract.masterEntityID = user.masterEntityID
       return Contract.create(contract)
     },
     deleteContract: (root, args) => {
       return Contract.findByIdAndRemove(args.id)
     },
-    deleteUser: (root, args) => {
-      return User.find({ email: args.email }).remove()
+    deleteUser: (root, { id }) => {
+      return User.remove({ _id: id })
     },
-    createAdminAccount: async (root, { name, email, password }) => {
+    createInitialAccount: async (root, { name, email, password }) => {
       const newMasterEntity = await MasterEntity.create({ name })
       const existingUser = await User.findOne({ email })
       if (existingUser) {
@@ -176,9 +167,9 @@ const resolvers = {
 
       // Maybe just let user create account w/out validation for now
     },
-    addUser: async (root, args) => {
-      const user = args
-      user.password = await bcrypt.hash(user.password, 10)
+    addUser: async (root, { user }, context) => {
+      user.masterEntityID = context.user.masterEntityID
+      if (user.password) user.password = await bcrypt.hash(user.password, 10)
       return User.create(user)
     },
     login: async (root, { email, password }, { SECRET }) => {
@@ -228,8 +219,12 @@ const resolvers = {
   },
   Contract: {
     assignedTo: async contract => {
-      let response = await Lawyer.find({ id: contract.assignedTo })
-      return response
+      if (mongoose.Types.ObjectId.isValid(contract.assignedTo)) {
+        let response = await User.findById(contract.assignedTo)
+        return response
+      } else {
+        return { name: 'Unassigned', email: 'Unassigned', id: 'Unassigned' }
+      }
     }
   }
 }

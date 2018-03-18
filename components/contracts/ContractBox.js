@@ -43,8 +43,10 @@ class Contract extends React.Component {
       assignedTo,
       statuses
     } = this.props.contract
+
     let latestDate = _.last(statuses).date
-    const { masterEntity } = this.props
+    const { masterEntity, allUsers } = this.props
+
     return (
       <div>
         <div>
@@ -79,6 +81,7 @@ class Contract extends React.Component {
                   closeModal={this.closeModal}
                   contract={this.state.editableContract}
                   masterEntity={masterEntity}
+                  allUsers={allUsers}
                 />}
             </li>
             <li className='fl mr2 '><DeleteButton id={id} /></li>

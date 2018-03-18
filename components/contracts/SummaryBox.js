@@ -2,7 +2,7 @@ import ContractSquareList from './ContractSquareList'
 import _ from 'lodash'
 import react from 'react'
 import StatusBar from './StatusBar'
-import Moment from 'react-moment'
+import DateSummary from './DateSummary'
 import Flex from '../styles/Flex'
 import { CSSTransitionGroup } from 'react-transition-group'
 
@@ -24,28 +24,20 @@ class SummaryBox extends react.Component {
     let { contracts, filters } = this.props
     const { startDate, endDate } = filters.dateRange
     return (
-      <div>
+      <div className='pv3 f4'>
         {contracts &&
           contracts.length > 0 &&
-          <div className='h-100 bg-white pv3'>
+          <div>
             <Flex>
-              <div className='b f4 bw1 pb1 mr3'>Summary</div>
-              <div className='f4'>
-                {`${contracts.length}`}
-                {startDate && startDate.isValid()
-                  ? <span>
-                    {` between `}
-                    <Moment format='D MMMM YYYY' date={startDate} />
-                    {` and `}
-                    <Moment format='D MMMM YYYY' date={endDate} />
-                  </span>
-                  : <span>{` for all time`}</span>}
+              <div className='b mb1'>Summary</div>
+              <div className='ml3'>
+                {contracts.length}
+                <DateSummary startDate={startDate} endDate={endDate} />
               </div>
             </Flex>
             <Flex>
-
               <CSSTransitionGroup
-                className='flex flex-wrap list w-100 f4 mb2 pa0 ma0'
+                className='flex flex-wrap list w-100 mb2 pa0 ma0'
                 component='ul'
                 transitionName='example'
                 transitionEnterTimeout={500}

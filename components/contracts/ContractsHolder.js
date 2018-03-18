@@ -167,6 +167,7 @@ class ContractsHolder extends react.Component {
           <ContractsList
             contracts={filteredContracts}
             masterEntity={this.props.masterEntity}
+            allUsers={this.props.allUsers}
           />
         </FadeRightDiv>
       </div>

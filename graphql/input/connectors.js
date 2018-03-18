@@ -1,5 +1,4 @@
 import mongoose from 'mongoose'
-import generator from '../../data/compiled/data'
 mongoose.Promise = require('bluebird')
 
 const ContractSchema = mongoose.Schema({
@@ -41,18 +40,13 @@ const ContractSchema = mongoose.Schema({
 
 const Contract = mongoose.model('contract', ContractSchema)
 
-const LawyerSchema = mongoose.Schema({
-  firstName: String,
-  lastName: String,
-  masterEntityID: String
-})
-
-const Lawyer = mongoose.model('lawyer', LawyerSchema)
-
 const UserSchema = mongoose.Schema({
   email: String,
+  name: String,
   password: String,
-  masterEntityID: String
+  masterEntityID: String,
+  isLawyer: Boolean,
+  isAdmin: Boolean
 })
 
 const User = mongoose.model('user', UserSchema)
@@ -79,7 +73,7 @@ const MasterEntitySchema = mongoose.Schema({
 
 const MasterEntity = mongoose.model('masterEntity', MasterEntitySchema)
 
-export { Contract, Lawyer, User, MasterEntity }
+export { Contract, User, MasterEntity }
 /*
 User.find().exec((err, ents) => {
   if (err) console.log(err)

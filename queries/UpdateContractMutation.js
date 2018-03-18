@@ -28,8 +28,8 @@ mutation updateContract($contract: PostContractWithID) {
       color
     }
     assignedTo {
-      firstName
-      lastName
+      name
+      email
       id
     }
   }

@@ -28,10 +28,11 @@ query contracts {
       date
     }
     assignedTo {
-      firstName
-      lastName
+      name
+      email
       id
     }
+    
   }
   currentTags {
     name
@@ -63,7 +64,11 @@ query contracts {
       name
       color
     }
-    lawyers
+  }
+  allUsers {
+    name
+    email
+    id
   }
 }
 `

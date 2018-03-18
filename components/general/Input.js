@@ -1,5 +1,4 @@
 import react from 'react'
-import Flex from '../styles/Flex'
 import cn from 'classnames'
 
 class Input extends react.Component {
@@ -25,7 +24,6 @@ class Input extends react.Component {
 
     return (
       <div className='f4 b'>
-
         <label className='mr3' htmlFor={value}>
           {label}
         </label>
@@ -52,7 +50,7 @@ class Input extends react.Component {
         />
         {this.props.onClick &&
           <button
-            className='fr ml2 f5 bg-green white pv2 ph3 br2'
+            className='ml3 f5 bg-green white pv2 ph3 br2'
             onClick={this.props.onClick}
           >
             ADD

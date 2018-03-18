@@ -21,6 +21,7 @@ const ContractsList = props => (
               <div key={contract.id} className='mb3 w-50-ns w-25-l w-100'>
                 <ContractHolder key={contract.id} index={index}>
                   <ContractBox
+                    allUsers={props.allUsers}
                     masterEntity={props.masterEntity}
                     contract={contract}
                     />

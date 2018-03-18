@@ -12,16 +12,17 @@ type Query {
   currentBusinessUnits: [BusinessUnit]
   currentLawyers: [String]
   currentStatuses: [Status]
-  thing: String
+  allUsers: [User]
 }
 
 type Mutation {
   addContract(contract: PostContract): Contract
   updateContract(contract: PostContractWithID): Contract
   deleteContract(id: ID!): Contract
-  deleteUser(email: String!): User
-  addUser(email: String!): User
-  createAdminAccount(name: String!, email: String!, password: String!): String
+  deleteUser(id: String!): User
+  addUser(user: PostUser): User
+  updateUser(user: PostUserWithID): User
+  createInitialAccount(name: String!, email: String!, password: String!): String
   updateMasterEntity(masterEntity: PostMasterEntity): MasterEntity
   login(email: String!, password: String!): String
 }
@@ -31,7 +32,6 @@ type MasterEntity {
   name: String
   businessUnits: [BusinessUnit]
   tags: [Tag]
-  lawyers: [String]
   statuses: [Status]
   relatedEntities: [String]
 }
@@ -40,15 +40,38 @@ input PostMasterEntity {
   name: String
   businessUnits: [BusinessUnitInput]
   tags: [TagInput]
-  lawyers: [String]
   statuses: [StatusInput]
   relatedEntities: [String]
 }
 
 type User {
-  id: ID!
+  id: String
+  name: String
+  email: String
+  masterEntityID: String
+  isLawyer: Boolean
+  isAdmin: Boolean
+  isActivated: Boolean
+}
+
+input PostUser {
+  id: String
+  name: String
+  email: String
+  masterEntityID: String
+  isLawyer: Boolean
+  isAdmin: Boolean
+  isActivated: Boolean
+}
+
+input PostUserWithID {
+  id: String!
+  name: String
   email: String!
-  masterEntityID: String!
+  masterEntityID: String
+  isLawyer: Boolean
+  isAdmin: Boolean
+  isActivated: Boolean
 }
 
 input PostContract {
@@ -66,7 +89,7 @@ input PostContract {
   statuses: [ContractStatusInput]
   client: Boolean
   supplier: Boolean
-  assignedTo: LawyerInput
+  assignedTo: PostUserWithID  
 }
 
 input PostContractWithID {
@@ -85,7 +108,7 @@ input PostContractWithID {
   statuses: [ContractStatusInput]
   client: Boolean
   supplier: Boolean
-  assignedTo: LawyerInput
+  assignedTo: PostUserWithID
 }
 
 scalar Date
@@ -110,7 +133,7 @@ type Contract {
   statuses: [ContractStatus]
   client: Boolean
   supplier: Boolean
-  assignedTo: Lawyer
+  assignedTo: User
 }
 
 input ContractStatusInput {
@@ -156,19 +179,6 @@ type BusinessUnit {
 input BusinessUnitInput {
   name: String
   color: String
-}
-
-type Lawyer {
-  firstName: String
-  lastName: String
-  id: String
-  checked: Boolean
-}
-
-input LawyerInput {
-  firstName: String
-  lastName: String
-  id: String
 }
 
 schema {

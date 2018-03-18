@@ -16,8 +16,8 @@ query contract($id: ID!) {
     businessUnit
     currentStatus
     assignedTo {
-      firstName
-      lastName
+      name
+      email
     }
   }
 }

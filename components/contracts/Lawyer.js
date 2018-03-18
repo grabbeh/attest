@@ -1,10 +1,10 @@
 const LawyerName = props => (
   <div>
-    {!props === null
+    {props.name
       ? <div>
         <span>
           <i className='mr2 mt1 fa fa-id-card-o' />
-          {`${props.firstName} ${props.lastName}`}
+          {props.name}
         </span>
       </div>
       : <div />}

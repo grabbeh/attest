@@ -12,8 +12,8 @@ class Select extends react.Component {
           onChange={handleChange}
         >
           {items.map(l => (
-            <option key={l.id} value={l.id}>
-              {`${l.firstName} ${l.lastName}`}
+            <option key={l.email} value={l.email}>
+              {l.email}
             </option>
           ))}
         </select>

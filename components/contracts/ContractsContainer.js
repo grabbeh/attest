@@ -17,7 +17,8 @@ const ContractsQuery = graphql(CONTRACTS_QUERY, {
       currentStatuses,
       currentTags,
       currentBusinessUnits,
-      currentLawyers
+      currentLawyers,
+      allUsers
     }
   }) => ({
     loading,
@@ -26,7 +27,8 @@ const ContractsQuery = graphql(CONTRACTS_QUERY, {
     currentTags,
     currentLawyers,
     currentBusinessUnits,
-    currentStatuses
+    currentStatuses,
+    allUsers
   })
 })
 

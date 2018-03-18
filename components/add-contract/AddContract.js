@@ -26,7 +26,7 @@ class AddContractForm extends react.Component {
       selectedLawyer: '',
       initialTags: [],
       externalPartyError: '',
-      lawyers: props.masterEntity.lawyers,
+      lawyers: props.allUsers,
       tags: props.masterEntity.tags,
       statuses: props.masterEntity.statuses,
       businessUnits: props.masterEntity.businessUnits,
@@ -41,7 +41,7 @@ class AddContractForm extends react.Component {
         tags: [],
         businessUnit: '',
         currentStatus: '',
-        assignedTo: { firstName: '', lastName: '' }
+        assignedTo: { name: '', email: '', id: '' }
       }
     }
   }
@@ -125,14 +125,13 @@ class AddContractForm extends react.Component {
   }
 
   handleLawyerChange = e => {
-    let id = e.target.value
+    let email = e.target.value
     let { contract } = this.state
-    const { lawyers } = this.props.masterEntity
+    const lawyers = this.props.allUsers
     lawyers.forEach(lawyer => {
-      if (lawyer.id == id) {
-        let newLawyer = lawyer
-        contract.assignedTo = newLawyer
-        this.setState({ contract, selectedLawyer: id })
+      if (lawyer.email == email) {
+        contract.assignedTo = lawyer
+        this.setState({ contract, selectedLawyer: email })
       }
     })
   }
@@ -179,6 +178,7 @@ class AddContractForm extends react.Component {
       this.setState({
         contract,
         selectedStatus: contract.currentStatus.name,
+        selectedLawyer: contract.assignedTo.email,
         selectedBusinessUnit: contract.businessUnit.name,
         initialTags: contract.tags
       })
