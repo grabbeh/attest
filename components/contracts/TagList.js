@@ -4,7 +4,7 @@ const TagList = ({ tags }) => (
       <li
         style={{ background: tag.color }}
         key={tag.name}
-        className='f5 bg-blue white fl pv1 ph3 mr2 mv1'
+        className='bg-blue white fl pv1 ph3 mr2 mv1'
       >
         {tag.name}
       </li>
