@@ -204,7 +204,7 @@ class AddContractForm extends react.Component {
       businessUnitSelect = (
         <div className='mb2'>
           <select
-            className='f4 pa1 font pa1 mb2 bb bw1 b--black-20'
+            className='f4 pa1 font pa2 mb2 bb bw1 b--black-20'
             value={selectedBusinessUnit}
             key={selectedBusinessUnit}
             onChange={this.handleBusinessUnitChange}

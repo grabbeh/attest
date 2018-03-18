@@ -6,6 +6,7 @@ mutation addUser($user: PostUser) {
     id
     name
     email
+    masterEntityID
   }
 }
 `

@@ -9,6 +9,7 @@ import ClearFix from '../styles/ClearFix'
 import FormTitle from '../styles/FormTitle'
 import CenterBox from '../styles/CenterBox'
 import FadeRightDiv from '../styles/FadeRightDiv'
+import FormSection from '../styles/FormSection'
 
 class LoginForm extends React.Component {
   constructor (props) {
@@ -42,19 +43,23 @@ class LoginForm extends React.Component {
 
           <FormTitle title='Login' />
           <form className='pt2'>
-            <Input
-              value={this.state.email}
-              name='email'
-              onChange={this.saveToState}
-              label='Email'
-            />
-            <Input
-              value={this.state.password}
-              name='password'
-              onChange={this.saveToState}
-              label='Password'
-              type='password'
-            />
+            <FormSection>
+              <Input
+                value={this.state.email}
+                name='email'
+                onChange={this.saveToState}
+                label='Email'
+              />
+            </FormSection>
+            <FormSection>
+              <Input
+                value={this.state.password}
+                name='password'
+                onChange={this.saveToState}
+                label='Password'
+                type='password'
+              />
+            </FormSection>
             <FormButton onClick={this.handleClick} text='SUBMIT' />
             <ClearFix />
           </form>

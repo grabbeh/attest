@@ -37,7 +37,6 @@ const AddContractMutation = graphql(ADD_CONTRACT_MUTATION, {
           variables: { contract },
           update: (store, response) => {
             let contract = response.data.addContract
-            console.log(contract)
             let data = store.readQuery({ query: CONTRACTS_QUERY })
             data.contracts.push(contract)
             store.writeQuery({ query: CONTRACTS_QUERY, data })

@@ -142,7 +142,6 @@ const resolvers = {
     },
     addContract: (root, { contract }, { user }) => {
       if (contract.assignedTo && contract.assignedTo.id) {
-        console.log('ID found')
         contract.assignedTo = contract.assignedTo.id
       } else contract.assignedTo = 'UNASSIGNED'
       contract.masterEntityID = user.masterEntityID
@@ -171,6 +170,11 @@ const resolvers = {
       user.masterEntityID = context.user.masterEntityID
       if (user.password) user.password = await bcrypt.hash(user.password, 10)
       return User.create(user)
+    },
+    updateUser: async (root, { user }, context) => {
+      return User.findByIdAndUpdate(user.id, user, {
+        new: true
+      })
     },
     login: async (root, { email, password }, { SECRET }) => {
       const user = await User.findOne({ email })

@@ -6,6 +6,8 @@ import FormButton from '../styles/FormButton'
 import DeleteCheckbox from '../general/DeleteCheckbox'
 import _ from 'lodash'
 import ClearFix from '../styles/ClearFix'
+import ContractHolder from '../contracts/ContractHolder'
+import { CSSTransitionGroup } from 'react-transition-group'
 
 class UserForm extends Component {
   constructor (props) {
@@ -15,6 +17,7 @@ class UserForm extends Component {
         name: '',
         email: ''
       },
+      editUser: false,
       users: props.allUsers
     }
   }
@@ -40,8 +43,7 @@ class UserForm extends Component {
   }
 
   deleteUser = id => {
-    let { users } = this.state
-    let copy = _.cloneDeep(users)
+    let copy = _.cloneDeep(this.state.users)
     this.props.deleteUser(id)
     _.remove(copy, n => {
       return n.id == id
@@ -49,9 +51,19 @@ class UserForm extends Component {
     this.setState({ users: copy })
   }
 
+  editUser = user => {
+    let copy = _.cloneDeep(user)
+    this.setState({ user: copy, editUser: true })
+  }
+
+  updateUser = () => {
+    this.props.updateUser(this.state.user)
+    this.setState({ user: { email: '', name: '' } })
+  }
+
   render () {
     let { updateUser } = this.props
-    let { user, users } = this.state
+    let { user, users, editUser } = this.state
     let { email, name } = user
     return (
       <div>
@@ -69,27 +81,49 @@ class UserForm extends Component {
             name={email}
             onChange={this.saveEmail}
             label='Email'
-            onClick={this.addUser}
           />
         </FormSection>
-        <ClearFix />
+        {editUser
+          ? <FormButton onClick={this.updateUser} text='EDIT USER' />
+          : <FormButton onClick={this.addUser} text='ADD USER' />}
 
         <ClearFix />
-        <div>
-          <ul className='f4 mt1 list ma0 pa0'>
+        <div className='mt3'>
+          <CSSTransitionGroup
+            className='flex flex-wrap list pa0 ma0'
+            component='ul'
+            transitionName='example'
+            transitionEnterTimeout={500}
+            transitionLeaveTimeout={500}
+            transitionAppearTimeout={500}
+            transitionAppear
+          >
             {users &&
               users.map((b, i) => (
-                <DeleteCheckbox
-                  checked
-                  handleCheckboxChange={() => this.deleteUser(b.id)}
-                  label={b.email}
-                  key={i}
-                  index={i}
-                  color={b.color}
-                  setColor={this.setLawyerColor}
-                />
+                <div className='mb3 w-50-ns w-25-l w-100'>
+                  <ContractHolder>
+                    <div key={i} index={i}>
+                      <div>{b.email}</div>
+                      <div>{b.name}</div>
+                      <div
+                        onClick={() => {
+                          this.deleteUser(b.id)
+                        }}
+                      >
+                        x
+                      </div>
+                      <div
+                        onClick={() => {
+                          this.editUser(b)
+                        }}
+                      >
+                        Edit
+                      </div>
+                    </div>
+                  </ContractHolder>
+                </div>
               ))}
-          </ul>
+          </CSSTransitionGroup>
         </div>
       </div>
     )
