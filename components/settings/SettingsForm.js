@@ -122,22 +122,21 @@ class SettingsForm extends react.Component {
             name='businessUnitName'
             onClick={this.addBusinessUnit}
           />
-          <ClearFix />
-          <ul className='mt1 list ma0 pa0'>
-            {businessUnits &&
-              businessUnits.map((b, i) => (
-                <DeleteCheckbox
-                  checked
-                  handleCheckboxChange={this.deleteBusinessUnit}
-                  label={b.name}
-                  key={i}
-                  index={i}
-                  color={b.color}
-                  setColor={this.setBusinessUnitColor}
-                />
-              ))}
-          </ul>
         </FormSection>
+        <ul className='mt1 list ma0 pa0'>
+          {businessUnits &&
+            businessUnits.map((b, i) => (
+              <DeleteCheckbox
+                checked
+                handleCheckboxChange={this.deleteBusinessUnit}
+                label={b.name}
+                key={i}
+                index={i}
+                color={b.color}
+                setColor={this.setBusinessUnitColor}
+              />
+            ))}
+        </ul>
         <ClearFix />
         <FormSection>
           <Input
@@ -147,22 +146,21 @@ class SettingsForm extends react.Component {
             name='tagName'
             onClick={this.addTag}
           />
-          <ClearFix />
-          <ul className='mt1 list ma0 pa0'>
-            {tags &&
-              tags.map((t, i) => (
-                <DeleteCheckbox
-                  checked
-                  handleCheckboxChange={this.deleteTag}
-                  label={t.name}
-                  key={i}
-                  index={i}
-                  color={t.color}
-                  setColor={this.setTagColor}
-                />
-              ))}
-          </ul>
         </FormSection>
+        <ul className='mt1 list ma0 pa0'>
+          {tags &&
+            tags.map((t, i) => (
+              <DeleteCheckbox
+                checked
+                handleCheckboxChange={this.deleteTag}
+                label={t.name}
+                key={i}
+                index={i}
+                color={t.color}
+                setColor={this.setTagColor}
+              />
+            ))}
+        </ul>
         <ClearFix />
         <FormSection>
           <Input
@@ -172,26 +170,24 @@ class SettingsForm extends react.Component {
             name='statusName'
             onClick={this.addStatus}
           />
-          <ClearFix />
-          <ClearFix />
-          <ul className='mt1 list ma0 pa0'>
-            {statuses &&
-              statuses.map((s, i) => (
-                <DeleteCheckbox
-                  checked
-                  handleCheckboxChange={this.deleteStatus}
-                  label={s.name}
-                  key={i}
-                  index={i}
-                  color={s.color}
-                  setColor={this.setStatusColor}
-                />
-              ))}
-          </ul>
         </FormSection>
         <ClearFix />
-        <FormButton onClick={this.handleSubmit} text='SUBMIT' />
+        <ul className='mt1 list ma0 pa0'>
+          {statuses &&
+            statuses.map((s, i) => (
+              <DeleteCheckbox
+                checked
+                handleCheckboxChange={this.deleteStatus}
+                label={s.name}
+                key={i}
+                index={i}
+                color={s.color}
+                setColor={this.setStatusColor}
+              />
+            ))}
+        </ul>
         <ClearFix />
+        <FormButton onClick={this.handleSubmit} text='SUBMIT' />
       </form>
     )
   }

@@ -10,7 +10,7 @@ import ClearFix from '../styles/ClearFix'
 class SettingsHolder extends Component {
   render () {
     return (
-      <div className='pa3 flex flex-wrap'>
+      <div className='pa3-ns pt3 pa0 flex flex-wrap'>
         <Tabs>
           <TabList>
             <Tab><div className='pointer'>Filters</div></Tab>

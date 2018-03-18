@@ -40,7 +40,6 @@ class UserForm extends Component {
   }
 
   deleteUser = id => {
-    console.log(id)
     let { users } = this.state
     let copy = _.cloneDeep(users)
     this.props.deleteUser(id)
@@ -54,28 +53,26 @@ class UserForm extends Component {
     let { updateUser } = this.props
     let { user, users } = this.state
     let { email, name } = user
-    console.log(users)
     return (
       <div>
-        <div className='fl'>
-          <FormSection>
-            <Input
-              value={name}
-              name={name}
-              onChange={this.saveName}
-              label='Name'
-            />
-          </FormSection>
-          <FormSection>
-            <Input
-              value={email}
-              name={email}
-              onChange={this.saveEmail}
-              label='Email'
-              onClick={this.addUser}
-            />
-          </FormSection>
-        </div>
+        <FormSection>
+          <Input
+            value={name}
+            name={name}
+            onChange={this.saveName}
+            label='Name'
+          />
+        </FormSection>
+        <FormSection>
+          <Input
+            value={email}
+            name={email}
+            onChange={this.saveEmail}
+            label='Email'
+            onClick={this.addUser}
+          />
+        </FormSection>
+        <ClearFix />
 
         <ClearFix />
         <div>

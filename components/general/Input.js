@@ -1,5 +1,4 @@
 import react from 'react'
-import cn from 'classnames'
 
 class Input extends react.Component {
   constructor (props) {
@@ -24,21 +23,13 @@ class Input extends react.Component {
 
     return (
       <div className='f4 b'>
-        <label className='mr3' htmlFor={value}>
-          {label}
-        </label>
+        <div>
+          <label className='mr3' htmlFor={value}>
+            {label}
+          </label>
+        </div>
         <input
-          className={cn(
-            'bw1',
-            'pa1',
-            'f4',
-            'mt1',
-            'mb2',
-            'bb',
-            'bw1',
-            'b--black-20',
-            'font'
-          )}
+          className='w-100 mw5 bw1 pa1 f4 bb b--black-20 font'
           id={value}
           onChange={onChange}
           placeholder={placeholder}
@@ -49,12 +40,14 @@ class Input extends react.Component {
           onBlur={onBlur}
         />
         {this.props.onClick &&
-          <button
-            className='ml3 f5 bg-green white pv2 ph3 br2'
-            onClick={this.props.onClick}
-          >
-            ADD
-          </button>}
+          <div className='mt3 pt0-ns'>
+            <button
+              className='f6 bg-green white pv2 ph3'
+              onClick={this.props.onClick}
+            >
+              <i className='fa fa-plus' />
+            </button>
+          </div>}
         <div className='red b f6'>{error}</div>
       </div>
     )

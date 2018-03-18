@@ -22,7 +22,7 @@ class Header extends react.Component {
         </span>
         <span className='fr'>
           {user
-            ? <div className='mt1 f4-ns f6'>
+            ? <div className='mt1 f4-ns f5'>
               <span><i className='dark-gray fa fa-user-circle fa-lg' /></span>
               <span className='ml3' onClick={this.logout}>
                 <i title='Sign out' className='fa fa-sign-out fa-lg' />
