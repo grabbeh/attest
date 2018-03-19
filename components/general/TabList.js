@@ -15,7 +15,7 @@ class TabList extends Component {
       })
     })
     return (
-      <div className='tabs'>
+      <div>
         {children}
       </div>
     )

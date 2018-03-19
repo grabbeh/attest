@@ -97,7 +97,7 @@ class Filter extends react.Component {
 
     return (
       <Flex>
-        <div className='mt2 b f4 mr3'>Filters</div>
+        <div className='pt2 b f4 mr3'>Filters</div>
         <HideToggle
           toggleFilter={this.toggleFilter}
           activeFilter={activeFilter}

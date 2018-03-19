@@ -24,7 +24,7 @@ class Tabs extends Component {
 
   render () {
     return (
-      <div className=''>
+      <div className='w-100'>
         {this.props.children}
       </div>
     )

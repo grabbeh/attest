@@ -52,7 +52,7 @@ class Contract extends React.Component {
         <div>
           <div>
             {externalParties.map(party => (
-              <div key={party} className='f4 pb1 b bb b--black-20 bw1'>
+              <div key={party} className='pb1 b bb b--black-20 bw1'>
                 {party}
               </div>
             ))}
@@ -66,7 +66,7 @@ class Contract extends React.Component {
           {tags ? <TagList tags={tags} /> : null}
           <div className='cf' />
         </div>
-        <div className='bottom-0'>
+        <div>
           <ul className='fr list pa0 mt2'>
             <li className='fl mr2'>
               <button

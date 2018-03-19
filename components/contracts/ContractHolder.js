@@ -3,8 +3,8 @@ import cn from 'classnames'
 const ContractHolder = ({ children, index }) => (
   <li
     className={cn(
-      (index + 1) % 4 === 0 && 'mr0-l',
-      (index + 1) % 4 !== 0 && 'mr3-l',
+      (index + 1) % 4 === 0 && 'mr0-l mr0',
+      (index + 1) % 4 !== 0 && 'mr3-l mr0',
       (index + 1) % 4 === 0 && 'mr0',
       (index + 1) % 4 !== 0 && 'mr0',
       (index + 1) % 2 === 0 && 'mr0-ns',

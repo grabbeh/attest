@@ -7,9 +7,9 @@ class Tab extends Component {
     return (
       <div
         className={cn(
-          isActive && 'bg-light-gray',
+          isActive && 'bg-light-gray b',
           isDisabled && 'bg-white',
-          'f4 fl pv2 ph3 mr3  '
+          'f3 fl pv2 ph3 mr3  '
         )}
         onClick={isDisabled ? null : onSelect}
       >

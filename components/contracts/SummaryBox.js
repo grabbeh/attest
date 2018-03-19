@@ -5,6 +5,7 @@ import StatusBar from './StatusBar'
 import DateSummary from './DateSummary'
 import Flex from '../styles/Flex'
 import { CSSTransitionGroup } from 'react-transition-group'
+import FadeTransition from '../styles/FadeTransition'
 
 class SummaryBox extends react.Component {
   render () {
@@ -36,14 +37,9 @@ class SummaryBox extends react.Component {
               </div>
             </Flex>
             <Flex>
-              <CSSTransitionGroup
-                className='flex flex-wrap list w-100 mb2 pa0 ma0'
-                component='ul'
-                transitionName='example'
-                transitionEnterTimeout={500}
-                transitionLeaveTimeout={500}
-                transitionAppearTimeout={500}
-                transitionAppear
+              <FadeTransition
+                element='ul'
+                css='flex flex-wrap list w-100 mb2 pa0 ma0'
               >
                 {res.map(r => (
                   <li key={r.status.name} className='fl mr4'>
@@ -51,22 +47,15 @@ class SummaryBox extends react.Component {
                   </li>
                 ))}
 
-              </CSSTransitionGroup>
+              </FadeTransition>
               <div className='cf:after' />
-              <CSSTransitionGroup
-                component='div'
-                transitionName='example'
-                transitionEnterTimeout={500}
-                transitionLeaveTimeout={500}
-                transitionAppearTimeout={500}
-                transitionAppear
-              >
+              <FadeTransition element='div'>
                 {arr.map(contracts => (
                   <div className='fl' key={contracts[0].id}>
                     <ContractSquareList contracts={contracts} />
                   </div>
                 ))}
-              </CSSTransitionGroup>
+              </FadeTransition>
             </Flex>
           </div>}
       </div>
