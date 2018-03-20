@@ -57,7 +57,8 @@ export default class MyDocument extends Document {
 
               input {
                 font-family: 'shapefont'; 
-                border-radius: 0
+                border-radius: 0;
+                -webkit-appearance: none;
               }
 
           `
@@ -207,7 +208,11 @@ export default class MyDocument extends Document {
                 color: #005baa;
               }
 
-              input, button, submit { border: none; outline: none;}
+              input, button, submit { border: none;
+                 outline: none;
+                 border-radius: 0;
+                 -webkit-appearance: none;
+                }
 
           `}
           </style>
