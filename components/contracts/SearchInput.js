@@ -7,7 +7,7 @@ class SearchInput extends react.Component {
       <div className='w-50-l w-100 pv1 f4'>
         <span className='f4 b mr2'>Search</span>
         <input
-          className='w-80 bb bw1 b--black-20 font pa1'
+          className='w-100 bb bw1 b--black-20 f4 font pa1 mw5'
           value={this.props.searchTerm}
           onChange={this.props.handleSearchInput}
         />
