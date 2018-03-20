@@ -59,6 +59,7 @@ export default class MyDocument extends Document {
                 font-family: 'shapefont'; 
                 border-radius: 0;
                 -webkit-appearance: none;
+                -webkit-border-radius:0px;
               }
 
           `
@@ -212,6 +213,7 @@ export default class MyDocument extends Document {
                  outline: none;
                  border-radius: 0;
                  -webkit-appearance: none;
+                 -webkit-border-radius:0px;
                 }
 
           `}
