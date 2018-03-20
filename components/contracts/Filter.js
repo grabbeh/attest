@@ -97,7 +97,7 @@ class Filter extends react.Component {
 
     return (
       <Flex>
-        <div className='pt2 b f4 mr3'>Filters</div>
+        <div className='b f4 mr3'>Filters</div>
         <HideToggle
           toggleFilter={this.toggleFilter}
           activeFilter={activeFilter}
@@ -207,7 +207,7 @@ class Filter extends react.Component {
 
         {
           <div
-            className='ml3 f4 underline-hover mt2 pointer'
+            className='ml3 f4 underline-hover pointer'
             onClick={clearFilters}
           >
             Reset
