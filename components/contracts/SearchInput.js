@@ -8,7 +8,6 @@ class SearchInput extends react.Component {
         <span className='f4 b mr2'>Search</span>
         <input
           className='w-80 bb bw1 b--black-20 font pa1'
-          type='search'
           value={this.props.searchTerm}
           onChange={this.props.handleSearchInput}
         />
