@@ -29,7 +29,7 @@ class Input extends react.Component {
           </label>
         </div>
         <input
-          className='w-100 mw5 bw1 pa1 f4 bb b--black-20 font'
+          className='w-100 bb bw1 b--black-20 f4 font pa1 mw5'
           id={value}
           onChange={onChange}
           placeholder={placeholder}
