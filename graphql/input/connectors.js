@@ -1,5 +1,8 @@
 import mongoose from 'mongoose'
+
 mongoose.Promise = require('bluebird')
+
+let Schema = mongoose.Schema
 
 const ContractSchema = mongoose.Schema({
   ownerEntity: String,
@@ -35,6 +38,8 @@ const ContractSchema = mongoose.Schema({
   lastUpdated: Date,
   client: Boolean,
   supplier: Boolean,
+  // assignedTo may not always be ID so population potentially not always possible
+  // assignedTo: { type: Schema.Types.ObjectId, ref: 'User' }
   assignedTo: String
 })
 
@@ -73,12 +78,22 @@ const MasterEntitySchema = mongoose.Schema({
 
 const MasterEntity = mongoose.model('masterEntity', MasterEntitySchema)
 
-export { Contract, User, MasterEntity }
+const NotificationSchema = mongoose.Schema({
+  readBy: Array,
+  masterEntityID: Schema.Types.ObjectId,
+  relatedContract: { type: Schema.Types.ObjectId, ref: 'contract' },
+  action: String,
+  relatedUser: { type: Schema.Types.ObjectId, ref: 'user' },
+  changes: Object
+})
+
+const Notification = mongoose.model('notification', NotificationSchema)
+export { Contract, User, MasterEntity, Notification }
 /*
-User.find().exec((err, ents) => {
+Notification.find().exec((err, notifications) => {
   if (err) console.log(err)
-  ents.forEach(c => {
-    c.remove()
+  notifications.forEach(n => {
+    n.remove()
   })
 })
 /*

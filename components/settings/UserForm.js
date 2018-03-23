@@ -13,6 +13,7 @@ import FadeTransition from '../styles/FadeTransition'
 
 class UserForm extends Component {
   constructor (props) {
+    console.log(props)
     super(props)
     this.state = {
       user: {
@@ -113,7 +114,9 @@ class UserForm extends Component {
             ))}
         </FadeTransition>
         <ClearFix />
-        <FormTitle title='Add user' />
+        {editUser
+          ? <FormTitle title='Edit user' />
+          : <FormTitle title='Add user' />}
         <FormSection>
           <Input
             value={name}

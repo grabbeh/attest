@@ -1,10 +1,11 @@
-import { Contract, User, MasterEntity } from './connectors'
+import { Contract, User, MasterEntity, Notification } from './connectors'
 import { GraphQLScalarType } from 'graphql'
 import { Kind } from 'graphql/language'
 import _ from 'lodash'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import mongoose from 'mongoose'
+import { addNotification } from './utils'
 
 const resolvers = {
   Date: new GraphQLScalarType({
@@ -25,10 +26,9 @@ const resolvers = {
   }),
   Query: {
     contracts: async (root, args, { user }) => {
-      let contracts = await Contract.find({
+      return Contract.find({
         masterEntityID: user.masterEntityID
       })
-      return contracts
     },
     contract: (root, { id }) => {
       return Contract.findOne({ id })
@@ -124,8 +124,13 @@ const resolvers = {
       }
       return null
     },
-    allUsers: (root, args, { user }) => {
+    allUsers: async (root, args, { user }) => {
       return User.find({ masterEntityID: user.masterEntityID })
+    },
+    allNotifications: async (roots, args, { user }) => {
+      let notifications = await Notification.find().populate('relatedContract')
+      console.log(notifications)
+      return notifications
     }
   },
   Mutation: {
@@ -134,21 +139,25 @@ const resolvers = {
         new: true
       })
     },
-    updateContract: (root, { contract }) => {
+    updateContract: (root, { contract }, { user }) => {
       contract.assignedTo = contract.assignedTo.id
+      addNotification(contract.id, user, 'UPDATE_CONTRACT')
       return Contract.findByIdAndUpdate(contract.id, contract, {
         new: true
       })
     },
-    addContract: (root, { contract }, { user }) => {
+    addContract: async (root, { contract }, { user }) => {
       if (contract.assignedTo && contract.assignedTo.id) {
         contract.assignedTo = contract.assignedTo.id
       } else contract.assignedTo = 'UNASSIGNED'
       contract.masterEntityID = user.masterEntityID
-      return Contract.create(contract)
+      let newContract = await Contract.create(contract)
+      addNotification(newContract.id, user, 'ADD_CONTRACT')
+      return newContract
     },
-    deleteContract: (root, args) => {
-      return Contract.findByIdAndRemove(args.id)
+    deleteContract: (root, { id }, { user }) => {
+      addNotification(id, user, 'DELETE_CONTRACT')
+      return Contract.findByIdAndRemove(id)
     },
     deleteUser: (root, { id }) => {
       return User.remove({ _id: id })
@@ -224,8 +233,8 @@ const resolvers = {
   Contract: {
     assignedTo: async contract => {
       if (mongoose.Types.ObjectId.isValid(contract.assignedTo)) {
-        let response = await User.findById(contract.assignedTo)
-        return response
+        let user = await User.findById(contract.assignedTo)
+        return user
       } else {
         return { name: 'Unassigned', email: 'Unassigned', id: 'Unassigned' }
       }

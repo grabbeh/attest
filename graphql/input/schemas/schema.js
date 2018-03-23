@@ -13,6 +13,7 @@ type Query {
   currentLawyers: [String]
   currentStatuses: [Status]
   allUsers: [User]
+  allNotifications: [Notification]
 }
 
 type Mutation {
@@ -25,6 +26,14 @@ type Mutation {
   createInitialAccount(name: String!, email: String!, password: String!): String
   updateMasterEntity(masterEntity: PostMasterEntity): MasterEntity
   login(email: String!, password: String!): String
+}
+
+type Notification {
+  readBy: [String]
+  masterEntityID: String
+  relatedContract: Contract
+  action: String
+  relatedUser: String
 }
 
 type MasterEntity {
@@ -45,7 +54,7 @@ input PostMasterEntity {
 }
 
 type User {
-  id: String
+  id: ID!
   name: String
   email: String
   masterEntityID: String
@@ -55,7 +64,7 @@ type User {
 }
 
 input PostUser {
-  id: String
+  id: ID
   name: String
   email: String
   masterEntityID: String
@@ -65,9 +74,9 @@ input PostUser {
 }
 
 input PostUserWithID {
-  id: String!
+  id: ID
   name: String
-  email: String!
+  email: String
   masterEntityID: String
   isLawyer: Boolean
   isAdmin: Boolean
