@@ -1,20 +1,9 @@
-import { CSSTransitionGroup } from 'react-transition-group'
-import { Fragment } from 'react'
+import { CSSTransition } from 'react-transition-group'
 
-const FadeTransition = props => (
-  <Fragment>
-    <CSSTransitionGroup
-      component={props.element}
-      className={props.css}
-      transitionName='example'
-      transitionEnterTimeout={500}
-      transitionLeaveTimeout={500}
-      transitionAppearTimeout={500}
-      transitionAppear
-    >
-      {props.children}
-    </CSSTransitionGroup>
-  </Fragment>
+const Fade = ({ children, ...props }) => (
+  <CSSTransition {...props} timeout={1000} classNames='fade'>
+    {children}
+  </CSSTransition>
 )
 
-export default FadeTransition
+export default Fade

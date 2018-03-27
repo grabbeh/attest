@@ -68,31 +68,22 @@ export default class MyDocument extends Document {
           <style>
             {`
 
-              .example-appear {
-                opacity: 0.01;
-              }
-
-              .example-appear.example-appear-active {
-                opacity: 1;
-                transition: opacity .5s ease-in;
-              }
-
-            .example-enter {
+            .fade-enter {
               opacity: 0.01;
             }
 
-            .example-enter.example-enter-active {
+            .fade-enter.fade-enter-active {
               opacity: 1;
-              transition: opacity 500ms ease-in;
+              transition: opacity 1000ms ease-in;
             }
 
-            .example-leave {
+            .fade-exit {
               opacity: 1;
             }
 
-            .example-leave.example-leave-active {
+            .fade-exit.fade-exit-active {
               opacity: 0.01;
-              transition: opacity 500ms ease-in;
+              transition: opacity 800ms ease-in;
             }
 
             .height {

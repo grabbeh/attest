@@ -7,13 +7,13 @@ import DeleteCheckbox from '../general/DeleteCheckbox'
 import _ from 'lodash'
 import ClearFix from '../styles/ClearFix'
 import ContractHolder from '../contracts/ContractHolder'
-import { CSSTransitionGroup } from 'react-transition-group'
+import { TransitionGroup } from 'react-transition-group'
 import LawyerName from '../contracts/Lawyer'
-import FadeTransition from '../styles/FadeTransition'
+import Fade from '../styles/FadeTransition'
+import Title from '../styles/Title'
 
 class UserForm extends Component {
   constructor (props) {
-    console.log(props)
     super(props)
     this.state = {
       user: {
@@ -75,44 +75,46 @@ class UserForm extends Component {
     return (
       <div>
         <div className='pv2'>
-          <div className='b f3'>Summary</div>
+          <Title text='Summary' />
           <div className='mv2 f4'>{users.length} users</div>
         </div>
-        <FadeTransition css='flex flex-wrap list pa0 ma0' element='ul'>
+        <TransitionGroup className='flex flex-wrap list pa0 ma0'>
           {users &&
             users.map((b, i) => (
-              <div className='mb3 w-50-ns w-25-l w-100'>
-                <ContractHolder>
-                  <div key={i} index={i}>
-                    <i className='mr2 fa fa-envelope' />
-                    {b.email}
-                    <LawyerName name={b.name} />
-                    <ul className='fr list pa0 mt2'>
-                      <li className='fl mr2'>
-                        <button
-                          className='bg-light-gray f6 link dim ph0 dib'
-                          onClick={() => {
-                            this.editUser(b)
-                          }}
-                        >
-                          <i className='pointer fa fa-pencil fa-lg' />
-                        </button>
+              <Fade key={i}>
+                <div className='mb3 w-50-ns w-25-l w-100'>
+                  <ContractHolder>
+                    <div key={i} index={i}>
+                      <i className='mr2 fa fa-envelope' />
+                      {b.email}
+                      <LawyerName name={b.name} />
+                      <ul className='fr list pa0 mt2'>
+                        <li className='fl mr2'>
+                          <button
+                            className='bg-light-gray f6 link dim ph0 dib'
+                            onClick={() => {
+                              this.editUser(b)
+                            }}
+                          >
+                            <i className='pointer fa fa-pencil fa-lg' />
+                          </button>
 
-                      </li>
-                      <li
-                        onClick={() => {
-                          this.deleteUser(b.id)
-                        }}
-                        className='fl mr2 '
-                      >
-                        <i className='pointer fa fa-trash-o fa-lg' />
-                      </li>
-                    </ul>
-                  </div>
-                </ContractHolder>
-              </div>
+                        </li>
+                        <li
+                          onClick={() => {
+                            this.deleteUser(b.id)
+                          }}
+                          className='fl mr2 '
+                        >
+                          <i className='pointer fa fa-trash-o fa-lg' />
+                        </li>
+                      </ul>
+                    </div>
+                  </ContractHolder>
+                </div>
+              </Fade>
             ))}
-        </FadeTransition>
+        </TransitionGroup>
         <ClearFix />
         {editUser
           ? <FormTitle title='Edit user' />

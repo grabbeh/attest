@@ -4,8 +4,9 @@ import react from 'react'
 import StatusBar from './StatusBar'
 import DateSummary from './DateSummary'
 import Flex from '../styles/Flex'
-import { CSSTransitionGroup } from 'react-transition-group'
-import FadeTransition from '../styles/FadeTransition'
+import { TransitionGroup } from 'react-transition-group'
+import Fade from '../styles/FadeTransition'
+import ClearFix from '../styles/ClearFix'
 
 class SummaryBox extends react.Component {
   render () {
@@ -37,25 +38,25 @@ class SummaryBox extends react.Component {
               </div>
             </Flex>
             <Flex>
-              <FadeTransition
-                element='ul'
-                css='flex flex-wrap list w-100 mb2 pa0 ma0'
-              >
+              <TransitionGroup className='flex flex-wrap list w-100 mb2 pa0 ma0'>
                 {res.map(r => (
-                  <li key={r.status.name} className='fl mr4'>
-                    <StatusBar status={r.status} volume={r.volume} />
-                  </li>
+                  <Fade key={r.status.name}>
+                    <div className='fl mr4'>
+                      <StatusBar status={r.status} volume={r.volume} />
+                    </div>
+                  </Fade>
                 ))}
-
-              </FadeTransition>
-              <div className='cf:after' />
-              <FadeTransition element='div'>
+              </TransitionGroup>
+              <ClearFix />
+              <TransitionGroup>
                 {arr.map(contracts => (
-                  <div className='fl' key={contracts[0].id}>
-                    <ContractSquareList contracts={contracts} />
-                  </div>
+                  <Fade key={contracts[0].id}>
+                    <div className='fl'>
+                      <ContractSquareList contracts={contracts} />
+                    </div>
+                  </Fade>
                 ))}
-              </FadeTransition>
+              </TransitionGroup>
             </Flex>
           </div>}
       </div>
