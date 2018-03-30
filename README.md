@@ -1,7 +1,12 @@
 # attest
 Contract management tool
 
-Development instructions (pre-requisites are installation of node and npm):
+***Prerequisites***
+
+Node and npm installed
+Working instance of attest-graphql at https://github.com/grabbeh/attest-graphql
+
+Development instructions:
 
 ```git clone https://github.com/grabbeh/attest```
 
