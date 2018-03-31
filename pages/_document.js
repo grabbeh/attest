@@ -24,6 +24,7 @@ export default class MyDocument extends Document {
             href='https://unpkg.com/tachyons@4.9.0/css/tachyons.min.css'
           />
           <link rel='stylesheet' href='/static/datepicker.css' />
+          <link rel='stylesheet' href='/_next/static/style.css' />
           <link
             href='https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'
             rel='stylesheet'

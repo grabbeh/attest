@@ -23,7 +23,7 @@ const SlimMenu = ({ selectedUrl }) => (
       <MenuItem selectedUrl={selectedUrl} url='/' icon='fa fa-bell-o fa-lg' />
       <MenuItem
         selectedUrl={selectedUrl}
-        url='/'
+        url='/charts'
         icon='fa fa-line-chart fa-lg'
       />
     </ul>

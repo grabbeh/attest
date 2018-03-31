@@ -37,9 +37,14 @@ const AddContractMutation = graphql(ADD_CONTRACT_MUTATION, {
           variables: { contract },
           update: (store, response) => {
             let contract = response.data.addContract
-            let data = store.readQuery({ query: CONTRACTS_QUERY })
-            data.contracts.push(contract)
-            store.writeQuery({ query: CONTRACTS_QUERY, data })
+            // try/catch block used to silence error
+            try {
+              let data = store.readQuery({ query: CONTRACTS_QUERY })
+              data.contracts.push(contract)
+              store.writeQuery({ query: CONTRACTS_QUERY, data })
+            } catch (e) {
+              // console.log(e)
+            }
             redirect({}, '/contracts')
           }
         })

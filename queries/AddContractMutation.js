@@ -4,6 +4,8 @@ export default gql`
 mutation addContract($contract: PostContract) {
   addContract(contract: $contract) {
     id
+    executionDate
+    effectiveDate
     expiryDate
     internalParties
     externalParties

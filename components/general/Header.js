@@ -5,9 +5,9 @@ import cookie from 'cookie'
 
 class Header extends react.Component {
   logout = () => {
+    redirect({}, '/')
     this.props.client.resetStore()
     document.cookie = cookie.serialize('token', '')
-    redirect({}, '/')
   }
 
   render () {

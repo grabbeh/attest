@@ -40,7 +40,6 @@ class LoginForm extends React.Component {
     return (
       <FadeRightDiv>
         <CenterBox>
-
           <FormTitle title='Login' />
           <form className='pt2'>
             <FormSection>
