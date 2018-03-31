@@ -4636,21 +4636,20 @@ var _default = SlimMenu;
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(module) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_styled_components__ = __webpack_require__("./node_modules/styled-components/dist/styled-components.browser.es.js");
-var _templateObject = _taggedTemplateLiteral(['\n'], ['\n']);
-
 (function () {
   var enterModule = __webpack_require__("./node_modules/react-hot-loader/index.js").enterModule;
 
   enterModule && enterModule(module);
 })();
 
-function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-
 
 
 var Box = __WEBPACK_IMPORTED_MODULE_0_styled_components__["a" /* default */].div.attrs({
   className: 'pa3 bg-white ba b--black-20'
-})(_templateObject);
+}).withConfig({
+  displayName: 'Box',
+  componentId: 'n6xy4-0'
+})(['']);
 var _default = Box;
 /* harmony default export */ __webpack_exports__["a"] = (_default);
 ;
@@ -4725,21 +4724,20 @@ var _default = ClearFix;
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(module) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_styled_components__ = __webpack_require__("./node_modules/styled-components/dist/styled-components.browser.es.js");
-var _templateObject = _taggedTemplateLiteral(['\n \n  display: ', ';\n'], ['\n \n  display: ', ';\n']);
-
 (function () {
   var enterModule = __webpack_require__("./node_modules/react-hot-loader/index.js").enterModule;
 
   enterModule && enterModule(module);
 })();
 
-function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-
 
 
 var FadeInDiv = __WEBPACK_IMPORTED_MODULE_0_styled_components__["a" /* default */].div.attrs({
   className: 'absolute shadow-4 bg-white'
-})(_templateObject, function (props) {
+}).withConfig({
+  displayName: 'FadeInDiv',
+  componentId: 'nk73e3-0'
+})(['display:', ';'], function (props) {
   return props.activeFilter === props.title ? '' : 'none';
 });
 var _default = FadeInDiv;
@@ -4776,23 +4774,21 @@ transition: opacity .5s ease-in; */
 /* WEBPACK VAR INJECTION */(function(module) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_styled_components__ = __webpack_require__("./node_modules/styled-components/dist/styled-components.browser.es.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_animations__ = __webpack_require__("./node_modules/react-animations/lib/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_animations___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_animations__);
-var _templateObject = _taggedTemplateLiteral(['', ''], ['', '']),
-    _templateObject2 = _taggedTemplateLiteral(['\n  animation: 1s ', ';\n'], ['\n  animation: 1s ', ';\n']);
-
 (function () {
   var enterModule = __webpack_require__("./node_modules/react-hot-loader/index.js").enterModule;
 
   enterModule && enterModule(module);
 })();
 
-function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
 
 
+var fadeAnimation = Object(__WEBPACK_IMPORTED_MODULE_0_styled_components__["b" /* keyframes */])(['', ''], __WEBPACK_IMPORTED_MODULE_1_react_animations__["fadeInRightBig"]);
 
-var fadeAnimation = Object(__WEBPACK_IMPORTED_MODULE_0_styled_components__["b" /* keyframes */])(_templateObject, __WEBPACK_IMPORTED_MODULE_1_react_animations__["fadeInRightBig"]);
-
-var FadeInRightDiv = __WEBPACK_IMPORTED_MODULE_0_styled_components__["a" /* default */].div(_templateObject2, fadeAnimation);
+var FadeInRightDiv = __WEBPACK_IMPORTED_MODULE_0_styled_components__["a" /* default */].div.withConfig({
+  displayName: 'FadeRightDiv__FadeInRightDiv',
+  componentId: 'ob6gdi-0'
+})(['animation:1s ', ';'], fadeAnimation);
 var _default = FadeInRightDiv;
 /* harmony default export */ __webpack_exports__["a"] = (_default);
 ;
@@ -4883,21 +4879,20 @@ var _default = Fade;
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(module) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_styled_components__ = __webpack_require__("./node_modules/styled-components/dist/styled-components.browser.es.js");
-var _templateObject = _taggedTemplateLiteral(['\n\n'], ['\n\n']);
-
 (function () {
   var enterModule = __webpack_require__("./node_modules/react-hot-loader/index.js").enterModule;
 
   enterModule && enterModule(module);
 })();
 
-function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-
 
 
 var Flex = __WEBPACK_IMPORTED_MODULE_0_styled_components__["a" /* default */].div.attrs({
   className: 'flex flex-wrap'
-})(_templateObject);
+}).withConfig({
+  displayName: 'Flex',
+  componentId: 's1m282w4-0'
+})(['']);
 var _default = Flex;
 /* harmony default export */ __webpack_exports__["a"] = (_default);
 ;
@@ -5079,21 +5074,20 @@ var _default = FormTitle;
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(module) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_styled_components__ = __webpack_require__("./node_modules/styled-components/dist/styled-components.browser.es.js");
-var _templateObject = _taggedTemplateLiteral(['\ntransform: translateX(', ');\ntransition: transform .3s ease-in;\n'], ['\ntransform: translateX(', ');\ntransition: transform .3s ease-in;\n']);
-
 (function () {
   var enterModule = __webpack_require__("./node_modules/react-hot-loader/index.js").enterModule;
 
   enterModule && enterModule(module);
 })();
 
-function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-
 
 
 var MenuAnimation = __WEBPACK_IMPORTED_MODULE_0_styled_components__["a" /* default */].div.attrs({
   className: 'ph3 pt4 bg-dark-gray height front fixed'
-})(_templateObject, function (props) {
+}).withConfig({
+  displayName: 'MenuAnimation',
+  componentId: 's11mv09s-0'
+})(['transform:translateX(', ');transition:transform .3s ease-in;'], function (props) {
   return props.showMenu ? '0px' : '-60px';
 });
 
@@ -5125,21 +5119,20 @@ var _default = MenuAnimation;
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(module) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_styled_components__ = __webpack_require__("./node_modules/styled-components/dist/styled-components.browser.es.js");
-var _templateObject = _taggedTemplateLiteral(['\n\n'], ['\n\n']);
-
 (function () {
   var enterModule = __webpack_require__("./node_modules/react-hot-loader/index.js").enterModule;
 
   enterModule && enterModule(module);
 })();
 
-function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-
 
 
 var PageAnimation = __WEBPACK_IMPORTED_MODULE_0_styled_components__["a" /* default */].div.attrs({
   className: 'ml2 ml0-l w-100'
-})(_templateObject);
+}).withConfig({
+  displayName: 'PageAnimation',
+  componentId: 'b8qayj-0'
+})(['']);
 
 // transform: translateX(${props => (props.showMenu ? '60px' : '0px')});
 // transition: transform .3s ease-in;
@@ -14170,7 +14163,7 @@ var _location = __webpack_require__("./node_modules/graphql/language/location.js
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- *  strict
+ * 
  */
 
 function GraphQLError( // eslint-disable-line no-redeclare
@@ -14200,8 +14193,9 @@ message, nodes, source, positions, path, originalError, extensions) {
 
   var _locations = void 0;
   if (positions && source) {
+    var providedSource = source;
     _locations = positions.map(function (pos) {
-      return (0, _location.getLocation)(source, pos);
+      return (0, _location.getLocation)(providedSource, pos);
     });
   } else if (_nodes) {
     _locations = _nodes.reduce(function (list, node) {
@@ -14302,7 +14296,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                                                                                                                                                                                                                                                                    * This source code is licensed under the MIT license found in the
                                                                                                                                                                                                                                                                    * LICENSE file in the root directory of this source tree.
                                                                                                                                                                                                                                                                    *
-                                                                                                                                                                                                                                                                   *  strict
+                                                                                                                                                                                                                                                                   * 
                                                                                                                                                                                                                                                                    */
 
 exports.formatError = formatError;
@@ -14406,7 +14400,6 @@ var _GraphQLError = __webpack_require__("./node_modules/graphql/error/GraphQLErr
 function locatedError(originalError, nodes, path) {
   // Note: this uses a brand-check to support GraphQL errors originating from
   // other contexts.
-  // $FlowFixMe(>=0.68.0)
   if (originalError && Array.isArray(originalError.path)) {
     return originalError;
   }
@@ -14418,7 +14411,7 @@ function locatedError(originalError, nodes, path) {
    * This source code is licensed under the MIT license found in the
    * LICENSE file in the root directory of this source tree.
    *
-   *  strict
+   * 
    */
 
 /***/ }),
@@ -14467,7 +14460,7 @@ function printError(error) {
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- *  strict
+ * 
  */
 
 function highlightSourceAtLocation(source, location) {
@@ -14523,7 +14516,7 @@ var _GraphQLError = __webpack_require__("./node_modules/graphql/error/GraphQLErr
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- *  strict
+ * 
  */
 
 function syntaxError(source, position, description) {
@@ -14548,7 +14541,7 @@ exports.default = invariant;
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- *  strict
+ * 
  */
 
 function invariant(condition, message) {
@@ -14576,7 +14569,7 @@ exports.default = blockStringValue;
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- *  strict
+ * 
  */
 
 /**
@@ -14649,13 +14642,13 @@ Object.defineProperty(exports, "__esModule", {
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- *  strict
+ * 
  */
 
 /**
  * The set of allowed directive location values.
  */
-var DirectiveLocation = exports.DirectiveLocation = Object.freeze({
+var DirectiveLocation = exports.DirectiveLocation = {
   // Request Definitions
   QUERY: 'QUERY',
   MUTATION: 'MUTATION',
@@ -14676,7 +14669,7 @@ var DirectiveLocation = exports.DirectiveLocation = Object.freeze({
   ENUM_VALUE: 'ENUM_VALUE',
   INPUT_OBJECT: 'INPUT_OBJECT',
   INPUT_FIELD_DEFINITION: 'INPUT_FIELD_DEFINITION'
-});
+};
 
 /**
  * The enum type representing the directive location values.
@@ -14699,79 +14692,80 @@ Object.defineProperty(exports, "__esModule", {
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- *  strict
+ * 
  */
 
-/**
- * The set of allowed kind values for AST nodes.
- */
-var Kind = exports.Kind = Object.freeze({
-  // Name
-  NAME: 'Name',
+// Name
 
-  // Document
-  DOCUMENT: 'Document',
-  OPERATION_DEFINITION: 'OperationDefinition',
-  VARIABLE_DEFINITION: 'VariableDefinition',
-  VARIABLE: 'Variable',
-  SELECTION_SET: 'SelectionSet',
-  FIELD: 'Field',
-  ARGUMENT: 'Argument',
+var NAME = exports.NAME = 'Name';
 
-  // Fragments
-  FRAGMENT_SPREAD: 'FragmentSpread',
-  INLINE_FRAGMENT: 'InlineFragment',
-  FRAGMENT_DEFINITION: 'FragmentDefinition',
+// Document
 
-  // Values
-  INT: 'IntValue',
-  FLOAT: 'FloatValue',
-  STRING: 'StringValue',
-  BOOLEAN: 'BooleanValue',
-  NULL: 'NullValue',
-  ENUM: 'EnumValue',
-  LIST: 'ListValue',
-  OBJECT: 'ObjectValue',
-  OBJECT_FIELD: 'ObjectField',
+var DOCUMENT = exports.DOCUMENT = 'Document';
+var OPERATION_DEFINITION = exports.OPERATION_DEFINITION = 'OperationDefinition';
+var VARIABLE_DEFINITION = exports.VARIABLE_DEFINITION = 'VariableDefinition';
+var VARIABLE = exports.VARIABLE = 'Variable';
+var SELECTION_SET = exports.SELECTION_SET = 'SelectionSet';
+var FIELD = exports.FIELD = 'Field';
+var ARGUMENT = exports.ARGUMENT = 'Argument';
 
-  // Directives
-  DIRECTIVE: 'Directive',
+// Fragments
 
-  // Types
-  NAMED_TYPE: 'NamedType',
-  LIST_TYPE: 'ListType',
-  NON_NULL_TYPE: 'NonNullType',
+var FRAGMENT_SPREAD = exports.FRAGMENT_SPREAD = 'FragmentSpread';
+var INLINE_FRAGMENT = exports.INLINE_FRAGMENT = 'InlineFragment';
+var FRAGMENT_DEFINITION = exports.FRAGMENT_DEFINITION = 'FragmentDefinition';
 
-  // Type System Definitions
-  SCHEMA_DEFINITION: 'SchemaDefinition',
-  OPERATION_TYPE_DEFINITION: 'OperationTypeDefinition',
+// Values
 
-  // Type Definitions
-  SCALAR_TYPE_DEFINITION: 'ScalarTypeDefinition',
-  OBJECT_TYPE_DEFINITION: 'ObjectTypeDefinition',
-  FIELD_DEFINITION: 'FieldDefinition',
-  INPUT_VALUE_DEFINITION: 'InputValueDefinition',
-  INTERFACE_TYPE_DEFINITION: 'InterfaceTypeDefinition',
-  UNION_TYPE_DEFINITION: 'UnionTypeDefinition',
-  ENUM_TYPE_DEFINITION: 'EnumTypeDefinition',
-  ENUM_VALUE_DEFINITION: 'EnumValueDefinition',
-  INPUT_OBJECT_TYPE_DEFINITION: 'InputObjectTypeDefinition',
+var INT = exports.INT = 'IntValue';
+var FLOAT = exports.FLOAT = 'FloatValue';
+var STRING = exports.STRING = 'StringValue';
+var BOOLEAN = exports.BOOLEAN = 'BooleanValue';
+var NULL = exports.NULL = 'NullValue';
+var ENUM = exports.ENUM = 'EnumValue';
+var LIST = exports.LIST = 'ListValue';
+var OBJECT = exports.OBJECT = 'ObjectValue';
+var OBJECT_FIELD = exports.OBJECT_FIELD = 'ObjectField';
 
-  // Type Extensions
-  SCALAR_TYPE_EXTENSION: 'ScalarTypeExtension',
-  OBJECT_TYPE_EXTENSION: 'ObjectTypeExtension',
-  INTERFACE_TYPE_EXTENSION: 'InterfaceTypeExtension',
-  UNION_TYPE_EXTENSION: 'UnionTypeExtension',
-  ENUM_TYPE_EXTENSION: 'EnumTypeExtension',
-  INPUT_OBJECT_TYPE_EXTENSION: 'InputObjectTypeExtension',
+// Directives
 
-  // Directive Definitions
-  DIRECTIVE_DEFINITION: 'DirectiveDefinition'
-});
+var DIRECTIVE = exports.DIRECTIVE = 'Directive';
 
-/**
- * The enum type representing the possible kind values of AST nodes.
- */
+// Types
+
+var NAMED_TYPE = exports.NAMED_TYPE = 'NamedType';
+var LIST_TYPE = exports.LIST_TYPE = 'ListType';
+var NON_NULL_TYPE = exports.NON_NULL_TYPE = 'NonNullType';
+
+// Type System Definitions
+
+var SCHEMA_DEFINITION = exports.SCHEMA_DEFINITION = 'SchemaDefinition';
+var OPERATION_TYPE_DEFINITION = exports.OPERATION_TYPE_DEFINITION = 'OperationTypeDefinition';
+
+// Type Definitions
+
+var SCALAR_TYPE_DEFINITION = exports.SCALAR_TYPE_DEFINITION = 'ScalarTypeDefinition';
+var OBJECT_TYPE_DEFINITION = exports.OBJECT_TYPE_DEFINITION = 'ObjectTypeDefinition';
+var FIELD_DEFINITION = exports.FIELD_DEFINITION = 'FieldDefinition';
+var INPUT_VALUE_DEFINITION = exports.INPUT_VALUE_DEFINITION = 'InputValueDefinition';
+var INTERFACE_TYPE_DEFINITION = exports.INTERFACE_TYPE_DEFINITION = 'InterfaceTypeDefinition';
+var UNION_TYPE_DEFINITION = exports.UNION_TYPE_DEFINITION = 'UnionTypeDefinition';
+var ENUM_TYPE_DEFINITION = exports.ENUM_TYPE_DEFINITION = 'EnumTypeDefinition';
+var ENUM_VALUE_DEFINITION = exports.ENUM_VALUE_DEFINITION = 'EnumValueDefinition';
+var INPUT_OBJECT_TYPE_DEFINITION = exports.INPUT_OBJECT_TYPE_DEFINITION = 'InputObjectTypeDefinition';
+
+// Type Extensions
+
+var SCALAR_TYPE_EXTENSION = exports.SCALAR_TYPE_EXTENSION = 'ScalarTypeExtension';
+var OBJECT_TYPE_EXTENSION = exports.OBJECT_TYPE_EXTENSION = 'ObjectTypeExtension';
+var INTERFACE_TYPE_EXTENSION = exports.INTERFACE_TYPE_EXTENSION = 'InterfaceTypeExtension';
+var UNION_TYPE_EXTENSION = exports.UNION_TYPE_EXTENSION = 'UnionTypeExtension';
+var ENUM_TYPE_EXTENSION = exports.ENUM_TYPE_EXTENSION = 'EnumTypeExtension';
+var INPUT_OBJECT_TYPE_EXTENSION = exports.INPUT_OBJECT_TYPE_EXTENSION = 'InputObjectTypeExtension';
+
+// Directive Definitions
+
+var DIRECTIVE_DEFINITION = exports.DIRECTIVE_DEFINITION = 'DirectiveDefinition';
 
 /***/ }),
 
@@ -14810,11 +14804,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- *  strict
+ * 
  */
 
 function createLexer(source, options) {
-  var startOfFileToken = new Tok(TokenKind.SOF, 0, 0, 0, 0, null);
+  var startOfFileToken = new Tok(SOF, 0, 0, 0, 0, null);
   var lexer = {
     source: source,
     options: options,
@@ -14836,11 +14830,11 @@ function advanceLexer() {
 
 function lookahead() {
   var token = this.token;
-  if (token.kind !== TokenKind.EOF) {
+  if (token.kind !== EOF) {
     do {
       // Note: next is only mutable during parsing, so we cast to allow this.
       token = token.next || (token.next = readToken(this, token));
-    } while (token.kind === TokenKind.COMMENT);
+    } while (token.kind === COMMENT);
   }
   return token;
 }
@@ -14850,39 +14844,56 @@ function lookahead() {
  */
 
 
+// Each kind of token.
+var SOF = '<SOF>';
+var EOF = '<EOF>';
+var BANG = '!';
+var DOLLAR = '$';
+var PAREN_L = '(';
+var PAREN_R = ')';
+var SPREAD = '...';
+var COLON = ':';
+var EQUALS = '=';
+var AT = '@';
+var BRACKET_L = '[';
+var BRACKET_R = ']';
+var BRACE_L = '{';
+var PIPE = '|';
+var BRACE_R = '}';
+var NAME = 'Name';
+var INT = 'Int';
+var FLOAT = 'Float';
+var STRING = 'String';
+var BLOCK_STRING = 'BlockString';
+var COMMENT = 'Comment';
+
 /**
  * An exported enum describing the different kinds of tokens that the
  * lexer emits.
  */
-var TokenKind = exports.TokenKind = Object.freeze({
-  SOF: '<SOF>',
-  EOF: '<EOF>',
-  BANG: '!',
-  DOLLAR: '$',
-  AMP: '&',
-  PAREN_L: '(',
-  PAREN_R: ')',
-  SPREAD: '...',
-  COLON: ':',
-  EQUALS: '=',
-  AT: '@',
-  BRACKET_L: '[',
-  BRACKET_R: ']',
-  BRACE_L: '{',
-  PIPE: '|',
-  BRACE_R: '}',
-  NAME: 'Name',
-  INT: 'Int',
-  FLOAT: 'Float',
-  STRING: 'String',
-  BLOCK_STRING: 'BlockString',
-  COMMENT: 'Comment'
-});
-
-/**
- * The enum type representing the token kinds values.
- */
-
+var TokenKind = exports.TokenKind = {
+  SOF: SOF,
+  EOF: EOF,
+  BANG: BANG,
+  DOLLAR: DOLLAR,
+  PAREN_L: PAREN_L,
+  PAREN_R: PAREN_R,
+  SPREAD: SPREAD,
+  COLON: COLON,
+  EQUALS: EQUALS,
+  AT: AT,
+  BRACKET_L: BRACKET_L,
+  BRACKET_R: BRACKET_R,
+  BRACE_L: BRACE_L,
+  PIPE: PIPE,
+  BRACE_R: BRACE_R,
+  NAME: NAME,
+  INT: INT,
+  FLOAT: FLOAT,
+  STRING: STRING,
+  BLOCK_STRING: BLOCK_STRING,
+  COMMENT: COMMENT
+};
 
 /**
  * A helper function to describe a token as a string for debugging
@@ -14922,7 +14933,7 @@ Tok.prototype.toJSON = Tok.prototype.inspect = function toJSON() {
 function printCharCode(code) {
   return (
     // NaN/undefined represents access beyond the end of the file.
-    isNaN(code) ? TokenKind.EOF : // Trust JSON for ASCII.
+    isNaN(code) ? EOF : // Trust JSON for ASCII.
     code < 0x007f ? JSON.stringify(String.fromCharCode(code)) : // Otherwise print the escaped form.
     '"\\u' + ('00' + code.toString(16).toUpperCase()).slice(-4) + '"'
   );
@@ -14940,70 +14951,67 @@ function readToken(lexer, prev) {
   var body = source.body;
   var bodyLength = body.length;
 
-  var pos = positionAfterWhitespace(body, prev.end, lexer);
+  var position = positionAfterWhitespace(body, prev.end, lexer);
   var line = lexer.line;
-  var col = 1 + pos - lexer.lineStart;
+  var col = 1 + position - lexer.lineStart;
 
-  if (pos >= bodyLength) {
-    return new Tok(TokenKind.EOF, bodyLength, bodyLength, line, col, prev);
+  if (position >= bodyLength) {
+    return new Tok(EOF, bodyLength, bodyLength, line, col, prev);
   }
 
-  var code = charCodeAt.call(body, pos);
+  var code = charCodeAt.call(body, position);
 
   // SourceCharacter
   if (code < 0x0020 && code !== 0x0009 && code !== 0x000a && code !== 0x000d) {
-    throw (0, _error.syntaxError)(source, pos, 'Cannot contain the invalid character ' + printCharCode(code) + '.');
+    throw (0, _error.syntaxError)(source, position, 'Cannot contain the invalid character ' + printCharCode(code) + '.');
   }
 
   switch (code) {
     // !
     case 33:
-      return new Tok(TokenKind.BANG, pos, pos + 1, line, col, prev);
+      return new Tok(BANG, position, position + 1, line, col, prev);
     // #
     case 35:
-      return readComment(source, pos, line, col, prev);
+      return readComment(source, position, line, col, prev);
     // $
     case 36:
-      return new Tok(TokenKind.DOLLAR, pos, pos + 1, line, col, prev);
-    // &
-    case 38:
-      return new Tok(TokenKind.AMP, pos, pos + 1, line, col, prev);
+      return new Tok(DOLLAR, position, position + 1, line, col, prev);
     // (
     case 40:
-      return new Tok(TokenKind.PAREN_L, pos, pos + 1, line, col, prev);
+      return new Tok(PAREN_L, position, position + 1, line, col, prev);
     // )
     case 41:
-      return new Tok(TokenKind.PAREN_R, pos, pos + 1, line, col, prev);
+      return new Tok(PAREN_R, position, position + 1, line, col, prev);
     // .
     case 46:
-      if (charCodeAt.call(body, pos + 1) === 46 && charCodeAt.call(body, pos + 2) === 46) {
-        return new Tok(TokenKind.SPREAD, pos, pos + 3, line, col, prev);
+      if (charCodeAt.call(body, position + 1) === 46 && charCodeAt.call(body, position + 2) === 46) {
+        return new Tok(SPREAD, position, position + 3, line, col, prev);
       }
       break;
     // :
     case 58:
-      return new Tok(TokenKind.COLON, pos, pos + 1, line, col, prev);
+      return new Tok(COLON, position, position + 1, line, col, prev);
     // =
     case 61:
-      return new Tok(TokenKind.EQUALS, pos, pos + 1, line, col, prev);
+      return new Tok(EQUALS, position, position + 1, line, col, prev);
     // @
     case 64:
-      return new Tok(TokenKind.AT, pos, pos + 1, line, col, prev);
+      return new Tok(AT, position, position + 1, line, col, prev);
     // [
     case 91:
-      return new Tok(TokenKind.BRACKET_L, pos, pos + 1, line, col, prev);
+      return new Tok(BRACKET_L, position, position + 1, line, col, prev);
     // ]
     case 93:
-      return new Tok(TokenKind.BRACKET_R, pos, pos + 1, line, col, prev);
+      return new Tok(BRACKET_R, position, position + 1, line, col, prev);
     // {
     case 123:
-      return new Tok(TokenKind.BRACE_L, pos, pos + 1, line, col, prev);
+      return new Tok(BRACE_L, position, position + 1, line, col, prev);
     // |
     case 124:
-      return new Tok(TokenKind.PIPE, pos, pos + 1, line, col, prev);
+      return new Tok(PIPE, position, position + 1, line, col, prev);
     // }
     case 125:
-      return new Tok(TokenKind.BRACE_R, pos, pos + 1, line, col, prev);
+      return new Tok(BRACE_R, position, position + 1, line, col, prev);
     // A-Z _ a-z
     case 65:
     case 66:
@@ -15058,7 +15066,7 @@ function readToken(lexer, prev) {
     case 120:
     case 121:
     case 122:
-      return readName(source, pos, line, col, prev);
+      return readName(source, position, line, col, prev);
     // - 0-9
     case 45:
     case 48:
@@ -15071,16 +15079,16 @@ function readToken(lexer, prev) {
     case 55:
     case 56:
     case 57:
-      return readNumber(source, pos, code, line, col, prev);
+      return readNumber(source, position, code, line, col, prev);
     // "
     case 34:
-      if (charCodeAt.call(body, pos + 1) === 34 && charCodeAt.call(body, pos + 2) === 34) {
-        return readBlockString(source, pos, line, col, prev);
+      if (charCodeAt.call(body, position + 1) === 34 && charCodeAt.call(body, position + 2) === 34) {
+        return readBlockString(source, position, line, col, prev);
       }
-      return readString(source, pos, line, col, prev);
+      return readString(source, position, line, col, prev);
   }
 
-  throw (0, _error.syntaxError)(source, pos, unexpectedCharacterMessage(code));
+  throw (0, _error.syntaxError)(source, position, unexpectedCharacterMessage(code));
 }
 
 /**
@@ -15145,7 +15153,7 @@ function readComment(source, start, line, col, prev) {
   // SourceCharacter but not LineTerminator
   code > 0x001f || code === 0x0009));
 
-  return new Tok(TokenKind.COMMENT, start, position, line, col, prev, slice.call(body, start + 1, position));
+  return new Tok(COMMENT, start, position, line, col, prev, slice.call(body, start + 1, position));
 }
 
 /**
@@ -15198,7 +15206,7 @@ function readNumber(source, start, firstCode, line, col, prev) {
     position = readDigits(source, position, code);
   }
 
-  return new Tok(isFloat ? TokenKind.FLOAT : TokenKind.INT, start, position, line, col, prev, slice.call(body, start, position));
+  return new Tok(isFloat ? FLOAT : INT, start, position, line, col, prev, slice.call(body, start, position));
 }
 
 /**
@@ -15236,7 +15244,7 @@ function readString(source, start, line, col, prev) {
     // Closing Quote (")
     if (code === 34) {
       value += slice.call(body, chunkStart, position);
-      return new Tok(TokenKind.STRING, start, position + 1, line, col, prev, value);
+      return new Tok(STRING, start, position + 1, line, col, prev, value);
     }
 
     // SourceCharacter
@@ -15310,7 +15318,7 @@ function readBlockString(source, start, line, col, prev) {
     // Closing Triple-Quote (""")
     if (code === 34 && charCodeAt.call(body, position + 1) === 34 && charCodeAt.call(body, position + 2) === 34) {
       rawValue += slice.call(body, chunkStart, position);
-      return new Tok(TokenKind.BLOCK_STRING, start, position + 3, line, col, prev, (0, _blockStringValue2.default)(rawValue));
+      return new Tok(BLOCK_STRING, start, position + 3, line, col, prev, (0, _blockStringValue2.default)(rawValue));
     }
 
     // SourceCharacter
@@ -15365,19 +15373,19 @@ function char2hex(a) {
  *
  * [_A-Za-z][_0-9A-Za-z]*
  */
-function readName(source, start, line, col, prev) {
+function readName(source, position, line, col, prev) {
   var body = source.body;
   var bodyLength = body.length;
-  var position = start + 1;
+  var end = position + 1;
   var code = 0;
-  while (position !== bodyLength && (code = charCodeAt.call(body, position)) !== null && (code === 95 || // _
+  while (end !== bodyLength && (code = charCodeAt.call(body, end)) !== null && (code === 95 || // _
   code >= 48 && code <= 57 || // 0-9
   code >= 65 && code <= 90 || // A-Z
   code >= 97 && code <= 122) // a-z
   ) {
-    ++position;
+    ++end;
   }
-  return new Tok(TokenKind.NAME, start, position, line, col, prev, slice.call(body, start, position));
+  return new Tok(NAME, position, end, line, col, prev, slice.call(body, position, end));
 }
 
 /***/ }),
@@ -15404,7 +15412,7 @@ exports.getLocation = getLocation;
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- *  strict
+ * 
  */
 
 function getLocation(source, position) {
@@ -15485,7 +15493,7 @@ function parse(source, options) {
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- *  strict
+ * 
  */
 
 function parseValue(source, options) {
@@ -15522,7 +15530,7 @@ function parseType(source, options) {
 function parseName(lexer) {
   var token = expect(lexer, _lexer.TokenKind.NAME);
   return {
-    kind: _kinds.Kind.NAME,
+    kind: _kinds.NAME,
     value: token.value,
     loc: loc(lexer, token)
   };
@@ -15542,7 +15550,7 @@ function parseDocument(lexer) {
   } while (!skip(lexer, _lexer.TokenKind.EOF));
 
   return {
-    kind: _kinds.Kind.DOCUMENT,
+    kind: _kinds.DOCUMENT,
     definitions: definitions,
     loc: loc(lexer, start)
   };
@@ -15617,7 +15625,7 @@ function parseOperationDefinition(lexer) {
   var start = lexer.token;
   if (peek(lexer, _lexer.TokenKind.BRACE_L)) {
     return {
-      kind: _kinds.Kind.OPERATION_DEFINITION,
+      kind: _kinds.OPERATION_DEFINITION,
       operation: 'query',
       name: undefined,
       variableDefinitions: [],
@@ -15632,7 +15640,7 @@ function parseOperationDefinition(lexer) {
     name = parseName(lexer);
   }
   return {
-    kind: _kinds.Kind.OPERATION_DEFINITION,
+    kind: _kinds.OPERATION_DEFINITION,
     operation: operation,
     name: name,
     variableDefinitions: parseVariableDefinitions(lexer),
@@ -15672,7 +15680,7 @@ function parseVariableDefinitions(lexer) {
 function parseVariableDefinition(lexer) {
   var start = lexer.token;
   return {
-    kind: _kinds.Kind.VARIABLE_DEFINITION,
+    kind: _kinds.VARIABLE_DEFINITION,
     variable: parseVariable(lexer),
     type: (expect(lexer, _lexer.TokenKind.COLON), parseTypeReference(lexer)),
     defaultValue: skip(lexer, _lexer.TokenKind.EQUALS) ? parseValueLiteral(lexer, true) : undefined,
@@ -15687,7 +15695,7 @@ function parseVariable(lexer) {
   var start = lexer.token;
   expect(lexer, _lexer.TokenKind.DOLLAR);
   return {
-    kind: _kinds.Kind.VARIABLE,
+    kind: _kinds.VARIABLE,
     name: parseName(lexer),
     loc: loc(lexer, start)
   };
@@ -15699,7 +15707,7 @@ function parseVariable(lexer) {
 function parseSelectionSet(lexer) {
   var start = lexer.token;
   return {
-    kind: _kinds.Kind.SELECTION_SET,
+    kind: _kinds.SELECTION_SET,
     selections: many(lexer, _lexer.TokenKind.BRACE_L, parseSelection, _lexer.TokenKind.BRACE_R),
     loc: loc(lexer, start)
   };
@@ -15734,7 +15742,7 @@ function parseField(lexer) {
   }
 
   return {
-    kind: _kinds.Kind.FIELD,
+    kind: _kinds.FIELD,
     alias: alias,
     name: name,
     arguments: parseArguments(lexer, false),
@@ -15758,7 +15766,7 @@ function parseArguments(lexer, isConst) {
 function parseArgument(lexer) {
   var start = lexer.token;
   return {
-    kind: _kinds.Kind.ARGUMENT,
+    kind: _kinds.ARGUMENT,
     name: parseName(lexer),
     value: (expect(lexer, _lexer.TokenKind.COLON), parseValueLiteral(lexer, false)),
     loc: loc(lexer, start)
@@ -15768,7 +15776,7 @@ function parseArgument(lexer) {
 function parseConstArgument(lexer) {
   var start = lexer.token;
   return {
-    kind: _kinds.Kind.ARGUMENT,
+    kind: _kinds.ARGUMENT,
     name: parseName(lexer),
     value: (expect(lexer, _lexer.TokenKind.COLON), parseConstValue(lexer)),
     loc: loc(lexer, start)
@@ -15789,7 +15797,7 @@ function parseFragment(lexer) {
   expect(lexer, _lexer.TokenKind.SPREAD);
   if (peek(lexer, _lexer.TokenKind.NAME) && lexer.token.value !== 'on') {
     return {
-      kind: _kinds.Kind.FRAGMENT_SPREAD,
+      kind: _kinds.FRAGMENT_SPREAD,
       name: parseFragmentName(lexer),
       directives: parseDirectives(lexer, false),
       loc: loc(lexer, start)
@@ -15801,7 +15809,7 @@ function parseFragment(lexer) {
     typeCondition = parseNamedType(lexer);
   }
   return {
-    kind: _kinds.Kind.INLINE_FRAGMENT,
+    kind: _kinds.INLINE_FRAGMENT,
     typeCondition: typeCondition,
     directives: parseDirectives(lexer, false),
     selectionSet: parseSelectionSet(lexer),
@@ -15823,7 +15831,7 @@ function parseFragmentDefinition(lexer) {
   //   - fragment FragmentName VariableDefinitions? on TypeCondition Directives? SelectionSet
   if (lexer.options.experimentalFragmentVariables) {
     return {
-      kind: _kinds.Kind.FRAGMENT_DEFINITION,
+      kind: _kinds.FRAGMENT_DEFINITION,
       name: parseFragmentName(lexer),
       variableDefinitions: parseVariableDefinitions(lexer),
       typeCondition: (expectKeyword(lexer, 'on'), parseNamedType(lexer)),
@@ -15833,7 +15841,7 @@ function parseFragmentDefinition(lexer) {
     };
   }
   return {
-    kind: _kinds.Kind.FRAGMENT_DEFINITION,
+    kind: _kinds.FRAGMENT_DEFINITION,
     name: parseFragmentName(lexer),
     typeCondition: (expectKeyword(lexer, 'on'), parseNamedType(lexer)),
     directives: parseDirectives(lexer, false),
@@ -15882,14 +15890,14 @@ function parseValueLiteral(lexer, isConst) {
     case _lexer.TokenKind.INT:
       lexer.advance();
       return {
-        kind: _kinds.Kind.INT,
+        kind: _kinds.INT,
         value: token.value,
         loc: loc(lexer, token)
       };
     case _lexer.TokenKind.FLOAT:
       lexer.advance();
       return {
-        kind: _kinds.Kind.FLOAT,
+        kind: _kinds.FLOAT,
         value: token.value,
         loc: loc(lexer, token)
       };
@@ -15900,20 +15908,20 @@ function parseValueLiteral(lexer, isConst) {
       if (token.value === 'true' || token.value === 'false') {
         lexer.advance();
         return {
-          kind: _kinds.Kind.BOOLEAN,
+          kind: _kinds.BOOLEAN,
           value: token.value === 'true',
           loc: loc(lexer, token)
         };
       } else if (token.value === 'null') {
         lexer.advance();
         return {
-          kind: _kinds.Kind.NULL,
+          kind: _kinds.NULL,
           loc: loc(lexer, token)
         };
       }
       lexer.advance();
       return {
-        kind: _kinds.Kind.ENUM,
+        kind: _kinds.ENUM,
         value: token.value,
         loc: loc(lexer, token)
       };
@@ -15930,7 +15938,7 @@ function parseStringLiteral(lexer) {
   var token = lexer.token;
   lexer.advance();
   return {
-    kind: _kinds.Kind.STRING,
+    kind: _kinds.STRING,
     value: token.value,
     block: token.kind === _lexer.TokenKind.BLOCK_STRING,
     loc: loc(lexer, token)
@@ -15954,7 +15962,7 @@ function parseList(lexer, isConst) {
   var start = lexer.token;
   var item = isConst ? parseConstValue : parseValueValue;
   return {
-    kind: _kinds.Kind.LIST,
+    kind: _kinds.LIST,
     values: any(lexer, _lexer.TokenKind.BRACKET_L, item, _lexer.TokenKind.BRACKET_R),
     loc: loc(lexer, start)
   };
@@ -15973,7 +15981,7 @@ function parseObject(lexer, isConst) {
     fields.push(parseObjectField(lexer, isConst));
   }
   return {
-    kind: _kinds.Kind.OBJECT,
+    kind: _kinds.OBJECT,
     fields: fields,
     loc: loc(lexer, start)
   };
@@ -15985,7 +15993,7 @@ function parseObject(lexer, isConst) {
 function parseObjectField(lexer, isConst) {
   var start = lexer.token;
   return {
-    kind: _kinds.Kind.OBJECT_FIELD,
+    kind: _kinds.OBJECT_FIELD,
     name: parseName(lexer),
     value: (expect(lexer, _lexer.TokenKind.COLON), parseValueLiteral(lexer, isConst)),
     loc: loc(lexer, start)
@@ -16012,7 +16020,7 @@ function parseDirective(lexer, isConst) {
   var start = lexer.token;
   expect(lexer, _lexer.TokenKind.AT);
   return {
-    kind: _kinds.Kind.DIRECTIVE,
+    kind: _kinds.DIRECTIVE,
     name: parseName(lexer),
     arguments: parseArguments(lexer, isConst),
     loc: loc(lexer, start)
@@ -16034,7 +16042,7 @@ function parseTypeReference(lexer) {
     type = parseTypeReference(lexer);
     expect(lexer, _lexer.TokenKind.BRACKET_R);
     type = {
-      kind: _kinds.Kind.LIST_TYPE,
+      kind: _kinds.LIST_TYPE,
       type: type,
       loc: loc(lexer, start)
     };
@@ -16043,7 +16051,7 @@ function parseTypeReference(lexer) {
   }
   if (skip(lexer, _lexer.TokenKind.BANG)) {
     return {
-      kind: _kinds.Kind.NON_NULL_TYPE,
+      kind: _kinds.NON_NULL_TYPE,
       type: type,
       loc: loc(lexer, start)
     };
@@ -16057,7 +16065,7 @@ function parseTypeReference(lexer) {
 function parseNamedType(lexer) {
   var start = lexer.token;
   return {
-    kind: _kinds.Kind.NAMED_TYPE,
+    kind: _kinds.NAMED_TYPE,
     name: parseName(lexer),
     loc: loc(lexer, start)
   };
@@ -16132,7 +16140,7 @@ function parseSchemaDefinition(lexer) {
   var directives = parseDirectives(lexer, true);
   var operationTypes = many(lexer, _lexer.TokenKind.BRACE_L, parseOperationTypeDefinition, _lexer.TokenKind.BRACE_R);
   return {
-    kind: _kinds.Kind.SCHEMA_DEFINITION,
+    kind: _kinds.SCHEMA_DEFINITION,
     directives: directives,
     operationTypes: operationTypes,
     loc: loc(lexer, start)
@@ -16148,7 +16156,7 @@ function parseOperationTypeDefinition(lexer) {
   expect(lexer, _lexer.TokenKind.COLON);
   var type = parseNamedType(lexer);
   return {
-    kind: _kinds.Kind.OPERATION_TYPE_DEFINITION,
+    kind: _kinds.OPERATION_TYPE_DEFINITION,
     operation: operation,
     type: type,
     loc: loc(lexer, start)
@@ -16165,7 +16173,7 @@ function parseScalarTypeDefinition(lexer) {
   var name = parseName(lexer);
   var directives = parseDirectives(lexer, true);
   return {
-    kind: _kinds.Kind.SCALAR_TYPE_DEFINITION,
+    kind: _kinds.SCALAR_TYPE_DEFINITION,
     description: description,
     name: name,
     directives: directives,
@@ -16187,7 +16195,7 @@ function parseObjectTypeDefinition(lexer) {
   var directives = parseDirectives(lexer, true);
   var fields = parseFieldsDefinition(lexer);
   return {
-    kind: _kinds.Kind.OBJECT_TYPE_DEFINITION,
+    kind: _kinds.OBJECT_TYPE_DEFINITION,
     description: description,
     name: name,
     interfaces: interfaces,
@@ -16198,21 +16206,15 @@ function parseObjectTypeDefinition(lexer) {
 }
 
 /**
- * ImplementsInterfaces :
- *   - implements `&`? NamedType
- *   - ImplementsInterfaces & NamedType
+ * ImplementsInterfaces : implements NamedType+
  */
 function parseImplementsInterfaces(lexer) {
   var types = [];
   if (lexer.token.value === 'implements') {
     lexer.advance();
-    // Optional leading ampersand
-    skip(lexer, _lexer.TokenKind.AMP);
     do {
       types.push(parseNamedType(lexer));
-    } while (skip(lexer, _lexer.TokenKind.AMP) ||
-    // Legacy support for the SDL?
-    lexer.options.allowLegacySDLImplementsInterfaces && peek(lexer, _lexer.TokenKind.NAME));
+    } while (peek(lexer, _lexer.TokenKind.NAME));
   }
   return types;
 }
@@ -16221,12 +16223,6 @@ function parseImplementsInterfaces(lexer) {
  * FieldsDefinition : { FieldDefinition+ }
  */
 function parseFieldsDefinition(lexer) {
-  // Legacy support for the SDL?
-  if (lexer.options.allowLegacySDLEmptyFields && peek(lexer, _lexer.TokenKind.BRACE_L) && lexer.lookahead().kind === _lexer.TokenKind.BRACE_R) {
-    lexer.advance();
-    lexer.advance();
-    return [];
-  }
   return peek(lexer, _lexer.TokenKind.BRACE_L) ? many(lexer, _lexer.TokenKind.BRACE_L, parseFieldDefinition, _lexer.TokenKind.BRACE_R) : [];
 }
 
@@ -16243,7 +16239,7 @@ function parseFieldDefinition(lexer) {
   var type = parseTypeReference(lexer);
   var directives = parseDirectives(lexer, true);
   return {
-    kind: _kinds.Kind.FIELD_DEFINITION,
+    kind: _kinds.FIELD_DEFINITION,
     description: description,
     name: name,
     arguments: args,
@@ -16279,7 +16275,7 @@ function parseInputValueDef(lexer) {
   }
   var directives = parseDirectives(lexer, true);
   return {
-    kind: _kinds.Kind.INPUT_VALUE_DEFINITION,
+    kind: _kinds.INPUT_VALUE_DEFINITION,
     description: description,
     name: name,
     type: type,
@@ -16301,7 +16297,7 @@ function parseInterfaceTypeDefinition(lexer) {
   var directives = parseDirectives(lexer, true);
   var fields = parseFieldsDefinition(lexer);
   return {
-    kind: _kinds.Kind.INTERFACE_TYPE_DEFINITION,
+    kind: _kinds.INTERFACE_TYPE_DEFINITION,
     description: description,
     name: name,
     directives: directives,
@@ -16312,7 +16308,7 @@ function parseInterfaceTypeDefinition(lexer) {
 
 /**
  * UnionTypeDefinition :
- *   - Description? union Name Directives[Const]? UnionMemberTypes?
+ *   - Description? union Name Directives[Const]? MemberTypesDefinition?
  */
 function parseUnionTypeDefinition(lexer) {
   var start = lexer.token;
@@ -16320,9 +16316,9 @@ function parseUnionTypeDefinition(lexer) {
   expectKeyword(lexer, 'union');
   var name = parseName(lexer);
   var directives = parseDirectives(lexer, true);
-  var types = parseUnionMemberTypes(lexer);
+  var types = parseMemberTypesDefinition(lexer);
   return {
-    kind: _kinds.Kind.UNION_TYPE_DEFINITION,
+    kind: _kinds.UNION_TYPE_DEFINITION,
     description: description,
     name: name,
     directives: directives,
@@ -16332,11 +16328,13 @@ function parseUnionTypeDefinition(lexer) {
 }
 
 /**
- * UnionMemberTypes :
- *   - = `|`? NamedType
- *   - UnionMemberTypes | NamedType
+ * MemberTypesDefinition : = MemberTypes
+ *
+ * MemberTypes :
+ *   - `|`? NamedType
+ *   - MemberTypes | NamedType
  */
-function parseUnionMemberTypes(lexer) {
+function parseMemberTypesDefinition(lexer) {
   var types = [];
   if (skip(lexer, _lexer.TokenKind.EQUALS)) {
     // Optional leading pipe
@@ -16360,7 +16358,7 @@ function parseEnumTypeDefinition(lexer) {
   var directives = parseDirectives(lexer, true);
   var values = parseEnumValuesDefinition(lexer);
   return {
-    kind: _kinds.Kind.ENUM_TYPE_DEFINITION,
+    kind: _kinds.ENUM_TYPE_DEFINITION,
     description: description,
     name: name,
     directives: directives,
@@ -16387,7 +16385,7 @@ function parseEnumValueDefinition(lexer) {
   var name = parseName(lexer);
   var directives = parseDirectives(lexer, true);
   return {
-    kind: _kinds.Kind.ENUM_VALUE_DEFINITION,
+    kind: _kinds.ENUM_VALUE_DEFINITION,
     description: description,
     name: name,
     directives: directives,
@@ -16407,7 +16405,7 @@ function parseInputObjectTypeDefinition(lexer) {
   var directives = parseDirectives(lexer, true);
   var fields = parseInputFieldsDefinition(lexer);
   return {
-    kind: _kinds.Kind.INPUT_OBJECT_TYPE_DEFINITION,
+    kind: _kinds.INPUT_OBJECT_TYPE_DEFINITION,
     description: description,
     name: name,
     directives: directives,
@@ -16469,7 +16467,7 @@ function parseScalarTypeExtension(lexer) {
     throw unexpected(lexer);
   }
   return {
-    kind: _kinds.Kind.SCALAR_TYPE_EXTENSION,
+    kind: _kinds.SCALAR_TYPE_EXTENSION,
     name: name,
     directives: directives,
     loc: loc(lexer, start)
@@ -16494,7 +16492,7 @@ function parseObjectTypeExtension(lexer) {
     throw unexpected(lexer);
   }
   return {
-    kind: _kinds.Kind.OBJECT_TYPE_EXTENSION,
+    kind: _kinds.OBJECT_TYPE_EXTENSION,
     name: name,
     interfaces: interfaces,
     directives: directives,
@@ -16519,7 +16517,7 @@ function parseInterfaceTypeExtension(lexer) {
     throw unexpected(lexer);
   }
   return {
-    kind: _kinds.Kind.INTERFACE_TYPE_EXTENSION,
+    kind: _kinds.INTERFACE_TYPE_EXTENSION,
     name: name,
     directives: directives,
     fields: fields,
@@ -16529,7 +16527,7 @@ function parseInterfaceTypeExtension(lexer) {
 
 /**
  * UnionTypeExtension :
- *   - extend union Name Directives[Const]? UnionMemberTypes
+ *   - extend union Name Directives[Const]? MemberTypesDefinition
  *   - extend union Name Directives[Const]
  */
 function parseUnionTypeExtension(lexer) {
@@ -16538,12 +16536,12 @@ function parseUnionTypeExtension(lexer) {
   expectKeyword(lexer, 'union');
   var name = parseName(lexer);
   var directives = parseDirectives(lexer, true);
-  var types = parseUnionMemberTypes(lexer);
+  var types = parseMemberTypesDefinition(lexer);
   if (directives.length === 0 && types.length === 0) {
     throw unexpected(lexer);
   }
   return {
-    kind: _kinds.Kind.UNION_TYPE_EXTENSION,
+    kind: _kinds.UNION_TYPE_EXTENSION,
     name: name,
     directives: directives,
     types: types,
@@ -16567,7 +16565,7 @@ function parseEnumTypeExtension(lexer) {
     throw unexpected(lexer);
   }
   return {
-    kind: _kinds.Kind.ENUM_TYPE_EXTENSION,
+    kind: _kinds.ENUM_TYPE_EXTENSION,
     name: name,
     directives: directives,
     values: values,
@@ -16591,7 +16589,7 @@ function parseInputObjectTypeExtension(lexer) {
     throw unexpected(lexer);
   }
   return {
-    kind: _kinds.Kind.INPUT_OBJECT_TYPE_EXTENSION,
+    kind: _kinds.INPUT_OBJECT_TYPE_EXTENSION,
     name: name,
     directives: directives,
     fields: fields,
@@ -16613,7 +16611,7 @@ function parseDirectiveDefinition(lexer) {
   expectKeyword(lexer, 'on');
   var locations = parseDirectiveLocations(lexer);
   return {
-    kind: _kinds.Kind.DIRECTIVE_DEFINITION,
+    kind: _kinds.DIRECTIVE_DEFINITION,
     description: description,
     name: name,
     arguments: args,
@@ -16909,7 +16907,7 @@ var printDocASTReducer = {
   },
   BooleanValue: function BooleanValue(_ref11) {
     var value = _ref11.value;
-    return value ? 'true' : 'false';
+    return JSON.stringify(value);
   },
   NullValue: function NullValue() {
     return 'null';
@@ -16969,69 +16967,78 @@ var printDocASTReducer = {
     return operation + ': ' + type;
   },
 
-  ScalarTypeDefinition: addDescription(function (_ref22) {
-    var name = _ref22.name,
+  ScalarTypeDefinition: function ScalarTypeDefinition(_ref22) {
+    var description = _ref22.description,
+        name = _ref22.name,
         directives = _ref22.directives;
-    return join(['scalar', name, join(directives, ' ')], ' ');
-  }),
+    return join([description, join(['scalar', name, join(directives, ' ')], ' ')], '\n');
+  },
 
-  ObjectTypeDefinition: addDescription(function (_ref23) {
-    var name = _ref23.name,
+  ObjectTypeDefinition: function ObjectTypeDefinition(_ref23) {
+    var description = _ref23.description,
+        name = _ref23.name,
         interfaces = _ref23.interfaces,
         directives = _ref23.directives,
         fields = _ref23.fields;
-    return join(['type', name, wrap('implements ', join(interfaces, ' & ')), join(directives, ' '), block(fields)], ' ');
-  }),
+    return join([description, join(['type', name, wrap('implements ', join(interfaces, ', ')), join(directives, ' '), block(fields)], ' ')], '\n');
+  },
 
-  FieldDefinition: addDescription(function (_ref24) {
-    var name = _ref24.name,
+  FieldDefinition: function FieldDefinition(_ref24) {
+    var description = _ref24.description,
+        name = _ref24.name,
         args = _ref24.arguments,
         type = _ref24.type,
         directives = _ref24.directives;
-    return name + wrap('(', join(args, ', '), ')') + ': ' + type + wrap(' ', join(directives, ' '));
-  }),
+    return join([description, name + wrap('(', join(args, ', '), ')') + ': ' + type + wrap(' ', join(directives, ' '))], '\n');
+  },
 
-  InputValueDefinition: addDescription(function (_ref25) {
-    var name = _ref25.name,
+  InputValueDefinition: function InputValueDefinition(_ref25) {
+    var description = _ref25.description,
+        name = _ref25.name,
         type = _ref25.type,
         defaultValue = _ref25.defaultValue,
         directives = _ref25.directives;
-    return join([name + ': ' + type, wrap('= ', defaultValue), join(directives, ' ')], ' ');
-  }),
+    return join([description, join([name + ': ' + type, wrap('= ', defaultValue), join(directives, ' ')], ' ')], '\n');
+  },
 
-  InterfaceTypeDefinition: addDescription(function (_ref26) {
-    var name = _ref26.name,
+  InterfaceTypeDefinition: function InterfaceTypeDefinition(_ref26) {
+    var description = _ref26.description,
+        name = _ref26.name,
         directives = _ref26.directives,
         fields = _ref26.fields;
-    return join(['interface', name, join(directives, ' '), block(fields)], ' ');
-  }),
+    return join([description, join(['interface', name, join(directives, ' '), block(fields)], ' ')], '\n');
+  },
 
-  UnionTypeDefinition: addDescription(function (_ref27) {
-    var name = _ref27.name,
+  UnionTypeDefinition: function UnionTypeDefinition(_ref27) {
+    var description = _ref27.description,
+        name = _ref27.name,
         directives = _ref27.directives,
         types = _ref27.types;
-    return join(['union', name, join(directives, ' '), types && types.length !== 0 ? '= ' + join(types, ' | ') : ''], ' ');
-  }),
+    return join([description, join(['union', name, join(directives, ' '), types && types.length !== 0 ? '= ' + join(types, ' | ') : ''], ' ')], '\n');
+  },
 
-  EnumTypeDefinition: addDescription(function (_ref28) {
-    var name = _ref28.name,
+  EnumTypeDefinition: function EnumTypeDefinition(_ref28) {
+    var description = _ref28.description,
+        name = _ref28.name,
         directives = _ref28.directives,
         values = _ref28.values;
-    return join(['enum', name, join(directives, ' '), block(values)], ' ');
-  }),
+    return join([description, join(['enum', name, join(directives, ' '), block(values)], ' ')], '\n');
+  },
 
-  EnumValueDefinition: addDescription(function (_ref29) {
-    var name = _ref29.name,
+  EnumValueDefinition: function EnumValueDefinition(_ref29) {
+    var description = _ref29.description,
+        name = _ref29.name,
         directives = _ref29.directives;
-    return join([name, join(directives, ' ')], ' ');
-  }),
+    return join([description, join([name, join(directives, ' ')], ' ')], '\n');
+  },
 
-  InputObjectTypeDefinition: addDescription(function (_ref30) {
-    var name = _ref30.name,
+  InputObjectTypeDefinition: function InputObjectTypeDefinition(_ref30) {
+    var description = _ref30.description,
+        name = _ref30.name,
         directives = _ref30.directives,
         fields = _ref30.fields;
-    return join(['input', name, join(directives, ' '), block(fields)], ' ');
-  }),
+    return join([description, join(['input', name, join(directives, ' '), block(fields)], ' ')], '\n');
+  },
 
   ScalarTypeExtension: function ScalarTypeExtension(_ref31) {
     var name = _ref31.name,
@@ -17044,7 +17051,7 @@ var printDocASTReducer = {
         interfaces = _ref32.interfaces,
         directives = _ref32.directives,
         fields = _ref32.fields;
-    return join(['extend type', name, wrap('implements ', join(interfaces, ' & ')), join(directives, ' '), block(fields)], ' ');
+    return join(['extend type', name, wrap('implements ', join(interfaces, ', ')), join(directives, ' '), block(fields)], ' ');
   },
 
   InterfaceTypeExtension: function InterfaceTypeExtension(_ref33) {
@@ -17075,19 +17082,14 @@ var printDocASTReducer = {
     return join(['extend input', name, join(directives, ' '), block(fields)], ' ');
   },
 
-  DirectiveDefinition: addDescription(function (_ref37) {
-    var name = _ref37.name,
+  DirectiveDefinition: function DirectiveDefinition(_ref37) {
+    var description = _ref37.description,
+        name = _ref37.name,
         args = _ref37.arguments,
         locations = _ref37.locations;
-    return 'directive @' + name + wrap('(', join(args, ', '), ')') + ' on ' + join(locations, ' | ');
-  })
+    return join([description, 'directive @' + name + wrap('(', join(args, ', '), ')') + ' on ' + join(locations, ' | ')], '\n');
+  }
 };
-
-function addDescription(cb) {
-  return function (node) {
-    return join([node.description, cb(node)], '\n');
-  };
-}
 
 /**
  * Given maybeArray, print an empty string if it is null or empty, otherwise
@@ -17104,7 +17106,7 @@ function join(maybeArray, separator) {
  * indented "{ }" block.
  */
 function block(array) {
-  return array && array.length !== 0 ? '{\n' + indent(join(array, '\n')) + '\n}' : '';
+  return array && array.length !== 0 ? indent('{\n' + join(array, '\n')) + '\n}' : '';
 }
 
 /**
@@ -17116,7 +17118,7 @@ function wrap(start, maybeString, end) {
 }
 
 function indent(maybeString) {
-  return maybeString && '  ' + maybeString.replace(/\n/g, '\n  ');
+  return maybeString && maybeString.replace(/\n/g, '\n  ');
 }
 
 /**
@@ -17125,8 +17127,7 @@ function indent(maybeString) {
  * a single-line, adding a leading blank line would strip that whitespace.
  */
 function printBlockString(value, isDescription) {
-  var escaped = value.replace(/"""/g, '\\"""');
-  return (value[0] === ' ' || value[0] === '\t') && value.indexOf('\n') === -1 ? '"""' + escaped.replace(/"$/, '"\n') + '"""' : '"""\n' + (isDescription ? escaped : indent(escaped)) + '\n"""';
+  return (value[0] === ' ' || value[0] === '\t') && value.indexOf('\n') === -1 ? '"""' + value.replace(/"""/g, '\\"""') + '"""' : isDescription ? '"""\n' + value.replace(/"""/g, '\\"""') + '\n"""' : indent('"""\n' + value.replace(/"""/g, '\\"""')) + '\n"""';
 }
 
 /***/ }),
@@ -17154,7 +17155,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                                                                                                                                            * This source code is licensed under the MIT license found in the
                                                                                                                                                            * LICENSE file in the root directory of this source tree.
                                                                                                                                                            *
-                                                                                                                                                           *  strict
+                                                                                                                                                           * 
                                                                                                                                                            */
 
 /**
@@ -17208,7 +17209,7 @@ exports.getVisitFn = getVisitFn;
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- *  strict
+ * 
  */
 
 var QueryDocumentKeys = exports.QueryDocumentKeys = {

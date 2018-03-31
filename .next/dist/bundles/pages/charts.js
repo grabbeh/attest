@@ -161,23 +161,16 @@ var Chart = function (_React$Component) {
         };
       });
 
-      var val = __WEBPACK_IMPORTED_MODULE_4_lodash___default.a.values(d).map(function (value, index) {
-        return {
-          x: index,
-          y: value.length
-        };
-      });
-
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
         { className: 'pa3', __source: {
             fileName: _jsxFileName,
-            lineNumber: 34
+            lineNumber: 27
           }
         },
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__styles_Title__["a" /* default */], { text: 'Charts', __source: {
             fileName: _jsxFileName,
-            lineNumber: 35
+            lineNumber: 28
           }
         }),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -190,36 +183,36 @@ var Chart = function (_React$Component) {
             colorType: 'literal',
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 36
+              lineNumber: 29
             }
           },
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_vis__["VerticalGridLines"], {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 43
+              lineNumber: 36
             }
           }),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_vis__["HorizontalGridLines"], {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 44
+              lineNumber: 37
             }
           }),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_vis__["XAxis"], {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 45
+              lineNumber: 38
             }
           }),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_vis__["YAxis"], {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 46
+              lineNumber: 39
             }
           }),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_vis__["VerticalBarSeries"], { data: data, __source: {
               fileName: _jsxFileName,
-              lineNumber: 47
+              lineNumber: 40
             }
           })
         )
@@ -711,15 +704,14 @@ var SlimMenu = function SlimMenu(_ref) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_styled_components__ = __webpack_require__("styled-components");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_styled_components___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_styled_components__);
-var _templateObject = _taggedTemplateLiteral(['\n\n'], ['\n\n']);
-
-function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-
 
 
 var Flex = __WEBPACK_IMPORTED_MODULE_0_styled_components___default.a.div.attrs({
   className: 'flex flex-wrap'
-})(_templateObject);
+}).withConfig({
+  displayName: 'Flex',
+  componentId: 's1m282w4-0'
+})(['']);
 /* harmony default export */ __webpack_exports__["a"] = (Flex);
 
 /***/ }),
@@ -730,15 +722,14 @@ var Flex = __WEBPACK_IMPORTED_MODULE_0_styled_components___default.a.div.attrs({
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_styled_components__ = __webpack_require__("styled-components");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_styled_components___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_styled_components__);
-var _templateObject = _taggedTemplateLiteral(['\ntransform: translateX(', ');\ntransition: transform .3s ease-in;\n'], ['\ntransform: translateX(', ');\ntransition: transform .3s ease-in;\n']);
-
-function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-
 
 
 var MenuAnimation = __WEBPACK_IMPORTED_MODULE_0_styled_components___default.a.div.attrs({
   className: 'ph3 pt4 bg-dark-gray height front fixed'
-})(_templateObject, function (props) {
+}).withConfig({
+  displayName: 'MenuAnimation',
+  componentId: 's11mv09s-0'
+})(['transform:translateX(', ');transition:transform .3s ease-in;'], function (props) {
   return props.showMenu ? '0px' : '-60px';
 });
 
@@ -752,15 +743,14 @@ var MenuAnimation = __WEBPACK_IMPORTED_MODULE_0_styled_components___default.a.di
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_styled_components__ = __webpack_require__("styled-components");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_styled_components___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_styled_components__);
-var _templateObject = _taggedTemplateLiteral(['\n\n'], ['\n\n']);
-
-function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-
 
 
 var PageAnimation = __WEBPACK_IMPORTED_MODULE_0_styled_components___default.a.div.attrs({
   className: 'ml2 ml0-l w-100'
-})(_templateObject);
+}).withConfig({
+  displayName: 'PageAnimation',
+  componentId: 'b8qayj-0'
+})(['']);
 
 // transform: translateX(${props => (props.showMenu ? '60px' : '0px')});
 // transition: transform .3s ease-in;

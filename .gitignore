@@ -37,6 +37,7 @@ package-lock.json
 jspm_packages
 ./next
 /build
+/.next
 
 # Optional npm cache directory
 .npm
