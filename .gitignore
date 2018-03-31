@@ -38,6 +38,7 @@ jspm_packages
 ./next
 /build
 /.next
+.next
 
 # Optional npm cache directory
 .npm
