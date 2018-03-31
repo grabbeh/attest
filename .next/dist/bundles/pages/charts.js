@@ -178,8 +178,8 @@ var Chart = function (_React$Component) {
           {
             className: 'mt3',
             xType: 'ordinal',
-            height: 600,
-            width: 600,
+            height: 300,
+            width: 300,
             colorType: 'literal',
             __source: {
               fileName: _jsxFileName,

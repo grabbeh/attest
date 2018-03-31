@@ -90,7 +90,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "383a48fcf8fe01b344cb"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "09f36e23acdcc1db5bfe"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -755,7 +755,7 @@
 /******/ 		if (__webpack_require__.nc) {
 /******/ 			script.setAttribute("nonce", __webpack_require__.nc);
 /******/ 		}
-/******/ 		script.src = __webpack_require__.p + "" + ({"0":"main.js","1":"bundles/pages/_error.js","3":"bundles/pages/contracts.js","4":"bundles/pages/charts.js"}[chunkId]||chunkId) + "-" + {"0":"013aeea9696a44fa3fe0","1":"3763de13a4559be52569","3":"b21e4133230c98f37178","4":"6f559fdf6279940567c5"}[chunkId] + ".js";
+/******/ 		script.src = __webpack_require__.p + "" + ({"0":"main.js","1":"bundles/pages/_error.js","3":"bundles/pages/contracts.js","4":"bundles/pages/charts.js"}[chunkId]||chunkId) + "-" + {"0":"013aeea9696a44fa3fe0","1":"3763de13a4559be52569","3":"b21e4133230c98f37178","4":"52ab7e5f1dc6a72b3761"}[chunkId] + ".js";
 /******/ 		var timeout = setTimeout(onScriptComplete, 120000);
 /******/ 		script.onerror = script.onload = onScriptComplete;
 /******/ 		function onScriptComplete() {
