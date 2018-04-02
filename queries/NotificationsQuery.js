@@ -2,8 +2,10 @@ import gql from 'graphql-tag'
 
 export default gql`
    {
+
     allNotifications {
       action
+      id
       relatedContract {
         id
         expiryDate
@@ -37,6 +39,7 @@ export default gql`
       }
       relatedUser {
         email
+        name
       }
     }
 }
