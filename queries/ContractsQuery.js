@@ -49,7 +49,10 @@ query {
     color
     checked
   }
-  currentLawyers
+  currentLawyers {
+    name
+    checked
+  }
   masterEntity {
     name
     businessUnits {

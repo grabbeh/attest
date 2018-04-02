@@ -1,7 +1,7 @@
 import { CSSTransition } from 'react-transition-group'
 
 const Fade = ({ children, ...props }) => (
-  <CSSTransition {...props} timeout={1000} classNames='fade'>
+  <CSSTransition {...props} timeout={500} classNames='fade'>
     {children}
   </CSSTransition>
 )

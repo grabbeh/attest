@@ -85,6 +85,7 @@ class Filter extends react.Component {
     const selectedStatuses = this.checked(statuses)
     const selectedBusinessUnits = this.checked(businessUnits)
     const selectedTags = this.checked(tags)
+    const selectedLawyers = this.checked(lawyers)
     const { toggleCheckbox, filters, clearFilters } = this.props
     const { startDate, endDate } = this.state.dateRange
     const selectedDateRange = this.dateRangeCheck(this.state.dateRange)
@@ -140,11 +141,11 @@ class Filter extends react.Component {
         <HideToggle
           toggleFilter={this.toggleFilter}
           activeFilter={activeFilter}
-          filterUsed={false}
+          filterUsed={selectedLawyers}
           show={false}
           title='Lawyers'
         >
-          <CheckboxList
+          <CheckboxListTwo
             error='Please add filters'
             content={lawyers}
             toggleCheckbox={toggleCheckbox}

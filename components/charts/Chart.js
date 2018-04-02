@@ -1,8 +1,7 @@
-import { curveCatmullRom } from 'd3-shape'
 import '../../node_modules/react-vis/dist/style.css'
 import {
   XYPlot,
-  VerticalBarSeries,
+  HorizontalBarSeries,
   VerticalGridLines,
   HorizontalGridLines,
   YAxis,
@@ -16,8 +15,8 @@ export default class Chart extends React.Component {
     let d = _.groupBy(this.props.data.contracts, 'currentStatus.name')
     let data = _.values(d).map((value, index) => {
       return {
-        x: value[0].currentStatus.name,
-        y: value.length,
+        y: value[0].currentStatus.name,
+        x: value.length,
         color: value[0].currentStatus.color,
         opacity: 1
       }
@@ -27,17 +26,18 @@ export default class Chart extends React.Component {
       <div className='pa3'>
         <Title text='Charts' />
         <XYPlot
+          style={{ paddingRight: 80 }}
           className='mt3'
-          xType='ordinal'
-          height={300}
+          yType='ordinal'
+          height={200}
           width={300}
           colorType='literal'
         >
           <VerticalGridLines />
           <HorizontalGridLines />
-          <XAxis />
-          <YAxis />
-          <VerticalBarSeries data={data} />
+          <XAxis style={{ fontSize: 16 }} />
+          <YAxis orientation='right' style={{ fontSize: 16 }} />
+          <HorizontalBarSeries data={data} />
         </XYPlot>
       </div>
     )

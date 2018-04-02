@@ -1,6 +1,8 @@
+import Spinner from 'react-svg-spinner'
+
 const Loading = () => (
-  <div className='f4 b center tc bg-light-gray mw5 pa3 mt5'>
-    Loading...
+  <div className='b mt5 center tc'>
+    <Spinner thickness={4} size='80px' />
   </div>
 )
 

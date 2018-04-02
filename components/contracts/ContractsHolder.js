@@ -88,7 +88,7 @@ class ContractsHolder extends react.Component {
       },
       tags: this.props.currentTags,
       businessUnits: this.props.currentBusinessUnits,
-      lawyers: [],
+      lawyers: this.props.currentLawyers,
       selectedDateOption: 'GENERAL'
     }
     this.setState({ filters })
@@ -121,7 +121,7 @@ class ContractsHolder extends react.Component {
     lawyers = lawyers.map(l => {
       return {
         checked: l.checked,
-        name: l,
+        name: l.name,
         type: 'lawyer',
         category: 'lawyers'
       }
