@@ -8,22 +8,46 @@ import _ from 'lodash'
 class Notification extends Component {
   render () {
     let { notification } = this.props
-    let { relatedUser, action } = notification
+    let { relatedUser, action, changes, relatedContract } = notification
+    console.log(notification)
 
     return (
       <div className='pa3 f4 mr3 mb3 bg-light-gray'>
         <div>{`${relatedUser.name} ${action}`}</div>
+        <div>{relatedContract.externalParties[0]}</div>
+        <div>
+          {changes.map(c => (
+            <div>
+              <div>{c.attr}</div><div>{c.added} {c.removed} </div>
+              {c.addedObject &&
+                c.addedObject.color &&
+                <div
+                  className='pa2 white'
+                  style={{ background: c.addedObject.color }}
+                >
+                  {c.addedObject.name}
+                </div>}
+              <div>{c.removedObject && c.removedObject.name}</div>
 
+            </div>
+          ))}
+        </div>
         <div>Go to contract</div>
         <Mutation
           mutation={UPDATE_NOTIFICATION_MUTATION}
           update={(cache, { data: { updateNotification } }) => {
-            const data = cache.readQuery({ query: NOTIFICATIONS_QUERY })
-            let copy = data.allNotifications
+            const { allNotifications } = cache.readQuery({
+              query: NOTIFICATIONS_QUERY
+            })
             let { id } = updateNotification
-            const revisedNotifications = _.without(copy, _.find(copy, { id }))
-            data.allNotifications = revisedNotifications
-            cache.writeQuery({ query: NOTIFICATIONS_QUERY, data })
+            const revised = _.without(
+              allNotifications,
+              _.find(allNotifications, { id })
+            )
+            cache.writeQuery({
+              query: NOTIFICATIONS_QUERY,
+              data: { allNotifications: revised }
+            })
           }}
         >
           {(updateNotification, { data }) => (

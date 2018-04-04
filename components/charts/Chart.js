@@ -9,8 +9,9 @@ import {
 } from 'react-vis'
 import _ from 'lodash'
 import Title from '../styles/Title'
+import { Component } from 'react'
 
-export default class Chart extends React.Component {
+class Chart extends Component {
   render () {
     let d = _.groupBy(this.props.data.contracts, 'currentStatus.name')
     let data = _.values(d).map((value, index) => {
@@ -43,3 +44,5 @@ export default class Chart extends React.Component {
     )
   }
 }
+
+export default Chart

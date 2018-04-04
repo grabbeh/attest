@@ -5,6 +5,22 @@ export default gql`
 
     allNotifications {
       action
+      createdAt
+      changes {
+        attr
+        addedObject {
+          name
+          color
+          date
+        }
+        removedObject {
+          name
+          color
+          date
+        }
+        added
+        removed
+      }
       id
       relatedContract {
         id
