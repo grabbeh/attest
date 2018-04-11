@@ -8,14 +8,22 @@ class HideToggle extends React.Component {
   }
 
   render () {
-    let { title, children, filterUsed, toggleFilter, activeFilter } = this.props
+    let {
+      title,
+      icon,
+      children,
+      filterUsed,
+      toggleFilter,
+      activeFilter
+    } = this.props
     return (
       <div>
-        <div onClick={this.setFilter} className='mb2 pointer mr2'>
+        <div onClick={this.setFilter} className='mb3 mb2-ns pointer mr2'>
           <span
             className={cn(filterUsed && 'bg-light-gray', 'ph3', 'pv2', 'f4')}
           >
-            {title}
+            <span className='mr2'><i className={icon} /></span>
+            <span>{title}</span>
           </span>
         </div>
 

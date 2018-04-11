@@ -98,13 +98,16 @@ class Filter extends react.Component {
 
     return (
       <Flex>
-        <div className='b f4 mr3'>Filters</div>
+        <div className='b f4 mr3'>
+          <i className='mr3 fa fa-filter' />Filters
+        </div>
         <HideToggle
           toggleFilter={this.toggleFilter}
           activeFilter={activeFilter}
           filterUsed={selectedStatuses}
           show={false}
           title='Statuses'
+          icon='fa fa-signal'
         >
           <CheckboxListTwo
             error='Please add filters'
@@ -117,6 +120,7 @@ class Filter extends react.Component {
           activeFilter={activeFilter}
           filterUsed={selectedTags}
           show={false}
+          icon='fa fa-tag'
           title='Tags'
         >
           <CheckboxListTwo
@@ -131,6 +135,7 @@ class Filter extends react.Component {
           filterUsed={selectedBusinessUnits}
           show={false}
           title='Business Units'
+          icon='fa fa-building-o'
         >
           <CheckboxListTwo
             error='Please add filters'
@@ -143,6 +148,7 @@ class Filter extends react.Component {
           activeFilter={activeFilter}
           filterUsed={selectedLawyers}
           show={false}
+          icon='fa fa-id-card-o'
           title='Lawyers'
         >
           <CheckboxListTwo
@@ -157,6 +163,7 @@ class Filter extends react.Component {
           filterUsed={selectedDateRange}
           show={false}
           title='Dates'
+          icon='fa fa-calendar'
         >
           <div className='pl3 fl mt3'>
             <Radio

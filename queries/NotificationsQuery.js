@@ -8,18 +8,18 @@ export default gql`
       createdAt
       changes {
         attr
-        addedObject {
+        added {
           name
           color
           date
+          email
         }
-        removedObject {
+        removed {
           name
           color
           date
+          email
         }
-        added
-        removed
       }
       id
       relatedContract {
