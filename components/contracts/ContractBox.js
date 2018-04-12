@@ -1,6 +1,6 @@
 import DeleteButton from './DeleteButton'
+import FavouriteButton from './FavouriteButton'
 import EditContractContainer from '../../modals/EditContractContainer'
-import Moment from 'react-moment'
 import React from 'react'
 import _ from 'lodash'
 import cn from 'classnames'
@@ -41,7 +41,8 @@ class Contract extends React.Component {
       currentStatus,
       businessUnit,
       assignedTo,
-      statuses
+      statuses,
+      favourite
     } = this.props.contract
 
     let latestDate = _.last(statuses).date
@@ -86,7 +87,7 @@ class Contract extends React.Component {
             </li>
             <li className='fl mr2 '><DeleteButton id={id} /></li>
             <li className='fl mr2'>
-              <i className='fa fa-eye fa-lg' />
+              <FavouriteButton favourite={favourite} id={id} />
             </li>
             <li className='fl'><i className='fa fa-plus-square fa-lg' /></li>
           </ul>

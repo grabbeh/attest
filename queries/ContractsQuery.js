@@ -32,6 +32,7 @@ query {
       email
       id
     }
+    favourite
     
   }
   currentTags {

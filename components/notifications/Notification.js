@@ -1,21 +1,32 @@
 import { Component } from 'react'
-
-import _ from 'lodash'
+import Moment from 'react-moment'
 import ClearFix from '../styles/ClearFix'
 import DeleteNotification from './DeleteNotification'
 
 class Notification extends Component {
   render () {
     let { notification } = this.props
-    let { relatedUser, action, changes, relatedContract } = notification
+    let {
+      relatedUser,
+      createdAt,
+      action,
+      changes,
+      relatedContract
+    } = notification
     console.log(notification)
 
     return (
       <div className='pa3 f4 mr3 mb3 bg-light-gray'>
         <div>
-          <div className='fr'>
+          <div className='fl'>
+            <i className='fa fa-bell' /> <div className='fr ml3'>
+              <Moment format='DD MMMM YYYY'>{createdAt}</Moment>
+            </div>
+          </div>
+          <div className='mb3 fr'>
             <DeleteNotification notification={notification} />
           </div>
+          <ClearFix />
           <div className='fl pv2 ph3 bg-blue white'>{relatedUser.name}</div>
           <div className='fl'>{` `}</div>
           <div className='fl pv2 bg-light-yellow ph3 black mh3'>

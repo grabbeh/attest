@@ -2,6 +2,7 @@ import { Mutation } from 'react-apollo'
 import UPDATE_NOTIFICATION_MUTATION
   from '../../queries/UpdateNotificationMutation'
 import NOTIFICATIONS_QUERY from '../../queries/NotificationsQuery'
+import _ from 'lodash'
 
 const DeleteNotification = ({ notification }) => (
   <Mutation

@@ -1,41 +1,27 @@
-import withData from '../lib/withData'
-import withUser from '../lib/withUser'
-import { graphql } from 'react-apollo'
-import { Component } from 'react'
-import gql from 'graphql-tag'
-import Link from 'next/link'
-import { Page, UserPage } from '../components/Page'
+import React, { Component } from 'react'
+import TestProvider from '../lib/TestProvider'
+import { Consumer } from '../lib/Context'
 
-const DATA_QUERY = gql`
-  query  {
-    thing
-    masterEntity {
-      id
-    }
-}
-`
-
-const TestPageWithData = withData(props => <TestPageWithQuery {...props} />)
-
-class TestComponent extends Component {
-  constructor (props) {
-    super(props)
-    console.log(props)
-  }
-
+class TestConsumer extends Component {
   render () {
     return (
-      <div className='height blue'>
-        <Link href='/test-two'><a>Link</a></Link>
-      </div>
+      <TestProvider>
+        <Test />
+      </TestProvider>
     )
   }
 }
 
-const TestPageWithQuery = graphql(DATA_QUERY, {
-  props: ({ data }) => ({
-    data
-  })
-})(TestComponent)
+class Test extends Component {
+  render () {
+    return (
+      <Consumer>
+        {context => {
+          console.log(context)
+        }}
+      </Consumer>
+    )
+  }
+}
 
-export default TestPageWithData
+export default TestConsumer
