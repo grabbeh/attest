@@ -32,6 +32,7 @@ mutation updateContract($contract: PostContractWithID) {
       email
       id
     }
+    favourite
   }
 }
 `
