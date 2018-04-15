@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 
 export default gql`
    {
-    allNotifications {
+    activeNotifications {
       action
       createdAt
       changes {
@@ -21,6 +21,7 @@ export default gql`
         }
       }
       id
+      unseen
       relatedContract {
         id
         expiryDate

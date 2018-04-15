@@ -1,33 +1,33 @@
 import { Mutation } from 'react-apollo'
-import UPDATE_NOTIFICATION_MUTATION
-  from '../../queries/UpdateNotificationMutation'
-import NOTIFICATIONS_QUERY from '../../queries/NotificationsQuery'
+import DEACTIVATE_NOTIFICATION_MUTATION
+  from '../../queries/DeactivateNotificationMutation'
+import ACTIVE_NOTIFICATIONS_QUERY from '../../queries/ActiveNotificationsQuery'
 import _ from 'lodash'
 
 const DeleteNotification = ({ id }) => (
   <Mutation
-    mutation={UPDATE_NOTIFICATION_MUTATION}
-    update={(cache, { data: { updateNotification } }) => {
-      const { allNotifications } = cache.readQuery({
-        query: NOTIFICATIONS_QUERY
+    mutation={DEACTIVATE_NOTIFICATION_MUTATION}
+    update={(cache, { data: { deactivateNotification } }) => {
+      const { activeNotifications } = cache.readQuery({
+        query: ACTIVE_NOTIFICATIONS_QUERY
       })
-      let { id } = updateNotification
+      let { id } = deactivateNotification
       const revised = _.without(
-        allNotifications,
-        _.find(allNotifications, { id })
+        activeNotifications,
+        _.find(activeNotifications, { id })
       )
       cache.writeQuery({
-        query: NOTIFICATIONS_QUERY,
-        data: { allNotifications: revised }
+        query: ACTIVE_NOTIFICATIONS_QUERY,
+        data: { activeNotifications: revised }
       })
     }}
   >
-    {(updateNotification, { data }) => (
+    {(deactivateNotification, { data }) => (
       <div
         onClick={e => {
           console.log(id)
           e.preventDefault()
-          updateNotification({ variables: { id } })
+          deactivateNotification({ variables: { id } })
         }}
       >
         <i className='fa fa-times' />

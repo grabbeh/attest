@@ -7,7 +7,7 @@ export default gql`
       email
       favourites
     }
-    allNotifications {
+    unseenNotifications {
       action
     }
   }

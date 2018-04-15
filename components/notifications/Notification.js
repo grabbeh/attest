@@ -3,6 +3,7 @@ import Moment from 'react-moment'
 import ClearFix from '../styles/ClearFix'
 import DeleteNotification from './DeleteNotification'
 import FavouriteButton from '../contracts/FavouriteButton'
+import cn from 'classnames'
 
 class Notification extends Component {
   render () {
@@ -12,12 +13,24 @@ class Notification extends Component {
       action,
       changes,
       relatedContract,
-      id
+      id,
+      unseen
     } = this.props
     let { favourite } = relatedContract
     return (
-      <div className='pa3 f4 mt3 mr3 bg-light-gray'>
+      <div
+        className={cn(
+          unseen && 'bg-light-yellow',
+          'pa3',
+          'f4',
+          'mt3',
+          'mr3',
+          'bg-light-gray'
+        )}
+      >
         <div>
+          {unseen && <div className='mb2 bg-red b pa2 white fl'>New!</div>}
+          <ClearFix />
           <div className='overflow-auto pv2 bb bw1 b--black-20'>
             <i className='fl fa fa-bell' />
             <div className='fl ml3'>
@@ -26,6 +39,7 @@ class Notification extends Component {
             <div className='ml3 fl'>
               <FavouriteButton favourite={favourite} id={relatedContract.id} />
             </div>
+
             <div className='fr'>
               <DeleteNotification id={id} />
             </div>
@@ -76,7 +90,7 @@ class Notification extends Component {
                     className='fl white bg-blue pv2 ph3 tc mr2'
                     style={{ background: c.added.color }}
                   >
-                    {c.added.name}s
+                    {c.added.name}
                   </div>
                   <ClearFix />
                 </div>}
