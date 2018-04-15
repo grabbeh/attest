@@ -7,5 +7,8 @@ export default gql`
       email
       favourites
     }
+    allNotifications {
+      action
+    }
   }
 `

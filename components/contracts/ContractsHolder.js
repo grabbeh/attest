@@ -150,28 +150,22 @@ class ContractsHolder extends react.Component {
     }
     return (
       <div className='pa3-ns pa0 pt3'>
-        <FadeRightDiv>
-          <Title name={name} />
-          <Filter
-            filters={filters}
-            toggleCheckbox={this.toggleCheckbox}
-            clearFilters={this.clearFilters}
-            setDate={this.setDate}
-            selectDateOption={this.selectDateOption}
-          />
-          <SearchInput
-            handleSearchInput={this.handleSearchInput}
-            searchTerm={this.state.searchTerm}
-            clear={this.clearSearchTerm}
-          />
-          <ClearFix />
-          <SummaryBox contracts={filteredContracts} filters={filters} />
-          <ContractsList
-            contracts={filteredContracts}
-            masterEntity={this.props.masterEntity}
-            allUsers={this.props.allUsers}
-          />
-        </FadeRightDiv>
+        <Title name={name} />
+        <Filter
+          filters={filters}
+          toggleCheckbox={this.toggleCheckbox}
+          clearFilters={this.clearFilters}
+          setDate={this.setDate}
+          selectDateOption={this.selectDateOption}
+        />
+        <SearchInput
+          handleSearchInput={this.handleSearchInput}
+          searchTerm={this.state.searchTerm}
+          clear={this.clearSearchTerm}
+        />
+        <ClearFix />
+        <SummaryBox contracts={filteredContracts} filters={filters} />
+        <ContractsList contracts={filteredContracts} />
       </div>
     )
   }

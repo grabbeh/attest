@@ -4,7 +4,7 @@ import UPDATE_NOTIFICATION_MUTATION
 import NOTIFICATIONS_QUERY from '../../queries/NotificationsQuery'
 import _ from 'lodash'
 
-const DeleteNotification = ({ notification }) => (
+const DeleteNotification = ({ id }) => (
   <Mutation
     mutation={UPDATE_NOTIFICATION_MUTATION}
     update={(cache, { data: { updateNotification } }) => {
@@ -25,11 +25,12 @@ const DeleteNotification = ({ notification }) => (
     {(updateNotification, { data }) => (
       <div
         onClick={e => {
+          console.log(id)
           e.preventDefault()
-          updateNotification({ variables: { id: notification.id } })
+          updateNotification({ variables: { id } })
         }}
       >
-        <i className='fa fa-times fa-lg' />
+        <i className='fa fa-times' />
       </div>
     )}
 

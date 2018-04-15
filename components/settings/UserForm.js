@@ -6,7 +6,7 @@ import FormButton from '../styles/FormButton'
 import DeleteCheckbox from '../general/DeleteCheckbox'
 import _ from 'lodash'
 import ClearFix from '../styles/ClearFix'
-import ContractHolder from '../contracts/ContractHolder'
+import UserHolder from './UserHolder'
 import { TransitionGroup } from 'react-transition-group'
 import LawyerName from '../contracts/Lawyer'
 import Fade from '../styles/FadeTransition'
@@ -74,16 +74,13 @@ class UserForm extends Component {
     let { email, name } = user
     return (
       <div>
-        <div className='pv2'>
-          <Title text='Summary' />
-          <div className='mv2 f4'>{users.length} users</div>
-        </div>
+        <div className='pv2 f4 b'>{`${users.length} users`}</div>
         <TransitionGroup className='flex flex-wrap list pa0 ma0'>
           {users &&
             users.map((b, i) => (
               <Fade key={i}>
-                <div className='mb3 w-50-ns w-25-l w-100'>
-                  <ContractHolder>
+                <div className='mb3 w-50-ns w-50-l w-100'>
+                  <UserHolder>
                     <div key={i} index={i}>
                       <i className='mr2 fa fa-envelope' />
                       {b.email}
@@ -91,12 +88,12 @@ class UserForm extends Component {
                       <ul className='fr list pa0 mt2'>
                         <li className='fl mr2'>
                           <button
-                            className='bg-light-gray f6 link dim ph0 dib'
+                            className='f6 link bg-dark-gray dim ph0 dib'
                             onClick={() => {
                               this.editUser(b)
                             }}
                           >
-                            <i className='pointer fa fa-pencil fa-lg' />
+                            <i className='bg-dark-gray gray pointer fa fa-pencil fa-lg' />
                           </button>
 
                         </li>
@@ -110,7 +107,7 @@ class UserForm extends Component {
                         </li>
                       </ul>
                     </div>
-                  </ContractHolder>
+                  </UserHolder>
                 </div>
               </Fade>
             ))}

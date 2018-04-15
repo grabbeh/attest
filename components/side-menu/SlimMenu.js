@@ -1,5 +1,6 @@
 import React from 'react'
 import MenuItem from './MenuItem'
+import { Consumer } from '../../lib/Context'
 
 const SlimMenu = ({ selectedUrl }) => (
   <div>
@@ -20,11 +21,13 @@ const SlimMenu = ({ selectedUrl }) => (
         url='/settings'
         icon='fa fa-cog fa-lg'
       />
+
       <MenuItem
         selectedUrl={selectedUrl}
         url='/notifications'
         icon='fa fa-bell-o fa-lg'
       />
+
       <MenuItem
         selectedUrl={selectedUrl}
         url='/charts'

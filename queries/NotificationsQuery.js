@@ -2,7 +2,6 @@ import gql from 'graphql-tag'
 
 export default gql`
    {
-
     allNotifications {
       action
       createdAt
@@ -52,6 +51,7 @@ export default gql`
           email
           id
         }
+        favourite
       }
       relatedUser {
         email

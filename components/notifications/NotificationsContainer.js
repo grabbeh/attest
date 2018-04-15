@@ -15,20 +15,4 @@ const NotificationsContainer = () => (
   </Query>
 )
 
-/*
-const UpdateNotificationMutation = graphql(UPDATE_NOTIFICATION_MUTATION, {
-  props ({ mutate }) {
-    return {
-      updateNotification (id) {
-        return mutate({
-          variables: { id },
-          update: (store, response) => {
-            // redirect({}, '/contracts')
-          }
-        })
-      }
-    }
-  }
-}) */
-
 export default NotificationsContainer

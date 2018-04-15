@@ -5,16 +5,16 @@ import { graphql, compose } from 'react-apollo'
 import AddContractForm from './AddContract'
 import Loading from '../general/Loading'
 import redirect from '../../lib/Redirect'
-import CenterBox from '../styles/CenterBox'
+import WideCenterBox from '../styles/WideCenterBox'
 import FadeRightDiv from '../styles/FadeRightDiv'
 
 const AddContractContainer = props => {
   if (!props.loading) {
     return (
       <FadeRightDiv>
-        <CenterBox>
+        <WideCenterBox>
           <AddContractForm title='Add Contract' {...props} />
-        </CenterBox>
+        </WideCenterBox>
       </FadeRightDiv>
     )
   }

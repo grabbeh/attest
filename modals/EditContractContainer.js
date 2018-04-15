@@ -1,12 +1,15 @@
 import UPDATE_CONTRACT_MUTATION from '../queries/UpdateContractMutation'
 import CONTRACTS_QUERY from '../queries/ContractsQuery'
-import { graphql, compose } from 'react-apollo'
+import { graphql, compose, Query } from 'react-apollo'
 import AddContractForm from '../components/add-contract/AddContract'
 import Loading from '../components/general/Loading'
 import Modal from 'react-modal'
 import Box from '../components/styles/Box'
 import _ from 'lodash'
 import FadeRightDiv from '../components/styles/FadeRightDiv'
+import EDIT_CONTRACT_QUERY from '../queries/EditContractQuery'
+
+if (process.browser) Modal.setAppElement('body')
 
 const EditContractContainer = props => {
   if (!props.loading) {
@@ -19,15 +22,25 @@ const EditContractContainer = props => {
           isOpen={props.isOpen}
         >
           <Box>
-            <AddContractForm
-              closeModal={props.closeModal}
-              isOpen={props.isOpen}
-              allUsers={props.allUsers}
-              masterEntity={props.masterEntity}
-              contract={props.contract}
-              title='Edit Contract'
-              handleContract={props.handleContract}
-            />
+            {props.isOpen
+              ? <Query query={EDIT_CONTRACT_QUERY}>
+                {({ loading, error, data: { masterEntity, allUsers } }) => {
+                  if (loading) return <Loading />
+                  if (error) return 'Error'
+                  return (
+                    <AddContractForm
+                      closeModal={props.closeModal}
+                      isOpen={props.isOpen}
+                      allUsers={allUsers}
+                      masterEntity={masterEntity}
+                      contract={props.contract}
+                      title='Edit Contract'
+                      handleContract={props.handleContract}
+                      />
+                  )
+                }}
+              </Query>
+              : null}
           </Box>
         </Modal>
       </FadeRightDiv>

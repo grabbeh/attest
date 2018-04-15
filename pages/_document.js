@@ -195,6 +195,26 @@ export default class MyDocument extends Document {
                 overflow: auto;
                 WebkitOverflowScrolling: touch;
                 outline: none;
+                marginRight: '-50%',
+                transform: 'translate(-50%, -50%)'
+              }
+
+              .bell {
+                left: -25px;
+              }
+
+              .notification {
+                left: -10px;
+                position: absolute;
+                color: white;
+                height: 12px;
+                width: 12px;
+                font-size: 13px;
+                top: -6px;
+                background: #7676ff;
+                z-index: 999;
+                padding: 2px;
+                line-height: 12px;
               }
 
               .fc-blue {
