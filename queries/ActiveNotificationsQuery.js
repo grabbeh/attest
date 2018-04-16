@@ -24,35 +24,8 @@ export default gql`
       unseen
       relatedContract {
         id
-        expiryDate
-        effectiveDate
-        executionDate
-        internalParties
-        externalParties
-        statuses {
-          name
-          color
-          date
-        }
-        tags {
-          name
-          color
-        }
-        businessUnit {
-          name
-          color
-        }
-        currentStatus {
-          name
-          color
-          date
-        }
-        assignedTo {
-          name
-          email
-          id
-        }
         favourite
+        externalParties
       }
       relatedUser {
         email

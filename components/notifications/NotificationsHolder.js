@@ -8,9 +8,8 @@ class NotificationsHolder extends Component {
     return (
       <div className='pa3-ns mw7 w-100 center pa0 pt3'>
         <Title text='Notifications' />
-        {!this.props.activeNotifications.length > 0 &&
-          <Text>No notifications!</Text>}
-        {this.props.activeNotifications.map((notification, index) => (
+        {!this.props.notifications.length > 0 && <Text>No notifications!</Text>}
+        {this.props.notifications.map((notification, index) => (
           <Notification key={index} {...notification} />
         ))}
       </div>

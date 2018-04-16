@@ -81,15 +81,17 @@ class Contract extends React.Component {
                   isOpen={this.state.modalIsOpen}
                   closeModal={this.closeModal}
                   contract={this.state.editableContract}
-                  masterEntity={masterEntity}
-                  allUsers={allUsers}
                 />}
             </li>
             <li className='fl mr2 '><DeleteButton id={id} /></li>
             <li className='fl mr2'>
               <FavouriteButton favourite={favourite} id={id} />
             </li>
-            <li className='fl'><i className='fa fa-plus-square fa-lg' /></li>
+            <li className='fl'>
+              <Link href={`/contract?id=${id}`}>
+                <a><i className='dark-gray fa fa-plus-square fa-lg' /></a>
+              </Link>
+            </li>
           </ul>
         </div>
         <div className='cf' />

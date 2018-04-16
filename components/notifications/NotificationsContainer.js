@@ -10,7 +10,11 @@ const NotificationsContainer = () => (
     {({ loading, error, data }) => {
       if (loading) return <Loading />
       if (error) return 'Error'
-      return <FadeRightDiv><NotificationsHolder {...data} /></FadeRightDiv>
+      return (
+        <FadeRightDiv>
+          <NotificationsHolder notifications={data.activeNotifications} />
+        </FadeRightDiv>
+      )
     }}
   </Query>
 )

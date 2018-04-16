@@ -6,7 +6,6 @@ import redirect from '../../lib/Redirect'
 import cookie from 'cookie'
 import { Component } from 'react'
 import ClearFix from '../styles/ClearFix'
-import HeaderBar from './HeaderBar'
 
 class LandingPage extends Component {
   logout = () => {
@@ -19,14 +18,6 @@ class LandingPage extends Component {
     return (
       <div className='bg-light-peach'>
         <div className='mh6-l mh3'>
-          <div className='pt4 f3'>
-            <div className='fl b dark-gray'>
-              attest
-            </div>
-            <div className='fr'>
-              <HeaderBar user={this.props.user} logout={this.logout} />
-            </div>
-          </div>
           <ClearFix />
           <div className='mt5'>
             <div className='f2 b dark-gray'>

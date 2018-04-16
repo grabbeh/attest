@@ -1,6 +1,6 @@
 import LoginForm from '../components/login-form/LoginForm'
-import { UserPage } from '../components/Page'
+import { UserRedirectPage } from '../components/Page'
 
-const LoginPage = UserPage(props => <LoginForm {...props} />)
+const LoginPage = UserRedirectPage(props => <LoginForm {...props} />)
 
 export default LoginPage

@@ -3,10 +3,13 @@ import Moment from 'react-moment'
 import ClearFix from '../styles/ClearFix'
 import DeleteNotification from './DeleteNotification'
 import FavouriteButton from '../contracts/FavouriteButton'
+import { expanded, icon } from '../../lib/convertNotificationText'
 import cn from 'classnames'
+import Link from 'next/link'
 
 class Notification extends Component {
   render () {
+    console.log(this.props)
     let {
       relatedUser,
       createdAt,
@@ -39,32 +42,41 @@ class Notification extends Component {
             <div className='ml3 fl'>
               <FavouriteButton favourite={favourite} id={relatedContract.id} />
             </div>
-
             <div className='fr'>
               <DeleteNotification id={id} />
             </div>
           </div>
           <ClearFix />
           <div className='overflow-auto mt3'>
-            <div className='fl pv2 ph3 bg-blue white'>{`${relatedUser.name} `}</div>
-            <div className='fl pv2 bg-light-yellow ph3 black mh3'>
-              {`${action} `}
+            <div className='fl pv2 ph3 bg-blue white'>
+              <i className='white fa fa-id-card mr2' />{relatedUser.name}
+            </div>
+            <div className='fl pv2 bg-gold ph3 black mh3'>
+              {action}
             </div>
             <div className='fl pr2 pv2'>for</div>
             <div className='fl pv2 ph3 bg-dark-gray white'>
+              <i className='white fa fa-file mr2  ' />
               {relatedContract.externalParties[0]}
             </div>
           </div>
         </div>
         <ClearFix />
-        <ul className='mb3 list ma0 pa0'>
-          <div className='mt2 b'>Changes</div>
+        <div className='fl ph3 pv2 bg-light-green mt3 b'>
+          <i className='fa fa-pencil mr2 dark-gray' />Changes
+        </div>
+        <ClearFix />
+        <ul className='overflow-auto mb3 list ma0 pa0'>
           {changes.map((c, i) => (
             <li className='f4 overflow-auto' key={i}>
-              <div className='pv2 b'>{c.attr}</div>
+              <div className='overflow-auto mv2'>
+                <i className={icon(c.attr)} />
+                <div className='fl pv2 b'>{expanded(c.attr)}</div>
+              </div>
+              <ClearFix />
               {c.removed &&
                 c.removed.name &&
-                <div>
+                <div className='ml3 pl2'>
                   {c.attr === 'tags' &&
                     !c.added &&
                     <i className='fl dark-gray mr2 mt2 fa fa-minus' />}
@@ -82,7 +94,7 @@ class Notification extends Component {
                 </div>}
               {c.added &&
                 c.added.name &&
-                <div>
+                <div className='ml3 pl2'>
                   {c.attr === 'tags' &&
                     !c.removed &&
                     <i className='fl dark-gray mr2 mt2 fa fa-plus' />}
@@ -98,7 +110,11 @@ class Notification extends Component {
           ))}
         </ul>
         <ClearFix />
-        <div>Go to contract</div>
+        <div>
+          <Link href={`/contract?id=${relatedContract.id}`}>
+            <a><i className='dark-gray fa fa-file' /></a>
+          </Link>
+        </div>
       </div>
     )
   }
