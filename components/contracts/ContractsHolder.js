@@ -12,7 +12,6 @@ import Loading from '../general/Loading'
 import HideToggle from '../general/Hide'
 import cn from 'classnames'
 import FadeRightDiv from '../styles/FadeRightDiv'
-import PageAnimation from '../styles/PageAnimation'
 import ClearFix from '../styles/ClearFix'
 
 class ContractsHolder extends react.Component {
