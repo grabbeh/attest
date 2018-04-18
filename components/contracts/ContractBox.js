@@ -67,8 +67,8 @@ class Contract extends React.Component {
           {tags ? <TagList tags={tags} /> : null}
           <div className='cf' />
         </div>
-        <div>
-          <ul className='fr list pa0 mt2'>
+        <div className='relative'>
+          <ul className='abolute bottom-1 right-1 fr list pa0 mt2'>
             <li className='fl mr2'>
               <button
                 className='bg-light-gray f6 link dim ph0 dib'
@@ -89,7 +89,7 @@ class Contract extends React.Component {
             </li>
             <li className='fl'>
               <Link href={`/contract?id=${id}`}>
-                <a><i className='dark-gray fa fa-plus-square fa-lg' /></a>
+                <a><i className='dark-gray dim fa fa-file' /></a>
               </Link>
             </li>
           </ul>

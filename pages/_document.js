@@ -203,6 +203,8 @@ export default class MyDocument extends Document {
                 left: -25px;
               }
 
+              .ml8 { margin-left: 350px;}
+
               .notification {
                 left: -10px;
                 position: absolute;

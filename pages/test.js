@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import TestProvider from '../lib/TestProvider'
 import { Consumer } from '../lib/Context'
+import Loading from '../components/general/Loading'
 
 class TestConsumer extends Component {
   render () {
@@ -16,9 +17,7 @@ class Test extends Component {
   render () {
     return (
       <Consumer>
-        {context => {
-          console.log(context)
-        }}
+        {context => <Loading />}
       </Consumer>
     )
   }

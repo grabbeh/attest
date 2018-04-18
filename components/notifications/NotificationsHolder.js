@@ -10,7 +10,7 @@ class NotificationsHolder extends Component {
         <Title text='Notifications' />
         {!this.props.notifications.length > 0 && <Text>No notifications!</Text>}
         {this.props.notifications.map((notification, index) => (
-          <Notification key={index} {...notification} />
+          <Notification key={index} deleteButton {...notification} />
         ))}
       </div>
     )

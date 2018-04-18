@@ -14,8 +14,8 @@ const UserHolder = ({ children, index }) => (
       'pa3',
       'overflow-hidden',
       'h-100',
-      'bg-dark-gray',
-      'gray'
+      'bg-white',
+      'dark-gray'
     )}
   >
     {children}

@@ -88,12 +88,12 @@ class UserForm extends Component {
                       <ul className='fr list pa0 mt2'>
                         <li className='fl mr2'>
                           <button
-                            className='f6 link bg-dark-gray dim ph0 dib'
+                            className='f6 link bg-white dim ph0 dib'
                             onClick={() => {
                               this.editUser(b)
                             }}
                           >
-                            <i className='bg-dark-gray gray pointer fa fa-pencil fa-lg' />
+                            <i className='bg-white dark-gray pointer fa fa-pencil fa-lg' />
                           </button>
 
                         </li>

@@ -9,7 +9,6 @@ import Link from 'next/link'
 
 class Notification extends Component {
   render () {
-    console.log(this.props)
     let {
       relatedUser,
       createdAt,
@@ -17,7 +16,8 @@ class Notification extends Component {
       changes,
       relatedContract,
       id,
-      unseen
+      unseen,
+      deleteButton
     } = this.props
     let { favourite } = relatedContract
     return (
@@ -26,7 +26,8 @@ class Notification extends Component {
           unseen && 'bg-light-yellow',
           'pa3',
           'f4',
-          'mt3',
+          'mb3',
+          'mt2',
           'mr3',
           'bg-light-gray'
         )}
@@ -42,19 +43,30 @@ class Notification extends Component {
             <div className='ml3 fl'>
               <FavouriteButton favourite={favourite} id={relatedContract.id} />
             </div>
-            <div className='fr'>
-              <DeleteNotification id={id} />
-            </div>
+            {deleteButton &&
+              <div className='fr'>
+                <DeleteNotification id={id} />
+              </div>}
           </div>
           <ClearFix />
           <div className='overflow-auto mt3'>
             <div className='fl pv2 ph3 bg-blue white'>
               <i className='white fa fa-id-card mr2' />{relatedUser.name}
             </div>
-            <div className='fl pv2 bg-gold ph3 black mh3'>
+            <div
+              className={cn(
+                action === 'updated contract' && 'bg-red',
+                'fl',
+                'pv2',
+                'bg-gold',
+                'ph3',
+                'black',
+                'mh3'
+              )}
+            >
               {action}
             </div>
-            <div className='fl pr2 pv2'>for</div>
+            <div className='fl mr3 pv2'>for</div>
             <div className='fl pv2 ph3 bg-dark-gray white'>
               <i className='white fa fa-file mr2  ' />
               {relatedContract.externalParties[0]}
@@ -110,11 +122,13 @@ class Notification extends Component {
           ))}
         </ul>
         <ClearFix />
-        <div>
-          <Link href={`/contract?id=${relatedContract.id}`}>
-            <a><i className='dark-gray fa fa-file' /></a>
-          </Link>
-        </div>
+        {deleteButton &&
+          <div>
+
+            <Link href={`/contract?id=${relatedContract.id}`}>
+              <a><i className='dark-gray fa fa-file' /></a>
+            </Link>
+          </div>}
       </div>
     )
   }

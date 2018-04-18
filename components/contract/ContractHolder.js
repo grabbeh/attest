@@ -9,12 +9,11 @@ import TabList from '../general/TabList'
 
 const ContractHolder = ({ contract, notificationsForContract }) => (
   <div className='pa3'>
-    <div className='fl mw5 f4 bg-light-gray dark-gray pa3'>
+    <div className='fixed w-25 mt2 f4 bg-light-gray dark-gray pa3'>
       <ContractBox contract={contract} />
     </div>
-
-    <div className='ml3 fl pa3'>
-      <div className='flex flex-wrap'>
+    <div className='ml8'>
+      <div>
         <Tabs>
           <TabList>
             <Tab><div className='pointer'>Notifications</div></Tab>
@@ -37,7 +36,6 @@ const ContractHolder = ({ contract, notificationsForContract }) => (
         </Tabs>
       </div>
     </div>
-
   </div>
 )
 

@@ -5,12 +5,19 @@ import React, { Component } from 'react'
 import cn from 'classnames'
 import { Consumer } from '../../lib/Context'
 import _ from 'lodash'
+import posed from 'react-pose'
+
+const Star = posed.i({
+  idle: { scale: 1 },
+  hovered: { scale: 1.2 }
+})
 
 class FavouriteButton extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      isFavourite: props.favourite
+      isFavourite: props.favourite,
+      hovering: false
     }
   }
 
@@ -53,7 +60,10 @@ class FavouriteButton extends Component {
                   updateUser({ variables: { user: copy } })
                 }}
               >
-                <i
+                <Star
+                  pose={this.state.hovering ? 'hovered' : 'idle'}
+                  onMouseEnter={() => this.setState({ hovering: true })}
+                  onMouseLeave={() => this.setState({ hovering: false })}
                   className={cn(
                     isFavourite && 'gold',
                     'fa',
