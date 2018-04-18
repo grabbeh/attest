@@ -74,9 +74,10 @@ class Notification extends Component {
           </div>
         </div>
         <ClearFix />
-        <div className='fl ph3 pv2 bg-light-green mt3 b'>
-          <i className='fa fa-pencil mr2 dark-gray' />Changes
-        </div>
+        {changes.length > 0 &&
+          <div className='fl ph3 pv2 bg-light-green mt3 b'>
+            <i className='fa fa-pencil mr2 dark-gray' />Changes
+          </div>}
         <ClearFix />
         <ul className='overflow-auto mb3 list ma0 pa0'>
           {changes.map((c, i) => (
