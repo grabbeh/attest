@@ -12,6 +12,7 @@ import SideColumn from '../side-menu/SideColumn'
 import CenterBox from '../styles/CenterBox'
 import DeleteCheckbox from '../general/DeleteCheckbox'
 import { GithubPicker } from 'react-color'
+import UpdateSettingsButton from './UpdateSettingsButton'
 import _ from 'lodash'
 
 class SettingsForm extends react.Component {
@@ -49,13 +50,6 @@ class SettingsForm extends react.Component {
     let copy = [...businessUnits]
     copy.splice(index, 1, revisedUnit)
     this.setState({ businessUnits: copy })
-  }
-
-  handleSubmit = e => {
-    e.preventDefault()
-    let { businessUnits, tags, statuses } = this.state
-    let o = { businessUnits, tags, statuses }
-    this.props.updateMasterEntity(o)
   }
 
   saveToState = e => {
@@ -187,7 +181,7 @@ class SettingsForm extends react.Component {
             ))}
         </ul>
         <ClearFix />
-        <FormButton onClick={this.handleSubmit} text='SUBMIT' />
+        <UpdateSettingsButton {...this.state} />
       </form>
     )
   }

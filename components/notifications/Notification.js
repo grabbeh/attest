@@ -28,7 +28,6 @@ class Notification extends Component {
           'f4',
           'mb3',
           'mt2',
-          'mr3',
           'bg-light-gray'
         )}
       >

@@ -13,8 +13,8 @@ const ContractHolder = ({ children, index }) => (
       'f4',
       'pa3',
       'overflow-hidden',
-      'h-100',
-      'bg-light-gray'
+      'bg-light-gray',
+      'h-100'
     )}
   >
     {children}

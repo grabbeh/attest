@@ -11,13 +11,15 @@ import Lawyer from './Lawyer'
 import BusinessUnit from './BusinessUnit'
 import PartyList from './PartyList'
 import Link from 'next/link'
+import FadeBox from '../styles/FadeBox'
 
 class Contract extends React.Component {
   constructor () {
     super()
     this.state = {
       modalIsOpen: false,
-      editableContract: ''
+      editableContract: '',
+      active: true
     }
   }
 
@@ -49,7 +51,7 @@ class Contract extends React.Component {
     const { masterEntity, allUsers } = this.props
 
     return (
-      <div>
+      <FadeBox pose={this.state.active ? 'visible' : 'hidden'}>
         <div>
           <div>
             {externalParties.map(party => (
@@ -67,8 +69,8 @@ class Contract extends React.Component {
           {tags ? <TagList tags={tags} /> : null}
           <div className='cf' />
         </div>
-        <div className='relative'>
-          <ul className='abolute bottom-1 right-1 fr list pa0 mt2'>
+        <div>
+          <ul className='fr list pa0 mt2'>
             <li className='fl mr2'>
               <button
                 className='bg-light-gray f6 link dim ph0 dib'
@@ -83,7 +85,12 @@ class Contract extends React.Component {
                   contract={this.state.editableContract}
                 />}
             </li>
-            <li className='fl mr2 '><DeleteButton id={id} /></li>
+            <li
+              onClick={() => this.setState({ active: false })}
+              className='fl mr2 '
+            >
+              <DeleteButton id={id} />
+            </li>
             <li className='fl mr2'>
               <FavouriteButton favourite={favourite} id={id} />
             </li>
@@ -95,7 +102,7 @@ class Contract extends React.Component {
           </ul>
         </div>
         <div className='cf' />
-      </div>
+      </FadeBox>
     )
   }
 }

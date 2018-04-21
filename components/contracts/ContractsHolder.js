@@ -13,6 +13,7 @@ import HideToggle from '../general/Hide'
 import cn from 'classnames'
 import FadeRightDiv from '../styles/FadeRightDiv'
 import ClearFix from '../styles/ClearFix'
+import Box from '../styles/Box'
 
 class ContractsHolder extends react.Component {
   constructor (props) {
@@ -148,7 +149,7 @@ class ContractsHolder extends react.Component {
       )
     }
     return (
-      <div className='pa3-ns pa0 pt3'>
+      <Box>
         <Title name={name} />
         <Filter
           filters={filters}
@@ -165,7 +166,7 @@ class ContractsHolder extends react.Component {
         <ClearFix />
         <SummaryBox contracts={filteredContracts} filters={filters} />
         <ContractsList contracts={filteredContracts} />
-      </div>
+      </Box>
     )
   }
 }

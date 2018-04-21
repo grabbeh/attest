@@ -18,7 +18,8 @@ class Input extends react.Component {
       value,
       error,
       onFocus,
-      onBlur
+      onBlur,
+      readOnly
     } = this.props
 
     return (
@@ -38,6 +39,7 @@ class Input extends react.Component {
           name={name}
           onFocus={onFocus}
           onBlur={onBlur}
+          readOnly={readOnly}
         />
         {this.props.onClick &&
           <div className='mt3 pt0-ns'>

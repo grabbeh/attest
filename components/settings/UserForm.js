@@ -71,10 +71,10 @@ class UserForm extends Component {
   render () {
     let { updateUser } = this.props
     let { user, users, editUser } = this.state
-    let { email, name } = user
+    let { email, name, acceptedInvite } = user
     return (
       <div>
-        <div className='pv2 f4 b'>{`${users.length} users`}</div>
+        <div className='pv2 f4'>{`${users.length} users`}</div>
         <TransitionGroup className='flex flex-wrap list pa0 ma0'>
           {users &&
             users.map((b, i) => (
@@ -106,6 +106,11 @@ class UserForm extends Component {
                           <i className='pointer fa fa-trash-o fa-lg' />
                         </li>
                       </ul>
+                      <ClearFix />
+                      {b.acceptedInvite
+                        ? 'Accepted user!'
+                        : <div
+                          >{`Invite link: https://tryattest.com/invite?id=${b.id}`}</div>}
                     </div>
                   </UserHolder>
                 </div>

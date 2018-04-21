@@ -16,6 +16,7 @@ import SideColumn from '../side-menu/SideColumn'
 import Box from '../styles/Box'
 import _ from 'lodash'
 import moment from 'moment'
+import SubmitContractButton from './SubmitContractButton'
 
 class AddContractForm extends react.Component {
   constructor (props) {
@@ -92,14 +93,6 @@ class AddContractForm extends react.Component {
       ...errors
     })
     return isError
-  }
-
-  handleClick = e => {
-    e.preventDefault()
-    const err = this.validate()
-    if (!err) {
-      this.props.handleContract(this.state.contract, this.props.closeModal)
-    }
   }
 
   saveToState = e => {
@@ -328,7 +321,13 @@ class AddContractForm extends react.Component {
             : <div className='mt3 f4'>Add lawyers here</div>}
         </FormSection>
         <ClearFix />
-        <FormButton onClick={this.handleClick} text='SUBMIT' />
+        <SubmitContractButton
+          onClick={this.handleClick}
+          validate={this.validate}
+          closeModal={this.props.closeModal}
+          contract={this.state.contract}
+          text='SUBMIT'
+        />
         <ClearFix />
       </form>
     )

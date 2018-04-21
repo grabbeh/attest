@@ -6,7 +6,8 @@ export default gql`
       name
       email
       id
-      masterEntityID 
+      masterEntityID
+      acceptedInvite
     }
     masterEntity {
       businessUnits {

@@ -1,4 +1,4 @@
-import { graphql, compose, Query } from 'react-apollo'
+import { Query } from 'react-apollo'
 import CONTRACTS_QUERY from '../../queries/ContractsQuery'
 import ContractsHolder from './ContractsHolder'
 import Loading from '../general/Loading'

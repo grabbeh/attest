@@ -25,7 +25,6 @@ const DeleteNotification = ({ id }) => (
     {(deactivateNotification, { data }) => (
       <div
         onClick={e => {
-          console.log(id)
           e.preventDefault()
           deactivateNotification({ variables: { id } })
         }}

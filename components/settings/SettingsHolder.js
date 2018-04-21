@@ -20,7 +20,7 @@ class SettingsHolder extends Component {
             </TabList>
             <ClearFix />
             <TabPanels>
-              <SettingsForm updateMasterEntity={this.props.updateMasterEntity}  masterEntity={this.props.masterEntity} />
+              <SettingsForm masterEntity={this.props.masterEntity} />
               <UsersHolder allUsers={this.props.allUsers} />
             </TabPanels>
           </Tabs>
