@@ -9,16 +9,16 @@ transition: transform .3s ease-in;
 `
 
 class Notification extends Component {
-  componentDidMount () {
-    console.log('Fn called')
+  componentDidUpdate () {
+    if (this.props.error && this.props.auto) {
+      setTimeout(() => {
+        this.props.close()
+      }, 5000)
+    }
   }
   render () {
-    let { error, close, auto } = this.props
-    if (auto) {
-      setTimeout(() => {
-        close()
-      }, 8000)
-    }
+    let { error, close } = this.props
+
     return (
       <NotificationAnimation error={error}>
         <div className='ml3 fl pv3'>
