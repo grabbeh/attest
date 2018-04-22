@@ -4,6 +4,7 @@ import USER_QUERY from '../../queries/UserQuery'
 import FadeRightDiv from '../styles/FadeRightDiv'
 import Loading from '../general/Loading'
 import InviteHolder from './InviteHolder'
+import CenterBox from '../styles/CenterBox'
 
 class InviteContainer extends Component {
   render () {
@@ -14,7 +15,11 @@ class InviteContainer extends Component {
           if (loading) return <Loading />
           if (error) return 'Error'
           if (data.user.acceptedInvite) return 'Existing user'
-          return <FadeRightDiv><InviteHolder {...data} /></FadeRightDiv>
+          return (
+            <FadeRightDiv>
+              <CenterBox><InviteHolder {...data} /></CenterBox>
+            </FadeRightDiv>
+          )
         }}
       </Query>
     )

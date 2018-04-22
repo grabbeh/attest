@@ -1,6 +1,6 @@
 import InviteContainer from '../components/invite/InviteContainer'
-import { UserRedirectPage } from '../components/Page'
+import { AuthPage } from '../components/Page'
 
-const InvitePage = UserRedirectPage(props => <InviteContainer {...props} />)
+const InvitePage = AuthPage(props => <InviteContainer {...props} />)
 
 export default InvitePage

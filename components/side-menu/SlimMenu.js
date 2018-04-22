@@ -1,6 +1,5 @@
 import React from 'react'
 import MenuItem from './MenuItem'
-import { Consumer } from '../../lib/Context'
 
 const SlimMenu = ({ selectedUrl }) => (
   <div>

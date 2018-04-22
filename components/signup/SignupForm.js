@@ -1,5 +1,5 @@
-import React from 'react'
-import { graphql, compose } from 'react-apollo'
+import { Component, Fragment } from 'react'
+import { graphql, Mutation } from 'react-apollo'
 import withData from '../../lib/withData'
 import CREATE_ACCOUNT_MUTATION from '../../queries/CreateAccountMutation'
 import redirect from '../../lib/Redirect'
@@ -10,31 +10,22 @@ import ClearFix from '../styles/ClearFix'
 import FormTitle from '../styles/FormTitle'
 import CenterBox from '../styles/CenterBox'
 import FadeRightDiv from '../styles/FadeRightDiv'
+import { Consumer } from '../../lib/Context'
+import Notification from '../general/Notification'
 
-class CreateAccountForm extends React.Component {
+class CreateAccountForm extends Component {
   constructor (props) {
     super(props)
     this.state = {
       email: '',
       password: '',
-      name: '',
-      error: ''
+      name: ''
     }
   }
 
   saveToState = e => {
     let { name, value, type } = e.target
     this.setState({ [name]: value })
-  }
-
-  setError = error => {
-    this.setState({ error })
-  }
-
-  handleClick = e => {
-    e.preventDefault()
-    const { name, email, password } = this.state
-    this.props.createAdminAccount(name, email, password, this.setError)
   }
 
   render () {
@@ -69,9 +60,8 @@ class CreateAccountForm extends React.Component {
                 type='password'
               />
             </div>
-            <FormButton onClick={this.handleClick} text='SUBMIT' />
+            <CreateAccountButton {...this.state} />
             <ClearFix />
-            <Error error={error} />
             <ClearFix />
           </form>
         </CenterBox>
@@ -80,25 +70,47 @@ class CreateAccountForm extends React.Component {
   }
 }
 
-const createAccountMutation = graphql(CREATE_ACCOUNT_MUTATION, {
-  props: ({ mutate }) => ({
-    createAdminAccount: (name, email, password, setError) => {
-      mutate({
-        variables: { name, email, password, setError }
-      })
-        .then(res => {
-          redirect({}, '/login')
-        })
-        .catch(e => {
-          let error = e.graphQLErrors[0].message
-          setError(error)
-        })
-    }
-  })
-})
+class CreateAccountButton extends Component {
+  state = {
+    error: null
+  }
 
-const CreateAccountFormWithMutation = compose(createAccountMutation)(
-  CreateAccountForm
-)
+  closeNotification = () => {
+    this.setState({ error: false })
+  }
 
-export default CreateAccountFormWithMutation
+  render () {
+    let { name, email, password } = this.props
+    return (
+      <Mutation
+        mutation={CREATE_ACCOUNT_MUTATION}
+        onError={error => {
+          this.setState({ error })
+        }}
+      >
+        {(createAdminAccount, { data, error, loading }) => {
+          return (
+            <Fragment>
+              <FormButton
+                text='SUBMIT'
+                onClick={e => {
+                  e.preventDefault()
+                  createAdminAccount({
+                    variables: { name, email, password }
+                  })
+                }}
+              />
+              <Notification
+                close={this.closeNotification}
+                error={this.state.error}
+                auto
+              />
+            </Fragment>
+          )
+        }}
+      </Mutation>
+    )
+  }
+}
+
+export default CreateAccountForm

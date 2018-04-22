@@ -1,6 +1,6 @@
-import { LandingPage } from '../components/Page'
+import { AuthPage } from '../components/Page'
 import MainLandingPage from '../components/landing-page/LandingPage'
 
-const LandingPageWithData = LandingPage(props => <MainLandingPage {...props} />)
+const LandingPageWithData = AuthPage(props => <MainLandingPage {...props} />)
 
 export default LandingPageWithData

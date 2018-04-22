@@ -1,4 +1,4 @@
-import { Component } from 'react'
+import { Component, Fragment } from 'react'
 import FadeRightDiv from '../styles/FadeRightDiv'
 import CenterBox from '../styles/CenterBox'
 import FormTitle from '../styles/FormTitle'
@@ -16,7 +16,6 @@ import AcceptInviteButton from './AcceptInviteButton'
 class InviteHolder extends Component {
   constructor (props) {
     super(props)
-    console.log(props)
     this.state = {
       ...props.user,
       password: '',
@@ -49,42 +48,38 @@ class InviteHolder extends Component {
     let { password, repeatPassword } = this.state
     let { email, id } = this.props.user
     return (
-      <Box>
-        <FadeRightDiv>
-          <CenterBox>
-            <FormTitle title={`Confirm invite for ${email}`} />
-            <form>
-              <FormSection>
-                <Input
-                  value={password}
-                  name='password'
-                  onChange={this.saveToState}
-                  label='Password'
-                  type='password'
-                />
-              </FormSection>
-              <FormSection>
-                <Input
-                  value={repeatPassword}
-                  name='repeatPassword'
-                  onChange={this.saveToState}
-                  label='Repeat password'
-                  type='password'
-                  error={this.state.matchingPasswordError}
-                />
-              </FormSection>
-              <AcceptInviteButton
-                validate={this.validate}
-                id={id}
-                password={password}
-              />
-              <ClearFix />
-              <Error />
-              <ClearFix />
-            </form>
-          </CenterBox>
-        </FadeRightDiv>
-      </Box>
+      <Fragment>
+        <FormTitle title={`Confirm invite for ${email}`} />
+        <form>
+          <FormSection>
+            <Input
+              value={password}
+              name='password'
+              onChange={this.saveToState}
+              label='Password'
+              type='password'
+            />
+          </FormSection>
+          <FormSection>
+            <Input
+              value={repeatPassword}
+              name='repeatPassword'
+              onChange={this.saveToState}
+              label='Repeat password'
+              type='password'
+              error={this.state.matchingPasswordError}
+            />
+          </FormSection>
+          <AcceptInviteButton
+            validate={this.validate}
+            id={id}
+            password={password}
+          />
+          <ClearFix />
+          <Error />
+          <ClearFix />
+        </form>
+      </Fragment>
     )
   }
 }
