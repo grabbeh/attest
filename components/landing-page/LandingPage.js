@@ -28,7 +28,7 @@ class LandingPage extends Component {
             </div>
             <div className='f5 mt4'>
               <button className='pointer w-100 w-20-l grow fl br2 shadow-3 pv2 ph3 tc bg-blue mr4'>
-                <Link href='/create-admin-account'>
+                <Link href='/signup'>
                   <a className='link white'>CREATE ACCOUNT</a>
                 </Link>
               </button>
