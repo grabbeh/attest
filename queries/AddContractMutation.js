@@ -31,6 +31,7 @@ mutation addContract($contract: PostContract) {
       name
       email
       id
+      acceptedInvite
     }
     favourite
   }
