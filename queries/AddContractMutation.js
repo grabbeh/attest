@@ -30,7 +30,9 @@ mutation addContract($contract: PostContract) {
     assignedTo {
       name
       email
+      id
     }
+    favourite
   }
 }
 `

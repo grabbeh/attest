@@ -1,38 +1,75 @@
 import { Mutation } from 'react-apollo'
+import { Component, Fragment } from 'react'
 import CONTRACTS_QUERY from '../../queries/ContractsQuery'
 import ADD_CONTRACT_MUTATION from '../../queries/AddContractMutation'
 import redirect from '../../lib/Redirect'
 import FormButton from '../styles/FormButton'
+import _ from 'lodash'
+import Notification from '../general/Notification'
 
-const SubmitContractButton = ({ contract, validate, closeModal }) => (
-  <Mutation
-    mutation={ADD_CONTRACT_MUTATION}
-    update={(store, response) => {
-      let contract = response.data.addContract
-      // try/catch block used to silence error
-      try {
-        let data = store.readQuery({ query: CONTRACTS_QUERY })
-        data.contracts.push(contract)
-        store.writeQuery({ query: CONTRACTS_QUERY, data })
-      } catch (e) {
-        // console.log(e)
-      }
-      redirect({}, '/contracts')
-    }}
-  >
-    {(addContract, { data }) => (
-      <FormButton
-        onClick={e => {
-          e.preventDefault()
-          const err = validate()
-          if (!err) {
-            addContract({ variables: { contract } })
-            if (closeModal) closeModal()
+class SubmitContractButton extends Component {
+  state = {
+    error: null,
+    success: null
+  }
+
+  closeNotification = () => {
+    this.setState({ success: false, error: false })
+  }
+
+  render () {
+    let { contract, validate, closeModal } = this.props
+    return (
+      <Mutation
+        mutation={ADD_CONTRACT_MUTATION}
+        update={(store, response) => {
+          let contract = response.data.addContract
+          let { id } = contract
+          // try/catch block used to silence error
+          try {
+            // if closeModal present then editable contract
+            if (closeModal) {
+              let data = store.readQuery({ query: CONTRACTS_QUERY })
+              _.extend(_.find(data.contracts, { id }), contract)
+              store.writeQuery({ query: CONTRACTS_QUERY, data })
+            } else {
+              // else new contract so push into cache
+              let data = store.readQuery({ query: CONTRACTS_QUERY })
+              data.contracts.push(contract)
+              store.writeQuery({ query: CONTRACTS_QUERY, data })
+            }
+          } catch (e) {
+            // console.log(e)
           }
         }}
-        text='SUBMIT'
-      />
-    )}
-  </Mutation>
-)
+        onCompleted={data => {
+          // if (!closeModal) redirect({}, '/contracts')
+          this.setState({ success: 'Contract updated' })
+        }}
+      >
+        {(addContract, { data }) => (
+          <Fragment>
+            <FormButton
+              onClick={e => {
+                e.preventDefault()
+                const err = validate()
+                if (!err) {
+                  addContract({ variables: { contract } })
+                }
+              }}
+              text='SUBMIT'
+            />
+            <Notification
+              close={this.closeNotification}
+              success={this.state.success}
+              auto
+              closeModal={closeModal}
+            />
+          </Fragment>
+        )}
+      </Mutation>
+    )
+  }
+}
+
 export default SubmitContractButton
