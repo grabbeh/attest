@@ -43,7 +43,6 @@ class SubmitContractButton extends Component {
           }
         }}
         onCompleted={data => {
-          // if (!closeModal) redirect({}, '/contracts')
           this.setState({ success: 'Contract updated' })
         }}
       >
@@ -64,6 +63,7 @@ class SubmitContractButton extends Component {
               success={this.state.success}
               auto
               closeModal={closeModal}
+              redirectTo='/contracts'
             />
           </Fragment>
         )}

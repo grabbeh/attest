@@ -10,10 +10,10 @@ import Box from '../styles/Box'
 
 const ContractHolder = ({ contract, notificationsForContract }) => (
   <Box>
-    <div className='fixed w-25 mt2 f4 bg-light-gray dark-gray pa3'>
+    <div className='fixed-l w-25-l w-100 mt2 f4 bg-light-gray dark-gray pa3'>
       <ContractBox contract={contract} />
     </div>
-    <div className='ml8'>
+    <div className='ml8-l mt0-l w-70-l w-100'>
       <div>
         <Tabs>
           <TabList>

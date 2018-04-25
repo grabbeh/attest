@@ -103,13 +103,13 @@ class AddContractForm extends react.Component {
   }
 
   deleteItem = (tag, index) => {
-    let { contract } = this.state
+    let contract = _.cloneDeep(this.state.contract)
     contract.tags = _.without(contract.tags, tag)
     this.setState({ contract })
   }
 
   handleStatusChange = e => {
-    let { contract } = this.state
+    let contract = _.cloneDeep(this.state.contract)
     let date = new Date().getTime()
     let newStatus = { ...e, date }
     contract.statuses.push(newStatus)
@@ -119,7 +119,7 @@ class AddContractForm extends react.Component {
 
   handleLawyerChange = e => {
     let email = e.target.value
-    let { contract } = this.state
+    let contract = _.cloneDeep(this.state.contract)
     const lawyers = this.props.allUsers
     lawyers.forEach(lawyer => {
       if (lawyer.email == email) {
@@ -131,11 +131,11 @@ class AddContractForm extends react.Component {
 
   handleBusinessUnitChange = e => {
     let selectedUnit = e.target.value
-    let { contract } = this.state
+    let contract = _.cloneDeep(this.state.contract)
     const { businessUnits } = this.props.masterEntity
     businessUnits.forEach(unit => {
       if (selectedUnit == unit.name) {
-        contract.businessUnit = { name: selectedUnit }
+        contract.businessUnit = unit
         this.setState({
           contract: contract,
           selectedBusinessUnit: selectedUnit

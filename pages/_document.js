@@ -101,6 +101,10 @@ export default class MyDocument extends Document {
               z-index: 1000;
             }
 
+            .front-three {
+              z-index: 1500;
+            }
+
 
               html, body {
                 height: 100vh;
@@ -202,8 +206,9 @@ export default class MyDocument extends Document {
               .bell {
                 left: -25px;
               }
-
-              .ml8 { margin-left: 28%;}
+              @media screen and (min-width: 60em) {
+                .ml8-l { margin-left: 28%;}
+              }
 
               .notification {
                 left: -10px;

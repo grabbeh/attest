@@ -73,10 +73,10 @@ class Contract extends React.Component {
           <ul className='fr list pa0 mt2'>
             <li className='fl mr2'>
               <button
-                className='bg-light-gray f6 link dim ph0 dib'
+                className='bg-light-gray link dim ph0 dib'
                 onClick={() => this.openModal(this.props.contract)}
               >
-                <i className='pointer fa fa-pencil fa-lg' />
+                <i className='pointer fa fa-pencil' />
               </button>
               {this.state.editableContract &&
                 <EditContractContainer

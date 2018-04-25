@@ -1,8 +1,9 @@
 import styled from 'styled-components'
 import { Component } from 'react'
+import redirect from '../../lib/Redirect'
 
 const NotificationAnimation = styled.div.attrs({
-  className: 'fixed top-0 f4 left-0 w-100 white front-two'
+  className: 'fixed top-0 f4 left-0 w-100 white front-three'
 })`
 background: ${props => (props.error ? 'red' : 'green')};
 transform: translateY(${props => (props.error || props.success ? '0px' : '-70px')});
@@ -14,6 +15,7 @@ class Notification extends Component {
     setTimeout(() => {
       this.props.close()
       if (this.props.closeModal) this.props.closeModal()
+      else redirect({}, this.props.redirectTo)
     }, 2500)
   }
 

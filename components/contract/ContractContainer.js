@@ -12,8 +12,7 @@ class ContractContainer extends Component {
       <Query query={CONTRACT_QUERY} variables={{ id }}>
         {({ loading, error, data }) => {
           if (loading) return <Loading />
-          if (error) return 'Error'
-          console.log(data)
+          if (error) return <Error />
           return <FadeRightDiv><ContractHolder {...data} /></FadeRightDiv>
         }}
       </Query>
