@@ -1,14 +1,25 @@
 const express = require('express')
 const next = require('next')
 const dev = process.env.NODE_ENV !== 'production'
+const production = process.env.NODE_ENV == 'production'
 const app = next({ dev })
 const handle = app.getRequestHandler()
 const proxy = require('http-proxy-middleware')
+const compression = require('compression')
 
 let GRAPHQL_SERVER = 'http://localhost:8000/graphql'
 
+var setCustomHeaderFunc = function (req, res, next) {
+  res.set('SpecialCustomHeader', 'super-awesome-value')
+  next()
+}
+
 app.prepare().then(() => {
   const server = express()
+  if (production) {
+    server.use(compression())
+    server.use('*', setCustomHeaderFunc)
+  }
 
   // proxy graphql requests from client through to server (avoiding CORS issues (I think))
   const newProxy = proxy({
