@@ -93,39 +93,27 @@ class ContractsHolder extends react.Component {
     }
     this.setState({ filters })
   }
+  
+  convertForFilter = (arr, type) => {
+     return _.map(arr, i => {
+        return {
+          checked: i.checked,
+          name: i.name,
+          type: type,
+          category: `${type}s`
+        }
+     })
+  }
 
   toggleCheckbox = label => {
     let { statuses, tags, businessUnits, lawyers } = this.state.filters
-    statuses = statuses.map(s => {
-      return {
-        checked: s.checked,
-        name: s.name,
-        type: 'status',
-        category: 'statuses'
-      }
-    })
-
-    tags = tags.map(t => {
-      return { checked: t.checked, name: t.name, type: 'tag', category: 'tags' }
-    })
-
-    businessUnits = businessUnits.map(b => {
-      return {
-        checked: b.checked,
-        name: b.name,
-        type: 'businessUnit',
-        category: 'businessUnits'
-      }
-    })
-
-    lawyers = lawyers.map(l => {
-      return {
-        checked: l.checked,
-        name: l.name,
-        type: 'lawyer',
-        category: 'lawyers'
-      }
-    })
+    
+    
+    
+    statuses = convertForFilter(statuses, 'status')
+    tags = convertForFilter(tags, 'tag')
+    businessUnits = convertForFilter(businessUnits, 'businessUnit')
+    lawyer = convertForFilter(lawyers, 'lawyer')
 
     let filters = _.concat(statuses, tags, businessUnits, lawyers)
     filters.forEach(f => {
