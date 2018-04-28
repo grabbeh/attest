@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import getTextColor from '../../lib/getTextColor'
 import cn from 'classnames'
 
 class Checkbox extends Component {
@@ -19,15 +20,18 @@ class Checkbox extends Component {
 
   getStyle () {
     const { color, checked } = this.props
+    let textColor = ''
+    if (color) textColor = getTextColor(color)
+    else textColor = 'white'
     return {
       backgroundColor: checked ? color : '',
-      borderColor: color
+      borderColor: color,
+      color: checked ? textColor : 'black'
     }
   }
 
   render () {
     const { label, color, checked } = this.props
-
     return (
       <li key={label} className='pb2 mr2 fl'>
         <label>

@@ -23,6 +23,7 @@ export default class MyDocument extends Document {
             rel='stylesheet'
             href='https://unpkg.com/tachyons@4.9.0/css/tachyons.min.css'
           />
+          <script src='https://cdn.polyfill.io/v2/polyfill.min.js' />
           <link rel='stylesheet' href='/static/datepicker.css' />
           <link rel='stylesheet' href='/_next/static/style.css' />
           <link

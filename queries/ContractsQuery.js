@@ -33,7 +33,6 @@ query {
       id
     }
     favourite
-    
   }
   currentTags {
     name

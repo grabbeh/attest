@@ -19,7 +19,8 @@ class CreateAccountForm extends Component {
     this.state = {
       email: '',
       password: '',
-      name: ''
+      name: '',
+      userName: ''
     }
   }
 
@@ -29,7 +30,8 @@ class CreateAccountForm extends Component {
   }
 
   render () {
-    let { email, name, password, error } = this.state
+    let { email, userName, name, password, error } = this.state
+    let { saveToState } = this
     return (
       <FadeRightDiv>
         <CenterBox>
@@ -37,27 +39,39 @@ class CreateAccountForm extends Component {
           <form>
             <div className='mt2'>
               <Input
-                value={this.state.name}
+                value={name}
                 name='name'
-                onChange={this.saveToState}
+                onChange={saveToState}
                 label='Company name'
+                autoComplete='organization'
               />
             </div>
             <div className='mt2'>
               <Input
-                value={this.state.email}
+                value={userName}
+                name='userName'
+                onChange={saveToState}
+                label='User name'
+                autoComplete='username'
+              />
+            </div>
+            <div className='mt2'>
+              <Input
+                value={email}
                 name='email'
-                onChange={this.saveToState}
+                onChange={saveToState}
                 label='Email'
+                autoComplete='email'
               />
             </div>
             <div className='mt2'>
               <Input
-                value={this.state.password}
+                value={password}
                 name='password'
-                onChange={this.saveToState}
+                onChange={saveToState}
                 label='Password'
                 type='password'
+                autoComplete='current-password'
               />
             </div>
             <CreateAccountButton {...this.state} />
@@ -72,7 +86,8 @@ class CreateAccountForm extends Component {
 
 class CreateAccountButton extends Component {
   state = {
-    error: null
+    error: null,
+    success: null
   }
 
   closeNotification = () => {
@@ -80,12 +95,15 @@ class CreateAccountButton extends Component {
   }
 
   render () {
-    let { name, email, password } = this.props
+    let { name, userName, email, password } = this.props
     return (
       <Mutation
         mutation={CREATE_ACCOUNT_MUTATION}
         onError={error => {
           this.setState({ error })
+        }}
+        onCompleted={data => {
+          this.setState({ success: 'User created' })
         }}
       >
         {(createAdminAccount, { data, error, loading }) => {
@@ -96,14 +114,16 @@ class CreateAccountButton extends Component {
                 onClick={e => {
                   e.preventDefault()
                   createAdminAccount({
-                    variables: { name, email, password }
+                    variables: { name, userName, email, password }
                   })
                 }}
               />
               <Notification
                 close={this.closeNotification}
                 error={this.state.error}
+                success={this.state.success}
                 auto
+                redirectTo='/login'
               />
             </Fragment>
           )

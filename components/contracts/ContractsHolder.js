@@ -19,6 +19,7 @@ class ContractsHolder extends react.Component {
   constructor (props) {
     super(props)
     this.state = {
+      name: this.props.masterEntity.name,
       contracts: props.contracts,
       filters: {
         statuses: props.currentStatuses,
@@ -93,27 +94,27 @@ class ContractsHolder extends react.Component {
     }
     this.setState({ filters })
   }
-  
+
   convertForFilter = (arr, type) => {
-     return _.map(arr, i => {
-        return {
-          checked: i.checked,
-          name: i.name,
-          type: type,
-          category: `${type}s`
-        }
-     })
+    let category = type === 'status' ? `${type}es` : `${type}s`
+    return _.map(arr, i => {
+      let { checked, name } = i
+      return {
+        checked,
+        name,
+        type,
+        category
+      }
+    })
   }
 
   toggleCheckbox = label => {
     let { statuses, tags, businessUnits, lawyers } = this.state.filters
-    
-    
-    
-    statuses = convertForFilter(statuses, 'status')
-    tags = convertForFilter(tags, 'tag')
-    businessUnits = convertForFilter(businessUnits, 'businessUnit')
-    lawyer = convertForFilter(lawyers, 'lawyer')
+
+    statuses = this.convertForFilter(statuses, 'status')
+    tags = this.convertForFilter(tags, 'tag')
+    businessUnits = this.convertForFilter(businessUnits, 'businessUnit')
+    lawyers = this.convertForFilter(lawyers, 'lawyer')
 
     let filters = _.concat(statuses, tags, businessUnits, lawyers)
     filters.forEach(f => {
@@ -127,8 +128,8 @@ class ContractsHolder extends react.Component {
   }
 
   render () {
-    let { filters, contracts } = this.state
-    let { name } = this.props.masterEntity
+    let { filters, contracts, name } = this.state
+
     let filteredContracts = filter(filters, contracts)
     if (this.state.searchTerm.length > 0 && !this.state.liveInput) {
       filteredContracts = this.getSearchResults(

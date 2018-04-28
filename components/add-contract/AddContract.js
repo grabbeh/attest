@@ -24,7 +24,7 @@ class AddContractForm extends react.Component {
     this.state = {
       selectedStatus: '',
       selectedBusinessUnit: '',
-      selectedLawyer: '',
+      selectedLawyer: -1,
       initialTags: [],
       externalPartyError: '',
       lawyers: props.allUsers,
@@ -37,7 +37,7 @@ class AddContractForm extends react.Component {
         expiryDate: null,
         internalParties: [],
         externalParties: [],
-        currentStatus: [],
+        currentStatus: {},
         statuses: [],
         tags: [],
         businessUnit: '',
@@ -202,6 +202,7 @@ class AddContractForm extends react.Component {
             key={selectedBusinessUnit}
             onChange={this.handleBusinessUnitChange}
           >
+            <option>Please select</option>
             {businessUnits.map(unit => (
               <option key={unit.name} value={unit.name}>
                 {unit.name}
@@ -317,6 +318,7 @@ class AddContractForm extends react.Component {
               selectedItem={selectedLawyer}
               items={lawyers}
               handleChange={this.handleLawyerChange}
+              placeholder='Please select'
               />
             : <div className='mt3 f4'>Add lawyers here</div>}
         </FormSection>

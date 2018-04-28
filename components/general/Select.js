@@ -2,7 +2,7 @@ import react from 'react'
 
 class Select extends react.Component {
   render () {
-    let { selectedItem, handleChange, items } = this.props
+    let { selectedItem, handleChange, items, placeholder } = this.props
     return (
       <div className='mb2'>
         <select
@@ -11,6 +11,7 @@ class Select extends react.Component {
           key={selectedItem}
           onChange={handleChange}
         >
+          <option value={-1}>{placeholder}</option>
           {items.map(l => (
             <option key={l.email} value={l.email}>
               {l.email}

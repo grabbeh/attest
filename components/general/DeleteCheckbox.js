@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { GithubPicker } from 'react-color'
+import getTextColor from '../../lib/getTextColor'
 import cn from 'classnames'
 
 class Checkbox extends Component {
@@ -29,12 +30,23 @@ class Checkbox extends Component {
     handleCheckboxChange(label, index)
   }
 
+  getStyle () {
+    const { color, checked } = this.props
+    let textColor = ''
+    if (color) textColor = getTextColor(color)
+    else textColor = 'white'
+    return {
+      backgroundColor: color,
+      color: textColor
+    }
+  }
+
   render () {
     const { label, color } = this.props
     const { isChecked, showPicker } = this.state
     return (
       <li key={label} className='fl pb2 mr2 fl white'>
-        <div style={{ background: color }} className='fl pv1 ph3 bg-blue white'>
+        <div style={this.getStyle()} className='fl pv1 ph3 bg-blue white'>
           {label}
         </div>
         <label>

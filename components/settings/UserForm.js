@@ -1,4 +1,5 @@
-import { Component } from 'react'
+import { Component, Fragment } from 'react'
+import { Mutation } from 'react-apollo'
 import FormTitle from '../styles/FormTitle'
 import FormSection from '../styles/FormSection'
 import Input from '../general/Input'
@@ -11,6 +12,12 @@ import { TransitionGroup } from 'react-transition-group'
 import LawyerName from '../contracts/Lawyer'
 import Fade from '../styles/FadeTransition'
 import Title from '../styles/Title'
+import ADD_USER_MUTATION from '../../queries/AddUserMutation'
+import UPDATE_USER_MUTATION from '../../queries/UpdateUserMutation'
+import DELETE_USER_MUTATION from '../../queries/DeleteUserMutation'
+import MASTER_ENTITY_METADATA_QUERY
+  from '../../queries/MasterEntityMetaDataQuery'
+import Notification from '../general/Notification'
 
 class UserForm extends Component {
   constructor (props) {
@@ -37,23 +44,6 @@ class UserForm extends Component {
     this.setState({ user })
   }
 
-  addUser = () => {
-    let { users, user } = this.state
-    users = [...users, this.state.user]
-    this.setState({ users })
-    this.props.addUser(user)
-    this.setState({ user: { email: '', name: '' } })
-  }
-
-  deleteUser = id => {
-    let copy = _.cloneDeep(this.state.users)
-    this.props.deleteUser(id)
-    _.remove(copy, n => {
-      return n.id == id
-    })
-    this.setState({ users: copy })
-  }
-
   editUser = user => {
     let copy = _.cloneDeep(user)
     this.setState({ user: copy, editUser: true })
@@ -61,11 +51,6 @@ class UserForm extends Component {
 
   cancelEdit = () => {
     this.setState({ user: { email: '', name: '' }, editUser: false })
-  }
-
-  updateUser = () => {
-    this.props.updateUser(this.state.user)
-    this.setState({ user: { email: '', name: '' } })
   }
 
   render () {
@@ -97,14 +82,7 @@ class UserForm extends Component {
                           </button>
 
                         </li>
-                        <li
-                          onClick={() => {
-                            this.deleteUser(b.id)
-                          }}
-                          className='fl mr2 '
-                        >
-                          <i className='pointer fa fa-trash-o fa-lg' />
-                        </li>
+                        <DeleteUserButton id={b.id} />
                       </ul>
                       <ClearFix />
                       {b.acceptedInvite
@@ -139,12 +117,163 @@ class UserForm extends Component {
         </FormSection>
         {editUser
           ? <div>
-            <FormButton onClick={this.updateUser} text='EDIT USER' />
+            <EditUserButton {...this.state} />
             <div className='pt2' onClick={this.cancelEdit}>Cancel</div>
           </div>
-          : <FormButton onClick={this.addUser} text='ADD USER' />}
+          : <AddUserButton {...this.state} />}
 
       </div>
+    )
+  }
+}
+
+class AddUserButton extends Component {
+  state = {
+    error: null,
+    success: null
+  }
+
+  closeNotification = () => {
+    this.setState({ error: false, success: false })
+  }
+
+  render () {
+    let { user } = this.props
+    return (
+      <Mutation
+        mutation={ADD_USER_MUTATION}
+        update={(store, response) => {
+          let user = response.data.addUser
+          let data = store.readQuery({ query: MASTER_ENTITY_METADATA_QUERY })
+          data.allUsers.push(user)
+          store.writeQuery({ query: MASTER_ENTITY_METADATA_QUERY, data })
+        }}
+        onError={error => {
+          this.setState({ error })
+        }}
+        onCompleted={data => {
+          this.setState({ success: 'User added' })
+        }}
+      >
+        {(addUser, { data }) => (
+          <Fragment>
+            <FormButton
+              text='SUBMIT'
+              onClick={e => {
+                e.preventDefault()
+                addUser({ variables: { user } })
+              }}
+            />
+            <Notification
+              close={this.closeNotification}
+              error={this.state.error}
+              success={this.state.success}
+            />
+          </Fragment>
+        )}
+      </Mutation>
+    )
+  }
+}
+
+class EditUserButton extends Component {
+  state = {
+    error: null,
+    success: null
+  }
+
+  closeNotification = () => {
+    this.setState({ error: false, success: false })
+  }
+
+  render () {
+    let { user } = this.props
+    let { id } = user
+    return (
+      <Mutation
+        mutation={UPDATE_USER_MUTATION}
+        update={(store, response) => {
+          let user = response.data.updateUser
+          let data = store.readQuery({ query: MASTER_ENTITY_METADATA_QUERY })
+          _.extend(_.find(data.allUsers, { id }), user)
+          store.writeQuery({ query: MASTER_ENTITY_METADATA_QUERY, data })
+        }}
+        onError={error => {
+          this.setState({ error })
+        }}
+        onCompleted={data => {
+          this.setState({ success: 'User updated' })
+        }}
+      >
+        {(updateUser, { data }) => (
+          <Fragment>
+            <FormButton
+              text='SUBMIT'
+              onClick={e => {
+                e.preventDefault()
+                updateUser({ variables: { user } })
+              }}
+            />
+            <Notification
+              close={this.closeNotification}
+              error={this.state.error}
+              success={this.state.success}
+            />
+          </Fragment>
+        )}
+      </Mutation>
+    )
+  }
+}
+
+class DeleteUserButton extends Component {
+  state = {
+    error: null,
+    success: null
+  }
+
+  closeNotification = () => {
+    this.setState({ error: false, success: false })
+  }
+
+  render () {
+    let { id } = this.props
+    return (
+      <Mutation
+        mutation={DELETE_USER_MUTATION}
+        update={(store, response) => {
+          let data = store.readQuery({ query: MASTER_ENTITY_METADATA_QUERY })
+          _.remove(data.allUsers, n => {
+            return n.id == id
+          })
+          store.writeQuery({ query: MASTER_ENTITY_METADATA_QUERY, data })
+        }}
+        onError={error => {
+          this.setState({ error })
+        }}
+        onCompleted={data => {
+          this.setState({ success: 'User deleted' })
+        }}
+      >
+        {(deleteUser, { data }) => (
+          <Fragment>
+            <li
+              onClick={e => {
+                e.preventDefault()
+                deleteUser({ variables: { id } })
+              }}
+              className='fl mr2 '
+            >
+              <i className='pointer fa fa-trash-o fa-lg' />
+            </li>
+            <Notification
+              close={this.closeNotification}
+              error={this.state.error}
+              success={this.state.success}
+            />
+          </Fragment>
+        )}
+      </Mutation>
     )
   }
 }

@@ -9,7 +9,7 @@ const ContractsList = props => (
       ? <div>
         <div className='b f4 mb2'>Contracts</div>
         <section className='mb3'>
-          <TransitionGroup className='flex flex-wrap list pa0 ma0'>
+          <div className='flex flex-wrap list pa0 ma0'>
             {props.contracts.map((contract, index) => (
               <Fade key={contract.id}>
                 <div key={contract.id} className='mb3 w-50-ns w-25-l w-100'>
@@ -19,10 +19,10 @@ const ContractsList = props => (
                 </div>
               </Fade>
               ))}
-          </TransitionGroup>
+          </div>
         </section>
       </div>
-      : <div className='bg-light-gray pa3 f4 b mt3'>
+      : <div className='f4'>
           No matching contracts
         </div>}
   </div>

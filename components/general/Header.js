@@ -7,9 +7,9 @@ import { Consumer } from '../../lib/Context'
 
 class Header extends Component {
   logout = () => {
+    document.cookie = cookie.serialize('token', '', { maxAge: -1 })
     redirect({}, '/')
-    this.props.client.resetStore()
-    document.cookie = cookie.serialize('token', '')
+    this.props.client.cache.reset()
   }
 
   render () {
@@ -18,11 +18,11 @@ class Header extends Component {
       <Consumer>
         {context => {
           return (
-            <div className='relative front-two bg--dark-peach pa2 f3'>
-              <span onClick={context.toggleMenu} className='dark-gray'>
+            <div className='dark-gray relative front-two bg--dark-peach pa2 f3'>
+              <span onClick={context.toggleMenu}>
                 <i className='mr3 fa fa-bars' />
               </span>
-              <span className='b dark-gray'>
+              <span className='b'>
                 Attest
               </span>
               <span className='fr'>
@@ -33,7 +33,7 @@ class Header extends Component {
                         notifications={unseenNotifications}
                         />
                       <span>
-                        <i className='ml3 dark-gray fa fa-user-circle fa-lg' />
+                        <i className='ml3 fa fa-user-circle fa-lg' />
                       </span>
                       <span className='ml3' onClick={this.logout}>
                         <i

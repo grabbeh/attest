@@ -1,6 +1,6 @@
 import { Component } from 'react'
 import SettingsForm from './SettingsForm'
-import UsersHolder from './UsersHolder'
+import UserForm from './UserForm'
 import Tabs from '../general/Tabs'
 import TabList from '../general/TabList'
 import Tab from '../general/Tab'
@@ -21,7 +21,7 @@ class SettingsHolder extends Component {
             <ClearFix />
             <TabPanels>
               <SettingsForm masterEntity={this.props.masterEntity} />
-              <UsersHolder allUsers={this.props.allUsers} />
+              <UserForm allUsers={this.props.allUsers} />
             </TabPanels>
           </Tabs>
         </div>

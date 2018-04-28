@@ -1,5 +1,5 @@
-import React from 'react'
-import { graphql, compose } from 'react-apollo'
+import { Component, Fragment } from 'react'
+import { graphql, Mutation } from 'react-apollo'
 import LOGIN_MUTATION from '../../queries/LoginMutation'
 import redirect from '../../lib/Redirect'
 import cookie from 'cookie'
@@ -10,8 +10,10 @@ import FormTitle from '../styles/FormTitle'
 import CenterBox from '../styles/CenterBox'
 import FadeRightDiv from '../styles/FadeRightDiv'
 import FormSection from '../styles/FormSection'
+import Notification from '../general/Notification'
+import Loading from '../general/Loading'
 
-class LoginForm extends React.Component {
+class LoginForm extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -48,6 +50,7 @@ class LoginForm extends React.Component {
                 name='email'
                 onChange={this.saveToState}
                 label='Email'
+                autoComplete='email'
               />
             </FormSection>
             <FormSection>
@@ -57,39 +60,73 @@ class LoginForm extends React.Component {
                 onChange={this.saveToState}
                 label='Password'
                 type='password'
+                autoComplete='current-password'
               />
             </FormSection>
-            <FormButton onClick={this.handleClick} text='SUBMIT' />
+            <LoginButton client={this.props.client} {...this.state} />
             <ClearFix />
           </form>
           <div />
-
         </CenterBox>
       </FadeRightDiv>
     )
   }
 }
 
-const loginMutation = graphql(LOGIN_MUTATION, {
-  props ({ ownProps, mutate }) {
-    return {
-      login (email, password) {
-        return mutate({
-          variables: { email, password },
-          update: (store, response) => {
-            document.cookie = cookie.serialize('token', response.data.login, {
-              maxAge: 30 * 24 * 60 * 60 // 30 days
-            })
-            ownProps.client.resetStore().then(() => {
-              redirect({}, '/contracts')
-            })
-          }
-        })
-      }
-    }
+class LoginButton extends Component {
+  state = {
+    error: null,
+    success: null
   }
-})
 
-const LoginFormWithQueries = compose(loginMutation)(LoginForm)
+  closeNotification = () => {
+    this.setState({ error: false, success: false })
+  }
 
-export default LoginFormWithQueries
+  render () {
+    let { email, password } = this.props
+    return (
+      <Mutation
+        mutation={LOGIN_MUTATION}
+        update={(store, response) => {
+          document.cookie = cookie.serialize('token', response.data.login, {
+            maxAge: 30 * 24 * 60 * 60
+          })
+          this.props.client.resetStore().then(() => {
+            redirect({}, '/contracts')
+          })
+        }}
+        onError={error => {
+          this.setState({ error })
+        }}
+        onCompleted={data => {
+          this.setState({ success: 'Redirecting...' })
+        }}
+      >
+        {(login, { data, error, loading }) => {
+          return (
+            <Fragment>
+              <FormButton
+                text='SUBMIT'
+                onClick={e => {
+                  e.preventDefault()
+                  login({
+                    variables: { email, password }
+                  })
+                }}
+              />
+              <Notification
+                close={this.closeNotification}
+                error={this.state.error}
+                success={this.state.success}
+                redirectTo='/contracts'
+              />
+            </Fragment>
+          )
+        }}
+      </Mutation>
+    )
+  }
+}
+
+export default LoginForm

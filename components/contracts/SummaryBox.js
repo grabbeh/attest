@@ -4,8 +4,6 @@ import react from 'react'
 import StatusBar from './StatusBar'
 import DateSummary from './DateSummary'
 import Flex from '../styles/Flex'
-import { TransitionGroup } from 'react-transition-group'
-import Fade from '../styles/FadeTransition'
 import ClearFix from '../styles/ClearFix'
 
 class SummaryBox extends react.Component {
@@ -38,25 +36,21 @@ class SummaryBox extends react.Component {
               </div>
             </Flex>
             <Flex>
-              <TransitionGroup className='flex flex-wrap list w-100 mb2 pa0 ma0'>
+              <div className='flex flex-wrap list w-100 mb2 pa0 ma0'>
                 {res.map(r => (
-                  <Fade key={r.status.name}>
-                    <div className='fl mr4'>
-                      <StatusBar status={r.status} volume={r.volume} />
-                    </div>
-                  </Fade>
+                  <div key={r.status.name} className='fl mr4'>
+                    <StatusBar status={r.status} volume={r.volume} />
+                  </div>
                 ))}
-              </TransitionGroup>
+              </div>
               <ClearFix />
-              <TransitionGroup>
+              <div>
                 {arr.map(contracts => (
-                  <Fade key={contracts[0].id}>
-                    <div className='fl'>
-                      <ContractSquareList contracts={contracts} />
-                    </div>
-                  </Fade>
+                  <div key={contracts[0].id} className='fl'>
+                    <ContractSquareList contracts={contracts} />
+                  </div>
                 ))}
-              </TransitionGroup>
+              </div>
             </Flex>
           </div>}
       </div>

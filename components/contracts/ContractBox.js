@@ -1,7 +1,7 @@
 import DeleteButton from './DeleteButton'
 import FavouriteButton from './FavouriteButton'
 import EditContractContainer from '../../modals/EditContractContainer'
-import React from 'react'
+import { Component, Fragment } from 'react'
 import _ from 'lodash'
 import cn from 'classnames'
 import StatusBar from './StatusBar'
@@ -13,7 +13,7 @@ import PartyList from './PartyList'
 import Link from 'next/link'
 import FadeBox from '../styles/FadeBox'
 
-class Contract extends React.Component {
+class Contract extends Component {
   constructor () {
     super()
     this.state = {
@@ -51,7 +51,7 @@ class Contract extends React.Component {
     const { masterEntity, allUsers } = this.props
 
     return (
-      <FadeBox pose={this.state.active ? 'visible' : 'hidden'}>
+      <Fragment>
         <div>
           <div>
             {externalParties.map(party => (
@@ -101,8 +101,7 @@ class Contract extends React.Component {
             </li>
           </ul>
         </div>
-        <div className='cf' />
-      </FadeBox>
+      </Fragment>
     )
   }
 }

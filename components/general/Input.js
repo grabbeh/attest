@@ -19,7 +19,8 @@ class Input extends react.Component {
       error,
       onFocus,
       onBlur,
-      readOnly
+      readOnly,
+      autoComplete
     } = this.props
 
     return (
@@ -31,6 +32,7 @@ class Input extends react.Component {
         </div>
         <input
           className='w-100 bb bw1 b--black-20 f4 font pa1 mw5'
+          autoComplete={autoComplete}
           id={value}
           onChange={onChange}
           placeholder={placeholder}

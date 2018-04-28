@@ -11,25 +11,15 @@ transition: transform .3s ease-in;
 `
 
 class Notification extends Component {
-  shut = () => {
-    setTimeout(() => {
-      this.props.close()
-      if (this.props.closeModal) this.props.closeModal()
-      else redirect({}, this.props.redirectTo)
-    }, 2500)
-  }
-
   componentDidUpdate () {
-    if (this.props.error && this.props.auto) {
-      this.shut()
-    }
-    if (this.props.success && this.props.auto) {
-      this.shut()
+    if (this.props.success) {
+      if (this.props.closeModal) this.props.closeModal()
+      if (this.props.redirectTo) redirect({}, this.props.redirectTo)
     }
   }
 
   render () {
-    let { error, close, success, closeModal } = this.props
+    let { error, close, success } = this.props
     return (
       <NotificationAnimation success={success} error={error}>
         <div className='ml3 fl pv3'>
