@@ -34,6 +34,11 @@ mutation addContract($contract: PostContract) {
       acceptedInvite
     }
     favourite
+    comments {
+      text
+      createdAt
+      updatedAt
+    }
   }
 }
 `

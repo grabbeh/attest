@@ -89,9 +89,10 @@ class Notification extends Component {
               {c.removed &&
                 c.removed.name &&
                 <div className='ml3 pl2'>
-                  {c.attr === 'tags' &&
-                    !c.added &&
-                    <i className='fl dark-gray mr2 mt2 fa fa-minus' />}
+                  {c.attr === 'tags' ||
+                    ('comments' &&
+                      !c.added &&
+                      <i className='fl dark-gray mr2 mt2 fa fa-minus' />)}
                   <div
                     className='fl white bg-blue pv2 ph3 tc'
                     style={{ background: c.removed.color }}
@@ -107,9 +108,10 @@ class Notification extends Component {
               {c.added &&
                 c.added.name &&
                 <div className='ml3 pl2'>
-                  {c.attr === 'tags' &&
-                    !c.removed &&
-                    <i className='fl dark-gray mr2 mt2 fa fa-plus' />}
+                  {c.attr === 'tags' ||
+                    ('comments' &&
+                      !c.removed &&
+                      <i className='fl dark-gray mr2 mt2 fa fa-plus' />)}
                   <div
                     className='fl white bg-blue pv2 ph3 tc mr2'
                     style={{ background: c.added.color }}

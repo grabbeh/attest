@@ -60,7 +60,7 @@ class UserForm extends Component {
     return (
       <div>
         <div className='pv2 f4'>{`${users.length} users`}</div>
-        <TransitionGroup className='flex flex-wrap list pa0 ma0'>
+        <div className='flex flex-wrap list pa0 ma0'>
           {users &&
             users.map((b, i) => (
               <Fade key={i}>
@@ -94,7 +94,7 @@ class UserForm extends Component {
                 </div>
               </Fade>
             ))}
-        </TransitionGroup>
+        </div>
         <ClearFix />
         {editUser
           ? <FormTitle title='Edit user' />

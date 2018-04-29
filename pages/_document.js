@@ -70,6 +70,10 @@ export default class MyDocument extends Document {
           <style>
             {`
 
+            .status-ml {
+              margin-left: -10px;
+            }
+
             .fade-enter {
               opacity: 0.01;
             }

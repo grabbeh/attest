@@ -1,5 +1,5 @@
 import ContractBox from '../contracts/ContractBox'
-import Moment from 'react-moment'
+import StatusOverview from './StatusOverview'
 import Notification from '../notifications/Notification'
 import Tabs from '../general/Tabs'
 import Tab from '../general/Tab'
@@ -7,8 +7,9 @@ import ClearFix from '../styles/ClearFix'
 import TabPanels from '../general/TabPanels'
 import TabList from '../general/TabList'
 import Box from '../styles/Box'
+import CommentEditor from './CommentEditor'
 
-const ContractHolder = ({ contract, notificationsForContract }) => (
+const ContractHolder = ({ contract, notificationsForContract, user }) => (
   <Box>
     <div className='fixed-l w-25-l w-100 mt2 f4 bg-light-gray dark-gray pa3'>
       <ContractBox contract={contract} />
@@ -17,8 +18,9 @@ const ContractHolder = ({ contract, notificationsForContract }) => (
       <div>
         <Tabs>
           <TabList>
-            <Tab><div className='pointer'>Notifications</div></Tab>
-            <Tab><div className='pointer'>Status history</div></Tab>
+            <Tab>Notifications</Tab>
+            <Tab>Status history</Tab>
+            <Tab>Comments</Tab>
           </TabList>
           <ClearFix />
           <TabPanels>
@@ -27,14 +29,8 @@ const ContractHolder = ({ contract, notificationsForContract }) => (
                 <Notification key={i} {...n} />
               ))}
             </ul>
-            <ul className='mt3 f4 list ma0 pa0'>
-              {contract.statuses.map((s, i) => (
-                <li key={i} className='pa3 mw7 bg-light-gray mb3 dark-gray'>
-                  {` ${s.name} -`}
-                  <Moment format='DD MMMM YYYY'>{s.date}</Moment>
-                </li>
-              ))}
-            </ul>
+            <StatusOverview statuses={contract.statuses} />
+            <CommentEditor user={user} contract={contract} />
           </TabPanels>
         </Tabs>
       </div>

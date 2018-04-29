@@ -324,7 +324,6 @@ class AddContractForm extends react.Component {
         </FormSection>
         <ClearFix />
         <SubmitContractButton
-          onClick={this.handleClick}
           validate={this.validate}
           closeModal={this.props.closeModal}
           contract={this.state.contract}

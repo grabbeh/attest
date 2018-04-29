@@ -18,7 +18,7 @@ class SubmitContractButton extends Component {
   }
 
   render () {
-    let { contract, validate, closeModal } = this.props
+    let { contract, validate, closeModal, text } = this.props
     return (
       <Mutation
         mutation={ADD_CONTRACT_MUTATION}
@@ -51,12 +51,13 @@ class SubmitContractButton extends Component {
             <FormButton
               onClick={e => {
                 e.preventDefault()
-                const err = validate()
+                let err = false
+                if (validate) err = validate()
                 if (!err) {
                   addContract({ variables: { contract } })
                 }
               }}
-              text='SUBMIT'
+              text={text}
             />
             <Notification
               close={this.closeNotification}

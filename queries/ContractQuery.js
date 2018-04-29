@@ -33,6 +33,12 @@ query contract($id: ID!) {
       id
     }
     favourite
+    comments {
+      text
+      createdAt
+      updatedAt
+      author
+    }
   }
   notificationsForContract(id: $id) {
     action
