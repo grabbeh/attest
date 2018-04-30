@@ -6,9 +6,7 @@ import ClearFix from '../styles/ClearFix'
 class StatusOverview extends Component {
   createDiff = (earlierDate, laterDate) => {
     let { statuses } = this.props
-    let first = moment(earlierDate)
-    let last = moment(laterDate)
-    return last.diff(first, 'days') * 20
+    return moment(laterDate).diff(moment(earlierDate), 'days') * 20
   }
 
   supplementStatuses = statuses => {
@@ -17,7 +15,6 @@ class StatusOverview extends Component {
       if (copy[i + 1]) {
         s.diff = this.createDiff(copy[i].date, copy[i + 1].date)
       }
-      console.log(s)
       return s
     })
   }

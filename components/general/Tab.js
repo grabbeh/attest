@@ -6,7 +6,10 @@ class Tab extends Component {
     const { isActive, isDisabled, onSelect } = this.props
     return (
       <div
-        className={cn(isActive && 'underline b', 'f4 pointer fl pv2 pr3')}
+        className={cn(
+          isActive && 'bb b--black-70 bw1 b',
+          'f4 pointer fl pt2 pb1 mr3'
+        )}
         onClick={isDisabled ? null : onSelect}
       >
         {this.props.children}

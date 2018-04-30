@@ -14,17 +14,26 @@ const ContractHolder = ({ contract, notificationsForContract, user }) => (
     <div className='fixed-l w-25-l w-100 mt2 f4 bg-light-gray dark-gray pa3'>
       <ContractBox contract={contract} />
     </div>
-    <div className='ml8-l mt0-l w-70-l w-100'>
+    <div className='ml8-l mt2 mt0-l w-70-l w-100'>
       <div>
         <Tabs>
           <TabList>
-            <Tab>Notifications</Tab>
-            <Tab>Status history</Tab>
-            <Tab>Comments</Tab>
+            <Tab>
+              <i className='fa fa-bell mr0 mr2-ns' />
+              <div className='di-ns dn'>Notifications</div>
+            </Tab>
+            <Tab>
+              <i className='fa fa-signal mr0 mr2-ns' />
+              <div className='di-ns dn'>Status history</div>
+            </Tab>
+            <Tab>
+              <i className='fa fa-comment mr0 mr2-ns' />
+              <div className='di-ns dn'>Comments</div>
+            </Tab>
           </TabList>
           <ClearFix />
           <TabPanels>
-            <ul className='list ma0 pa0'>
+            <ul className='list mt3 ma0 pa0'>
               {notificationsForContract.map((n, i) => (
                 <Notification key={i} {...n} />
               ))}

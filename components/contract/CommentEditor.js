@@ -62,9 +62,9 @@ class CommentEditor extends Component {
     let { handleChange, deleteComment, editComment, addComment } = this
     return (
       <Fragment>
-        <form>
+        <form className='mt3'>
           <textarea
-            className='mt2 pa2 w-100 f4 h4 font'
+            className='pa2 ba b--black-50 bw1 w-100 f4 h4 font'
             value={text}
             onChange={handleChange}
           />

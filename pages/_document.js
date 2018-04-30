@@ -239,6 +239,12 @@ export default class MyDocument extends Document {
                  -webkit-appearance: none;
                  -webkit-border-radius:0px;
                 }
+              
+                @media screen and (min-width: 30em) {
+                  .dn-ns {
+                    display: none;
+                  }
+                }
 
           `}
           </style>

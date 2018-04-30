@@ -12,6 +12,7 @@ import BusinessUnit from './BusinessUnit'
 import PartyList from './PartyList'
 import Link from 'next/link'
 import FadeBox from '../styles/FadeBox'
+import ClearFix from '../styles/ClearFix'
 
 class Contract extends Component {
   constructor () {
@@ -100,6 +101,7 @@ class Contract extends Component {
               </Link>
             </li>
           </ul>
+          <ClearFix />
         </div>
       </Fragment>
     )
