@@ -64,7 +64,6 @@ class SubmitContractButton extends Component {
               success={this.state.success}
               auto
               closeModal={closeModal}
-              redirectTo='/contracts'
             />
           </Fragment>
         )}

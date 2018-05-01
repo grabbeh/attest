@@ -53,19 +53,10 @@ class Notification extends Component {
               <i className='white fa fa-id-card mr2' />{relatedUser.name}
             </div>
             <div
-              className={cn(
-                action === 'updated contract' && 'bg-red',
-                'fl',
-                'pv2',
-                'bg-gold',
-                'ph3',
-                'black',
-                'mh3'
-              )}
+              className={cn('fl', 'pv2', 'mr2', 'dark-gray', 'ml3-ns', 'ml0')}
             >
-              {action}
+              {`${action} for`}
             </div>
-            <div className='fl mr3 pv2'>for</div>
             <div className='fl pv2 ph3 bg-dark-gray white'>
               <i className='white fa fa-file mr2  ' />
               {relatedContract.externalParties[0]}
@@ -74,7 +65,7 @@ class Notification extends Component {
         </div>
         <ClearFix />
         {changes.length > 0 &&
-          <div className='fl ph3 pv2 bg-light-green mt3 b'>
+          <div className='fl mt3 b'>
             <i className='fa fa-pencil mr2 dark-gray' />Changes
           </div>}
         <ClearFix />
