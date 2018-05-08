@@ -32,7 +32,6 @@ class FavouriteButton extends Component {
       <Consumer>
         {context => (
           <Mutation
-            user={context.state.user}
             mutation={UPDATE_USER_MUTATION}
             update={(cache, { data: { updateUser } }) => {
               const { user } = cache.readQuery({
@@ -47,6 +46,7 @@ class FavouriteButton extends Component {
             {(updateUser, { data }) => (
               <div
                 onClick={e => {
+                  let { state: { user } } = context
                   this.toggleFavourite()
                   e.preventDefault()
                   if (!user.favourites) user.favourites = []
