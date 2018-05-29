@@ -208,6 +208,13 @@ export default class MyDocument extends Document {
                 transform: 'translate(-50%, -50%)'
               }
 
+               .ReactModal__Body--open {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
+
               .bell {
                 left: -25px;
               }
