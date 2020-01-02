@@ -42,15 +42,17 @@ class Notification extends Component {
             <div className='ml3 fl'>
               <FavouriteButton favourite={favourite} id={relatedContract.id} />
             </div>
-            {deleteButton &&
+            {deleteButton && (
               <div className='fr'>
                 <DeleteNotification id={id} />
-              </div>}
+              </div>
+            )}
           </div>
           <ClearFix />
           <div className='overflow-auto mt3'>
             <div className='fl pv2 ph3 bg-blue white'>
-              <i className='white fa fa-id-card mr2' />{relatedUser.name}
+              <i className='white fa fa-id-card mr2' />
+              {relatedUser.name}
             </div>
             <div
               className={cn('fl', 'pv2', 'mr2', 'dark-gray', 'ml3-ns', 'ml0')}
@@ -64,10 +66,12 @@ class Notification extends Component {
           </div>
         </div>
         <ClearFix />
-        {changes.length > 0 &&
+        {changes.length > 0 && (
           <div className='fl mt3 b'>
-            <i className='fa fa-pencil mr2 dark-gray' />Changes
-          </div>}
+            <i className='fa fa-pencil mr2 dark-gray' />
+            Changes
+          </div>
+        )}
         <ClearFix />
         <ul className='overflow-auto mb3 list ma0 pa0'>
           {changes.map((c, i) => (
@@ -77,32 +81,31 @@ class Notification extends Component {
                 <div className='fl pv2 b'>{expanded(c.attr)}</div>
               </div>
               <ClearFix />
-              {c.removed &&
-                c.removed.name &&
+              {c.removed && c.removed.name && (
                 <div className='ml3 pl2'>
                   {c.attr === 'tags' ||
-                    ('comments' &&
-                      !c.added &&
-                      <i className='fl dark-gray mr2 mt2 fa fa-minus' />)}
+                    ('comments' && !c.added && (
+                      <i className='fl dark-gray mr2 mt2 fa fa-minus' />
+                    ))}
                   <div
                     className='fl white bg-blue pv2 ph3 tc'
                     style={{ background: c.removed.color }}
                   >
                     {c.removed.name}
                   </div>
-                </div>}
-              {c.added &&
-                c.removed &&
+                </div>
+              )}
+              {c.added && c.removed && (
                 <div>
                   <i className='fl mt2 mh3 fa dark-gray fa-arrow-right' />
-                </div>}
-              {c.added &&
-                c.added.name &&
+                </div>
+              )}
+              {c.added && c.added.name && (
                 <div className='ml3 pl2'>
                   {c.attr === 'tags' ||
-                    ('comments' &&
-                      !c.removed &&
-                      <i className='fl dark-gray mr2 mt2 fa fa-plus' />)}
+                    ('comments' && !c.removed && (
+                      <i className='fl dark-gray mr2 mt2 fa fa-plus' />
+                    ))}
                   <div
                     className='fl white bg-blue pv2 ph3 tc mr2'
                     style={{ background: c.added.color }}
@@ -110,18 +113,21 @@ class Notification extends Component {
                     {c.added.name}
                   </div>
                   <ClearFix />
-                </div>}
+                </div>
+              )}
             </li>
           ))}
         </ul>
         <ClearFix />
-        {deleteButton &&
+        {deleteButton && (
           <div>
-
             <Link href={`/contract?id=${relatedContract.id}`}>
-              <a><i className='dark-gray fa fa-file' /></a>
+              <a>
+                <i className='dark-gray fa fa-file' />
+              </a>
             </Link>
-          </div>}
+          </div>
+        )}
       </div>
     )
   }

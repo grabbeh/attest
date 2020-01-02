@@ -1,16 +1,9 @@
 import { Component, Fragment } from 'react'
-import FadeRightDiv from '../styles/FadeRightDiv'
-import CenterBox from '../styles/CenterBox'
 import FormTitle from '../styles/FormTitle'
 import FormSection from '../styles/FormSection'
 import Input from '../general/Input'
-import FormButton from '../styles/FormButton'
 import ClearFix from '../styles/ClearFix'
-import Box from '../styles/Box'
 import Error from '../general/Error'
-import { Mutation } from 'react-apollo'
-import ACCEPT_INVITE_MUTATION from '../../queries/AcceptInviteMutation'
-import redirect from '../../lib/Redirect'
 import AcceptInviteButton from './AcceptInviteButton'
 
 class InviteHolder extends Component {

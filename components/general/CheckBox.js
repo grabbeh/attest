@@ -31,7 +31,7 @@ class Checkbox extends Component {
   }
 
   render () {
-    const { label, color, checked } = this.props
+    const { label, checked } = this.props
     return (
       <li key={label} className='pb2 mr2 fl'>
         <label>

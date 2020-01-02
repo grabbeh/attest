@@ -46,7 +46,9 @@ class FavouriteButton extends Component {
             {(updateUser, { data }) => (
               <div
                 onClick={e => {
-                  let { state: { user } } = context
+                  let {
+                    state: { user }
+                  } = context
                   this.toggleFavourite()
                   e.preventDefault()
                   if (!user.favourites) user.favourites = []
