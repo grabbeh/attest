@@ -56,7 +56,7 @@ class Contract extends Component {
         <div>
           <div>
             {externalParties.map(party => (
-              <div key={party} className='pb1 b bb b--black-20 bw1'>
+              <div key={party} className='f3 pb1 bb b--black-20 bw1'>
                 {party}
               </div>
             ))}
@@ -79,12 +79,13 @@ class Contract extends Component {
               >
                 <i className='pointer fa fa-pencil' />
               </button>
-              {this.state.editableContract &&
+              {this.state.editableContract && (
                 <EditContractContainer
                   isOpen={this.state.modalIsOpen}
                   closeModal={this.closeModal}
                   contract={this.state.editableContract}
-                />}
+                />
+              )}
             </li>
             <li
               onClick={() => this.setState({ active: false })}
@@ -97,7 +98,9 @@ class Contract extends Component {
             </li>
             <li className='fl'>
               <Link href={`/contract?id=${id}`}>
-                <a><i className='dark-gray dim fa fa-file' /></a>
+                <a>
+                  <i className='dark-gray dim fa fa-file' />
+                </a>
               </Link>
             </li>
           </ul>

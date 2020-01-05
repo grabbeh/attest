@@ -7,7 +7,8 @@ export default class MyDocument extends Document {
     const sheet = new ServerStyleSheet()
     const styles = flush()
     const page = renderPage(App => props =>
-      sheet.collectStyles(<App {...props} />))
+      sheet.collectStyles(<App {...props} />)
+    )
     const styleTags = sheet.getStyleElement()
     return { ...page, styleTags, styles }
   }
@@ -15,17 +16,17 @@ export default class MyDocument extends Document {
   render () {
     return (
       <html>
+        <title>Attest - open source contract management</title>
         <Head>
           <meta charSet='utf-8' />
           <meta name='viewport' content='width=device-width, initial-scale=1' />
-          <title>Attest - open source contract management</title>
           <link
             rel='stylesheet'
             href='https://unpkg.com/tachyons@4.9.0/css/tachyons.min.css'
           />
           <script src='https://cdn.polyfill.io/v2/polyfill.min.js' />
           <link rel='stylesheet' href='/static/datepicker.css' />
-          <link rel='stylesheet' href='/_next/static/style.css' />
+          <link rel='stylesheet' href='/_next/public/style.css' />
           <link
             href='https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'
             rel='stylesheet'
@@ -60,7 +61,6 @@ export default class MyDocument extends Document {
               input {
                 font-family: 'shapefont'; 
                 border-radius: 0;
-                -webkit-appearance: none;
                 -webkit-border-radius:0px;
               }
 
@@ -243,7 +243,6 @@ export default class MyDocument extends Document {
               input, button, submit { border: none;
                  outline: none;
                  border-radius: 0;
-                 -webkit-appearance: none;
                  -webkit-border-radius:0px;
                 }
               

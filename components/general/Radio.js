@@ -35,9 +35,10 @@ class Radio extends react.Component {
           <input
             className='dn'
             type='radio'
+            name='currentStatus'
             value={s.name}
             checked={s.name === selectedItem}
-            onChange={() => handleChange(s)}
+            onChange={handleChange}
           />
           {s.name}
         </label>

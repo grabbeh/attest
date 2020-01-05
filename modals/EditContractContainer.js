@@ -20,25 +20,25 @@ const EditContractContainer = props => {
         isOpen={props.isOpen}
       >
         <Box>
-          {props.isOpen
-            ? <Query query={EDIT_CONTRACT_QUERY}>
-              {({ loading, error, data: { masterEntity, allUsers } }) => {
+          {props.isOpen ? (
+            <Query query={EDIT_CONTRACT_QUERY}>
+              {({ loading, error, data }) => {
                 if (loading) return <Loading />
                 if (error) return 'Error'
                 return (
                   <AddContractForm
                     closeModal={props.closeModal}
                     isOpen={props.isOpen}
-                    allUsers={allUsers}
-                    masterEntity={masterEntity}
+                    allUsers={data.allUsers}
+                    masterEntity={data.masterEntity}
                     contract={props.contract}
                     title='Edit Contract'
                     handleContract={props.handleContract}
-                    />
+                  />
                 )
               }}
             </Query>
-            : null}
+          ) : null}
         </Box>
       </Modal>
     </FadeRightDiv>

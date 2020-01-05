@@ -1,10 +1,11 @@
 const FormButton = ({ onClick, text }) => (
-  <input
+  <button
     className='pv2 ph3 font f5 mt3 bg-green white'
     onClick={onClick}
     type='submit'
-    value={text}
-  />
+  >
+    {text}
+  </button>
 )
 
 export default FormButton

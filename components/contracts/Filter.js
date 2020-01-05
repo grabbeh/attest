@@ -1,7 +1,6 @@
 import react from 'react'
 import HideToggle from '../general/Hide'
 import DatePicker from 'react-datepicker'
-import CheckboxList from '../general/CheckboxList'
 import CheckboxListTwo from '../general/CheckboxListTwo'
 import Radio from '../general/Radio'
 import Flex from '../styles/Flex'
@@ -99,7 +98,8 @@ class Filter extends react.Component {
     return (
       <Flex>
         <div className='b f4 mr3'>
-          <i className='mr3 fa fa-filter' />Filters
+          <i className='mr3 fa fa-filter' />
+          Filters
         </div>
         <HideToggle
           toggleFilter={this.toggleFilter}
@@ -206,10 +206,9 @@ class Filter extends react.Component {
             Clear
           </div>
           <div>
-            {error.finishBeforeStart &&
-              <div className='pa2 red b'>
-                End date is before the start date
-              </div>}
+            {error.finishBeforeStart && (
+              <div className='pa2 red b'>End date is before the start date</div>
+            )}
           </div>
         </HideToggle>
 

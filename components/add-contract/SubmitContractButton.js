@@ -1,74 +1,62 @@
-import { Mutation } from 'react-apollo'
-import { Component, Fragment } from 'react'
-import CONTRACTS_QUERY from '../../queries/ContractsQuery'
-import ADD_CONTRACT_MUTATION from '../../queries/AddContractMutation'
+import { useState } from 'react'
+import { useMutation } from '@apollo/react-hooks'
+import GET_CONTRACTS from '../../queries/ContractsQuery'
+import ADD_CONTRACT from '../../queries/AddContractMutation'
 import FormButton from '../styles/FormButton'
 import _ from 'lodash'
 import Notification from '../general/Notification'
 
-class SubmitContractButton extends Component {
-  state = {
-    error: null,
-    success: null
+const SubmitContractButton = props => {
+  let [success, setSuccess] = useState(null)
+  const closeNotification = () => {
+    setSuccess(false)
   }
 
-  closeNotification = () => {
-    this.setState({ success: false, error: false })
-  }
+  let { contract, validate, closeModal, text } = props
+  const [addContract] = useMutation(ADD_CONTRACT, {
+    update (cache, res) {
+      let contract = res.data.addContract
+      let { id } = contract
+      // if closeModal present then editable contract
+      if (closeModal) {
+        let data = cache.readQuery({ query: GET_CONTRACTS })
+        _.extend(_.find(data.contracts, { id }), contract)
+        cache.writeQuery({ query: GET_CONTRACTS, data })
+      } else {
+        // else new contract so push into cache
+        let { contracts } = cache.readQuery({ query: GET_CONTRACTS })
+        cache.writeQuery({
+          query: GET_CONTRACTS,
+          data: { contracts: contracts.concat([contract]) }
+        })
+      }
+    },
+    onCompleted () {
+      setSuccess('Contract updated')
+    }
+  })
 
-  render () {
-    let { contract, validate, closeModal, text } = this.props
-    return (
-      <Mutation
-        mutation={ADD_CONTRACT_MUTATION}
-        update={(store, response) => {
-          let contract = response.data.addContract
-          let { id } = contract
-          // try/catch block used to silence error
-          try {
-            // if closeModal present then editable contract
-            if (closeModal) {
-              let data = store.readQuery({ query: CONTRACTS_QUERY })
-              _.extend(_.find(data.contracts, { id }), contract)
-              store.writeQuery({ query: CONTRACTS_QUERY, data })
-            } else {
-              // else new contract so push into cache
-              let data = store.readQuery({ query: CONTRACTS_QUERY })
-              data.contracts.push(contract)
-              store.writeQuery({ query: CONTRACTS_QUERY, data })
-            }
-          } catch (e) {
-            // console.log(e)
+  return (
+    <>
+      <FormButton
+        onClick={e => {
+          e.preventDefault()
+          let err = false
+          if (validate) err = validate()
+          if (!err) {
+            addContract({ variables: { id: contract.id, contract } })
           }
         }}
-        onCompleted={data => {
-          this.setState({ success: 'Contract updated' })
-        }}
-      >
-        {(addContract, { data }) => (
-          <Fragment>
-            <FormButton
-              onClick={e => {
-                e.preventDefault()
-                let err = false
-                if (validate) err = validate()
-                if (!err) {
-                  addContract({ variables: { contract } })
-                }
-              }}
-              text={text}
-            />
-            <Notification
-              close={this.closeNotification}
-              success={this.state.success}
-              auto
-              closeModal={closeModal}
-            />
-          </Fragment>
-        )}
-      </Mutation>
-    )
-  }
+        text={text}
+      />
+      <Notification
+        close={closeNotification}
+        success={success}
+        auto
+        closeModal={closeModal}
+      />
+    </>
+  )
 }
 
 export default SubmitContractButton

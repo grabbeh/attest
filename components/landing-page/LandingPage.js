@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import PageExample from './PageExample'
-import { graphql, compose } from 'react-apollo'
+import { graphql } from 'react-apollo'
+import { compose } from 'recompose'
 import LOGIN_MUTATION from '../../queries/LoginMutation'
 import redirect from '../../lib/Redirect'
 import cookie from 'cookie'
@@ -24,7 +25,7 @@ class LandingPage extends Component {
               An open source contract management platform
             </div>
             <div className='f3 mt4 dark-gray'>
-              Easily get visibility on contract volume,  progress and status
+              Easily get visibility on contract volume, progress and status
             </div>
             <div className='f5 mt4'>
               <button className='pointer w-100 w-20-l grow fl br2 shadow-3 pv2 ph3 tc bg-blue mr4'>
@@ -43,7 +44,6 @@ class LandingPage extends Component {
                   <a className='link dark-gray'>GITHUB</a>
                 </Link>
               </button>
-
             </div>
             <ClearFix />
             <div className='center mt4 mb5'>

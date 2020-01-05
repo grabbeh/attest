@@ -71,10 +71,6 @@ class ContractsHolder extends react.Component {
     return copy
   }
 
-  componentWillReceiveProps (nextProps) {
-    this.setState({ contracts: nextProps.contracts })
-  }
-
   clearFilters = () => {
     let filters = {
       statuses: this.props.currentStatuses,
@@ -124,7 +120,6 @@ class ContractsHolder extends react.Component {
 
   render () {
     let { filters, contracts, name } = this.state
-
     let filteredContracts = filter(filters, contracts)
     if (this.state.searchTerm.length > 0 && !this.state.liveInput) {
       filteredContracts = this.getSearchResults(
