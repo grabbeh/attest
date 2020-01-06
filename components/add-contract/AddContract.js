@@ -16,7 +16,6 @@ import Notification from '../general/Notification'
 
 const AddContractForm = props => {
   let [success, setSuccess] = useState(null)
-
   // as the form collects basic values only (to keep things simple), these need to be supplemented with full details which we can do on submission only
   const processValues = values => {
     const { allUsers } = props
@@ -34,7 +33,7 @@ const AddContractForm = props => {
     contract.statuses = contract.statuses.concat(currentStatus)
     // tags
     contract.tags = values.appliedTags.map(a => {
-      if (tags.find(t => t.name === a)) return tags.find(t => t.name === a)
+      if (tags.find(t => t.name === a)) return tags.filter(t => t.name === a)
       else return { name: a }
     })
     return contract
@@ -63,26 +62,25 @@ const AddContractForm = props => {
     }
   })
 
-  let { businessUnits, tags, statuses } = props.masterEntity
-  let { allUsers } = props
-  let { contract } = props
+  let {
+    allUsers,
+    contract = { businessUnit: {}, assignedTo: {}, currentStatus: {} },
+    masterEntity
+  } = props
+  let { businessUnits, tags, statuses } = masterEntity
 
-  if (tags) {
+  if (tags && props.contract) {
     tags = _.uniqBy(tags.concat(props.contract.tags), 'name')
   }
-
   return (
     <>
       <Formik
         initialValues={{
-          externalParty: contract.externalParties,
-          appliedTags: contract.tags.map(t => t.name),
-          businessUnit: contract.businessUnit.name,
-          assignedTo: contract.assignedTo.email,
-          currentStatus: contract.currentStatus.name,
-          expiryDate: contract.expiryDate,
-          effectiveDate: contract.effectiveDate,
-          executionDate: contract.executionDate
+          externalParty: '' || contract.externalParties,
+          appliedTags: [] || contract.tags.map(t => t.name),
+          businessUnit: '' || contract.businessUnit.name,
+          assignedTo: '' || contract.assignedTo.email,
+          currentStatus: '' || contract.currentStatus.name
         }}
         validate={values => {
           let isError = false
