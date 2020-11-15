@@ -1,5 +1,1 @@
-const withCSS = require('@zeit/next-css')
-
-module.exports = withCSS({
-  distDir: 'build'
-})
+require('dotenv').config()

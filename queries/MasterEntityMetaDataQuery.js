@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 
 export default gql`
-  query  {
+  query {
     allUsers {
       name
       email
@@ -22,6 +22,6 @@ export default gql`
         name
         color
       }
+    }
   }
-}
 `

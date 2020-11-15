@@ -1,16 +1,12 @@
 import { Component, Fragment } from 'react'
-import { graphql, Mutation } from 'react-apollo'
-import withData from '../../lib/withData'
+import { Mutation } from 'react-apollo'
 import CREATE_ACCOUNT_MUTATION from '../../queries/CreateAccountMutation'
-import redirect from '../../lib/Redirect'
 import FormButton from '../styles/FormButton'
 import Input from '../general/Input'
-import Error from '../general/Error'
 import ClearFix from '../styles/ClearFix'
 import FormTitle from '../styles/FormTitle'
 import CenterBox from '../styles/CenterBox'
 import FadeRightDiv from '../styles/FadeRightDiv'
-import { Consumer } from '../../lib/Context'
 import Notification from '../general/Notification'
 
 class CreateAccountForm extends Component {
@@ -25,7 +21,7 @@ class CreateAccountForm extends Component {
   }
 
   saveToState = e => {
-    let { name, value, type } = e.target
+    let { name, value } = e.target
     this.setState({ [name]: value })
   }
 

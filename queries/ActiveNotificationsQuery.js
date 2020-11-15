@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 
 export default gql`
-   {
+  {
     activeNotifications {
       action
       createdAt
@@ -32,5 +32,5 @@ export default gql`
         name
       }
     }
-}
+  }
 `

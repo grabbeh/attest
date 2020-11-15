@@ -1,25 +1,26 @@
 import gql from 'graphql-tag'
 
 export default gql`
-query{
-  masterEntity {
-    name
-    businessUnits {
+  query {
+    masterEntity {
       name
-      color
+      businessUnits {
+        name
+        color
+      }
+      statuses {
+        name
+        color
+      }
+      tags {
+        name
+        color
+      }
     }
-    statuses {
+    allUsers {
       name
-      color
-    }
-    tags {
-      name
-      color
+      email
+      id
     }
   }
-  allUsers {
-    name
-    email
-    id
-  }
-}`
+`

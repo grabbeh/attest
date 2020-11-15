@@ -3,7 +3,6 @@ import AddContractForm from '../components/add-contract/AddContract'
 import Loading from '../components/general/Loading'
 import Modal from 'react-modal'
 import Box from '../components/styles/Box'
-import _ from 'lodash'
 import FadeRightDiv from '../components/styles/FadeRightDiv'
 import EDIT_CONTRACT_QUERY from '../queries/EditContractQuery'
 

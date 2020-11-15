@@ -1,6 +1,7 @@
-import Document, { Head, Main, NextScript } from 'next/document'
+import Document, { Head, Main, Html, NextScript } from 'next/document'
 import { ServerStyleSheet } from 'styled-components'
 import flush from 'styled-jsx/server'
+
 
 export default class MyDocument extends Document {
   static getInitialProps ({ renderPage }) {
@@ -15,18 +16,19 @@ export default class MyDocument extends Document {
 
   render () {
     return (
-      <html>
+      <Html>
         <title>Attest - open source contract management</title>
-        <Head>
-          <meta charSet='utf-8' />
+        <meta charSet='utf-8' />
           <meta name='viewport' content='width=device-width, initial-scale=1' />
+        <Head>
+        
           <link
             rel='stylesheet'
             href='https://unpkg.com/tachyons@4.9.0/css/tachyons.min.css'
           />
           <script src='https://cdn.polyfill.io/v2/polyfill.min.js' />
-          <link rel='stylesheet' href='/static/datepicker.css' />
-          <link rel='stylesheet' href='/_next/public/style.css' />
+          <link rel='stylesheet' href='/datepicker.css' />
+      
           <link
             href='https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'
             rel='stylesheet'
@@ -38,14 +40,14 @@ export default class MyDocument extends Document {
               @font-face {
                 font-family: 'shapefont';
                 src: 
-                  url('/static/fonts/font-bold.otf');
+                  url('/fonts/font-bold.otf');
                 font-weight: bold;
               }
 
               @font-face {
                 font-family: 'shapefont';
                 src: 
-                  url('/static/fonts/font.otf');
+                  url('/fonts/font.otf');
               }
               body {
                 font-family: 'shapefont';
@@ -260,7 +262,7 @@ export default class MyDocument extends Document {
           <Main />
           <NextScript />
         </body>
-      </html>
+      </Html>
     )
   }
 }

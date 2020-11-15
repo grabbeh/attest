@@ -46,3 +46,11 @@ jspm_packages
 
 # Optional REPL history
 .node_repl_history
+
+# local env files
+.env
+.env.save
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
