@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react'
+import React, { useState } from 'react'
 import { useMutation } from '@apollo/react-hooks'
 import GET_CONTRACTS from '../../queries/ContractsQuery'
 import ADD_CONTRACT from '../../queries/AddContractMutation'
@@ -20,7 +20,7 @@ const AddContractForm = props => {
   const processValues = values => {
     const { allUsers } = props
     const { businessUnits, statuses, tags } = props.masterEntity
-    let contract = _.cloneDeep(props.contract)
+    let contract = _.cloneDeep(props.contract) || values
     // business unit
     contract.businessUnit = businessUnits.find(
       b => b.name === values.businessUnit
@@ -29,8 +29,10 @@ const AddContractForm = props => {
     contract.assignedTo = allUsers.find(u => u.email === values.assignedTo)
     // status
     let currentStatus = statuses.find(s => s.name === values.currentStatus)
-    currentStatus.date = new Date().getTime()
-    contract.statuses = contract.statuses.concat(currentStatus)
+    if (currentStatus) {
+      currentStatus.date = new Date().getTime()
+      contract.statuses = contract.statuses.concat(currentStatus)
+    }
     // tags
     contract.tags = values.appliedTags.map(a => {
       if (tags.find(t => t.name === a)) return tags.filter(t => t.name === a)
@@ -76,7 +78,7 @@ const AddContractForm = props => {
     <>
       <Formik
         initialValues={{
-          externalParty: '' || contract.externalParties,
+          externalParty: [] || contract.externalParties,
           appliedTags: [] || contract.tags.map(t => t.name),
           businessUnit: '' || contract.businessUnit.name,
           assignedTo: '' || contract.assignedTo.email,
@@ -94,6 +96,7 @@ const AddContractForm = props => {
           return isError
         }}
         onSubmit={values => {
+          console.log(values)
           addContract({
             variables: { id: contract.id, contract: processValues(values) }
           })

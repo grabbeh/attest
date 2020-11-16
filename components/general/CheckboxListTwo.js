@@ -51,8 +51,9 @@ class Checkbox extends React.Component {
 
   getStyle () {
     const { color, checked } = this.props
+
     let textColor = ''
-    if (color) textColor = getTextColor(color)
+    if (color || color !== undefined) textColor = getTextColor(color)
     else textColor = 'white'
     return {
       backgroundColor: checked ? color : '',
