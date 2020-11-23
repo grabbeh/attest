@@ -1,6 +1,6 @@
 import DeleteButton from './DeleteButton'
 import FavouriteButton from './FavouriteButton'
-import EditContractContainer from '../../modals/EditContractContainer'
+import EditContractContainer from '../modals/EditContractContainer'
 import { Component, Fragment } from 'react'
 import _ from 'lodash'
 import cn from 'classnames'

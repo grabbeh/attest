@@ -1,10 +1,10 @@
 import { Query } from 'react-apollo'
-import AddContractForm from '../components/add-contract/AddContract'
-import Loading from '../components/general/Loading'
+import AddContractForm from '../add-contract/AddContract'
+import Loading from '../general/Loading'
 import Modal from 'react-modal'
-import Box from '../components/styles/Box'
-import FadeRightDiv from '../components/styles/FadeRightDiv'
-import EDIT_CONTRACT_QUERY from '../queries/EditContractQuery'
+import Box from '../styles/Box'
+import FadeRightDiv from '../styles/FadeRightDiv'
+import EDIT_CONTRACT_QUERY from '../../queries/EditContractQuery'
 
 if (process.browser) Modal.setAppElement('body')
 

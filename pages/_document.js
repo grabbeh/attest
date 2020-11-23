@@ -2,7 +2,6 @@ import Document, { Head, Main, Html, NextScript } from 'next/document'
 import { ServerStyleSheet } from 'styled-components'
 import flush from 'styled-jsx/server'
 
-
 export default class MyDocument extends Document {
   static getInitialProps ({ renderPage }) {
     const sheet = new ServerStyleSheet()
@@ -19,16 +18,15 @@ export default class MyDocument extends Document {
       <Html>
         <title>Attest - open source contract management</title>
         <meta charSet='utf-8' />
-          <meta name='viewport' content='width=device-width, initial-scale=1' />
+        <meta name='viewport' content='width=device-width, initial-scale=1' />
         <Head>
-        
           <link
             rel='stylesheet'
             href='https://unpkg.com/tachyons@4.9.0/css/tachyons.min.css'
           />
           <script src='https://cdn.polyfill.io/v2/polyfill.min.js' />
           <link rel='stylesheet' href='/datepicker.css' />
-      
+
           <link
             href='https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'
             rel='stylesheet'
@@ -37,31 +35,25 @@ export default class MyDocument extends Document {
             dangerouslySetInnerHTML={{
               __html: `
               
-              @font-face {
-                font-family: 'shapefont';
-                src: 
-                  url('/fonts/font-bold.otf');
-                font-weight: bold;
-              }
-
-              @font-face {
-                font-family: 'shapefont';
-                src: 
-                  url('/fonts/font.otf');
-              }
               body {
-                font-family: 'shapefont';
+                font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  box-sizing: border-box;
                 text-rendering: optimizeLegibility;
                 -webkit-font-smoothing: antialiased;
                 -moz-osx-font-smoothing: grayscale;
               }
 
               .font {
-                font-family: 'shapefont';
+                font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  box-sizing: border-box;
               }
 
               input {
-                font-family: 'shapefont'; 
+                font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  box-sizing: border-box;
                 border-radius: 0;
                 -webkit-border-radius:0px;
               }
